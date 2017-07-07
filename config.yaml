@@ -1,0 +1,25 @@
+baseURL: "https://outcrawl.com/"
+languageCode: "en-us"
+title: "Outcrawl"
+
+metaDataFormat: "yaml"
+enableRobotsTXT: true
+
+pygmentsuseclasses: true
+
+paginate: 5
+
+blackfriday:
+  hrefTargetBlank: true
+
+taxonomies:
+  tag: "tags"
+  category: "categories"
+
+permalinks:
+  post: "/:slug"
+
+params:
+  tagline: "Software development tutorials without nonsense."
+  disqusShortname: "outcrawl"
+  copyrightHTML: "Copyright &#xA9; 2017 John Doe. All Rights Reserved."

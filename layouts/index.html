@@ -1,0 +1,13 @@
+{{define "header"}}
+{{partial "home/header.html" .}}
+{{end}}
+{{define "main"}}
+<div class="container" role="main">
+  <ul>
+  {{range .Paginator.Pages}}
+    <li><a href="{{.URL}}">{{.Title}}</a></li>
+  {{end}}
+  </ul>
+  {{partial "home/pagination" .Paginator}}
+</div>
+{{end}}
