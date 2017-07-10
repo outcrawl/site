@@ -1,5 +1,9 @@
-<footer class="footer bg-faded">
-  <div class="container">
-    <span class="text-muted">{{.Site.Params.CopyrightHTML | safeHTML}}</span>
+<footer class="footer text-muted">
+  <div class="container d-flex">
+    <span>{{.Site.Params.CopyrightHTML | safeHTML}}</span>
+    <div class="ml-auto">
+      <a class="muted-link" href="{{.Site.Params.TwitterURL}}"><i class="fa fa-twitter"></i></a>
+      <a class="muted-link" href="{{.Site.Params.FacebookURL}}"><i class="fa fa-facebook"></i></a>
+    </div>
   </div>
 </footer>

@@ -7,7 +7,7 @@ enableRobotsTXT: true
 
 pygmentsuseclasses: true
 
-paginate: 5
+paginate: 6
 
 blackfriday:
   hrefTargetBlank: true

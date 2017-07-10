@@ -1,13 +1,25 @@
-{{define "header"}}
-{{partial "home/header.html" .}}
-{{end}}
 {{define "main"}}
-<div class="container" role="main">
-  <ul>
-  {{range .Paginator.Pages}}
-    <li><a href="{{.URL}}">{{.Title}}</a></li>
+
+{{$paginator := .Paginate (after 1 .Data.Pages)}}
+
+<div class="container py-5" role="main">
+
+  {{if eq $paginator.PageNumber 1}}
+  <div class="row m-0">
+  {{range first 1 .Data.Pages}}
+    <div class="col-md-12 p-0">{{partial "post/featured.html" .}}</div>
   {{end}}
-  </ul>
-  {{partial "home/pagination" .Paginator}}
+  </div>
+  {{end}}
+
+  <div class="row m-0">
+  {{range $paginator.Pages}}
+    {{partial "post/entry.html" .}}
+  {{end}}
+  </div>
+  <div class="mt-3">
+  {{partial "home/pagination" $paginator}}
+  </div>
 </div>
+
 {{end}}

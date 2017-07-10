@@ -2,14 +2,22 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 4rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  color: #212121;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+  height: 4rem;
+  line-height: 4rem;
+  box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
 }

@@ -1,8 +1,9 @@
 {{define "main"}}
-<div class="container" role="main">
-  <article>
-    <h1>{{.Title}}</h1>
-    {{.Content}}
-  </article>
-</div>
+<article class="container py-5" role="main">
+  <h1>{{.Title}}</h1>
+  {{with .Params.thumbnail}}
+  <img class="progressive__img progressive--not-loaded" data-progressive="/img/thumbnails/{{.}}.png" src="/img/thumbnails-small/{{.}}.png" alt="{{.}}">
+  {{end}}
+  {{.Content}}
+</article>
 {{end}}

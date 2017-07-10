@@ -1,0 +1,39 @@
+<div class="col-md-6 p-0 entry">
+
+  {{with .Params.thumbnail}}
+    {{if eq . "test"}}
+    <div class="entry-image progressive__bg progressive--not-loaded"
+         data-progressive="http://lorempixel.com/854/480?id={{$.Title | md5}}"
+         style="background-image:url('http://lorempixel.com/854/480?id={{$.Title | md5}}')">
+    </div>
+    {{else}}
+    <div class="entry-image progressive__bg progressive--not-loaded"
+         data-progressive="/img/thumbnails/{{.}}.png"
+         style="background-image:url('/img/thumbnails-small/{{.}}.png')">
+    </div>
+    {{end}}
+  {{end}}
+
+  <div class="entry-overlay text-white p-4 d-flex align-items-start flex-column">
+    <a class="unstyled-link w-100 h-100" href="{{.Permalink}}">
+      <h2 class="entry-title">{{.Title}}</h2>
+    </a>
+    <div class="w-100 mt-auto d-flex">
+      <img class="my-auto rounded-circle"
+                src="https://www.gravatar.com/avatar/{{index .Site.Data.authors .Params.Author `email` | lower | md5}}?s=50"
+                width="50"
+                height="50"
+                alt="{{.Params.author}}-avatar">
+      <div class="ml-2 my-auto">
+        <a href="/author/{{index .Site.Data.authors .Params.Author `name` | urlize}}" class="decorated-link">{{index .Site.Data.authors .Params.author "name"}}</a>
+        <div class="text-white-transparent">
+          {{dateFormat "Jan 2, 2006" .Date}}
+        </div>
+      </div>
+      <div class="mt-auto ml-auto">
+        <a href="/category/{{index .Params.Categories 0 | urlize}}" class="decorated-link">{{index .Params.categories 0}}</a>
+      </div>
+    </div>
+  </div>
+
+</div>
