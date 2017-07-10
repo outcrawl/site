@@ -22,6 +22,10 @@
   background-color: #EEEEEE !important
 }
 
+.bg-white {
+  background-color: #FFFFFF !important;
+}
+
 .text-primary {
   color: #2196F3 !important
 }
@@ -389,10 +393,13 @@ a {
 
 .page-link {
   color: #212121;
+  border: 1px solid #E0E0E0;
 }
 
 .page-link:focus, .page-link:hover {
   color: #212121;
+  background-color: #F5F5F5;
+  border-color: #E0E0E0;
 }
 
 .text-white-transparent {
@@ -402,3 +409,17 @@ a {
 
 /* Utilities
 ------------------------------ */
+.background-cover-image {
+  height: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.h-40 {
+  height: 40%;
+}
+
+.h-60 {
+  height: 60%;
+}

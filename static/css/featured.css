@@ -1,0 +1,34 @@
+.featured {
+  height: 30rem;
+}
+
+.featured-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.featured-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  transition-duration: 300ms;
+}
+
+.featured-title {
+  font-size: 3rem;
+}
+
+@media(max-width: 991px) {
+  .featured-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media(max-width: 575px) {
+  .featured-title {
+    font-size: 1.75rem;
+  }
+}

@@ -1,25 +1,27 @@
 {{define "main"}}
 
-{{$paginator := .Paginate (after 1 .Data.Pages)}}
+{{$paginator := .Paginate (.Data.Pages)}}
 
 <div class="container py-5" role="main">
 
+<!--
   {{if eq $paginator.PageNumber 1}}
-  <div class="row m-0">
+  <div class="row">
   {{range first 1 .Data.Pages}}
-    <div class="col-md-12 p-0">{{partial "post/featured.html" .}}</div>
+    {{partial "post/featured.html" .}}
   {{end}}
   </div>
   {{end}}
+  -->
 
-  <div class="row m-0">
   {{range $paginator.Pages}}
     {{partial "post/entry.html" .}}
   {{end}}
-  </div>
+
   <div class="mt-3">
   {{partial "home/pagination" $paginator}}
   </div>
+
 </div>
 
 {{end}}

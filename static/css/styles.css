@@ -15,9 +15,15 @@ body {
   width: 100%;
   height: 4rem;
   line-height: 4rem;
-  box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid #E0E0E0;
+}
+
+@media (max-width: 575px) {
+  .footer {
+    font-size: 0.8rem;
+  }
 }
 
 .header {
-  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #E0E0E0;
 }
