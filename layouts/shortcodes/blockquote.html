@@ -1,0 +1,8 @@
+<blockquote class="blockquote">
+  <p class="mb-0">{{.Inner}}</p>
+  <footer class="blockquote-footer">
+    {{with .Get "cite"}}
+    <cite title="{{.}}">{{.}}</cite>
+    {{end}}
+  </footer>
+</blockquote>

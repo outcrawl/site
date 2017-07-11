@@ -1,9 +1,19 @@
 {{define "main"}}
 <article class="container py-5" role="main">
-  <h1>{{.Title}}</h1>
+
+  {{partial "single/meta_section.html" .}}
+
+  <h1 class="display-4 my-4">{{.Title}}</h1>
+
   {{with .Params.thumbnail}}
-  <img class="progressive__img progressive--not-loaded" data-progressive="/img/thumbnails/{{.}}.png" src="/img/thumbnails-small/{{.}}.png" alt="{{.}}">
+    {{if eq . "test"}}
+    <img class="img-fluid" src="http://lorempixel.com/854/480">
+    {{else}}
+    <img class="progressive__img progressive--not-loaded img-fluid" data-progressive="/img/thumbnails/{{.}}.png" src="/img/thumbnails-small/{{.}}.png" alt="{{.}}">
+    {{end}}
   {{end}}
+  
   {{.Content}}
+
 </article>
 {{end}}

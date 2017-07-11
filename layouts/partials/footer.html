@@ -1,9 +1,13 @@
 <footer class="footer text-muted">
-  <div class="container d-flex">
-    <span>{{.Site.Params.CopyrightHTML | safeHTML}}</span>
-    <div class="ml-auto">
-      <a class="muted-link" href="{{.Site.Params.TwitterURL}}"><i class="fa fa-twitter"></i></a>
-      <a class="muted-link" href="{{.Site.Params.FacebookURL}}"><i class="fa fa-facebook"></i></a>
-    </div>
+  <div class="container d-flex h-100 align-items-center">
+    <div>{{.Site.Params.CopyrightHTML | safeHTML}}</div>
+    <ul class="list-inline ml-auto my-auto">
+      <li class="list-inline-item"><a class="muted-link"
+           href="#">GitHub</a></li>
+      <li class="list-inline-item"><a class="muted-link"
+           href="#">Twitter</a></li>
+      <li class="list-inline-item"><a class="muted-link"
+           href="#">Facebook</a></li>
+    </ul>
   </div>
 </footer>

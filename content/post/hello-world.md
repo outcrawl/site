@@ -21,7 +21,31 @@ func delete(w http.ResponseWriter, r *http.Request, p httprouter.Params, ctx con
 	}
 	responseJSON(w, "")
 }
-{{< / highlight >}}
+{{< /highlight >}}
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nihil necessitatibus a quasi, consectetur repellendus vitae. Possimus atque ut provident?
+
+{{< highlight c >}}
+static int copy_fs(unsigned long clone_flags, struct task_struct *tsk)
+{
+	struct fs_struct *fs = current->fs;
+	if (clone_flags & CLONE_FS) {
+		/* tsk->fs is already what we want */
+		spin_lock(&fs->lock);
+		if (fs->in_exec) {
+			spin_unlock(&fs->lock);
+			return -EAGAIN;
+		}
+		fs->users++;
+		spin_unlock(&fs->lock);
+		return 0;
+	}
+	tsk->fs = copy_fs_struct(fs);
+	if (!tsk->fs)
+		return -ENOMEM;
+	return 0;
+}
+{{< /highlight >}}
 
 # Another section
 
@@ -46,11 +70,11 @@ This is intended as a quick reference and showcase
 
 Colons can be used to align columns.
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+Tables        | Are           | Cool  
+--------------|---------------|-------:
+col 3 is      | right-aligned | $1600 
+col 2 is      | centered      |   $12 
+zebra stripes | are neat      |    $1 
 
 There must be at least 3 dashes separating each header cell.
 The outer pipes (|) are optional, and you don't need to make the 
@@ -65,16 +89,8 @@ Markdown | Less | Pretty
 
 1. First ordered list item
 2. Another item
-⋅⋅* Unordered sub-list. 
 1. Actual numbers don't matter, just that it's a number
-⋅⋅1. Ordered sub-list
 4. And another item.
-
-⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
-
-⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
-⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
-⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
 
 * Unordered list can use asterisks
 - Or minuses
@@ -82,12 +98,9 @@ Markdown | Less | Pretty
 
 ## Blockquotes
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote. 
+{{< blockquote cite="Someone" >}}
+Something something something.
+{{< /blockquote >}}
 
 ## Links
 
