@@ -407,8 +407,23 @@ a {
   border-color: #E0E0E0;
 }
 
+.blockquote {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border-left: 0.25rem solid #E0E0E0;
+}
+
+.blockquote-footer {
+  display: block;
+  font-size: 1rem;
+  color: #616161;
+}
+
+
 /* Utilities
 ------------------------------ */
+
 .text-white-transparent {
   color: rgba(255, 255, 255, 0.7) !important;
 }

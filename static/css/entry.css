@@ -1,7 +1,5 @@
 .entry {
   height: 15rem;
-  border: 1px solid #E0E0E0;
-
   display: flex;
   flex-wrap: nowrap;
 }

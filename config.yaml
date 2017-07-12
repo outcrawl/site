@@ -5,8 +5,6 @@ title: "Outcrawl"
 metaDataFormat: "yaml"
 enableRobotsTXT: true
 
-pygmentsuseclasses: true
-
 paginate: 6
 
 blackfriday:

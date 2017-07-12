@@ -3,12 +3,13 @@ article.container {
 }
 
 article p {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 article img {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
+
 
 /* Author
 ---------------------- */
@@ -16,12 +17,64 @@ article img {
 
 /* Code
 ---------------------- */
-pre {
+
+code[class*="language-"], pre[class*="language-"], code {
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
   tab-size: 2;
-  padding: 1rem;
-  background-color: #F5F5F5;
+  line-height: 1.5rem;
+  font-size: 0.85rem;
 }
 
-pre code {
+:not(pre) > code[class*="language-"], pre[class*="language-"] {
+  background: #F5F5F5;
+}
+
+pre[class*="language-"] {
+  padding: 1rem 1.5em;
+  margin: 0;
+  margin-bottom: 1.5rem;
+  overflow: auto;
+}
+
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
   background: none;
+}
+
+
+/* Highlighted lines
+--------------------- */
+
+.line-highlight:before, .line-highlight[data-end]:before {
+  top: 0.25rem;
+}
+
+.line-highlight:after, .line-highlight[data-end]:after {
+  bottom: 0.25rem;
+}
+
+.line-highlight:before, .line-highlight:after, .line-highlight[data-end]:after, .line-highlight[data-end]:before {
+  background: none;
+  color: #9E9E9E;
+  left: 0.2rem;
+}
+
+.line-highlight {
+  background: rgba(0, 0, 0, 0.06);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-top: 1rem;
+}
+
+
+/* Command line
+------------------------ */
+
+.command-line-prompt {
+  border-right: none;
+  margin-right: 0.5rem;
+  letter-spacing: -1rem;
 }

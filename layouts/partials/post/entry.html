@@ -1,79 +1,119 @@
-<div class="entry mb-3 text-white hidden-sm-up">
+{{$params := .context.Params}}
+{{$data := .context.Site.Data}}
 
-  <a class="w-100" href="{{.Permalink}}">
-  {{with .Params.thumbnail}}
-    {{if eq . "test"}}
+<div class="entry text-white hidden-sm-up">
+
+  <a class="w-100" href="{{.context.Permalink}}">
+  {{if $params.thumbnail}}
+    {{if eq $params.thumbnail "test"}}
     <div class="background-cover-image progressive__bg progressive--not-loaded"
-         data-progressive="http://lorempixel.com/854/480?id={{$.Title | md5}}"
-         style="background-image:url('http://lorempixel.com/854/480?id={{$.Title | md5}}')">
+         data-progressive="http://lorempixel.com/854/480?id={{.context.Title | md5}}"
+         style="background-image:url('http://lorempixel.com/854/480?id={{.context.Title | md5}}')">
     </div>
     {{else}}
     <div class="background-cover-image progressive__bg progressive--not-loaded"
-         data-progressive="/img/thumbnails/{{.}}.png"
-         style="background-image:url('/img/thumbnails-small/{{.}}.png')">
+         data-progressive="/img/thumbnails/{{$params.thumbnail}}.png"
+         style="background-image:url('/img/thumbnails-small/{{$params.thumbnail}}.png')">
     </div>
     {{end}}
   {{end}}
   </a>
 
   <div class="entry-content d-flex align-items-start flex-column">
-    <a class="unstyled-link w-100" href="{{.Permalink}}">
-      <h2 class="entry-title">{{.Title}}</h2>
+    <a class="unstyled-link w-100" href="{{.context.Permalink}}">
+      <h2 class="entry-title">{{.context.Title}}</h2>
     </a>
     <div class="w-100 mt-auto d-flex entry-meta">
       <img class="author-avatar my-auto rounded-circle"
-                src="https://www.gravatar.com/avatar/{{index .Site.Data.authors .Params.Author `email` | lower | md5}}?s=50"
-                alt="{{.Params.author}}-avatar">
+                src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
+                alt="{{$params.author}}-avatar">
       <div class="ml-2 my-auto">
-        <a href="/author/{{index .Site.Data.authors .Params.Author `name` | urlize}}" class="decorated-link">{{index .Site.Data.authors .Params.author "name"}}</a>
+        <a href="/author/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
         <div class="text-white-transparent">
-          {{dateFormat `Jan 2, 2006` .Date}}
+          {{dateFormat `Jan 2, 2006` .context.Date}}
         </div>
       </div>
       <div class="mt-auto ml-auto">
-        <a href="/category/{{index .Params.Categories 0 | urlize}}" class="decorated-link">{{index .Params.categories 0}}</a>
+        <a href="/category/{{index $params.categories 0 | urlize}}" class="decorated-link">{{index $params.categories 0}}</a>
       </div>
     </div>
   </div>
 
 </div>
 
-<div class="entry mb-3 hidden-xs-down">
-  
-  <a class="entry-image" href="{{.Permalink}}">
-  {{with .Params.thumbnail}}
-    {{if eq . "test"}}
+<div class="entry hidden-xs-down">
+
+  {{if eq (mod .index 2) 0}}
+  <a class="entry-image" href="{{.context.Permalink}}">
+  {{if $params.thumbnail}}
+    {{if eq $params.thumbnail "test"}}
     <div class="background-cover-image progressive__bg progressive--not-loaded"
-         data-progressive="http://lorempixel.com/854/480?id={{$.Title | md5}}"
-         style="background-image:url('http://lorempixel.com/854/480?id={{$.Title | md5}}')">
+         data-progressive="http://lorempixel.com/854/480?id={{.context.Title | md5}}"
+         style="background-image:url('http://lorempixel.com/854/480?id={{.context.Title | md5}}')">
     </div>
     {{else}}
     <div class="background-cover-image progressive__bg progressive--not-loaded"
-         data-progressive="/img/thumbnails/{{.}}.png"
-         style="background-image:url('/img/thumbnails-small/{{.}}.png')">
+         data-progressive="/img/thumbnails/{{$params.thumbnail}}.png"
+         style="background-image:url('/img/thumbnails-small/{{$params.thumbnail}}.png')">
     </div>
     {{end}}
   {{end}}
   </a>
 
   <div class="entry-content d-flex align-items-start flex-column">
-    <a class="unstyled-link w-100" href="{{.Permalink}}">
-      <h2 class="entry-title">{{.Title}}</h2>
+    <a class="unstyled-link w-100" href="{{.context.Permalink}}">
+      <h2 class="entry-title">{{.context.Title}}</h2>
     </a>
     <div class="w-100 mt-auto d-flex entry-meta">
       <img class="author-avatar my-auto rounded-circle"
-                src="https://www.gravatar.com/avatar/{{index .Site.Data.authors .Params.Author `email` | lower | md5}}?s=50"
-                alt="{{.Params.author}}-avatar">
+                src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
+                alt="{{$params.author}}-avatar">
       <div class="ml-2 my-auto">
-        <a href="/author/{{index .Site.Data.authors .Params.Author `name` | urlize}}" class="decorated-link">{{index .Site.Data.authors .Params.author "name"}}</a>
+        <a href="/author/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
         <div class="text-muted">
-          {{dateFormat `Jan 2, 2006` .Date}}
+          {{dateFormat `Jan 2, 2006` .context.Date}}
         </div>
       </div>
       <div class="mt-auto ml-auto">
-        <a href="/category/{{index .Params.Categories 0 | urlize}}" class="decorated-link">{{index .Params.categories 0}}</a>
+        <a href="/category/{{index $params.categories 0 | urlize}}" class="decorated-link">{{index $params.categories 0}}</a>
       </div>
     </div>
   </div>
+  {{else}}
+  <div class="entry-content d-flex align-items-start flex-column">
+    <a class="unstyled-link w-100" href="{{.context.Permalink}}">
+      <h2 class="entry-title">{{.context.Title}}</h2>
+    </a>
+    <div class="w-100 mt-auto d-flex entry-meta">
+      <img class="author-avatar my-auto rounded-circle"
+                src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
+                alt="{{$params.author}}-avatar">
+      <div class="ml-2 my-auto">
+        <a href="/author/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
+        <div class="text-muted">
+          {{dateFormat `Jan 2, 2006` .context.Date}}
+        </div>
+      </div>
+      <div class="mt-auto ml-auto">
+        <a href="/category/{{index $params.categories 0 | urlize}}" class="decorated-link">{{index $params.categories 0}}</a>
+      </div>
+    </div>
+  </div>
+  <a class="entry-image" href="{{.context.Permalink}}">
+  {{if $params.thumbnail}}
+    {{if eq $params.thumbnail "test"}}
+    <div class="background-cover-image progressive__bg progressive--not-loaded"
+         data-progressive="http://lorempixel.com/854/480?id={{.context.Title | md5}}"
+         style="background-image:url('http://lorempixel.com/854/480?id={{.context.Title | md5}}')">
+    </div>
+    {{else}}
+    <div class="background-cover-image progressive__bg progressive--not-loaded"
+         data-progressive="/img/thumbnails/{{$params.thumbnail}}.png"
+         style="background-image:url('/img/thumbnails-small/{{$params.thumbnail}}.png')">
+    </div>
+    {{end}}
+  {{end}}
+  </a>
+  {{end}}
 
 </div>

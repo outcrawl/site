@@ -14,8 +14,8 @@
   {{end}}
   -->
 
-  {{range $paginator.Pages}}
-    {{partial "post/entry.html" .}}
+  {{range $index, $page := $paginator.Pages}}
+    {{partial "post/entry.html" (dict "context" . "index" $index)}}
   {{end}}
 
   <div class="mt-3">

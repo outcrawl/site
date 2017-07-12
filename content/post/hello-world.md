@@ -10,7 +10,7 @@ thumbnail: "todo-angular-appengine"
 
 Aenean fermentum condimentum eros, vitae pulvinar lacus pretium id. Donec sit amet dolor quis arcu ullamcorper imperdiet sit amet sed diam. Curabitur sed nunc sit amet turpis laoreet cursus non sit amet est. Proin dictum pharetra neque sit amet vulputate. Quisque ac dictum sem. In sodales a justo in dignissim. Phasellus mollis posuere erat, in volutpat libero aliquet eu.
 
-{{< highlight go >}}
+{{< code lang="go" line="3-4" >}}
 func delete(w http.ResponseWriter, r *http.Request, p httprouter.Params, ctx context.Context, userID string) {
 	if _, key, err := getOwnTodo(ctx, userID, p.ByName("id")); err != nil {
 		responseError(w, err.Error(), http.StatusBadRequest)
@@ -21,31 +21,23 @@ func delete(w http.ResponseWriter, r *http.Request, p httprouter.Params, ctx con
 	}
 	responseJSON(w, "")
 }
-{{< /highlight >}}
+{{< /code >}}
+
+{{< code lang="html" >}}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <base href="{{.Site.BaseURL}}">
+  <link rel="canonical" href="{{.Permalink}}">
+</head>
+{{< /code >}}
+
+{{< terminal output="2" >}}
+echo "hello, world"
+hello, world
+{{< /terminal >}}
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nihil necessitatibus a quasi, consectetur repellendus vitae. Possimus atque ut provident?
-
-{{< highlight c >}}
-static int copy_fs(unsigned long clone_flags, struct task_struct *tsk)
-{
-	struct fs_struct *fs = current->fs;
-	if (clone_flags & CLONE_FS) {
-		/* tsk->fs is already what we want */
-		spin_lock(&fs->lock);
-		if (fs->in_exec) {
-			spin_unlock(&fs->lock);
-			return -EAGAIN;
-		}
-		fs->users++;
-		spin_unlock(&fs->lock);
-		return 0;
-	}
-	tsk->fs = copy_fs_struct(fs);
-	if (!tsk->fs)
-		return -ENOMEM;
-	return 0;
-}
-{{< /highlight >}}
 
 # Another section
 
@@ -54,13 +46,6 @@ Curabitur sodales sit amet velit vel egestas. Cras vitae commodo sem. In ac luct
 {{< image src="http://superbwallpaper.website/wp-content/uploads/2017/01/Final-Fantasy-Advent-Children-Weapons-Anime-Abstract-Wallpaper-GVO157-854x480.jpg" >}}
 
 Mauris aliquam ipsum vel orci sagittis tincidunt ac non ligula. Sed imperdiet ullamcorper nunc ut vulputate. Integer volutpat at purus nec consequat. Morbi in convallis velit.
-
-{{< highlight go "linenos=inline,hl_lines=2 3" >}}
-var a string
-var b string
-var c string
-var d string
-{{< / highlight >}}
 
 # Markdown
 
