@@ -3,7 +3,6 @@ title: "Hello World"
 slug: "hello-world"
 author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
-categories: ["Web"]
 date: "2017-08-01"
 thumbnail: "todo-angular-appengine"
 ---

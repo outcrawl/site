@@ -12,7 +12,6 @@ blackfriday:
 
 taxonomies:
   tag: "tags"
-  category: "categories"
 
 permalinks:
   post: "/:slug"

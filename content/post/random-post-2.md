@@ -2,8 +2,7 @@
 title: "Random Post #2"
 slug: "random-post-2"
 author: "john-doe"
-tags: ["Angular", "Typescript", "Go"]
-categories: ["Test"]
+tags: ["Angular", "Go"]
 date: "2017-07-03"
 thumbnail: "test"
 ---

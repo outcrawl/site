@@ -3,11 +3,11 @@
   <ul class="pagination justify-content-center">
     {{if .HasPrev}}
     <li class="page-item">
-      <a class="page-link" href="{{.Prev.URL}}">{{i18n "previous"}}</a>
+      <a class="page-link" href="{{.Prev.URL}}">Previous</a>
     </li>
     {{else}}
     <li class="page-item disabled">
-      <span class="page-link">{{i18n "previous"}}</span>
+      <span class="page-link">Previous</span>
     </li>
     {{end}}
     {{range .Pagers}}
@@ -21,11 +21,11 @@
     {{end}}
       {{if .HasNext}}
     <li class="page-item">
-      <a class="page-link" href="{{.Next.URL}}">{{i18n "next"}}</a>
+      <a class="page-link" href="{{.Next.URL}}">Next</a>
     </li>
       {{else}}
     <li class="page-item disabled">
-      <span class="page-link">{{i18n "next"}}</span>
+      <span class="page-link">Next</span>
     </li>
       {{end}}
   </ul>

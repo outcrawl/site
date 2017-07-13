@@ -2,8 +2,7 @@
 title: "A Very Long Post Title Used For Testing CSS Styles And Other Extremely Fun Stuff"
 slug: "very-long-post"
 author: "john-doe"
-tags: ["Angular", "Typescript", "Go"]
-categories: ["Test"]
+tags: ["Angular"]
 date: "2017-07-09"
 thumbnail: "test"
 ---

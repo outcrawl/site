@@ -3,7 +3,6 @@ title: "Random Post #1"
 slug: "random-post-1"
 author: "john-doe"
 tags: ["Angular", "Typescript", "Go"]
-categories: ["Test"]
 date: "2017-07-02"
 thumbnail: "test"
 ---

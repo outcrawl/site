@@ -3,7 +3,6 @@ title: "Random Post #9"
 slug: "random-post-9"
 author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
-categories: ["Test"]
 date: "2017-07-10"
 thumbnail: "test"
 ---

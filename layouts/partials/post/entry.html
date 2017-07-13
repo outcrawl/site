@@ -33,9 +33,6 @@
           {{dateFormat `Jan 2, 2006` .context.Date}}
         </div>
       </div>
-      <div class="mt-auto ml-auto">
-        <a href="/category/{{index $params.categories 0 | urlize}}" class="decorated-link">{{index $params.categories 0}}</a>
-      </div>
     </div>
   </div>
 
@@ -74,9 +71,6 @@
           {{dateFormat `Jan 2, 2006` .context.Date}}
         </div>
       </div>
-      <div class="mt-auto ml-auto">
-        <a href="/category/{{index $params.categories 0 | urlize}}" class="decorated-link">{{index $params.categories 0}}</a>
-      </div>
     </div>
   </div>
   {{else}}
@@ -93,9 +87,6 @@
         <div class="text-muted">
           {{dateFormat `Jan 2, 2006` .context.Date}}
         </div>
-      </div>
-      <div class="mt-auto ml-auto">
-        <a href="/category/{{index $params.categories 0 | urlize}}" class="decorated-link">{{index $params.categories 0}}</a>
       </div>
     </div>
   </div>

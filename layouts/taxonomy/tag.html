@@ -4,6 +4,8 @@
 
 <div class="container py-4" role="main">
 
+  <h1 class="display-4 mb-4">{{.Title}}</h1>
+
   {{range $index, $page := $paginator.Pages}}
     {{partial "post/entry.html" (dict "context" . "index" $index)}}
   {{end}}
