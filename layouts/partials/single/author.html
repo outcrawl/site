@@ -1,8 +1,11 @@
-<div class="w-100 mb-3 d-flex">
-  <img class="author-avatar my-auto rounded-circle"
-            src="https://www.gravatar.com/avatar/{{index .Site.Data.authors .Params.Author `email` | lower | md5}}?s=50"
-            alt="{{.Params.author}}-avatar">
-  <div class="ml-2 my-auto">
-    <a href="/author/{{index .Site.Data.authors .Params.Author `name` | urlize}}" class="decorated-link">{{index .Site.Data.authors .Params.author "name"}}</a>
+<div class="container">
+  <div class="w-100 mb-3 d-flex">
+    <img class="author-avatar my-auto rounded-circle"
+         src="https://www.gravatar.com/avatar/{{index .Site.Data.authors .Params.Author `email` | lower | md5}}?s=50"
+         alt="{{.Params.author}}-avatar">
+    <div class="ml-2 my-auto">
+      <a href="/author/{{index .Site.Data.authors .Params.Author `name` | urlize}}"
+         class="decorated-link">{{index .Site.Data.authors .Params.author "name"}}</a>
+    </div>
   </div>
 </div>

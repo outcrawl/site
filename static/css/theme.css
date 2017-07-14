@@ -76,6 +76,10 @@ a {
 /* Utilities
 ------------------------------ */
 
+.relative {
+  position: relative;
+}
+
 .text-white-transparent {
   color: rgba(255, 255, 255, 0.7) !important;
 }
@@ -97,6 +101,11 @@ a {
 
 .h-60 {
   height: 60%;
+}
+
+.wh-100 {
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 576px) {
