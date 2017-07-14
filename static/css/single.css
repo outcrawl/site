@@ -1,19 +1,14 @@
-article.container {
-  max-width: 854px;
+.single .container {
+  max-width: 42rem;
 }
 
 article p {
   margin-bottom: 1.5rem;
 }
 
-article img {
+.section-margin {
   margin-bottom: 1.5rem;
 }
-
-
-/* Author
----------------------- */
-
 
 /* Code
 ---------------------- */
@@ -32,7 +27,6 @@ code[class*="language-"], pre[class*="language-"], code {
 pre[class*="language-"] {
   padding: 1rem 1.5em;
   margin: 0;
-  margin-bottom: 1.5rem;
   overflow: auto;
 }
 
@@ -77,4 +71,46 @@ pre[class*="language-"] {
   border-right: none;
   margin-right: 0.5rem;
   letter-spacing: -1rem;
+}
+
+/* Share
+----------------------- */
+.share {
+  font-size: 0.75rem;
+}
+
+.share .icon-link {
+  display: inline-block;
+  width: 1.75rem;
+  height: 1.75rem;
+  line-height: 1.75rem;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.share .icon-link i {
+  color: #FFFFFF;
+}
+
+/* Newsletter
+---------------------- */
+.newsletter {
+  padding: 3rem 0;
+}
+
+.newsletter p {
+  margin-bottom: 1.25rem;
+}
+
+.newsletter .input-group {
+  margin-bottom: 1rem;
+}
+
+.newsletter .container {
+  max-width: 24rem;
+}
+
+.newsletter .lead {
+  font-size: 1.75rem;
+  line-height: 2rem;
 }

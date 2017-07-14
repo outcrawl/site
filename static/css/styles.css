@@ -86,3 +86,7 @@ table {
 thead th {
   border-bottom: 1px solid #E0E0E0;
 }
+
+hr {
+  border-top: 1px solid #E0E0E0;
+}
