@@ -6,7 +6,7 @@
     <h1 class="display-4 mb-2">{{.Title}}</h1>
 
     <div class="mb-2">
-      <span class="text-muted">By</span> <a href="/author/{{index .Site.Data.authors .Params.Author `name` | urlize}}" class="decorated-link">{{index .Site.Data.authors .Params.author "name"}}</a>
+      <span class="text-muted">By</span> <a href="/authors/{{index .Site.Data.authors .Params.Author `name` | urlize}}" class="decorated-link">{{index .Site.Data.authors .Params.author "name"}}</a>
       <div class="text-muted float-right">{{dateFormat `Jan 2, 2006` .Date}}</div>
     </div>
 

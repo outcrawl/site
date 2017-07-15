@@ -24,11 +24,11 @@
       <h2 class="entry-title">{{.context.Title}}</h2>
     </a>
     <div class="w-100 mt-auto d-flex entry-meta">
-      <img class="author-avatar my-auto rounded-circle"
+      <img class="avatar my-auto rounded-circle"
                 src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
                 alt="{{$params.author}}-avatar">
       <div class="ml-2 my-auto">
-        <a href="/author/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
+        <a href="/authors/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
         <div class="text-white-transparent">
           {{dateFormat `Jan 2, 2006` .context.Date}}
         </div>
@@ -62,11 +62,11 @@
       <h2 class="entry-title">{{.context.Title}}</h2>
     </a>
     <div class="w-100 mt-auto d-flex entry-meta">
-      <img class="author-avatar my-auto rounded-circle"
+      <img class="avatar my-auto rounded-circle"
                 src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
                 alt="{{$params.author}}-avatar">
       <div class="ml-2 my-auto">
-        <a href="/author/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
+        <a href="/authors/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
         <div class="text-muted">
           {{dateFormat `Jan 2, 2006` .context.Date}}
         </div>
@@ -79,11 +79,11 @@
       <h2 class="entry-title">{{.context.Title}}</h2>
     </a>
     <div class="w-100 mt-auto d-flex entry-meta">
-      <img class="author-avatar my-auto rounded-circle"
+      <img class="avatar my-auto rounded-circle"
                 src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
                 alt="{{$params.author}}-avatar">
       <div class="ml-2 my-auto">
-        <a href="/author/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
+        <a href="/authors/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
         <div class="text-muted">
           {{dateFormat `Jan 2, 2006` .context.Date}}
         </div>

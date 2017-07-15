@@ -1,3 +1,10 @@
 name: "Tin Rabzelj"
+slug: "tin-rabzelj"
 email: "tin.rabzelj@gmail.com"
 bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, ab!"
+
+social:
+  twitter: "tinrab"
+  github: "tinrab"
+  facebook: "tinrab"
+  googlePlus: "111217297807827209130"

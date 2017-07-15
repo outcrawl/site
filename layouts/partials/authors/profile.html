@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-start">
+
+  <div>
+    <h1>{{.name}}</h1>
+    <div>
+      {{.bio}}
+    </div>
+    <div class="social-links">
+      <ul class="list-inline">
+
+        {{with .social.twitter}}
+        <li class="list-inline-item">
+          <a class="muted-link" href="//twitter.com/{{.}}"><i class="fa fa-twitter fa-fw"></i></a>
+        </li>
+        {{end}}
+
+        {{with .social.github}}
+        <li class="list-inline-item">
+          <a class="muted-link" href="//github.com/{{.}}"><i class="fa fa-github fa-fw"></i></a>
+        </li>
+        {{end}}
+
+        {{with .social.facebook}}
+        <li class="list-inline-item">
+          <a class="muted-link" href="//facebook.com/{{.}}"><i class="fa fa-facebook fa-fw"></i></a>
+        </li>
+        {{end}}
+
+        {{with .social.googlePlus}}
+        <li class="list-inline-item">
+          <a class="muted-link" href="//plus.google.com/{{.}}"><i class="fa fa-google-plus fa-fw"></i></a>
+        </li>
+        {{end}}
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="ml-auto mb-auto">
+    <img class="avatar my-auto rounded-circle"
+         src="https://www.gravatar.com/avatar/{{.email | lower | md5}}?s=160"
+         alt="{{.slug}}-avatar">
+  </div>
+
+</div>

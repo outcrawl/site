@@ -3,7 +3,7 @@ title: "Random Post #4"
 slug: "random-post-4"
 author: "tin-rabzelj"
 tags: ["Go"]
-date: "2017-07-05"
+date: "2017-08-05"
 thumbnail: "test"
 ---
 

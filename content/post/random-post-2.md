@@ -3,7 +3,7 @@ title: "Random Post #2"
 slug: "random-post-2"
 author: "john-doe"
 tags: ["Angular", "Go"]
-date: "2017-07-03"
+date: "2017-06-18"
 thumbnail: "test"
 ---
 

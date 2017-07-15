@@ -1,10 +1,10 @@
 {{define "main"}}
 
-{{$paginator := .Paginate (.Data.Pages)}}
+{{$paginator := .Paginate (where .Data.Pages "Type" "post")}}
 
 <div class="container py-4" role="main">
 
-  {{range $index, $page := $paginator.Pages}}
+  {{range $index, $post := $paginator.Pages}}
     {{partial "post/entry.html" (dict "context" . "index" $index)}}
   {{end}}
 

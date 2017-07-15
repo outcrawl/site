@@ -1,0 +1,36 @@
+{{define "main"}}
+
+{{$author := (index .Site.Data.authors .Slug)}}
+
+<div class="author" role="main">
+  <div class="container py-5">
+
+    {{partial "authors/profile.html" $author}}
+
+    <hr>
+
+    {{ range (where (where .Site.Pages "Type" "post") "Params.author" .Slug).GroupByDate "2006-01" }}
+    <h4 class="mb-2">{{ .Key }}</h4>
+    <ul class="list-unstyled">
+        {{ range .Pages }}
+        <li class="mb-3 ml-2">
+          <h2 class="mb-1"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          <div class="small text-muted d-flex">
+            <div class="my-auto">
+              {{range .Params.tags}}
+                <a href="/tags/{{. | urlize}}" role="button" class="btn btn-secondary btn-sm">{{ . }}</a>
+              {{end}}
+            </div>
+            <div class="my-auto ml-auto">
+              {{ .Date.Format "Jan 2, 2006" }}
+            </div>
+          </div>
+        </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+    
+  </div>
+</div>
+
+{{end}}
