@@ -1,8 +1,8 @@
 <blockquote class="blockquote section-margin">
-  <p class="mb-0">{{.Inner}}</p>
+  {{.Inner}}
+  {{with .Get "cite"}}
   <footer class="blockquote-footer">
-    {{with .Get "cite"}}
     <cite title="{{.}}">{{.}}</cite>
-    {{end}}
   </footer>
+  {{end}}
 </blockquote>
