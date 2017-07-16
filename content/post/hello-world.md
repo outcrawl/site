@@ -4,7 +4,7 @@ slug: "hello-world"
 author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
 date: "2017-10-01"
-thumbnail: "todo-angular-appengine"
+thumbnail: "test"
 ---
 
 Aenean fermentum condimentum eros, vitae pulvinar lacus pretium id. Donec sit amet dolor quis arcu ullamcorper imperdiet sit amet sed diam. Curabitur sed nunc sit amet turpis laoreet cursus non sit amet est. Proin dictum pharetra neque sit amet vulputate. Quisque ac dictum sem. In sodales a justo in dignissim. Phasellus mollis posuere erat, in volutpat libero aliquet eu.
