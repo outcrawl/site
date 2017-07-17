@@ -9,16 +9,72 @@ thumbnail: "test"
 
 Aenean fermentum condimentum eros, vitae pulvinar lacus pretium id. Donec sit amet dolor quis arcu ullamcorper imperdiet sit amet sed diam. Curabitur sed nunc sit amet turpis laoreet cursus non sit amet est. Proin dictum pharetra neque sit amet vulputate. Quisque ac dictum sem. In sodales a justo in dignissim. Phasellus mollis posuere erat, in volutpat libero aliquet eu.
 
-{{< code lang="go" line="3-4" >}}
-func delete(w http.ResponseWriter, r *http.Request, p httprouter.Params, ctx context.Context, userID string) {
-	if _, key, err := getOwnTodo(ctx, userID, p.ByName("id")); err != nil {
-		responseError(w, err.Error(), http.StatusBadRequest)
-		return
-	} else if err := datastore.Delete(ctx, key); err != nil {
-		responseError(w, "could not delete", http.StatusBadRequest)
-		return
+{{< code lang="go" >}}
+// This is a comment
+/* This is a comment
+on multiple lines */
+
+// Numbers
+42
+0600
+0xBadFace
+170141183460469231731687303715884105727
+0.
+72.40
+072.40
+2.71828
+1.e+0
+6.67428e-11
+1E6
+.25
+.12345E+5
+0i
+011i
+0.i
+2.71828i
+1.e+0i
+6.67428e-11i
+1E6i
+.25i
+.12345E+5i
+
+// Runes and strings
+'\t'
+'\000'
+'\x07'
+'\u12e4'
+'\U00101234'
+`abc`
+`multi-line
+string`
+"Hello, world!"
+"multi-line
+string"
+
+// Functions
+func(a, b int, z float64) bool { return a*b < int(z) }
+
+// Full example
+package main
+import "fmt"
+
+func sum(a []int, c chan int) {
+	sum := 0
+	for _, v := range a {
+		sum += v
 	}
-	responseJSON(w, "")
+	c <- sum // send sum to c
+}
+
+func main() {
+	a := []int{7, 2, 8, -9, 4, 0}
+
+	c := make(chan int)
+	go sum(a[:len(a)/2], c)
+	go sum(a[len(a)/2:], c)
+	x, y := <-c, <-c // receive from c
+
+	fmt.Println(x, y, x+y)
 }
 {{< /code >}}
 
@@ -31,12 +87,21 @@ func delete(w http.ResponseWriter, r *http.Request, p httprouter.Params, ctx con
 </head>
 {{< /code >}}
 
+Ullamco dolore enim sunt sint duis nostrud irure fugiat sunt sunt adipisicing dolor aute voluptate. Ipsum ut enim amet amet reprehenderit. Velit culpa ipsum do exercitation ex qui incididunt magna non nostrud Lorem. Dolor occaecat elit commodo consequat duis occaecat dolore deserunt. In occaecat fugiat cupidatat qui voluptate nisi est aliqua proident tempor ea in eu. Adipisicing cillum incididunt adipisicing enim cupidatat eu ex in duis adipisicing.
+
+{{< code lang="scss" >}}
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+{{< /code >}}
+
 {{< terminal output="2" >}}
 echo "hello, world"
 hello, world
 {{< /terminal >}}
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nihil necessitatibus a quasi, consectetur repellendus vitae. Possimus atque ut provident?
+Do tempor dolore aliqua enim amet officia. Voluptate dolore do quis do Lorem Lorem. Fugiat id esse minim nisi id laborum excepteur cillum do ex ad. Anim anim id do ipsum aliquip nostrud aliqua voluptate consequat exercitation magna ut irure laboris. Est exercitation adipisicing reprehenderit anim in deserunt nisi deserunt mollit.
 
 # Another section
 

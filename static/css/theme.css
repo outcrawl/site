@@ -69,7 +69,7 @@ a {
 }
 
 .jumbotron {
-  background-color: #E0E0E0;
+  background-color: #F5F5F5;
 }
 
 
@@ -124,10 +124,18 @@ a {
   text-decoration: none;
 }
 
+
 /* Alerts
 -------------------------- */
+
 .alert {
   margin: 0;
+}
+
+.alert-info {
+  background:#212121;
+  border: none;
+  color: #FFFFFF;
 }
 
 .alert-success {
@@ -142,8 +150,18 @@ a {
   color: #FFFFFF;
 }
 
+.alert a {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+.alert a, .alert a:focus {
+  color: #FFFFFF;
+}
+
 /* Buttons
 -------------------------- */
+
 .btn-primary {
   background-color: #212121;
   border-color: #212121;

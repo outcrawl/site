@@ -93,7 +93,7 @@ hello, world
 
 Before implementing functions handling operations with todos, you need a way to authenticate users with your back-end service. App Engine provides its own in-memory cache service called Memcache. You'll use it to hold users' sessions. To learn more about Memcache, see [official documentation](https://cloud.google.com/appengine/docs/standard/go/memcache/).
 
-Memcache is a key-value store, capable of caching values for keys with optional expiration time. That's a perfect fit for user sessions. A key will simply be the user's ID, given by the Google API. A value will be a secret token&mdash;auto-generated string consisting of 64 random alphanumeric characters, "_" and "-".
+Memcache is a key-value store, capable of caching values for keys with optional expiration time. That's a perfect fit for user sessions. Instead of using popular JWT, you'll design your own system. A key will simply be the user's ID, given by the Google API. A value will be a secret token&mdash;auto-generated string consisting of 64 random alphanumeric characters, "_" and "-".
 
 To start off, first create a new source file `utility.go` for some utility functions. Write a `generateToken` function, which generates our session token.
 

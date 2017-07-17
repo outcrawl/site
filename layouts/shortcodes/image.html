@@ -1,1 +1,4 @@
-<img class="img-fluid section-margin" src="/img/{{.Page.Slug}}/{{.Get `name`}}">
+<img class="progressive__img progressive--not-loaded img-fluid"
+     data-progressive="/img/{{.Page.Slug}}/{{.Get `name`}}"
+     src="/img/{{.Page.Slug}}/small-{{.Get `name`}}"
+     alt="{{.}}">
