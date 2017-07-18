@@ -9,8 +9,8 @@ article blockquote p, article .alert p {
 /* Section margins
 ----------------------- */
 
-article p, article blockquote, article .img-fluid, article .alert, .share, article h1, article h2, article h3, article h4, .chart {
-  margin-bottom: 1.5rem;
+article p, article .alert, article h1, article h2, article h3, article h4, {
+  margin-bottom: 1rem;
 }
 
 #TableOfContents {
@@ -88,16 +88,12 @@ pre[class*="language-"] {
 
 /* Share
 ----------------------- */
-
-.share {
-  font-size: 0.75rem;
-}
-
 .share .icon-link {
+  font-size: 0.75rem;
+  line-height: 1.75rem;
   display: inline-block;
   width: 1.75rem;
   height: 1.75rem;
-  line-height: 1.75rem;
   text-align: center;
   border-radius: 50%;
 }

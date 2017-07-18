@@ -1,33 +1,33 @@
 <div class="d-flex justify-content-start">
 
   <div>
-    <h1>{{.name}}</h1>
-    <div>
+    <h1 class="mb-3">{{.name}}</h1>
+    <p class="mb-3">
       {{.bio}}
-    </div>
+    </p>
     <div class="social-links">
       <ul class="list-inline">
 
         {{with .social.twitter}}
-        <li class="list-inline-item">
+        <li class="list-inline-item mr-0">
           <a class="muted-link" href="//twitter.com/{{.}}"><i class="fa fa-twitter fa-fw"></i></a>
         </li>
         {{end}}
 
         {{with .social.github}}
-        <li class="list-inline-item">
+        <li class="list-inline-item mr-0">
           <a class="muted-link" href="//github.com/{{.}}"><i class="fa fa-github fa-fw"></i></a>
         </li>
         {{end}}
 
         {{with .social.facebook}}
-        <li class="list-inline-item">
+        <li class="list-inline-item mr-0">
           <a class="muted-link" href="//facebook.com/{{.}}"><i class="fa fa-facebook fa-fw"></i></a>
         </li>
         {{end}}
 
         {{with .social.googlePlus}}
-        <li class="list-inline-item">
+        <li class="list-inline-item mr-0">
           <a class="muted-link" href="//plus.google.com/{{.}}"><i class="fa fa-google-plus fa-fw"></i></a>
         </li>
         {{end}}

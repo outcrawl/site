@@ -6,23 +6,21 @@
   <div class="container py-5">
 
     {{partial "authors/profile.html" $author}}
-
     <hr>
 
+    <h2 class="mb-3">Articles</h2>
+    
     {{ range (where (where .Site.Pages "Type" "post") "Params.author" .Slug).GroupByDate "2006-01" }}
-    <h4 class="mb-2">{{ .Key }}</h4>
+    <p class="mb-2 text-muted">{{ .Key }}</p>
     <ul class="list-unstyled">
         {{ range .Pages }}
         <li class="mb-3 ml-2">
-          <h2 class="mb-1"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          <h2 class="mb-2"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
           <div class="small text-muted d-flex">
             <div class="my-auto">
               {{range .Params.tags}}
-                <a href="/tags/{{. | urlize}}" role="button" class="btn btn-secondary btn-sm">{{ . }}</a>
+                <a href="/tags/{{. | urlize}}" role="button" class="btn btn-secondary btn-sm mr-1">{{ . }}</a>
               {{end}}
-            </div>
-            <div class="my-auto ml-auto">
-              {{ .Date.Format "Jan 2, 2006" }}
             </div>
           </div>
         </li>
