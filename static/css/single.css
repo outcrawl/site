@@ -6,11 +6,10 @@ article blockquote p, article .alert p {
   margin: 0;
 }
 
-
 /* Section margins
 ----------------------- */
 
-article p, article blockquote, article .img-fluid, article .alert, .share, article h1, article h2, article h3, article h4 {
+article p, article blockquote, article .img-fluid, article .alert, .share, article h1, article h2, article h3, article h4, .chart {
   margin-bottom: 1.5rem;
 }
 
@@ -27,19 +26,17 @@ pre[class*="language-"] {
 ---------------------- */
 
 code {
+  font-family: 'Roboto Mono', monospace;
   color: #212121;
   border-radius: 0.25rem;
+  background: #F5F5F5;
 }
 
 code[class*="language-"], pre[class*="language-"], code {
-  font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+  font-family: 'Roboto Mono', monospace;
   tab-size: 2;
   line-height: 1.5rem;
   font-size: 0.85rem;
-}
-
-:not(pre) > code[class*="language-"], pre[class*="language-"] {
-  background: #F5F5F5;
 }
 
 pre[class*="language-"] {
@@ -47,6 +44,7 @@ pre[class*="language-"] {
   margin-bottom: 1.5rem;
   overflow: auto;
   border-radius: 0.25rem;
+  background: #F5F5F5;
 }
 
 .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
@@ -58,11 +56,11 @@ pre[class*="language-"] {
 --------------------- */
 
 .line-highlight:before, .line-highlight[data-end]:before {
-  top: 0.4rem;
+  top: 0.5rem;
 }
 
 .line-highlight:after, .line-highlight[data-end]:after {
-  bottom: 0.4rem;
+  bottom: 0.2rem;
 }
 
 .line-highlight:before, .line-highlight:after, .line-highlight[data-end]:after, .line-highlight[data-end]:before {
@@ -131,4 +129,45 @@ pre[class*="language-"] {
 .newsletter .lead {
   font-size: 1.75rem;
   line-height: 2rem;
+}
+
+/* Related entries
+---------------------- */
+.related .entry-content {
+  padding: 0.75rem;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px) {
+.related .entry-title {
+  font-size: 1.5rem;
+}
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+.related .entry-title {
+  font-size: 2rem;
+}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+.related .entry-title {
+  font-size: 2rem;
+}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+.related .entry-title {
+  font-size: 2rem;
+}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+.related .entry-title {
+  font-size: 2rem;
+}
 }

@@ -5,6 +5,8 @@ author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
 date: "2017-10-01"
 thumbnail: "test"
+draft: true
+imports: ["katex"]
 ---
 
 Aenean fermentum condimentum eros, vitae pulvinar lacus pretium id. Donec sit amet dolor quis arcu ullamcorper imperdiet sit amet sed diam. Curabitur sed nunc sit amet turpis laoreet cursus non sit amet est. Proin dictum pharetra neque sit amet vulputate. Quisque ac dictum sem. In sodales a justo in dignissim. Phasellus mollis posuere erat, in volutpat libero aliquet eu.
@@ -106,6 +108,26 @@ Do tempor dolore aliqua enim amet officia. Voluptate dolore do quis do Lorem Lor
 # Another section
 
 Curabitur sodales sit amet velit vel egestas. Cras vitae commodo sem. In ac luctus dolor, rutrum aliquam dolor. Maecenas imperdiet id libero ut ultricies. Phasellus semper tellus at maximus sollicitudin.
+
+{{< blocklatex >}}
+f(x) = \int_{-\infty}^\infty
+    \hat f(\xi)\,e^{2 \pi i \xi x}
+    \,d\xi
+{{< /blocklatex >}}
+
+Officia cupidatat aliquip culpa pariatur dolore ut excepteur ea cupidatat reprehenderit.
+
+{{< blocklatex >}}
+\begin{aligned}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\   
+\nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
+\nabla \cdot \vec{\mathbf{B}} & = 0 \end{aligned}
+{{< /blocklatex >}}
+
+Dolor consectetur id pariatur consectetur laborum tempor eu sit esse pariatur fugiat. Sunt culpa ex {{< latex >}}f(x) = \sqrt{1+x} \quad (x \ge  -1){{< /latex >}} adipisicing enim proident tempor excepteur voluptate esse nostrud pariatur. Ullamco laborum velit pariatur voluptate labore esse id adipisicing culpa irure aute enim. Tempor amet tempor laboris ipsum.
+
+Dolore do enim enim aliquip in laboris enim consectetur. Reprehenderit aute non ut qui laborum. Ex ullamco incididunt cupidatat cupidatat deserunt culpa minim eu. Veniam ex ut proident duis. Elit aute ut est nostrud sit quis nisi quis eiusmod id ipsum eu reprehenderit.
 
 {{< image src="http://superbwallpaper.website/wp-content/uploads/2017/01/Final-Fantasy-Advent-Children-Weapons-Anime-Abstract-Wallpaper-GVO157-854x480.jpg" >}}
 

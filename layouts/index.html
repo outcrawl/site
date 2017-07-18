@@ -2,11 +2,15 @@
 
 {{$paginator := .Paginate (where .Data.Pages "Type" "post")}}
 
-<div class="container py-4" role="main">
+<div class="container py-5" role="main">
 
-  {{range $index, $post := $paginator.Pages}}
-    {{partial "post/entry.html" (dict "context" . "index" $index)}}
+  <div class="row">
+  {{range $paginator.Pages}}
+    <div class="col-md-6 p-0">
+      {{partial "entry.html" .}}
+    </div>
   {{end}}
+  </div>
 
   <div class="mt-4">
   {{partial "pagination.html" $paginator}}

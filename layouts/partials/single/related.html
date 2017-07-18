@@ -1,16 +1,32 @@
-<div class="related">
+<div class="related mb-4">
   <div class="container">
     <div class="row">
 
 {{ $page_link := .Permalink }}
 {{ $tags := .Params.tags }}
+
+{{ range $page := .Site.Pages }}
+  {{ $has_common_tags := intersect $tags .Params.tags | len | lt 0 }}
+  {{ if and $has_common_tags (ne $page_link $page.Permalink) (lt ($.Scratch.Get "$total") 3)}}
+    {{ $.Scratch.Add "$total" 1 }}
+  {{ end }}
+{{ end }}
+
 {{ range $page := .Site.Pages }}
   {{ $has_common_tags := intersect $tags .Params.tags | len | lt 0 }}
   {{ if and $has_common_tags (ne $page_link $page.Permalink) (lt ($.Scratch.Get "$c") 3)}}
     {{ $.Scratch.Add "$c" 1 }}
-
-    {{partial "post/related.html" $page}}
-
+      {{if eq ($.Scratch.Get "$total") 3}}
+      <div class="col-md-4">
+      {{end}}
+      {{if eq ($.Scratch.Get "$total") 2}}
+      <div class="col-md-6">
+      {{end}}
+      {{if eq ($.Scratch.Get "$total") 1}}
+      <div class="col-md-12">
+      {{end}}
+      {{partial "entry.html" $page}}
+      </div>
   {{ end }}
 {{ end }}
 

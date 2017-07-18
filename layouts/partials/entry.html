@@ -1,0 +1,37 @@
+{{$params := .Params}}
+{{$data := .Site.Data}}
+
+<div class="text-white entry">
+  <a class="w-100" href="{{.Permalink}}">
+  {{if $params.thumbnail}}
+    {{if eq $params.thumbnail "test"}}
+    <div class="background-cover-image progressive__bg progressive--not-loaded"
+          data-progressive="http://lorempixel.com/1280/720?id={{.Title | md5}}"
+          style="background-image:url('http://lorempixel.com/1280/720?id={{.Title | md5}}')">
+    </div>
+    {{else}}
+    <div class="background-cover-image progressive__bg progressive--not-loaded"
+          data-progressive="/img/thumbnails/{{$params.thumbnail}}.png"
+          style="background-image:url('/img/thumbnails-small/{{$params.thumbnail}}.png')">
+    </div>
+    {{end}}
+  {{end}}
+  </a>
+
+  <div class="entry-content d-flex align-items-start flex-column">
+    <a class="unstyled-link w-100 mt-auto mb-2" href="{{.Permalink}}">
+      <h2 class="entry-title">{{.Title}}</h2>
+    </a>
+    <div class="w-100 d-flex entry-meta">
+      <img class="avatar my-auto rounded-circle"
+                src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
+                alt="{{$params.author}}-avatar">
+      <div class="ml-2 my-auto">
+        <a href="/authors/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link">{{index $data.authors $params.author "name"}}</a>
+        <div class="text-white-transparent">
+          {{dateFormat `Jan 2, 2006` .Date}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

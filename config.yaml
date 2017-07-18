@@ -4,7 +4,6 @@ title: "Outcrawl"
 
 metaDataFormat: "yaml"
 enableRobotsTXT: true
-uglyurls: true
 paginate: 6
 
 blackfriday:
@@ -19,4 +18,3 @@ permalinks:
 params:
   tagline: "Software development tutorials without nonsense."
   disqusShortname: "outcrawl"
-  copyrightHTML: "Copyright &#xA9; 2017 John Doe. All Rights Reserved."

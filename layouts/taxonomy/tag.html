@@ -6,8 +6,8 @@
 
   <h1 class="display-4 mb-4">{{.Title}}</h1>
 
-  {{range $index, $post := $paginator.Pages}}
-    {{partial "post/entry.html" (dict "context" . "index" $index)}}
+  {{range $paginator.Pages}}
+    {{partial "entry.html" .}}
   {{end}}
 
   <div class="mt-4">

@@ -55,6 +55,14 @@ a {
   border-color: #E0E0E0;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #212121;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+  background-color: #E0E0E0;
+}
+
 .blockquote {
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
@@ -70,6 +78,7 @@ a {
 
 .jumbotron {
   background-color: #F5F5F5;
+  margin: 0;
 }
 
 
