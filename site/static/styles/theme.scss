@@ -1,14 +1,20 @@
+@import 'bootstrap';
+
+/* Colors */
+$dark: #212121;
+$gray: #616161;
+
 a {
   color: #1976D2
 }
 
 .muted-link {
-  color: #616161;
+  color: $gray;
   text-decoration: none
 }
 
 .text-muted {
-  color: #616161 !important
+  color: $gray !important
 }
 
 .muted-link:hover, .muted-link:focus {
@@ -31,17 +37,17 @@ a {
 }
 
 .page-item.active .page-link {
-  background-color: #212121;
-  border-color: #212121;
+  background-color: $dark;
+  border-color: $dark;
 }
 
 .page-link {
-  color: #212121;
+  color: $dark;
   border: 1px solid #E0E0E0;
 }
 
 .page-link:focus, .page-link:hover {
-  color: #212121;
+  color: $dark;
   background-color: #F5F5F5;
   border-color: #E0E0E0;
 }
@@ -56,7 +62,7 @@ a {
 }
 
 .dropdown-item.active, .dropdown-item:active {
-  background-color: #212121;
+  background-color: $dark;
 }
 
 .dropdown-item:focus, .dropdown-item:hover {
@@ -117,13 +123,13 @@ a {
   height: 100%;
 }
 
-@media (max-width: 576px) {
+@include media-breakpoint-only(xs) {
   .mt-xs-2 {
     margin-top: 0.5rem !important;
   }
 }
 
-@media (min-width: 576px) and (max-width: 767px) {
+@include media-breakpoint-only(sm) {
   .mt-sm-2 {
     margin-top: 0.5rem !important;
   }
@@ -142,7 +148,7 @@ a {
 }
 
 .alert-info {
-  background:#212121;
+  background:$dark;
   border: none;
   color: #FFFFFF;
 }
@@ -159,28 +165,29 @@ a {
   color: #FFFFFF;
 }
 
-.alert a {
-  color: #FFFFFF;
-  text-decoration: underline;
-}
-
-.alert a, .alert a:focus {
-  color: #FFFFFF;
+.alert {
+  a {
+    color: #FFFFFF;
+    text-decoration: underline;
+  }
+  a:focus {
+    color: #FFFFFF;
+  }
 }
 
 /* Buttons
 -------------------------- */
 
 .btn-primary {
-  background-color: #212121;
-  border-color: #212121;
-}
+  background-color: $dark;
+  border-color: $dark;
 
-.btn-primary:hover {
-  background-color: #616161;
-  border-color: #616161;
-}
+  &:hover {
+    background-color: $gray;
+    border-color: $gray;
+  }
 
-.btn-primary:focus {
-  box-shadow: rgba(33, 33, 33, 0.5) 0px 0px 0px 2px;
+  &:focus {
+    box-shadow: lighten($dark, 10%);
+  }
 }

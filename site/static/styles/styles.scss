@@ -1,3 +1,5 @@
+@import 'bootstrap';
+
 html {
   position: relative;
   min-height: 100%;
@@ -11,35 +13,25 @@ body {
   line-height: 1.5rem;
 }
 
-/* Extra small devices (portrait phones, less than 576px) */
-
-@media (max-width: 575px) {
+@include media-breakpoint-only(xs) {
   html {
     font-size: 14px;
   }
 }
 
-/* Medium devices (tablets, 768px and up) */
-
-@media (min-width: 768px) and (max-width: 991px) {
+@include media-breakpoint-only(md) {
   html {
     font-size: 16px;
   }
 }
 
-
-/* Large devices (desktops, 992px and up) */
-
-@media (min-width: 992px) and (max-width: 1199px) {
+@include media-breakpoint-only(lg) {
   html {
     font-size: 16px;
   }
 }
 
-
-/* Extra large devices (large desktops, 1200px and up) */
-
-@media (min-width: 1200px) {
+@include media-breakpoint-only(xl) {
   html {
     font-size: 18px;
   }
@@ -49,7 +41,7 @@ body {
   border-bottom: 1px solid #E0E0E0;
 }
 
-@media (max-width: 575px) {
+@include media-breakpoint-only(xs) {
   .navbar-toggleable-md > .container {
     margin-left: 0;
     margin-right: 0;
@@ -60,7 +52,7 @@ body {
   }
 }
 
-@media (max-width: 991px) {
+@include media-breakpoint-up(lg) {
   .navbar-toggleable-md > .container {
     padding-right: 15px;
     padding-left: 15px;
@@ -78,10 +70,10 @@ body {
   height: 4rem;
   border-top: 1px solid #E0E0E0;
   font-size: 0.85rem;
-}
 
-.footer i {
-  font-size: 1rem;
+  i {
+    font-size: 1rem;
+  }
 }
 
 table {

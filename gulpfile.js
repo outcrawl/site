@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var fs = require('fs')
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 var merge = require('merge-stream');
@@ -19,6 +20,25 @@ var paths = {
     'app/images/**/*'
   ]
 };
+
+var injectSvg = $.replace(/<img .*src="(.*svg)".*>/g, function (element, file) {
+  // get size attributes
+  var width = /width=\"([^"]*)\"/.exec(element);
+  var height = /height=\"([^"]*)\"/.exec(element);
+
+  // read svg file
+  var svg = fs.readFileSync('dist' + file, 'utf8').replace(/\r?\n|\r/g, '');
+
+  // inject attributes in svg element if they exist
+  if (width) {
+    svg = svg.replace(/<svg/, '<svg ' + width[0]);
+  }
+  if (height) {
+    svg = svg.replace(/<svg/, '<svg ' + height[0]);
+  }
+
+  return svg;
+});
 
 gulp.task('clean', function () {
   return $.del(['app', 'dist']);
@@ -58,8 +78,8 @@ gulp.task('styles', function () {
 gulp.task('scripts', function () {
   return gulp.src(paths.scripts)
     .pipe($.babel())
-    .pipe($.concat('main.js'))
     .pipe($.uglify())
+    .pipe($.concat('main.js'))
     .pipe(gulp.dest('dist'));
 });
 
@@ -82,6 +102,7 @@ gulp.task('images', function () {
 // Optimize html
 gulp.task('html', function () {
   return gulp.src(['app/**/*.html'])
+    .pipe(injectSvg)
     .pipe($.htmlmin({
       removeComments: true,
       collapseWhitespace: true,
@@ -117,13 +138,14 @@ gulp.task('copy:assets', function () {
     .pipe($.concat('main.js'))
     .pipe(gulp.dest('dist'));
   var html = gulp.src(['app/**/*.html'])
+    .pipe(injectSvg)
     .pipe(gulp.dest('dist'));
 
   return merge(styles, scripts, html);
 });
 
 gulp.task('build:dev', ['clean'], function (cb) {
-  return runSequence('hugo', ['images', 'copy:assets'], cb);
+  return runSequence('hugo', 'images', 'copy:assets', cb);
 });
 
 gulp.task('serve', ['build:dev'], function () {
@@ -135,4 +157,4 @@ gulp.task('serve', ['build:dev'], function () {
   gulp.watch(['site/**/*'], ['build:dev', browserSync.reload]);
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['build']);

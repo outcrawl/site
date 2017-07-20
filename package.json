@@ -22,6 +22,7 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-postcss": "^7.0.0",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
     "gulp-sass": "^3.1.0",
     "gulp-shell": "^0.6.3",
     "gulp-svgmin": "^1.2.4",

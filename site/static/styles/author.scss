@@ -1,54 +1,43 @@
-.author .container {
-  max-width: 42rem;
+@import 'bootstrap';
+
+.author {
+  .container {
+    max-width: 42rem;
+  }
+  .social-links {
+    font-size: 1.25rem;
+  }
 }
 
-.author .social-links {
-  font-size: 1.25rem;
-}
-
-/* Extra small devices (portrait phones, less than 576px) */
-
-@media (max-width: 575px) {
+@include media-breakpoint-only(xs) {
   .author .avatar {
     width: 60px;
     height: 60px;
   }
 }
 
-
-/* Small devices (landscape phones, 576px and up) */
-
-@media (min-width: 576px) and (max-width: 767px) {
+@include media-breakpoint-only(sm) {
   .author .avatar {
     width: 80px;
     height: 80px;
   }
 }
 
-
-/* Medium devices (tablets, 768px and up) */
-
-@media (min-width: 768px) and (max-width: 991px) {
+@include media-breakpoint-only(md) {
   .author .avatar {
     width: 100px;
     height: 100px;
   }
 }
 
-
-/* Large devices (desktops, 992px and up) */
-
-@media (min-width: 992px) and (max-width: 1199px) {
+@include media-breakpoint-only(lg) {
   .author .avatar {
     width: 120px;
     height: 120px;
   }
 }
 
-
-/* Extra large devices (large desktops, 1200px and up) */
-
-@media (min-width: 1200px) {
+@include media-breakpoint-only(xl) {
   .author .avatar {
     width: 160px;
     height: 160px;

@@ -1,21 +1,30 @@
+@import 'bootstrap';
+@import 'theme';
+
 .single .container {
   max-width: 42rem;
 }
 
-article blockquote p, article .alert p {
-  margin: 0;
+article {
+  blockquote p, .alert p {
+    margin: 0;
+  }
 }
 
 /* Section margins
 ----------------------- */
 
-article p, article .alert {
-  margin-bottom: 1rem;
+article {
+  p, .alert {
+    margin-bottom: 1rem;
+  }
 }
 
-article h1, article h2, article h3, article h4 {
-  margin-bottom: 1.5rem;
-  margin-top: 0.5rem;
+article {
+  h1, h2, h3, h4 {
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+  }
 }
 
 pre[class*="language-"] {
@@ -28,7 +37,7 @@ pre[class*="language-"] {
 
 code {
   font-family: 'Roboto Mono', monospace;
-  color: #212121;
+  color: $dark;
   border-radius: 0.25rem;
   background: #F5F5F5;
 }
@@ -55,27 +64,22 @@ pre[class*="language-"] {
 
 /* Highlighted lines
 --------------------- */
-
-.line-highlight:before, .line-highlight[data-end]:before {
-  top: 0.5rem;
-}
-
-.line-highlight:after, .line-highlight[data-end]:after {
-  bottom: 0.2rem;
-}
-
-.line-highlight:before, .line-highlight:after, .line-highlight[data-end]:after, .line-highlight[data-end]:before {
-  background: none;
-  color: #9E9E9E;
-  left: 0.05rem;
-}
-
 .line-highlight {
   background: rgba(0, 0, 0, 0.06);
   user-select: none;
   margin-top: 1rem;
+  &:before, &[data-end]:before {
+    top: 0.5rem;
+  }
+  &:after, &[data-end]:after {
+    bottom: 0.2rem;
+  }
+  &:before, &:after, &[data-end]:after, &[data-end]:before {
+    background: none;
+    color: #9E9E9E;
+    left: 0.05rem;
+  }
 }
-
 
 /* Command line
 ------------------------ */
@@ -89,43 +93,39 @@ pre[class*="language-"] {
 
 /* Share
 ----------------------- */
-.share .icon-link {
-  font-size: 0.75rem;
-  line-height: 1.75rem;
-  display: inline-block;
-  width: 1.75rem;
-  height: 1.75rem;
-  text-align: center;
-  border-radius: 50%;
+.share {
+  .icon-link {
+    font-size: 0.75rem;
+    line-height: 1.75rem;
+    display: inline-block;
+    width: 1.75rem;
+    height: 1.75rem;
+    text-align: center;
+    border-radius: 50%;
+    i {
+      color: #FFFFFF;
+    }
+  }
 }
-
-.share .icon-link i {
-  color: #FFFFFF;
-}
-
 
 /* Newsletter
 ---------------------- */
 
 .newsletter {
   padding: 3rem 0;
-}
-
-.newsletter p {
-  margin-bottom: 1.25rem;
-}
-
-.newsletter .input-group {
-  margin-bottom: 1rem;
-}
-
-.newsletter .container {
-  max-width: 24rem;
-}
-
-.newsletter .lead {
-  font-size: 1.75rem;
-  line-height: 2rem;
+  p {
+    margin-bottom: 1.25rem;
+  }
+  .input-group {
+    margin-bottom: 1rem;
+  }
+  .container {
+    max-width: 24rem;
+  }
+  .lead {
+    font-size: 1.75rem;
+    line-height: 2rem;
+  }
 }
 
 /* Related entries
@@ -134,37 +134,32 @@ pre[class*="language-"] {
   padding: 0.75rem;
 }
 
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575px) {
-.related .entry-title {
-  font-size: 1.5rem;
-}
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) and (max-width: 767px) {
-.related .entry-title {
-  font-size: 2rem;
-}
+@include media-breakpoint-only(xs) {
+  .related .entry-title {
+    font-size: 1.5rem;
+  }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991px) {
-.related .entry-title {
-  font-size: 2rem;
-}
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199px) {
-.related .entry-title {
-  font-size: 2rem;
-}
+@include media-breakpoint-only(sm) {
+  .related .entry-title {
+    font-size: 2rem;
+  }
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-.related .entry-title {
-  font-size: 2rem;
+@include media-breakpoint-only(md) {
+  .related .entry-title {
+    font-size: 2rem;
+  }
 }
+
+@include media-breakpoint-only(lg) {
+  .related .entry-title {
+    font-size: 2rem;
+  }
+}
+
+@include media-breakpoint-only(xl) {
+  .related .entry-title {
+    font-size: 2rem;
+  }
 }
