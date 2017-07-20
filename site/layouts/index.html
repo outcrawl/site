@@ -1,0 +1,22 @@
+{{define "main"}}
+
+{{$paginator := .Paginate (where .Data.Pages "Type" "post")}}
+
+<div class="container py-5" role="main">
+
+  <div class="row">
+
+  {{range $paginator.Pages}}
+    <div class="col-md-6 p-0">
+      {{partial "entry.html" .}}
+    </div>
+  {{end}}
+  </div>
+
+  <div class="mt-4">
+  {{partial "pagination.html" $paginator}}
+  </div>
+
+</div>
+
+{{end}}

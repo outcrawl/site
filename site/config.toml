@@ -1,0 +1,20 @@
+baseURL = "http://localhost:3000/"
+languageCode = "en-us"
+title = "Outcrawl"
+
+enableRobotsTXT = true
+paginate = 6
+buildDrafts = true
+
+[blackfriday]
+hrefTargetBlank = true
+
+[taxonomies]
+tag = "tags"
+
+[permalinks]
+post = "/:slug"
+
+[params]
+tagline = "Software development tutorials without nonsense."
+disqusShortname = "outcrawl"

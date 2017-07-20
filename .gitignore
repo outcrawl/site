@@ -1,2 +1,5 @@
-themes/
-public/
+node_modules/
+app/
+dist/
+tmp/
+app.yaml

@@ -1,0 +1,170 @@
+.single .container {
+  max-width: 42rem;
+}
+
+article blockquote p, article .alert p {
+  margin: 0;
+}
+
+/* Section margins
+----------------------- */
+
+article p, article .alert {
+  margin-bottom: 1rem;
+}
+
+article h1, article h2, article h3, article h4 {
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+pre[class*="language-"] {
+  margin: 0 0 1.5rem 0;
+}
+
+
+/* Code
+---------------------- */
+
+code {
+  font-family: 'Roboto Mono', monospace;
+  color: #212121;
+  border-radius: 0.25rem;
+  background: #F5F5F5;
+}
+
+code[class*="language-"], pre[class*="language-"], code {
+  font-family: 'Roboto Mono', monospace;
+  tab-size: 2;
+  line-height: 1.5rem;
+  font-size: 0.85rem;
+}
+
+pre[class*="language-"] {
+  padding: 1rem 1.5em;
+  margin-bottom: 1.5rem;
+  overflow: auto;
+  border-radius: 0.25rem;
+  background: #F5F5F5;
+}
+
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+  background: none;
+}
+
+
+/* Highlighted lines
+--------------------- */
+
+.line-highlight:before, .line-highlight[data-end]:before {
+  top: 0.5rem;
+}
+
+.line-highlight:after, .line-highlight[data-end]:after {
+  bottom: 0.2rem;
+}
+
+.line-highlight:before, .line-highlight:after, .line-highlight[data-end]:after, .line-highlight[data-end]:before {
+  background: none;
+  color: #9E9E9E;
+  left: 0.05rem;
+}
+
+.line-highlight {
+  background: rgba(0, 0, 0, 0.06);
+  user-select: none;
+  margin-top: 1rem;
+}
+
+
+/* Command line
+------------------------ */
+
+.command-line-prompt {
+  border-right: none;
+  margin-right: 0.5rem;
+  letter-spacing: -1rem;
+}
+
+
+/* Share
+----------------------- */
+.share .icon-link {
+  font-size: 0.75rem;
+  line-height: 1.75rem;
+  display: inline-block;
+  width: 1.75rem;
+  height: 1.75rem;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.share .icon-link i {
+  color: #FFFFFF;
+}
+
+
+/* Newsletter
+---------------------- */
+
+.newsletter {
+  padding: 3rem 0;
+}
+
+.newsletter p {
+  margin-bottom: 1.25rem;
+}
+
+.newsletter .input-group {
+  margin-bottom: 1rem;
+}
+
+.newsletter .container {
+  max-width: 24rem;
+}
+
+.newsletter .lead {
+  font-size: 1.75rem;
+  line-height: 2rem;
+}
+
+/* Related entries
+---------------------- */
+.related .entry-content {
+  padding: 0.75rem;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px) {
+.related .entry-title {
+  font-size: 1.5rem;
+}
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+.related .entry-title {
+  font-size: 2rem;
+}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+.related .entry-title {
+  font-size: 2rem;
+}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+.related .entry-title {
+  font-size: 2rem;
+}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+.related .entry-title {
+  font-size: 2rem;
+}
+}

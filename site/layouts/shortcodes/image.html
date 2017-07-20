@@ -1,0 +1,14 @@
+{{if .Get "src"}}
+<img class="img-fluid mb-3" src="{{.Get `src`}}">
+{{else}}
+{{if eq (substr (.Get "name") -3 3) "png"}}
+<img class="progressive__img progressive--not-loaded img-fluid mb-3"
+     data-progressive="/images/{{.Page.Slug}}/{{.Get `name`}}"
+     src="/images/{{.Page.Slug}}/small-{{.Get `name`}}"
+     alt="{{.Get `name`}}">
+{{else}}
+<img class="img-fluid mb-3"
+     src="/images/{{.Page.Slug}}/{{.Get `name`}}"
+     alt="{{.Get `name`}}">
+{{end}}
+{{end}}

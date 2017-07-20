@@ -1,8 +1,0 @@
-{{if .Get "src"}}
-<img class="img-fluid mb-3" src="{{.Get `src`}}">
-{{else}}
-<img class="progressive__img progressive--not-loaded img-fluid"
-     data-progressive="/img/{{.Page.Slug}}/{{.Get `name`}}"
-     src="/img/{{.Page.Slug}}/small-{{.Get `name`}}"
-     alt="{{.Get `name`}}">
-{{end}}
