@@ -1,0 +1,45 @@
+<div class="profile d-flex justify-content-start">
+
+  <div class="mb-auto mr-3">
+    <img class="avatar my-auto rounded-circle"
+         src="https://www.gravatar.com/avatar/{{.email | lower | md5}}?s=140"
+         alt="{{.slug}}-avatar">
+  </div>
+
+  <div>
+    <a href="/authors/{{.slug}}" class="decorated-link mb-2" title="{{.name}}">
+      <h4>{{.name}}</h4>
+    </a>
+    <p class="mb-3 pr-4">
+      {{.bio}}
+    </p>
+
+    <div class="social-links">
+    {{with .social.twitter}}
+      <a class="muted-link mr-1 d-inline-flex align-items-center justify-content-center" href="//twitter.com/{{.}}">
+        <img src="/images/icons/twitter.svg">
+      </a>
+    {{end}}
+
+    {{with .social.github}}
+      <a class="muted-link mr-1 d-inline-flex align-items-center justify-content-center" href="//github.com/{{.}}">
+        <img src="/images/icons/github.svg">
+      </a>
+    {{end}}
+
+    {{with .social.facebook}}
+      <a class="muted-link mr-1 d-inline-flex align-items-center justify-content-center" href="//facebook.com/{{.}}">
+        <img src="/images/icons/facebook.svg">
+      </a>
+    {{end}}
+
+    {{with .social.googlePlus}}
+      <a class="muted-link mr-1 d-inline-flex align-items-center justify-content-center" href="//plus.google.com/{{.}}">
+        <img src="/images/icons/google-plus.svg">
+      </a>
+    {{end}}
+    </div>
+
+  </div>
+
+</div>

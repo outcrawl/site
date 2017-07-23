@@ -1,7 +1,7 @@
 module.exports = function (gulp, $, paths) {
   return function () {
     return gulp.src(paths)
-      .pipe(require('./inject-svg'))
+      .pipe(require('./inject-svg')())
       .pipe($.htmlmin({
         removeComments: true,
         collapseWhitespace: true,

@@ -14,11 +14,11 @@
     {{end}}
   {{end}}
 
-  <div class="entry-content d-flex align-items-start flex-column">
+  <div class="content d-flex align-items-start flex-column">
     <a class="unstyled-link w-100 mt-auto mb-2" href="{{.Permalink}}" title="{{.Title}}">
-      <h2 class="entry-title">{{.Title}}</h2>
+      <h2>{{.Title}}</h2>
     </a>
-    <div class="w-100 d-flex entry-meta">
+    <div class="w-100 d-flex meta">
       <img class="avatar my-auto rounded-circle"
                 src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
                 alt="{{$params.author}}-avatar">

@@ -79,7 +79,7 @@ a {
 .blockquote-footer {
   display: block;
   font-size: 1rem;
-  color: #616161;
+  color: $gray;
 }
 
 .jumbotron {
@@ -87,6 +87,9 @@ a {
   margin: 0;
 }
 
+.form-control:focus {
+  border-color: $gray;
+}
 
 /* Utilities
 ------------------------------ */

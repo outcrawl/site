@@ -1,45 +1,11 @@
-@import 'bootstrap';
-
 .author {
-  .container {
-    max-width: 42rem;
-  }
-  .social-links {
-    font-size: 1.25rem;
-  }
+
+.container {
+  max-width: 42rem;
 }
 
-@include media-breakpoint-only(xs) {
-  .author .avatar {
-    width: 60px;
-    height: 60px;
-  }
+h4 {
+  font-size: 2rem;
 }
 
-@include media-breakpoint-only(sm) {
-  .author .avatar {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-@include media-breakpoint-only(md) {
-  .author .avatar {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-@include media-breakpoint-only(lg) {
-  .author .avatar {
-    width: 120px;
-    height: 120px;
-  }
-}
-
-@include media-breakpoint-only(xl) {
-  .author .avatar {
-    width: 160px;
-    height: 160px;
-  }
 }

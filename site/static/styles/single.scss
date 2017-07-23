@@ -23,7 +23,17 @@ article {
 article {
   h1, h2, h3, h4 {
     margin-bottom: 1.5rem;
-    margin-top: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
   }
 }
 
@@ -40,6 +50,7 @@ code {
   color: $dark;
   border-radius: 0.25rem;
   background: #F5F5F5;
+  padding: 0.2rem 0.4rem;
 }
 
 code[class*="language-"], pre[class*="language-"], code {
@@ -61,6 +72,11 @@ pre[class*="language-"] {
   background: none;
 }
 
+@include media-breakpoint-down(md) {
+code {
+  padding: 0.1rem 0.2rem;
+}
+}
 
 /* Highlighted lines
 --------------------- */
@@ -90,20 +106,19 @@ pre[class*="language-"] {
   letter-spacing: -1rem;
 }
 
-
 /* Share
 ----------------------- */
 .share {
   .icon-link {
-    font-size: 0.75rem;
-    line-height: 1.75rem;
     display: inline-block;
     width: 1.75rem;
     height: 1.75rem;
     text-align: center;
     border-radius: 50%;
-    i {
-      color: #FFFFFF;
+    svg {
+      width: 1rem;
+      height: 1rem;
+      vertical-align: middle;
     }
   }
 }
@@ -130,36 +145,40 @@ pre[class*="language-"] {
 
 /* Related entries
 ---------------------- */
-.related .entry-content {
+.related {
+
+.content {
   padding: 0.75rem;
 }
 
 @include media-breakpoint-only(xs) {
-  .related .entry-title {
+  h2 {
     font-size: 1.5rem;
   }
 }
 
 @include media-breakpoint-only(sm) {
-  .related .entry-title {
+  h2 {
     font-size: 2rem;
   }
 }
 
 @include media-breakpoint-only(md) {
-  .related .entry-title {
-    font-size: 2rem;
+  h2 {
+    font-size: 1.5rem;
   }
 }
 
 @include media-breakpoint-only(lg) {
-  .related .entry-title {
-    font-size: 2rem;
+  h2 {
+    font-size: 1.5rem;
   }
 }
 
 @include media-breakpoint-only(xl) {
-  .related .entry-title {
-    font-size: 2rem;
+  h2 {
+    font-size: 1.75rem;
   }
+}
+
 }

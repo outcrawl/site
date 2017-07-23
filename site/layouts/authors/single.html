@@ -5,11 +5,14 @@
 <div class="author" role="main">
   <div class="container py-5">
 
-    {{partial "authors/profile.html" $author}}
+    <div class="my-4">
+    {{partial "profile.html" $author}}
+    </div>
+
     <hr>
 
     <h2 class="mb-3">Articles</h2>
-    
+
     {{ range (where (where .Site.Pages "Type" "post") "Params.author" .Slug).GroupByDate "2006-01" }}
     <p class="mb-2 text-muted">{{ .Key }}</p>
     <ul class="list-unstyled">
@@ -27,7 +30,7 @@
         {{ end }}
     </ul>
     {{ end }}
-    
+
   </div>
 </div>
 

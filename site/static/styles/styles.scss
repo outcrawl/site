@@ -39,6 +39,14 @@ body {
 
 .navbar {
   border-bottom: 1px solid #E0E0E0;
+  font-size: 0.85rem;
+}
+
+.navbar-brand {
+  margin: 0;
+  svg {
+    vertical-align: middle;
+  }
 }
 
 @include media-breakpoint-only(xs) {
@@ -59,8 +67,13 @@ body {
   }
 }
 
-.navbar {
-  font-size: 0.85rem;
+#search-dropdown {
+  width: 100%;
+
+  .dropdown-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .footer {

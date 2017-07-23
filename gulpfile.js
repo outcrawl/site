@@ -2,17 +2,23 @@ var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 var merge = require('merge-stream');
+var injectSvg = require('./tools/inject-svg');
 var $ = require('gulp-load-plugins')();
 $.del = require('del');
 
 var paths = {
   styles: [
-    'app/vendor/**/*.css',
+    'app/vendor/bootstrap.css',
+    'app/vendor/prism.css',
+
     'app/styles/**/*.scss',
     'app/styles/**/*.css'
   ],
   scripts: [
-    'app/vendor/**/*.js',
+    'app/vendor/bootstrap.js',
+    'app/vendor/prism.js',
+    'app/vendor/wade.js',
+
     'app/scripts/**/*.js'
   ],
   images: [
@@ -44,18 +50,40 @@ gulp.task('build', function (cb) {
     cb);
 });
 
+// dev tasks
+gulp.task('images:dev', function () {
+  return gulp.src(paths.images, {
+    nodir: true
+  })
+    .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('styles:dev', function () {
+  return gulp.src(paths.styles)
+    .pipe($.sass({ precision: 10 }))
+    .pipe($.concat('main.css'))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('scripts:dev', function () {
+  return gulp.src(paths.scripts)
+    .pipe($.babel({
+      presets: ['es2015']
+    }))
+    .pipe($.concat('main.js'))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('html:dev', function () {
+  return gulp.src(paths.html)
+    .pipe(injectSvg())
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('build:dev', ['hugo'], function () {
-  return merge(
-    gulp.src(paths.styles)
-      .pipe($.sass({ precision: 10 }))
-      .pipe($.concat('main.css'))
-      .pipe(gulp.dest('dist')),
-    gulp.src(paths.scripts)
-      .pipe($.babel())
-      .pipe($.concat('main.js'))
-      .pipe(gulp.dest('dist')),
-    gulp.src(paths.html)
-      .pipe(gulp.dest('dist'))
+  return runSequence(
+    'images:dev',
+    ['styles:dev', 'scripts:dev', 'html:dev']
   );
 });
 
