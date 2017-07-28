@@ -1,3 +1,11 @@
+{{define "title"}}
+{{index (index .Site.Data.authors .Slug) "name"}} - {{.Site.Title}}
+{{end}}
+
+{{define "meta"}}
+{{partial "authors/meta.html" .}}
+{{end}}
+
 {{define "main"}}
 
 {{$author := (index .Site.Data.authors .Slug)}}

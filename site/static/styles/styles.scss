@@ -1,4 +1,7 @@
 @import 'bootstrap';
+@import 'theme';
+
+$footerHeight: 8rem;
 
 html {
   position: relative;
@@ -7,9 +10,9 @@ html {
 }
 
 body {
-  margin-bottom: 4rem;
-  font-family: 'Roboto', sans-serif;
-  color: #212121;
+  margin-bottom: $footerHeight;
+  font-family: $font;
+  color: $gray900;
   line-height: 1.5rem;
 }
 
@@ -38,7 +41,7 @@ body {
 }
 
 .navbar {
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid $gray300;
   font-size: 0.85rem;
 }
 
@@ -76,12 +79,16 @@ body {
   }
 }
 
+.page-container .container {
+  max-width: 42rem;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 4rem;
-  border-top: 1px solid #E0E0E0;
+  height: $footerHeight;
+  border-top: 1px solid $gray300;
   font-size: 0.85rem;
 
   i {
@@ -96,9 +103,26 @@ table {
 }
 
 thead th {
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid $gray300;
 }
 
 hr {
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid $gray300;
+}
+
+.icon-link {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+
+  svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
 }

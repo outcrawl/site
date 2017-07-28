@@ -11,6 +11,9 @@ var paths = {
     'app/vendor/bootstrap.css',
     'app/vendor/prism.css',
 
+    'app/styles/bootstrap.scss',
+    'app/styles/theme.scss',
+    'app/styles/styles.scss',
     'app/styles/**/*.scss',
     'app/styles/**/*.css'
   ],
@@ -30,23 +33,25 @@ var paths = {
 };
 
 gulp.task('clean', function () {
-  return $.del(['app', 'dist/*']);
+  return $.del(['app', 'dist/*', 'dist/.favicons.html']);
 });
 
 gulp.task('scripts', require('./tools/scripts')(gulp, $, paths.scripts));
 gulp.task('styles', require('./tools/styles')(gulp, $, paths.styles));
 gulp.task('images', require('./tools/images')(gulp, $, paths.images));
 gulp.task('html', require('./tools/html')(gulp, $, paths.html));
+gulp.task('favicons', require('./tools/favicons')(gulp, $));
 
 // Build Hugo site
-gulp.task('hugo', $.shell.task('hugo --buildDrafts --destination=../app', { cwd: 'site' }));
+gulp.task('hugo', $.shell.task('hugo --destination=../app', { cwd: 'site' }));
 
 gulp.task('build', function (cb) {
   runSequence(
     'clean',
     'hugo',
     'images',
-    ['html', 'styles', 'scripts'],
+    'html',
+    ['favicons', 'styles', 'scripts'],
     cb);
 });
 
@@ -75,15 +80,25 @@ gulp.task('scripts:dev', function () {
 });
 
 gulp.task('html:dev', function () {
-  return gulp.src(paths.html)
-    .pipe(injectSvg())
-    .pipe(gulp.dest('dist'));
+  return merge(
+    gulp.src(paths.html)
+      .pipe(injectSvg())
+      .pipe(gulp.dest('dist')),
+    gulp.src([
+      'app/**/robots.txt',
+      'app/**/sitemap.xml'
+    ], {
+        nodir: true
+      })
+      .pipe(gulp.dest('dist'))
+  );
 });
 
 gulp.task('build:dev', ['hugo'], function () {
   return runSequence(
     'images:dev',
-    ['styles:dev', 'scripts:dev', 'html:dev']
+    'html:dev',
+    ['styles:dev', 'scripts:dev', 'favicons']
   );
 });
 

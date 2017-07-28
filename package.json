@@ -9,11 +9,12 @@
     "browser-sync": "^2.18.12",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
+    "favicons": "^4.8.6",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^6.1.2",
-    "gulp-cheerio": "^0.6.2",
     "gulp-concat": "^2.6.1",
+    "gulp-favicons": "^2.2.7",
     "gulp-file-include": "^1.1.0",
     "gulp-htmlmin": "^3.0.0",
     "gulp-ignore": "^2.0.2",
@@ -35,7 +36,11 @@
     "run-sequence": "^2.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "serve": "gulp serve",
+    "deploy": "aws s3 cp dist s3://outcrawl.com/ --recursive --exclude '.*'",
+    "purge": "aws s3 rm s3://outcrawl.com/ --recursive"
   },
   "repository": {
     "type": "git",

@@ -1,11 +1,19 @@
+{{define "title"}}{{.Title}} - {{.Site.Title}}{{end}}
+
+{{define "meta"}}
+{{partial "single/meta.html" .}}
+{{end}}
+
 {{define "main"}}
 
-<div class="single" role="main">
+<div class="single page-container" role="main">
   <article class="container mt-5">
 
     <h1 class="display-4 mb-4">{{.Title}}</h1>
 
-    {{partial "single/meta.html" .}}
+    {{partial "single/tags.html" .}}
+
+    {{partial "single/author.html" .}}
 
     {{with .Params.thumbnail}}
       {{if eq . "test"}}
@@ -15,11 +23,9 @@
       {{end}}
     {{end}}
 
-    {{partial "single/tags.html" .}}
-
     {{.Content}}
 
-    {{partial "single/end_meta.html" .}}
+    {{partial "single/share.html" .}}
 
     <hr>
   </article>

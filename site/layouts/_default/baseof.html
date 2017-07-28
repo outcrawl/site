@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ .Lang }}">
-{{ partial "head.html" . }}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="google-site-verification" content="gPnbDPF-0Xf-xPVIFZMoa74h3kb-q6XPwuBvREFgfmI" />
+
+  <base href="{{.Site.BaseURL}}">
+
+  <title>
+    {{block "title" .}}{{end}}
+  </title>
+
+  <link rel="canonical" href="{{.Permalink}}">
+
+  {{ block "meta" . }}{{ end }}
+
+  {{partial "analytics.html" .Site.Params.googleAnalytics}}
+  {{partial "head_imports.html" .}}
+</head>
 
 <body>
   {{ block "header" . }}{{ partial "header.html" . }}{{ end }}

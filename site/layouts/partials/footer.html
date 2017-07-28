@@ -1,21 +1,34 @@
-<footer class="footer text-muted">
-  <div class="container d-flex h-100 align-items-center">
+<footer class="footer">
+  <div class="container py-3">
 
-    <div>Copyright &copy; 2017 John Doe. All Rights Reserved.</div>
+    <div class="row">
 
-    <div class="ml-auto my-auto">
-      <a class="muted-link"
-          href="#">
-        <i class="fa fa-twitter fa-fw"></i>
-      </a>
-      <a class="muted-link"
-          href="#">
-        <i class="fa fa-github fa-fw"></i>
-      </a>
-      <a class="muted-link"
-          href="#">
-        <i class="fa fa-facebook fa-fw"></i>
-      </a>
+      <div class="col-sm-12 col-md-6 d-flex justify-content-start align-items-end">
+        <div>
+          <h5 class="mb-2">{{.Site.Title}}</h5>
+          <div class="mb-2">
+            {{.Site.Params.tagline}}.
+          </div>
+          <div>
+            <a href="/about" class="muted-link mr-1">About</a>
+            <a href="/privacy" class="muted-link">Privacy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 d-flex justify-content-end align-items-end">
+        <div class="text-right text-muted">
+          <div>
+            <a href="//www.twitter.com/{{.Site.Params.social.twitter}}" title="Find us on Twitter" target="_blank" class="muted-link mr-1">Twitter</a>
+            <a href="//www.github.com/{{.Site.Params.social.github}}" title="Find us on GitHub" target="_blank" class="muted-link mr-1">GitHub</a>
+            <a href="//www.facebook.com/{{.Site.Params.social.facebook}}" title="Find us on Facebook" target="_blank" class="muted-link">Facebook</a>
+          </div>
+          <div>
+            Copyright &copy; 2017 <a href="https://moybl.com/" title="Moybl" class="muted-link">Moybl</a>. All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>

@@ -17,13 +17,13 @@
   {{ if and $has_common_tags (ne $page_link $page.Permalink) (lt ($.Scratch.Get "$c") 3)}}
     {{ $.Scratch.Add "$c" 1 }}
       {{if eq ($.Scratch.Get "$total") 3}}
-      <div class="col-md-4">
+      <div class="col-md-4 p-1">
       {{end}}
       {{if eq ($.Scratch.Get "$total") 2}}
-      <div class="col-md-6">
+      <div class="col-md-6 p-1">
       {{end}}
       {{if eq ($.Scratch.Get "$total") 1}}
-      <div class="col-md-12">
+      <div class="col-md-12 p-1">
       {{end}}
       {{partial "entry.html" $page}}
       </div>

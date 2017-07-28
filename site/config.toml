@@ -1,10 +1,9 @@
-baseURL = "http://localhost:3000/"
+baseURL = "https://outcrawl.com/" # https://outcrawl.com/
 languageCode = "en-us"
 title = "Outcrawl"
 
 enableRobotsTXT = true
 paginate = 6
-buildDrafts = true
 
 [blackfriday]
 hrefTargetBlank = true
@@ -16,5 +15,13 @@ tag = "tags"
 post = "/:slug"
 
 [params]
-tagline = "Software development tutorials without nonsense."
+tagline = "Software development tutorials without nonsense"
+keywords = ["software", "development", "tutorial", "go", "angular", "typescript"]
 disqusShortname = "outcrawl"
+googleAnalytics = "UA-103565863-1"
+facebookAppId = "863987620425609"
+
+[params.social]
+twitter = "tinrab"
+github = "tinrab"
+facebook = "outcrawl"

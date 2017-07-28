@@ -1,0 +1,24 @@
+{{$author := (index .Site.Data.authors .Slug)}}
+
+<meta name="title" content="{{$author.name}} – {{.Site.Title}}" />
+<meta name="description" content="{{$author.bio}}" />
+
+<meta property="fb:app_id" content="{{.Site.Params.FacebookAppId}}" />
+<meta property="og:title" content="{{$author.name}} – {{.Site.Title}}" />
+<meta property="og:url" content="{{.Site.BaseURL}}authors/{{$author.slug}}" />
+<meta property="og:description" content="{{$author.bio}}" />
+<meta property="og:site_name" content="{{$author.name}} – {{.Site.Title}}" />
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{.Site.BaseURL}}images/featured.png" />
+
+<meta name="twitter:description" content="{{$author.bio}}" />
+<meta name="twitter:image:src" content="{{.Site.BaseURL}}images/featured.png" />
+<meta name="twitter:site" content="@tinrab" />
+
+{{with $author.social.twitter}}
+<meta name="twitter:creator" content="@{{.}}" />
+{{end}}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta property="al:web:url" content="{{.Site.BaseURL}}authors/{{$author.slug}}" />
+<meta name="google" content="notranslate" />

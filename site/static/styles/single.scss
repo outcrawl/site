@@ -1,10 +1,6 @@
 @import 'bootstrap';
 @import 'theme';
 
-.single .container {
-  max-width: 42rem;
-}
-
 article {
   blockquote p, .alert p {
     margin: 0;
@@ -46,15 +42,15 @@ pre[class*="language-"] {
 ---------------------- */
 
 code {
-  font-family: 'Roboto Mono', monospace;
-  color: $dark;
+  font-family: $monospaceFont;
+  color: $gray900;
   border-radius: 0.25rem;
-  background: #F5F5F5;
-  padding: 0.2rem 0.4rem;
+  background: $gray100;
+  padding: 0.1rem 0.2rem;
 }
 
 code[class*="language-"], pre[class*="language-"], code {
-  font-family: 'Roboto Mono', monospace;
+  font-family: $monospaceFont;
   tab-size: 2;
   line-height: 1.5rem;
   font-size: 0.85rem;
@@ -65,7 +61,7 @@ pre[class*="language-"] {
   margin-bottom: 1.5rem;
   overflow: auto;
   border-radius: 0.25rem;
-  background: #F5F5F5;
+  background: $gray100;
 }
 
 .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
@@ -74,7 +70,7 @@ pre[class*="language-"] {
 
 @include media-breakpoint-down(md) {
 code {
-  padding: 0.1rem 0.2rem;
+  padding: 0.05rem 0.1rem;
 }
 }
 
@@ -92,7 +88,7 @@ code {
   }
   &:before, &:after, &[data-end]:after, &[data-end]:before {
     background: none;
-    color: #9E9E9E;
+    color: $gray500;
     left: 0.05rem;
   }
 }
@@ -104,23 +100,6 @@ code {
   border-right: none;
   margin-right: 0.5rem;
   letter-spacing: -1rem;
-}
-
-/* Share
------------------------ */
-.share {
-  .icon-link {
-    display: inline-block;
-    width: 1.75rem;
-    height: 1.75rem;
-    text-align: center;
-    border-radius: 50%;
-    svg {
-      width: 1rem;
-      height: 1rem;
-      vertical-align: middle;
-    }
-  }
 }
 
 /* Newsletter
