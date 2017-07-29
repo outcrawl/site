@@ -8,6 +8,7 @@ module.exports = function (gulp, $) {
       if (fs.existsSync('dist/.favicons.html')) {
         return null;
       }
+
       return gulp.src('app/images/logo.svg')
         .pipe($.favicons({
           appName: "Outcrawl",

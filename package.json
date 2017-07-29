@@ -6,6 +6,7 @@
   "dependencies": {},
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
+    "bootstrap": "^4.0.0-alpha.6",
     "browser-sync": "^2.18.12",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
@@ -30,7 +31,9 @@
     "gulp-svgmin": "^1.2.4",
     "gulp-svgstore": "^6.1.0",
     "gulp-uglify": "^3.0.0",
+    "gulp-uncss": "^1.0.6",
     "gulp-watch": "^4.3.11",
+    "jquery": "^3.2.1",
     "merge-stream": "^1.0.1",
     "postcss-flexbugs-fixes": "^3.0.0",
     "run-sequence": "^2.0.0"

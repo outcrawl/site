@@ -9,6 +9,7 @@
 {{define "main"}}
 
 {{$author := (index .Site.Data.authors .Slug)}}
+{{$baseURL := .Site.BaseURL}}
 
 <div class="author" role="main">
   <div class="container py-5">
@@ -30,7 +31,7 @@
           <div class="small text-muted d-flex">
             <div class="my-auto">
               {{range .Params.tags}}
-                <a href="/tags/{{. | urlize}}" title="{{.}}" role="button" class="btn btn-secondary btn-sm mr-1">{{ . }}</a>
+                <a href="{{$baseURL}}tags/{{. | urlize}}" title="{{.}}" role="button" class="btn btn-secondary btn-sm mr-1">{{ . }}</a>
               {{end}}
             </div>
           </div>

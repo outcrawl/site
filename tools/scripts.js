@@ -1,10 +1,9 @@
 module.exports = function (gulp, $, paths) {
   return function () {
-    return gulp.src(paths)
+    return gulp.src(paths.scripts)
       .pipe($.babel({
         presets: ['es2015']
       }))
-      .pipe($.uglify())
       .pipe($.concat('main.js'))
       .pipe(gulp.dest('dist'));
   }

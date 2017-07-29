@@ -32,7 +32,7 @@
 
 {{define "main"}}
 
-{{$paginator := .Paginate (where .Data.Pages "Type" "post")}}
+{{$paginator := .Paginate (where .Site.RegularPages "Type" "post")}}
 
 <div class="container py-5" role="main">
 

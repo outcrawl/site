@@ -1,4 +1,5 @@
 ---
+title: "Privacy Policy"
 slug: "privacy"
 type: "page"
 layout: "page"

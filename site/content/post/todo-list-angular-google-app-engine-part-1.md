@@ -3,7 +3,7 @@ title: "Build a Todo List with Angular and Google App Engine - Part 1"
 slug: "todo-list-angular-google-app-engine-part-1"
 author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
-date: "2017-10-02"
+date: "2017-07-27"
 thumbnail: "todo-list-angular-google-app-engine"
 description: "The world needs more todo lists. Let us deliver another one."
 keywords: ["Todo List", "Angular", "Go", "App Engine"]
@@ -606,4 +606,4 @@ Second part: [Build a Todo List with Angular and Google App Engine - Part 2](/to
 
 Source code for this tutorial is available on [GitHub](https://github.com/tinrab/todo-angular-appengine).
 
-If you have any questions or suggestions leave them in the comments below.
+<!-- If you have any questions or suggestions leave them in the comments below. -->

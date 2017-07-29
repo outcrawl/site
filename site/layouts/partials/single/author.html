@@ -2,7 +2,7 @@
 
 <div class="mb-2 d-flex align-items-center">
   <div>
-    <a class="decorated-link" href="/authors/{{$author.name | urlize}}"
+    <a class="decorated-link" href="{{.Site.BaseURL}}authors/{{$author.name | urlize}}"
        title="{{index .Site.Data.authors .Params.Author `name`}}">
        {{$author.name}}
     </a>

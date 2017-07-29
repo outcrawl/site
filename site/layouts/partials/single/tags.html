@@ -1,5 +1,5 @@
 <ul class="list-inline">
 {{ range .Params.tags }}
-  <a href="/tags/{{. | urlize}}" role="button" class="list-inline-item btn btn-secondary btn-sm" title="{{.}}">{{ . }}</a>
+  <a href="{{$.Site.BaseURL}}tags/{{. | urlize}}" role="button" class="list-inline-item btn btn-secondary btn-sm" title="{{.}}">{{ . }}</a>
 {{ end }}
 </ul>

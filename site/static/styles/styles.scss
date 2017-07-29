@@ -1,8 +1,6 @@
 @import 'bootstrap';
 @import 'theme';
 
-$footerHeight: 8rem;
-
 html {
   position: relative;
   min-height: 100%;
@@ -10,7 +8,7 @@ html {
 }
 
 body {
-  margin-bottom: $footerHeight;
+  margin-bottom: 10rem;
   font-family: $font;
   color: $gray900;
   line-height: 1.5rem;
@@ -52,30 +50,26 @@ body {
   }
 }
 
-@include media-breakpoint-only(xs) {
+@include media-breakpoint-down(xs) {
   .navbar-toggleable-md > .container {
     margin-left: 0;
     margin-right: 0;
-  }
-  .navbar-toggleable-md {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  .navbar-toggleable-md > .container {
-    padding-right: 15px;
-    padding-left: 15px;
   }
 }
 
 #search-dropdown {
   width: 100%;
-
   .dropdown-item {
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  #search-dropdown {
+    left: initial;
+    right: 0;
+    min-width: 20rem;
   }
 }
 
@@ -87,7 +81,6 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: $footerHeight;
   border-top: 1px solid $gray300;
   font-size: 0.85rem;
 

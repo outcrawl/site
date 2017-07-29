@@ -1,27 +1,27 @@
 <nav class="navbar navbar-toggleable-md navbar-light">
   <div class="container">
-    <button class="navbar-toggler navbar-toggler-right"
+
+    <a class="navbar-brand"
+       href="{{.Site.BaseURL}}">
+      <img height="30" src="/images/logo-text.svg">
+    </a>
+
+    <button class="navbar-toggler float-right"
             type="button"
             data-toggle="collapse"
             data-target="#navbarToggler"
             aria-controls="navbarToggler"
             aria-expanded="false">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-    <a class="navbar-brand"
-       href="{{.Site.BaseURL}}">
-      <img height="30" src="/images/logo-text.svg">
-  </a>
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse"
          id="navbarToggler">
-      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-
-        {{partial "header/search.html" .}}
-
+      <ul class="navbar-nav ml-auto mt-2 my-lg-0">
         {{partial "header/tags.html" .}}
-
       </ul>
+      {{partial "header/search.html" .}}
     </div>
+
   </div>
 </nav>

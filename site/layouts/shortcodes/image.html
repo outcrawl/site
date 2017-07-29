@@ -2,6 +2,6 @@
 <img class="img-fluid mb-3" src="{{.Get `src`}}">
 {{else}}
 <img class="img-fluid mb-3"
-     src="/images/{{.Page.Slug}}/{{.Get `name`}}"
+     src="{{.Site.BaseURL}}images/{{.Page.Slug}}/{{.Get `name`}}"
      alt="{{.Get `name`}}">
 {{end}}

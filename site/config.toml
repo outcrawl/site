@@ -1,4 +1,3 @@
-baseURL = "https://outcrawl.com/" # https://outcrawl.com/
 languageCode = "en-us"
 title = "Outcrawl"
 
@@ -17,7 +16,6 @@ post = "/:slug"
 [params]
 tagline = "Software development tutorials without nonsense"
 keywords = ["software", "development", "tutorial", "go", "angular", "typescript"]
-disqusShortname = "outcrawl"
 googleAnalytics = "UA-103565863-1"
 facebookAppId = "863987620425609"
 

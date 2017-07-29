@@ -106,8 +106,11 @@ a {
   margin: 0;
 }
 
-.form-control:focus {
-  border-color: $gray700;
+.form-control {
+  border-color: $gray300;
+  &:focus {
+    border-color: $gray700;
+  }
 }
 
 /* Utilities
@@ -168,7 +171,6 @@ b, strong {
 .icon-link, .icon-link:hover, .icon-link:focus {
   text-decoration: none;
 }
-
 
 /* Alerts
 -------------------------- */

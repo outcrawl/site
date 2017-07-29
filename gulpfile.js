@@ -8,7 +8,7 @@ $.del = require('del');
 
 var paths = {
   styles: [
-    'app/vendor/bootstrap.css',
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
     'app/vendor/prism.css',
 
     'app/styles/bootstrap.scss',
@@ -18,7 +18,7 @@ var paths = {
     'app/styles/**/*.css'
   ],
   scripts: [
-    'app/vendor/bootstrap.js',
+    'node_modules/bootstrap/dist/js/bootstrap.js',
     'app/vendor/prism.js',
     'app/vendor/wade.js',
 
@@ -36,14 +36,16 @@ gulp.task('clean', function () {
   return $.del(['app', 'dist/*', 'dist/.favicons.html']);
 });
 
-gulp.task('scripts', require('./tools/scripts')(gulp, $, paths.scripts));
-gulp.task('styles', require('./tools/styles')(gulp, $, paths.styles));
-gulp.task('images', require('./tools/images')(gulp, $, paths.images));
-gulp.task('html', require('./tools/html')(gulp, $, paths.html));
+gulp.task('scripts', require('./tools/scripts')(gulp, $, paths));
+gulp.task('styles', require('./tools/styles')(gulp, $, paths));
+gulp.task('images', require('./tools/images')(gulp, $, paths));
+gulp.task('html', require('./tools/html')(gulp, $, paths));
 gulp.task('favicons', require('./tools/favicons')(gulp, $));
+gulp.task('minify', require('./tools/minify')(gulp, $, paths));
 
 // Build Hugo site
-gulp.task('hugo', $.shell.task('hugo --destination=../app', { cwd: 'site' }));
+gulp.task('hugo', $.shell.task('hugo --baseURL=https://outcrawl.com/ --destination=../app', { cwd: 'site' }));
+gulp.task('hugo:dev', $.shell.task('hugo --baseURL=http://localhost:3000/ --buildDrafts --destination=../app', { cwd: 'site' }));
 
 gulp.task('build', function (cb) {
   runSequence(
@@ -52,54 +54,17 @@ gulp.task('build', function (cb) {
     'images',
     'html',
     ['favicons', 'styles', 'scripts'],
+    'minify',
     cb);
 });
 
-// dev tasks
-gulp.task('images:dev', function () {
-  return gulp.src(paths.images, {
-    nodir: true
-  })
-    .pipe(gulp.dest('dist/images'));
-});
-
-gulp.task('styles:dev', function () {
-  return gulp.src(paths.styles)
-    .pipe($.sass({ precision: 10 }))
-    .pipe($.concat('main.css'))
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('scripts:dev', function () {
-  return gulp.src(paths.scripts)
-    .pipe($.babel({
-      presets: ['es2015']
-    }))
-    .pipe($.concat('main.js'))
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('html:dev', function () {
-  return merge(
-    gulp.src(paths.html)
-      .pipe(injectSvg())
-      .pipe(gulp.dest('dist')),
-    gulp.src([
-      'app/**/robots.txt',
-      'app/**/sitemap.xml'
-    ], {
-        nodir: true
-      })
-      .pipe(gulp.dest('dist'))
-  );
-});
-
-gulp.task('build:dev', ['hugo'], function () {
-  return runSequence(
-    'images:dev',
-    'html:dev',
-    ['styles:dev', 'scripts:dev', 'favicons']
-  );
+gulp.task('build:dev', function (cb) {
+  runSequence(
+    'hugo:dev',
+    'images',
+    'html',
+    ['favicons', 'styles', 'scripts'],
+    cb);
 });
 
 gulp.task('serve', ['build:dev'], function () {

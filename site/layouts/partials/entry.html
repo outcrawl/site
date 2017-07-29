@@ -9,7 +9,7 @@
     </div>
     {{else}}
     <div class="background-cover-image"
-          style="background-image:url('/images/thumbnails/{{$params.thumbnail}}.png')">
+          style="background-image:url('{{.Site.BaseURL}}images/thumbnails/{{$params.thumbnail}}.png')">
     </div>
     {{end}}
   {{end}}
@@ -23,7 +23,7 @@
                 src="https://www.gravatar.com/avatar/{{index $data.authors $params.author `email` | lower | md5}}?s=50"
                 alt="{{$params.author}}-avatar">
       <div class="ml-2 my-auto">
-        <a href="/authors/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link" title="{{index $data.authors $params.author `name`}}">
+        <a href="{{.Site.BaseURL}}authors/{{index $data.authors $params.author `name` | urlize}}" class="decorated-link" title="{{index $data.authors $params.author `name`}}">
           {{index $data.authors $params.author "name"}}
         </a>
         <div class="text-white-transparent">

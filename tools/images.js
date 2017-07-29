@@ -1,6 +1,6 @@
 module.exports = function (gulp, $, paths) {
   return function () {
-    return gulp.src(paths, {
+    return gulp.src(paths.images, {
       nodir: true
     })
       .pipe($.imagemin({

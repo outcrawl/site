@@ -1,4 +1,4 @@
-<li class="nav-item dropdown ml-1">
+<li class="nav-item dropdown mr-2">
   <a class="nav-link dropdown-toggle"
       href="#"
       id="navbarDropdownMenuLink"
@@ -10,10 +10,10 @@
   <div class="dropdown-menu"
         aria-labelledby="navbarDropdownMenuLink">
 
-    {{ range $tag, $items := .Site.Taxonomies.tags }}
+    {{range $tag, $items := .Site.Taxonomies.tags}}
       <a class="dropdown-item"
-        href="/tags/{{$tag | urlize | lower}}">{{ $tag | title }}</a>
-    {{ end }}
+        href="{{$.Site.BaseURL}}tags/{{$tag | urlize | lower}}">{{$tag | title}}</a>
+    {{end}}
 
   </div>
 </li>
