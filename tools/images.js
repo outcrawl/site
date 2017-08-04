@@ -3,10 +3,6 @@ module.exports = function (gulp, $, paths) {
     return gulp.src(paths.images, {
       nodir: true
     })
-      .pipe($.imagemin({
-        progressive: true,
-        interlaced: true
-      }))
       .pipe(gulp.dest('dist/images'));
   }
 }

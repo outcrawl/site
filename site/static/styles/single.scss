@@ -159,17 +159,26 @@ code {
   h2 {
     font-size: 1.5rem;
   }
+  .col-md-12 h2 {
+    font-size: 2.5rem;
+  }
 }
 
 @include media-breakpoint-only(lg) {
   h2 {
     font-size: 1.5rem;
   }
+  .col-md-12 h2 {
+    font-size: 2.5rem;
+  }
 }
 
 @include media-breakpoint-only(xl) {
   h2 {
     font-size: 1.75rem;
+  }
+  .col-md-12 h2 {
+    font-size: 2.5rem;
   }
 }
 

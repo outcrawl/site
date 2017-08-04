@@ -1,5 +1,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
 
 <script>
   var posts=[
@@ -10,6 +12,8 @@
     {{- if (le $index (sub $len 2)) -}},{{- end -}}
 {{- end -}}
   ];
+  var threadId = '{{.Slug}}';
+  var commentsApiUrl = '{{.Site.Params.commentsApiUrl}}';
 </script>
 
 <script src="{{.Site.BaseURL}}main.js"></script>

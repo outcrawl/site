@@ -131,13 +131,13 @@ func responseJSON(w http.ResponseWriter, data interface{}) {
 It's also handy to have a function, which parser JSON from POST or PUT request's body into a map.
 
 {{< code lang="go" >}}
-func readJSON(rc io.ReadCloser) (map[string]string, error) {
+func readJSON(rc io.ReadCloser) (map[string]interface{}, error) {
 	defer rc.Close()
 	data, err := ioutil.ReadAll(rc)
 	if err != nil {
 		return nil, err
 	}
-	var jsonData map[string]string
+	var jsonData map[string]interface{}
 	err = json.Unmarshal(data, &jsonData)
 	if err != nil {
 		return nil, err
@@ -221,14 +221,14 @@ func verifyToken(ctx context.Context, token string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if aud, ok := bodyJSON["aud"]; ok {
+	if aud, ok := bodyJSON["aud"].(string); ok {
 		if clientID != aud {
 			return "", errors.New("invalid client id")
 		}
 	} else {
 		return "", errors.New("invalid id token")
 	}
-	if sub, ok := bodyJSON["sub"]; ok {
+	if sub, ok := bodyJSON["sub"].(string); ok {
 		return sub, nil
 	}
 	return "", errors.New("invalid id token")
@@ -375,7 +375,7 @@ func create(w http.ResponseWriter, r *http.Request, ctx context.Context, userID 
 
 	var title string
 	var ok bool
-	if title, ok = body["title"]; !ok {
+	if title, ok = body["title"].(string); !ok {
 		responseError(w, "invalid json", http.StatusBadRequest)
 		return
 	}
@@ -524,7 +524,7 @@ func update(w http.ResponseWriter, r *http.Request, ctx context.Context, userID 
 	}
 	var title string
 	var ok bool
-	if title, ok = body["title"]; !ok || len(title) == 0 {
+	if title, ok = body["title"].(string); !ok || len(title) == 0 {
 		responseError(w, "invalid json", http.StatusBadRequest)
 		return
 	}

@@ -5,37 +5,34 @@
 
 @include media-breakpoint-only(xs) {
   .avatar {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-@include media-breakpoint-only(sm) {
-  .avatar {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 }
 
 @include media-breakpoint-only(md) {
   .avatar {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
   }
 }
 
 @include media-breakpoint-only(lg) {
   .avatar {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
   }
 }
 
 @include media-breakpoint-only(xl) {
   .avatar {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
   }
+}
+
+.icon-link {
+  margin: auto 0.15rem;
 }
 
 }

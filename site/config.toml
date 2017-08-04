@@ -18,6 +18,7 @@ tagline = "Software development tutorials without nonsense"
 keywords = ["software", "development", "tutorial", "go", "angular", "typescript"]
 googleAnalytics = "UA-103565863-1"
 facebookAppId = "863987620425609"
+commentsApiUrl = "http://localhost:8080/api"
 
 [params.social]
 twitter = "tinrab"

@@ -1,45 +1,41 @@
-<div class="profile d-flex justify-content-start">
+<div class="profile w-100 text-center">
 
-  <div class="mb-auto mr-3">
-    <img class="avatar my-auto rounded-circle"
-         src="https://www.gravatar.com/avatar/{{.email | lower | md5}}?s=140"
-         alt="{{.slug}}-avatar">
-  </div>
+  <img class="avatar rounded-circle mb-3"
+        src="https://www.gravatar.com/avatar/{{.email | lower | md5}}?s=160"
+        alt="{{.slug}}-avatar">
+
+  <a href="{{.Site.BaseURL}}authors/{{.slug}}" class="decorated-link mb-3" title="{{.name}}">
+    <h4>{{.name}}</h4>
+  </a>
+
+  <p class="mb-3">
+    {{.bio}}
+  </p>
 
   <div>
-    <a href="{{.Site.BaseURL}}authors/{{.slug}}" class="decorated-link mb-2" title="{{.name}}">
-      <h4>{{.name}}</h4>
+  {{with .social.twitter}}
+    <a class="icon-link bg-inverse" href="//twitter.com/{{.}}">
+      <img src="/images/icons/twitter.svg">
     </a>
-    <p class="mb-3 pr-4">
-      {{.bio}}
-    </p>
+  {{end}}
 
-    <div>
-    {{with .social.twitter}}
-      <a class="icon-link bg-inverse mr-1" href="//twitter.com/{{.}}">
-        <img src="/images/icons/twitter.svg">
-      </a>
-    {{end}}
+  {{with .social.github}}
+    <a class="icon-link bg-inverse" href="//github.com/{{.}}">
+      <img src="/images/icons/github.svg">
+    </a>
+  {{end}}
 
-    {{with .social.github}}
-      <a class="icon-link bg-inverse mr-1" href="//github.com/{{.}}">
-        <img src="/images/icons/github.svg">
-      </a>
-    {{end}}
+  {{with .social.facebook}}
+    <a class="icon-link bg-inverse" href="//facebook.com/{{.}}">
+      <img src="/images/icons/facebook.svg">
+    </a>
+  {{end}}
 
-    {{with .social.facebook}}
-      <a class="icon-link bg-inverse mr-1" href="//facebook.com/{{.}}">
-        <img src="/images/icons/facebook.svg">
-      </a>
-    {{end}}
-
-    {{with .social.googlePlus}}
-      <a class="icon-link bg-inverse mr-1" href="//plus.google.com/{{.}}">
-        <img src="/images/icons/google-plus.svg">
-      </a>
-    {{end}}
-    </div>
-
+  {{with .social.googlePlus}}
+    <a class="icon-link bg-inverse" href="//plus.google.com/{{.}}">
+      <img src="/images/icons/google-plus.svg">
+    </a>
+  {{end}}
   </div>
 
 </div>

@@ -39,7 +39,14 @@ module.exports = function (gulp, $) {
         require('postcss-flexbugs-fixes'),
         require('cssnano')
       ]))
-      .pipe(gulp.dest('dist'))
+      .pipe(gulp.dest('dist')),
+      // images
+      gulp.src('dist/images/**/*')
+      .pipe($.imagemin({
+        progressive: true,
+        interlaced: true
+      }))
+      .pipe(gulp.dest('dist/images'))
     );
   }
 }

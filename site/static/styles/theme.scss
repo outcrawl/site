@@ -213,13 +213,16 @@ b, strong {
 .btn-primary {
   background-color: $gray900;
   border-color: $gray900;
-
   &:hover {
     background-color: $gray700;
     border-color: $gray700;
   }
-
-  &:focus {
-    box-shadow: lighten($gray900, 10%);
+  &:focus, &.focus {
+    box-shadow: 0 0 0 2px $gray500;
+    color: $white;
+  }
+  &:active, &.active {
+    background-color: $gray900;
+    border-color: $gray700;
   }
 }

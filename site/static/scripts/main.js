@@ -4,6 +4,9 @@ function buildNewsletterForm() {
 
   $('#subscribe-button').click(function () {
     const email = $('#email-input').val();
+    if (!email || $('#email-input-2').val()) {
+      return;
+    }
     const pt = 'tQswM96k127VkJZ88mor2HFLYaDFOgjp';
     const url = 'https://outcrawl-newsletter.appspot.com/subscribe?email=' + email + '&token=' + pt;
 
@@ -51,10 +54,21 @@ function buildSearch() {
 }
 
 $(document).ready(function () {
+  var config = {
+    apiKey: "AIzaSyBLwfly8SxDusu2z6b_qioVeWF8j21hRIs",
+    authDomain: "outcrawl-comments.firebaseapp.com",
+    databaseURL: "https://outcrawl-comments.firebaseio.com",
+    projectId: "outcrawl-comments",
+    storageBucket: "outcrawl-comments.appspot.com",
+    messagingSenderId: "166225468864"
+  };
+  firebase.initializeApp(config);
+
   $('.katex').each((i, obj) => {
     obj.innerHTML = katex.renderToString(obj.innerText);
   });
 
   buildNewsletterForm();
   buildSearch();
+  buildComments();
 });

@@ -1,0 +1,37 @@
+<div class="container mb-4">
+  <div>
+
+    <div class="media">
+      <img class="d-flex mr-3"
+           src="pictureUrl">
+      <div class="media-body">
+        <div>
+          <strong class="mt-0">user name</strong>
+          <span class="text-muted">date</span>
+        </div>
+
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, debitis.
+
+        <div *ngFor="let reply of item.replies" class="media mt-3">
+          <img class="d-flex pr-3"
+               src="picture">
+          <div class="media-body">
+            <div>
+              <strong class="mt-0">user name</strong>
+              <span class="text-muted">date</span>
+            </div>
+            <span>replyToName</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, quia?
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <a id="signin-button"
+     class="btn btn-primary"
+     href="#"
+     role="button">Sign in</a>
+
+</div>

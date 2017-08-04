@@ -22,7 +22,9 @@ var paths = {
     'app/vendor/prism.js',
     'app/vendor/wade.js',
 
-    'app/scripts/**/*.js'
+    'app/scripts/utilities.js',
+    'app/scripts/comments.js',
+    'app/scripts/main.js'
   ],
   images: [
     'app/images/**/*'
