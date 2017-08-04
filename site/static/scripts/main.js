@@ -1,4 +1,4 @@
-function buildNewsletterForm() {
+function initNewsletterForm() {
   const $newsletterSuccess = $('#newsletter-success');
   const $newsletterError = $('#newsletter-error');
 
@@ -22,7 +22,7 @@ function buildNewsletterForm() {
   });
 }
 
-function buildSearch() {
+function initSearch() {
   const titles = posts.map(p => p.title);
   const search = Wade(titles);
 
@@ -68,7 +68,7 @@ $(document).ready(function () {
     obj.innerHTML = katex.renderToString(obj.innerText);
   });
 
-  buildNewsletterForm();
-  buildSearch();
-  buildComments();
+  initNewsletterForm();
+  initSearch();
+  initComments();
 });

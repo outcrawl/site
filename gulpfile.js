@@ -21,6 +21,7 @@ var paths = {
     'node_modules/bootstrap/dist/js/bootstrap.js',
     'app/vendor/prism.js',
     'app/vendor/wade.js',
+    'app/vendor/moment.js',
 
     'app/scripts/utilities.js',
     'app/scripts/comments.js',
