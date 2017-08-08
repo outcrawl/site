@@ -1,0 +1,61 @@
+.entry {
+  @extend .mdc-card;
+  height: 20rem;
+
+  .entry__thumbnail {
+    @extend .mdc-card__media;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+  }
+
+  .entry__content {
+    @extend .mdc-card__primary;
+  }
+
+  .entry__permalink {
+    text-decoration: none;
+  }
+
+  .entry__title {
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.85rem;
+    margin: 0;
+    margin-bottom: 16px;
+    color: var(--mdc-theme-text-primary-on-light, $black-87);
+
+    @include media-phone {
+      font-size: 1.5rem;
+    }
+  }
+
+  .entry__author {
+    @extend .mdc-list-item;
+  }
+
+  .entry__author-avatar {
+    @extend .mdc-list-item__start-detail;
+    width: 40px;
+    height: 40px;
+    margin-left: 0;
+    margin-right: 16px;
+    border-radius: 50%;
+    border: 1px solid $grey-300;
+  }
+
+  .entry__author-info {
+    @extend .mdc-list-item__text;
+    line-height: 1.5rem;
+
+    .entry__author-name {
+      color: var(--mdc-theme-text-primary-on-light, $black-87);
+    }
+
+    .entry__date {
+      @extend .mdc-list-item__text__secondary;
+    }
+  }
+
+}

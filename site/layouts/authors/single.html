@@ -1,46 +1,8 @@
-{{define "title"}}
-{{index (index .Site.Data.authors .Slug) "name"}} - {{.Site.Title}}
-{{end}}
-
-{{define "meta"}}
-{{partial "authors/meta.html" .}}
-{{end}}
-
 {{define "main"}}
 
 {{$author := (index .Site.Data.authors .Slug)}}
 {{$baseURL := .Site.BaseURL}}
 
-<div class="author" role="main">
-  <div class="container py-3">
-
-    <div class="my-4">
-    {{partial "profile.html" $author}}
-    </div>
-
-    <hr>
-
-    <h2 class="mb-3">Articles</h2>
-
-    {{ range (where (where .Site.Pages "Type" "post") "Params.author" .Slug).GroupByDate "2006-01" }}
-    <p class="mb-2 text-muted">{{ .Key }}</p>
-    <ul class="list-unstyled">
-        {{ range .Pages }}
-        <li class="mb-3 ml-2">
-          <h2 class="mb-2"><a href="{{ .Permalink }}" title="{{.Title}}">{{ .Title }}</a></h2>
-          <div class="small text-muted d-flex">
-            <div class="my-auto">
-              {{range .Params.tags}}
-                <a href="{{$baseURL}}tags/{{. | urlize}}" title="{{.}}" role="button" class="btn btn-secondary btn-sm mr-1">{{ . }}</a>
-              {{end}}
-            </div>
-          </div>
-        </li>
-        {{ end }}
-    </ul>
-    {{ end }}
-
-  </div>
-</div>
+<h1>{{$author.name}}</h1>
 
 {{end}}

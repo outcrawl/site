@@ -1,0 +1,17 @@
+.home {
+  .home__content {
+    @extend .mdc-layout-grid;
+    padding: 0;
+    max-width: $home-max-width;
+  }
+
+  .home__inner {
+    @extend .mdc-layout-grid__inner;
+  }
+
+  .home__entry {
+    @extend .mdc-layout-grid__cell;
+    @extend .mdc-layout-grid__cell--span-6;
+    @extend .mdc-layout-grid__cell--span-12-tablet;
+  }
+}

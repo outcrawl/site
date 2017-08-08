@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ .Lang }}">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <base href="{{.Site.BaseURL}}">
 
   <title>
@@ -12,17 +11,14 @@
 
   <link rel="canonical" href="{{.Permalink}}">
 
-  {{ block "meta" . }}{{ end }}
-
-  {{partial "analytics.html" .Site.Params.googleAnalytics}}
   {{partial "head_imports.html" .}}
 </head>
-
-<body>
-  {{ block "header" . }}{{ partial "header.html" . }}{{ end }}
-  {{ block "main" . }}{{ end }}
-  {{ partial "footer.html" . }}
-  {{ partial "body_imports.html" . }}
+<body class="page">
+  {{partial "header/header.html" .}}
+  <main class="page__content">
+  {{block "main" .}}{{end}}
+  </main>
+  {{partial "footer/footer.html" .}}
+  {{partial "body_imports.html" .}}
 </body>
-
 </html>

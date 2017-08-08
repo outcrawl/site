@@ -1,0 +1,47 @@
+.icon {
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  display: inline-block;
+  fill: $white;
+}
+
+.mdc-button--icon {
+  padding: 0;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--mdc-theme-text-primary-on-light, $black-87);
+  text-decoration: none !important;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon {
+    fill: var(--mdc-theme-text-primary-on-light, $black-87);
+    width: 24px;
+    height: 24px;
+  }
+
+  &:disabled {
+    .icon {
+      fill: $black-26;
+    }
+  }
+
+  &.mdc-button--dense {
+    height: 32px;
+    width: 32px;
+    min-width: 32px;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

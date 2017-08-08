@@ -1,0 +1,21 @@
+a {
+  color: $blue-400;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+b, strong, th {
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+}
+
+thead th {
+  border-bottom: 1px solid $grey-300;
+}

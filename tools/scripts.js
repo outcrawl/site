@@ -1,10 +1,24 @@
 module.exports = function (gulp, $, paths) {
   return function () {
     return gulp.src(paths.scripts)
-      .pipe($.babel({
-        presets: ['es2015']
+      .pipe($.webpack({
+        output: {
+          filename: 'bundle.js'
+        },
+        module: {
+          rules: [
+            {
+              exclude: /(node_modules)/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['env']
+                }
+              }
+            }
+          ]
+        }
       }))
-      .pipe($.concat('main.js'))
       .pipe(gulp.dest('dist'));
   }
 }

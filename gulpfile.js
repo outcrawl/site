@@ -8,23 +8,9 @@ $.del = require('del');
 
 var paths = {
   styles: [
-    'node_modules/bootstrap/dist/css/bootstrap.min.css',
-    'app/vendor/prism.css',
-
-    'app/styles/bootstrap.scss',
-    'app/styles/theme.scss',
-    'app/styles/styles.scss',
-    'app/styles/**/*.scss',
-    'app/styles/**/*.css'
+    'app/styles/main.scss'
   ],
   scripts: [
-    'node_modules/bootstrap/dist/js/bootstrap.js',
-    'app/vendor/prism.js',
-    'app/vendor/wade.js',
-    'app/vendor/moment.js',
-
-    'app/scripts/utilities.js',
-    'app/scripts/comments.js',
     'app/scripts/main.js'
   ],
   images: [

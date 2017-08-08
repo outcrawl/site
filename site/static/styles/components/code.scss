@@ -1,0 +1,328 @@
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+
+.highlight-line {
+  background: yellow;
+  color: black;
+}
+
+.highlight-line span {
+    background: none !important;
+    color: inherit !important;
+}
+
+.highlight-line {
+  display: inline-block;
+  width: 100%;
+}
+
+
+
+/*
+code {
+  font-family: 'Roboto Mono', monospace;
+  color: $grey-900;
+  background-color: $grey-100;
+  word-wrap: break-word;
+  line-height: 1.5rem;
+  font-size: 0.875rem;
+  tab-size: 2;
+}
+
+pre[class*="language-"] {
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  overflow: auto;
+}
+
+.token.comment {
+  color: #757575;
+}
+
+.token.prolog {
+  color: #757575;
+}
+
+.token.doctype {
+  color: #757575;
+}
+
+.token.cdata {
+  color: #757575;
+}
+
+.token.tag {
+  color: #1E88E5;
+}
+
+.token.entity {
+  color: #a67f59;
+}
+
+.token.atrule {
+  color: #1E88E5;
+}
+
+.token.url {
+  color: #a67f59;
+}
+
+.token.selector {
+  color: #1E88E5;
+}
+
+.language-css .token.string {
+  color: #a67f59;
+}
+
+.token.string {
+  color: #43A047;
+}
+
+.token.property {
+  color: #8E24AA;
+}
+
+.token.important {
+  color: #e90;
+  font-weight: bold;
+}
+
+.token.punctuation {
+  color: #757575;
+}
+
+.token.number {
+  color: #EF6C00;
+}
+
+.token.function, .token.class-name {
+  color: #e53935;
+}
+
+.token.keyword {
+  color: #1E88E5;
+}
+
+.token.boolean {
+  color: #EF6C00;
+}
+
+.token.operator {
+  color: #757575;
+}
+
+.token.char {
+  color: #43A047;
+}
+
+.token.regex {
+  color: #43A047;
+}
+
+.token.variable {
+  color: #e90;
+}
+
+.token.constant {
+  color: #EF6C00;
+}
+
+.token.symbol {
+  color: #EF6C00;
+}
+
+.token.builtin {
+  color: #8E24AA;
+}
+
+.token.attr-name {
+  color: #8E24AA;
+}
+
+.token.attr-value {
+  color: #43A047;
+}
+
+.token.deleted {
+  color: #EF6C00;
+}
+
+.token.inserted {
+  color: #8E24AA;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+.line-highlight:before, .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%, .4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+}
+
+.line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}
+
+.command-line-prompt {
+  border-right: 1px solid #999;
+  display: block;
+  float: left;
+  font-size: 100%;
+  letter-spacing: -1px;
+  margin-right: 1em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.command-line-prompt > span:before {
+  color: #999;
+  content: ' ';
+  display: block;
+  padding-right: 0.8em;
+}
+
+.command-line-prompt > span[data-user]:before {
+  content: "[" attr(data-user) "@" attr(data-host) "] $";
+}
+
+.command-line-prompt > span[data-user="root"]:before {
+  content: "[" attr(data-user) "@" attr(data-host) "] #";
+}
+
+.command-line-prompt > span[data-prompt]:before {
+  content: attr(data-prompt);
+}
+*/

@@ -1,0 +1,47 @@
+@mixin breakpoint($min: 0, $max: 0) {
+  @if $min != 0 and $max != 0 {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $min != 0 {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else if $max != 0 {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @error "$min or $max must be specified";
+  }
+}
+
+@mixin media-phone {
+  @include breakpoint($max: $media-phone-max) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @include breakpoint($media-tablet-min, $media-tablet-max) {
+    @content;
+  }
+}
+
+@mixin media-tablet-down {
+  @include breakpoint($max: $media-tablet-max) {
+    @content;
+  }
+}
+
+@mixin media-tablet-up {
+  @include breakpoint($min: $media-tablet-min) {
+    @content;
+  }
+}
+
+@mixin media-desktop {
+  @include breakpoint($min: $media-desktop-min) {
+    @content;
+  }
+}

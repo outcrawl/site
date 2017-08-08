@@ -1,0 +1,47 @@
+{{$page := .PageNumber}}
+
+<nav class="pagination">
+  <ul class="pagination__list">
+
+{{if .HasPrev}}
+    <li class="pagination__item">
+      <a href="{{.Prev.URL}}" role="button" class="mdc-button mdc-button--icon">
+        <img class="icon" src="/images/icons/chevron-left.svg">
+      </a>
+    </li>
+{{else}}
+    <li class="pagination__item">
+      <button class="mdc-button mdc-button--icon" disabled>
+        <img class="icon" src="/images/icons/chevron-left.svg">
+      </button>
+    </li>
+{{end}}
+
+{{range .Pagers}}
+    <li class="pagination__item">
+  {{if eq .PageNumber $page}}
+      <a href="{{.URL}}" role="button" class="mdc-button mdc-button--icon pagination__link--active">
+  {{else}}
+      <a href="{{.URL}}" role="button" class="mdc-button mdc-button--icon">
+  {{end}}
+        {{.PageNumber}}
+      </a>
+    </li>
+{{end}}
+
+{{if .HasNext}}
+    <li class="pagination__item">
+      <a href="{{.Next.URL}}" role="button" class="mdc-button mdc-button--icon">
+        <img class="icon" src="/images/icons/chevron-right.svg">
+      </a>
+    </li>
+{{else}}
+    <li class="pagination__item">
+      <button class="mdc-button mdc-button--icon" disabled>
+        <img class="icon" src="/images/icons/chevron-right.svg">
+      </button>
+    </li>
+{{end}}
+
+  </ul>
+</nav>

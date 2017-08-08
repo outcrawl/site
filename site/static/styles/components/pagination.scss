@@ -1,0 +1,17 @@
+.pagination {
+  margin-top: 16px;
+
+  .pagination__list {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .pagination__item {
+    display: inline;
+  }
+
+  .pagination__link--active {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+}
