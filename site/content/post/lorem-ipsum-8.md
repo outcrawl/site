@@ -57,8 +57,19 @@ function $initHighlight(block, cls) {
       console.log('undefined');
   }
 }
-
 export  $initHighlight;
+{{< /code >}}
+
+{{< code lang="html" >}}
+<div class="post__author">
+  <img class="post__author-avatar" src="https://www.gravatar.com/avatar/cc6f46e1bb9eff9bc3d84337fd6b6507?s=120">
+  <span class="post__author-info">
+    <a class="post__author-name" href="http://localhost:3000/authors/tin-rabzelj" title="Tin Rabzelj">
+      Tin Rabzelj
+    </a>
+    <span class="post__date">Sep 5, 2017</span>
+  </span>
+</div>
 {{< /code >}}
 
 # Markdown

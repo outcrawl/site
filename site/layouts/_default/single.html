@@ -7,11 +7,11 @@
 
 <article class="post">
 
-  {{partial "post/thumbnail.html" .}}
-
   <h1 class="post__title">{{.Title}}</h1>
 
   {{partial "post/author.html" .}}
+
+  {{partial "post/thumbnail.html" .}}
 
   {{.Content}}
 

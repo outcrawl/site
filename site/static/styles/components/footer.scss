@@ -4,23 +4,23 @@
   background: $grey-50;
   padding: 24px;
 
-  .footer__content {
+  &__content {
     display: flex;
     align-items: center;
   }
 
-  .footer__logo {
+  &__logo {
+    @include mdc-theme-prop(color, text-primary-on-light);
     text-decoration: none;
-    color: var(--mdc-theme-text-primary-on-light, $black-87);
     font-weight: 500 !important;
   }
 
-  .footer__links, .footer__social {
+  &__links, &__social {
     display: flex;
     list-style-type: none;
   }
 
-  .footer__links {
+  &__links {
     padding: 0;
     li {
       margin-left: 0.5rem;
@@ -28,12 +28,13 @@
     li:first-child {
       margin-left: 1rem;
     }
-    .footer__link {
-      color: var(--mdc-theme-text-primary-on-light, $black-87);
-    }
   }
 
-  .footer__social {
+  &__link {
+    @include mdc-theme-prop(color, text-primary-on-light);
+  }
+
+  &__social {
     margin: 0;
     margin-left: auto;
     li {

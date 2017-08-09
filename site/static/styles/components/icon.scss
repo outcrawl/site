@@ -15,7 +15,7 @@
 
   font-size: 18px;
   font-weight: 500;
-  color: var(--mdc-theme-text-primary-on-light, $black-87);
+  @include mdc-theme-prop(color, text-primary-on-light);
   text-decoration: none !important;
 
   display: inline-flex;
@@ -23,14 +23,14 @@
   justify-content: center;
 
   .icon {
-    fill: var(--mdc-theme-text-primary-on-light, $black-87);
+    @include mdc-theme-prop(fill, text-primary-on-light);
     width: 24px;
     height: 24px;
   }
 
   &:disabled {
     .icon {
-      fill: $black-26;
+      @include mdc-theme-prop(fill, text-disabled-on-light);
     }
   }
 

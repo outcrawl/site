@@ -1,19 +1,19 @@
 .header {
   @extend .mdc-toolbar;
 
-  .header__content {
+  &__content {
     @extend .mdc-toolbar__row;
+  }
 
-    .header__left {
-      @extend .mdc-toolbar__section;
-      @extend .mdc-toolbar__section--align-start;
+  &__left {
+    @extend .mdc-toolbar__section;
+    @extend .mdc-toolbar__section--align-start;
+  }
 
-      .header__logo {
-        @extend .mdc-toolbar__title;
-        svg {
-          vertical-align: middle;
-        }
-      }
+  &__logo {
+    @extend .mdc-toolbar__title;
+    svg {
+      vertical-align: middle;
     }
   }
 }

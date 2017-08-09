@@ -1,17 +1,17 @@
 .pagination {
   margin-top: 16px;
 
-  .pagination__list {
+  &__list {
     padding: 0;
     margin: 0;
     text-align: center;
   }
 
-  .pagination__item {
+  &__item {
     display: inline;
   }
 
-  .pagination__link--active {
-    background-color: rgba(0, 0, 0, 0.06);
+  &__link--active {
+    @include mdc-theme-prop(background-color, text-hint-on-light);
   }
 }
