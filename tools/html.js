@@ -2,6 +2,23 @@ var merge = require('merge-stream');
 var replace = require('gulp-replace');
 var hljs = require('highlight.js');
 
+// https://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
+function escapeHTML(html) {
+  var entityMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;'
+  };
+  return String(html).replace(/[&<>"'`=\/]/g, function (s) {
+    return entityMap[s];
+  });
+}
+
 function markLines(html, mark) {
   if (!mark) {
     return html;
@@ -47,8 +64,12 @@ function highlight() {
     pres[i].removeAttribute('data-mark');
 
     var html = markLines(hljs.highlight(lang, sourceCode).value, mark);
+    var copyBtn = '<button class="icon-button icon-button--dense" title="Copy" style="z-index:1;"' +
+      'data-clipboard-text="' + escapeHTML(sourceCode) + '">\n' +
+      '<img src="/images/icons/content-copy.svg">\n' +
+      '</button>';
 
-    pres[i].innerHTML = '<code class="hljs">' + html + '</code>';
+    pres[i].innerHTML = copyBtn + '<code class="hljs">' + html + '</code>';
   }
   return this;
 }

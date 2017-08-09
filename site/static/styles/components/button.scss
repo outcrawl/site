@@ -1,0 +1,23 @@
+.button {
+  @extend .mdc-button;
+
+  &--accent {
+    @extend .mdc-button--accent;
+  }
+
+  &--raised {
+    @extend .mdc-button--raised;
+  }
+
+  &--dense {
+    @extend .mdc-button--dense;
+  }
+
+  &--compact {
+    @extend .mdc-button--compact;
+  }
+
+  &--primary {
+    @extend .mdc-button--primary;
+  }
+}

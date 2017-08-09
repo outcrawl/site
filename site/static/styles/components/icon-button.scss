@@ -1,12 +1,6 @@
-.icon {
-  width: 24px;
-  height: 24px;
-  line-height: 1;
-  display: inline-block;
-  fill: $white;
-}
+.icon-button {
+  @extend .mdc-button;
 
-.mdc-button--icon {
   padding: 0;
   border-radius: 50%;
   width: 36px;
@@ -22,26 +16,30 @@
   align-items: center;
   justify-content: center;
 
-  .icon {
-    @include mdc-theme-prop(fill, text-primary-on-light);
+  svg {
     width: 24px;
     height: 24px;
+    line-height: 1;
+    display: inline-block;
+    @include mdc-theme-prop(fill, text-primary-on-light);
   }
 
-  &:disabled {
-    .icon {
-      @include mdc-theme-prop(fill, text-disabled-on-light);
-    }
-  }
-
-  &.mdc-button--dense {
+  &--dense {
+    @extend .mdc-button--dense;
     height: 32px;
     width: 32px;
     min-width: 32px;
 
-    .icon {
+    svg {
       width: 20px;
       height: 20px;
     }
   }
+
+  &:disabled {
+    svg {
+      @include mdc-theme-prop(fill, text-disabled-on-light);
+    }
+  }
+
 }
