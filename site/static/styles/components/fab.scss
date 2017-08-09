@@ -1,0 +1,23 @@
+.fab {
+  @extend .mdc-fab;
+
+  &--mini {
+    @extend .mdc-fab--mini;
+  }
+
+  &--plain {
+    @extend .mdc-fab--plain;
+  }
+
+  &__icon {
+    @include mdc-theme-prop(fill, text-primary-on-light);
+    width: 24px;
+    height: 24px;
+  }
+
+  &:disabled {
+    .fab__icon {
+      @include mdc-theme-prop(fill, text-disabled-on-light);
+    }
+  }
+}

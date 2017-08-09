@@ -1,0 +1,5 @@
+<div class="post__tags">
+{{ range .Params.tags }}
+<a tabindex="0" class="tag" href="{{$.Site.BaseURL}}tags/{{. | urlize}}" title="{{.}}">{{ . }}</a>
+{{ end }}
+</div>

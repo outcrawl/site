@@ -1,6 +1,9 @@
 .header {
   @extend .mdc-toolbar;
 
+  background-color: $white;
+  @include mdc-theme-prop(color, text-primary-on-light);
+
   &__content {
     @extend .mdc-toolbar__row;
   }
@@ -14,6 +17,7 @@
     @extend .mdc-toolbar__title;
     svg {
       vertical-align: middle;
+      @include mdc-theme-prop(fill, text-primary-on-light);
     }
   }
 }

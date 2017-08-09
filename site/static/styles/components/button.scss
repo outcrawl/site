@@ -1,5 +1,6 @@
 .button {
   @extend .mdc-button;
+  text-decoration: none !important;
 
   &--accent {
     @extend .mdc-button--accent;

@@ -1,0 +1,23 @@
+.tag {
+  font-family: 'Roboto Mono', monospace;
+  @include mdc-theme-prop(color, text-primary-on-light);
+  background: $black-87;
+  color: $white;
+  border-radius: 8px;
+  display: inline-block;
+  padding: 10px;
+  text-decoration: none !important;
+
+  @include mdc-elevation(1);
+  position: relative;
+  cursor: pointer;
+
+  @include mdc-ripple-base;
+  @include mdc-ripple-bg((pseudo: "::before", base-color: #fff));
+  @include mdc-ripple-fg((pseudo: "::after", base-color: #fff));
+  overflow: hidden;
+
+  &:focus {
+    outline: none;
+  }
+}

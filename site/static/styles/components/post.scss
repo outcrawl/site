@@ -44,6 +44,14 @@
     width: 100%;
   }
 
+  &__tags {
+    margin: 3rem 0 1rem 0;
+
+    .tag {
+      margin: 0 8px 8px 0;
+    }
+  }
+
   p {
     @include mdc-theme-prop(color, text-primary-on-light);
     line-height: 1.5;
@@ -51,7 +59,7 @@
     font-size: 1.125rem;
   }
 
-  p, &__image, &__title, &__author {
+  p, &__image, &__title, &__author, table {
     margin: 0 0 1rem 0;
   }
 
