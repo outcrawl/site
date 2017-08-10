@@ -1,9 +1,14 @@
-const mdc = require('material-components-web/dist/material-components-web');
-const Clipboard = require('clipboard');
-const Chartist = require('chartist');
+import * as mdc from 'material-components-web/dist/material-components-web';
+import Clipboard from 'clipboard';
+import Chartist from 'chartist';
+
+import './newsletter';
 
 // Init MDC
 mdc.autoInit();
+for (let e of document.querySelectorAll('.mdc-textfield')) {
+  mdc.textfield.MDCTextfield.attachTo(e);
+}
 
 // Register clipboard
 new Clipboard('.icon-button[data-clipboard-text]');

@@ -34,10 +34,6 @@ $media-tablet-min: 480px;
 $media-tablet-max: 839px;
 $media-phone-max: 479px;
 
-// Page
-$home-max-width: 900px;
-$post-max-width: 720px;
-
 // Charts
 $ct-text-color: $black-54;
 $ct-text-size: 0.875rem;
@@ -49,3 +45,11 @@ $ct-series-colors: (
   #66BB6A,
   #AB47BC
 );
+
+// Page
+$home-max-width: 900px;
+
+// Post
+$post-max-width: 720px;
+$post-font-size: 1.125rem;
+$post-element-margin: 1.25rem;

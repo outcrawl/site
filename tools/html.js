@@ -67,7 +67,7 @@ function highlight() {
     var html = markLines(hljs.highlight(lang, sourceCode).value, mark);
     var copyBtn = '<button class="icon-button icon-button--dense" title="Copy" style="z-index:1;"' +
       'data-clipboard-text="' + escapeHTML(sourceCode) + '">\n' +
-      '<img src="/images/icons/content-copy.svg">\n' +
+      '<img class="icon-button__icon" src="/images/icons/content-copy.svg">\n' +
       '</button>';
 
     pres[i].innerHTML = copyBtn + '<code class="hljs">' + html + '</code>';
