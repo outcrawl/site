@@ -51,13 +51,13 @@
 
   p {
     @include mdc-theme-prop(color, text-primary-on-light);
-    line-height: 1.5;
     word-wrap: break-word;
-    font-size: 1.125rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
-  p, &__image, &__title, &__author, table, .latex--block {
-    margin: 0 0 1rem 0;
+  p, &__image, &__title, &__author, table, .latex--block, blockquote, .note, .embed, .chart {
+    margin: 0 0 1.25rem 0;
   }
 
   &__heading-link {

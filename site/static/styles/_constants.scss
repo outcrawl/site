@@ -37,3 +37,15 @@ $media-phone-max: 479px;
 // Page
 $home-max-width: 900px;
 $post-max-width: 720px;
+
+// Charts
+$ct-text-color: $black-54;
+$ct-text-size: 0.875rem;
+$ct-series-names: (a, b, c, d, e);
+$ct-series-colors: (
+  #42A5F5,
+  #ef5350,
+  #FFA726,
+  #66BB6A,
+  #AB47BC
+);

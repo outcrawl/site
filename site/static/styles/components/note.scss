@@ -1,0 +1,10 @@
+.note {
+  @include mdc-elevation(2);
+  display: block;
+  padding: 16px;
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+}

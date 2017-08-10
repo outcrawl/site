@@ -1,0 +1,12 @@
+.chart {
+  width: 100%;
+  display: block;
+
+  &--pie {
+    .ct-label {
+      fill: $white;
+      color: $white;
+      font-size: 1rem;
+    }
+  }
+}

@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "browser-sync": "^2.18.12",
+    "chartist": "^0.11.0",
     "clipboard": "^1.7.1",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",

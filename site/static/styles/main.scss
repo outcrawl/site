@@ -1,9 +1,11 @@
 @import "normalize.css/normalize";
-@import "katex/dist/katex";
 
 @import "constants";
 @import "mixins";
 
+// Third party
+@import "katex/dist/katex";
+@import "chartist/dist/scss/chartist.scss";
 @import "material-components-web/material-components-web";
 @import "prism";
 
@@ -22,3 +24,7 @@
 @import "components/tag";
 @import "components/code";
 @import "components/table";
+@import "components/blockquote";
+@import "components/note";
+@import "components/embed";
+@import "components/chart";
