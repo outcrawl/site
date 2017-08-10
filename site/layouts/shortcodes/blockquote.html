@@ -1,0 +1,6 @@
+<blockquote>
+  {{.Inner}}
+  {{with .Get "cite"}}
+  <cite title="{{.}}">&mdash; {{.}}</cite>
+  {{end}}
+</blockquote>

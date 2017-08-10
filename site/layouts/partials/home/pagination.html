@@ -6,13 +6,13 @@
 {{if .HasPrev}}
     <li class="pagination__item">
       <a href="{{.Prev.URL}}" role="button" class="icon-button">
-        <img class="icon" src="/images/icons/chevron-left.svg">
+        <img class="icon-button__icon" src="/images/icons/chevron-left.svg">
       </a>
     </li>
 {{else}}
     <li class="pagination__item">
       <button class="icon-button" disabled>
-        <img class="icon" src="/images/icons/chevron-left.svg">
+        <img class="icon-button__icon" src="/images/icons/chevron-left.svg">
       </button>
     </li>
 {{end}}
@@ -32,13 +32,13 @@
 {{if .HasNext}}
     <li class="pagination__item">
       <a href="{{.Next.URL}}" role="button" class="icon-button">
-        <img class="icon" src="/images/icons/chevron-right.svg">
+        <img class="icon-button__icon" src="/images/icons/chevron-right.svg">
       </a>
     </li>
 {{else}}
     <li class="pagination__item">
       <button class="icon-button" disabled>
-        <img class="icon" src="/images/icons/chevron-right.svg">
+        <img class="icon-button__icon" src="/images/icons/chevron-right.svg">
       </button>
     </li>
 {{end}}

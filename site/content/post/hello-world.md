@@ -1,9 +1,9 @@
 ---
-title: "Tempor aute pariatur labore eiusmod velit laborum elit"
-slug: "lorem-ipsum-8"
+title: "Hello World"
+slug: "hello-world"
 author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
-date: "2017-09-05"
+date: "2018-01-01"
 thumbnail: "test"
 ---
 
@@ -72,7 +72,7 @@ export  $initHighlight;
 </div>
 {{< /code >}}
 
-# Markdown
+# Elements
 
 Lorem ea occaecat labore in pariatur amet id. Exercitation ullamco consequat esse ut dolor pariatur voluptate dolor sint nisi qui exercitation eiusmod labore. Sit pariatur do voluptate occaecat commodo tempor ullamco do Lorem irure minim velit exercitation.
 
@@ -123,3 +123,27 @@ Markdown | Less | Pretty
 --- | --- | ---
 *Still* | `renders` | **nicely**
 1 | 2 | 3
+
+## Quotes
+
+Enim irure elit ut aliqua ea reprehenderit do adipisicing.
+
+{{< blockquote cite="Someone somewhere" >}}
+Irure quis magna duis duis laboris nulla proident cupidatat adipisicing aliqua do laborum.
+{{< /blockquote >}}
+
+Irure nostrud nostrud laboris consectetur consequat laborum consectetur.
+
+## Latex
+
+Officia amet sunt {{< latex >}}\displaystyle\sum_{i=1}^{k+1}i{{< /latex >}} consequat ad nulla Lorem.
+
+{{< blocklatex >}}
+\begin{aligned}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\[1em]   
+\nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\[0.5em]
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\[1em]
+\nabla \cdot \vec{\mathbf{B}} & = 0 \end{aligned}
+{{< /blocklatex >}}
+
+Minim do commodo sit aute irure voluptate amet incididunt laboris nisi aliqua sint.

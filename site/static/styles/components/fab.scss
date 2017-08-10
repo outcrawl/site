@@ -1,5 +1,8 @@
 .fab {
   @extend .mdc-fab;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   &--mini {
     @extend .mdc-fab--mini;
@@ -10,14 +13,14 @@
   }
 
   &__icon {
-    @include mdc-theme-prop(fill, text-primary-on-light);
     width: 24px;
     height: 24px;
+    fill: $white;
   }
 
   &:disabled {
     .fab__icon {
-      @include mdc-theme-prop(fill, text-disabled-on-light);
+      fill: $black-26;
     }
   }
 }

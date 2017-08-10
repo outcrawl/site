@@ -49,14 +49,6 @@
     width: 100%;
   }
 
-  &__tags {
-    margin: 3rem 0 1rem 0;
-
-    .tag {
-      margin: 0 8px 8px 0;
-    }
-  }
-
   p {
     @include mdc-theme-prop(color, text-primary-on-light);
     line-height: 1.5;
@@ -64,7 +56,7 @@
     font-size: 1.125rem;
   }
 
-  p, &__image, &__title, &__author, table {
+  p, &__image, &__title, &__author, table, .latex--block {
     margin: 0 0 1rem 0;
   }
 
@@ -89,6 +81,36 @@
     margin: 1.5rem 0 1rem 0;
     font-weight: 500;
     font-size: 1.5rem;
+  }
+
+  &__actions {
+    @extend .mdc-layout-grid;
+    padding: 0;
+    margin: 3rem 0 1rem 0;
+    &__inner {
+      @extend .mdc-layout-grid__inner;
+    }
+  }
+
+  &__tags {
+    @extend .mdc-layout-grid__cell;
+    @extend .mdc-layout-grid__cell--span-4;
+    @extend .mdc-layout-grid__cell--span-6-desktop;
+
+    .tag {
+      margin: 0 8px 8px 0;
+    }
+  }
+
+  &__share {
+    @extend .mdc-layout-grid__cell;
+    @extend .mdc-layout-grid__cell--span-4;
+    @extend .mdc-layout-grid__cell--span-6-desktop;
+    text-align: right;
+
+    .icon-button:not(:first-child) {
+      margin-left: 6px;
+    }
   }
 
 }

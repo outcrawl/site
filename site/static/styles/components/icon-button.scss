@@ -16,9 +16,9 @@
   align-items: center;
   justify-content: center;
 
-  svg {
-    width: 24px;
-    height: 24px;
+  &__icon {
+    width: 20px;
+    height: 20px;
     line-height: 1;
     display: inline-block;
     @include mdc-theme-prop(fill, text-primary-on-light);
@@ -30,16 +30,27 @@
     width: 32px;
     min-width: 32px;
 
-    svg {
+    .icon-button__icon {
       width: 20px;
       height: 20px;
     }
   }
 
   &:disabled {
-    svg {
+    .icon-button__icon {
       @include mdc-theme-prop(fill, text-disabled-on-light);
     }
   }
 
+  &--dark {
+    .icon-button__icon {
+      @include mdc-theme-prop(fill, text-primary-on-dark);
+    }
+
+    &:disabled {
+      .icon-button__icon {
+        @include mdc-theme-prop(fill, text-disabled-on-dark);
+      }
+    }
+  }
 }

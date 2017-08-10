@@ -1,10 +1,11 @@
 @import "normalize.css/normalize";
+@import "katex/dist/katex";
 
 @import "constants";
 @import "mixins";
 
 @import "material-components-web/material-components-web";
-@import 'prism';
+@import "prism";
 
 @import "overrides";
 

@@ -1,6 +1,7 @@
 var merge = require('merge-stream');
 var replace = require('gulp-replace');
 var hljs = require('highlight.js');
+var katex = require('katex');
 
 // https://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
 function escapeHTML(html) {
@@ -86,12 +87,29 @@ function anchors() {
   return this;
 }
 
+function insertLatex() {
+  var tags = this.querySelectorAll('.latex');
+  for (var i = 0; i < tags.length; i++) {
+    tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
+      displayMode: false
+    });
+  }
+  tags = this.querySelectorAll('.latex--block')
+  for (var i = 0; i < tags.length; i++) {
+    tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
+      displayMode: true
+    });
+  }
+  return this;
+}
+
 module.exports = function (gulp, $, paths) {
   return function () {
     return merge(
       gulp.src(paths.html)
         .pipe($.dom(highlight))
         .pipe($.dom(anchors))
+        .pipe($.dom(insertLatex))
         .pipe(require('./inject-svg')())
         .pipe(gulp.dest('dist')),
       gulp.src([
