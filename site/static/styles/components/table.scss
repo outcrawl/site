@@ -1,0 +1,53 @@
+table {
+  @include mdc-elevation(2);
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-collapse: collapse;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  background-color: #fff;
+
+  thead {
+    padding-bottom: 3px;
+
+    th {
+      position: relative;
+      vertical-align: bottom;
+      text-overflow: ellipsis;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0;
+      height: 48px;
+      font-size: 12px;
+      color: $black-54;
+      padding-bottom: 8px;
+      box-sizing: border-box;
+      padding: 0 18px 12px 18px;
+    }
+
+    th:not([align]) {
+      text-align: left;
+    }
+  }
+
+  tbody {
+    tr {
+      position: relative;
+      height: 48px;
+      transition-duration: 0.28s;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-property: background-color;
+    }
+  }
+
+  td {
+    position: relative;
+    height: 48px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 12px 18px;
+    box-sizing: border-box;
+  }
+}
