@@ -65,6 +65,7 @@
     "normalize.css": "^7.0.0",
     "postcss-flexbugs-fixes": "^3.0.0",
     "run-sequence": "^2.0.0",
+    "wade": "^0.3.3",
     "webpack": "^3.5.1"
   },
   "dependencies": {}

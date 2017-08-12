@@ -7,12 +7,13 @@
 @import "katex/dist/katex";
 @import "chartist/dist/scss/chartist.scss";
 @import "material-components-web/material-components-web";
-@import "prism";
 
 @import "overrides";
 
 @import "components/button";
 @import "components/icon-button";
+@import "components/textfield";
+@import "components/list";
 @import "components/fab";
 @import "components/page";
 @import "components/pagination";

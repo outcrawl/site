@@ -13,11 +13,56 @@
     @extend .mdc-toolbar__section--align-start;
   }
 
+  &__right {
+    @extend .mdc-toolbar__section;
+    @extend .mdc-toolbar__section--align-end;
+  }
+
   &__logo {
     @extend .mdc-toolbar__title;
     svg {
       vertical-align: middle;
       @include mdc-theme-prop(fill, text-primary-on-light);
+    }
+  }
+
+  &__search {
+    position: relative;
+    margin-right: 24px;
+
+    &-input {
+      margin: auto 0 auto 0;
+    }
+
+    &-results {
+      @include mdc-elevation(2);
+      padding: 0;
+      position: absolute;
+      right: 0;
+      background-color: $white;
+
+      width: 20rem;
+      @include media-tablet {
+        width: 15rem;
+      }
+      @include media-phone {
+        width: 10rem;
+      }
+
+      .list__item {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 1rem;
+        line-height: 1rem;
+        padding: 8px;
+
+        &:hover {
+          text-decoration: none;
+          background-color: $grey-100;
+        }
+      }
     }
   }
 }
