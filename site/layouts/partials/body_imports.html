@@ -1,1 +1,17 @@
+<script>
+  var posts = [
+{{- $posts := (where (where .Site.Pages "Type" "post") "Slug" "!=" "") -}}
+{{- $len := (len $posts) -}}
+{{- range $index, $post := $posts -}}
+    {title:'{{$post.Title}}',slug:'{{$post.Slug}}'}
+    {{- if (le $index (sub $len 2)) -}},{{- end -}}
+{{- end -}}
+  ];
+
+  {{if eq .Type "post"}}
+  var postSlug = '{{.Slug}}';
+  {{end}}
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script src="{{.Site.BaseURL}}bundle.js"></script>
