@@ -3,6 +3,7 @@ import threadBuilder from './thread-builder';
 
 const backend = {
   apiUrl: 'https://outcrawl-backend.appspot.com/api',
+  user: null,
   config: {
     apiKey: 'AIzaSyC0sNooAxM1he2YgwGxTab6ZKxtQpetqSo',
     authDomain: 'outcrawl-backend.firebaseapp.com',
@@ -15,20 +16,44 @@ const backend = {
 
 backend.init = () => {
   firebase.initializeApp(backend.config);
-  firebase.auth().onAuthStateChanged(auth => {});
+  firebase.auth().onAuthStateChanged(auth => {
+    if (auth) {
+      backend.user = JSON.parse(localStorage.getItem('user'));
+      if (backend.onAuthStateChangedListener) {
+        backend.onAuthStateChangedListener(backend.user);
+      }
+    } else {
+      backend.user = null;
+      localStorage.removeItem('user');
+      if (backend.onAuthStateChangedListener) {
+        backend.onAuthStateChangedListener(null);
+      }
+    }
+  });
+};
+
+backend.onAuthStateChanged = listener => {
+  backend.onAuthStateChangedListener = listener;
 };
 
 backend.signIn = () => new Promise((resolve, reject) => {
   firebase.auth()
     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(result => {
-      const client = axios.create({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': result.credential.idToken
-      });
-      client.post(`${backend.apiUrl}/users/signin`)
-        .then(resolve)
+    .then(authResult => {
+      axios.post(`${backend.apiUrl}/users/signin`, null, {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': authResult.credential.idToken
+          }
+        })
+        .then(result => {
+          const user = result.data;
+          user.displayName = authResult.user.displayName;
+          user.photoURL = authResult.user.photoURL;
+          localStorage.setItem('user', JSON.stringify(user));
+          backend.user = user;
+          resolve(user);
+        })
         .catch(reject);
     })
     .catch(reject);
@@ -36,24 +61,29 @@ backend.signIn = () => new Promise((resolve, reject) => {
 
 backend.signOut = () => firebase.auth().signOut();
 
+// Mail
 backend.subscribe = () => new Promise((resolve, reject) => {
   firebase.auth()
     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .then(result => {
-      const client = axios.create({
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': result.credential.idToken
-        }
-      });
-      client.post(`${backend.apiUrl}/mail/subscribe`)
+      axios.post(`${backend.apiUrl}/mail/subscribe`, null, {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': result.credential.idToken
+          }
+        })
         .then(_ => resolve(result))
         .catch(reject);
     })
     .catch(reject);
 });
 
+// Users
+backend.banUser = id => {
+
+};
+
+// Comments
 backend.getThread = id => {
   return new Promise((resolve, reject) => {
     axios.get(`${backend.apiUrl}/threads/${id}`)
@@ -68,17 +98,7 @@ backend.getThread = id => {
   });
 };
 
-/*
-return new Promise((resolve, reject) => {
-  firebase.auth()
-  .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(result => {
-      httpGet(`${commentsApiUrl}/signin`, result.credential.idToken)
-        .then(resolve)
-        .catch(reject);
-    })
-    .catch(reject);
-});
-*/
+backend.createComment = comment => {
+};
 
 export default backend;

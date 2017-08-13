@@ -24,7 +24,11 @@ threadBuilder.fetchUsers = thread => {
   let n = 0;
   return new Promise((resolve, reject) => {
     for (let id of users.keys()) {
-      axios.get(`https://www.googleapis.com/plus/v1/people/${id}?key=${backend.config.apiKey}`)
+      axios.get(`https://www.googleapis.com/plus/v1/people/${id}`, {
+        params: {
+          'key': backend.config.apiKey
+        }
+      })
       .then(result => {
         users.set(id, result.data);
         n++;

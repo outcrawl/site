@@ -3,7 +3,7 @@
   justify-content: flex-start;
   padding: 0 0 16px 0;
 
-  &__avatar {
+  &__user__avatar {
     width: 40px;
     height: 40px;
     min-width: 40px;
@@ -13,9 +13,10 @@
 
   &__body {
     padding-left: 8px;
+    width: 100%;
   }
 
-  &__author-name {
+  &__user__name {
     @include mdc-theme-prop(color, text-primary-on-light);
   }
 
@@ -26,10 +27,22 @@
   }
 
   &__text {
+    @include mdc-theme-prop(color, text-primary-on-light);
+    font-size: 1rem;
     padding: 8px 0;
   }
 
   &__reply-form {
     display: none;
+  }
+
+  &--reply {
+    padding: 16px 0 0 0;
+
+    .comment__user__avatar {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+    }
   }
 }
