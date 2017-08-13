@@ -1,0 +1,35 @@
+.comment {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 0 16px 0;
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    border: 1px solid $grey-300;
+  }
+
+  &__body {
+    padding-left: 8px;
+  }
+
+  &__author-name {
+    @include mdc-theme-prop(color, text-primary-on-light);
+  }
+
+  &__date {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    @include mdc-theme-prop(color, text-secondary-on-light);
+  }
+
+  &__text {
+    padding: 8px 0;
+  }
+
+  &__reply-form {
+    display: none;
+  }
+}

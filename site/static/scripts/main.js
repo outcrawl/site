@@ -5,6 +5,7 @@ import backend from './backend';
 import './newsletter';
 import './charts';
 import './search';
+import './comments';
 
 // Init MDC
 mdc.autoInit();

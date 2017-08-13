@@ -1,0 +1,44 @@
+.thread {
+  max-width: $post-max-width;
+  margin: 0 auto;
+  position: relative;
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  &__signed-in {
+    display: none;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+  }
+
+  &__user__avatar {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid $grey-300;
+  }
+
+  &__user__name {
+    @include mdc-theme-prop(color, text-primary-on-light);
+    margin-right: 8px;
+  }
+
+  &__sign-out-button {
+    margin-left: 8px;
+  }
+
+  &__post-button {
+    margin-left: auto;
+  }
+
+  &__comments {
+    margin-top: 24px;
+  }
+}

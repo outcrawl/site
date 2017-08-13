@@ -1,6 +1,11 @@
 .textfield {
   @extend .mdc-textfield;
 
+  &__input {
+    @extend .mdc-textfield__input;
+    letter-spacing: 0;
+  }
+
   &--box {
     @extend .mdc-textfield--box;
   }
@@ -9,7 +14,7 @@
     @extend .mdc-textfield--dense;
   }
 
-  &__input {
-    @extend .mdc-textfield__input;
+  &--multiline {
+    @extend .mdc-textfield--multiline;
   }
 }

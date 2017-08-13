@@ -15,22 +15,10 @@
       <h1 class="entry__title">{{.Title}}</h1>
     </a>
 
-    <!--
     <div class="entry__author">
-      <img class="entry__author-avatar" src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120"></img>
-      <span class="entry__author-info">
-        <a class="entry__author-name" href="{{.Site.BaseURL}}authors/{{$author.slug}}" title="{{$author.name}}">
-          {{$author.name}}
-        </a>
-        <span class="entry__date">{{dateFormat `Jan 2, 2006` .Date}}</span>
-      </span>
-    </div>
-    -->
-
-    <div class="entry__author">
-      <img class="entry__author-avatar" src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120"></img>
-      <span class="entry__author-info">
-        <a class="entry__author-name" href="{{.Site.BaseURL}}authors/{{$author.slug}}" title="{{$author.name}}">
+      <img class="entry__author__avatar" src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120"></img>
+      <span class="entry__author__info">
+        <a class="entry__author__name" href="{{.Site.BaseURL}}authors/{{$author.slug}}" title="{{$author.name}}">
           {{$author.name}}
         </a>
         <span class="entry__date">{{dateFormat `Jan 2, 2006` .Date}}</span>

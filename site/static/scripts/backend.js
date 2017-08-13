@@ -1,4 +1,5 @@
 import axios from 'axios';
+import threadBuilder from './thread-builder';
 
 const backend = {
   apiUrl: 'https://outcrawl-backend.appspot.com/api',
@@ -12,7 +13,28 @@ const backend = {
   }
 };
 
-backend.init = () => firebase.initializeApp(backend.config);
+backend.init = () => {
+  firebase.initializeApp(backend.config);
+  firebase.auth().onAuthStateChanged(auth => {});
+};
+
+backend.signIn = () => new Promise((resolve, reject) => {
+  firebase.auth()
+    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then(result => {
+      const client = axios.create({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': result.credential.idToken
+      });
+      client.post(`${backend.apiUrl}/users/signin`)
+        .then(resolve)
+        .catch(reject);
+    })
+    .catch(reject);
+});
+
+backend.signOut = () => firebase.auth().signOut();
 
 backend.subscribe = () => new Promise((resolve, reject) => {
   firebase.auth()
@@ -26,11 +48,25 @@ backend.subscribe = () => new Promise((resolve, reject) => {
         }
       });
       client.post(`${backend.apiUrl}/mail/subscribe`)
-        .then(resolve)
+        .then(_ => resolve(result))
         .catch(reject);
     })
     .catch(reject);
 });
+
+backend.getThread = id => {
+  return new Promise((resolve, reject) => {
+    axios.get(`${backend.apiUrl}/threads/${id}`)
+      .then(result => {
+        threadBuilder.build(result.data)
+          .then(thread => {
+            resolve(thread);
+          })
+          .catch(reject);
+      })
+      .catch(reject);
+  });
+};
 
 /*
 return new Promise((resolve, reject) => {

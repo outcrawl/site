@@ -22,3 +22,10 @@ searchInput.addEventListener('keyup', evt => {
 
   searchResults.style.display = results.length == 0 ? 'none' : '';
 });
+
+// close on unfocus
+window.addEventListener('click', evt => {
+  if (!searchResults.contains(evt.target)) {
+    searchResults.style.display = 'none';
+  }
+});

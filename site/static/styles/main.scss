@@ -3,16 +3,44 @@
 @import "constants";
 @import "mixins";
 
-// Third party
 @import "katex/dist/katex";
 @import "chartist/dist/scss/chartist.scss";
-@import "material-components-web/material-components-web";
+
+// MDC
+@import "@material/animation/mdc-animation";
+@import "@material/button/mdc-button";
+//@import "@material/card/mdc-card";
+@import "@material/checkbox/mdc-checkbox";
+@import "@material/dialog/mdc-dialog";
+//@import "@material/drawer/mdc-drawer";
+@import "@material/elevation/mdc-elevation";
+@import "@material/fab/mdc-fab";
+@import "@material/form-field/mdc-form-field";
+//@import "@material/grid-list/mdc-grid-list";
+//@import "@material/icon-toggle/mdc-icon-toggle";
+@import "@material/layout-grid/mdc-layout-grid";
+//@import "@material/linear-progress/mdc-linear-progress";
+@import "@material/list/mdc-list";
+//@import "@material/menu/mdc-menu";
+//@import "@material/radio/mdc-radio";
+@import "@material/ripple/mdc-ripple";
+//@import "@material/select/mdc-select";
+//@import "@material/slider/mdc-slider";
+//@import "@material/snackbar/mdc-snackbar";
+//@import "@material/switch/mdc-switch";
+//@import "@material/tabs/mdc-tabs";
+@import "@material/textfield/mdc-textfield";
+@import "@material/theme/mdc-theme";
+@import "@material/toolbar/mdc-toolbar";
+//@import "@material/typography/mdc-typography";
 
 @import "overrides";
 
+// Components
 @import "components/button";
 @import "components/icon-button";
 @import "components/textfield";
+@import "components/link-button";
 @import "components/list";
 @import "components/fab";
 @import "components/page";
@@ -23,7 +51,8 @@
 @import "components/entry";
 @import "components/post";
 @import "components/newsletter";
-@import "components/comments";
+@import "components/comment";
+@import "components/thread";
 @import "components/tag";
 @import "components/code";
 @import "components/table";
@@ -31,3 +60,4 @@
 @import "components/note";
 @import "components/embed";
 @import "components/chart";
+@import "components/dialog";

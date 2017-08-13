@@ -1,23 +1,24 @@
-<div class="comments">
+<div class="thread">
 
-  <h2 class="comments__title">Comments</h2>
+  <h2 class="thread__title">Comments</h2>
 
-<ul class="mdc-list mdc-list--avatar-list">
-  <li class="mdc-list-item">
-    <img class="mdc-list-item__start-detail" src="/users/1/profile_pic.png"
-         width="56" height="56" alt="Picture of Janet Perkins">
-    Janet Perkins
-  </li>
-  <li class="mdc-list-item">
-    <img class="mdc-list-item__start-detail" src="/users/2/profile_pic.png"
-         width="56" height="56" alt="Picture of Mary Johnson">
-    Mary Johnson
-  </li>
-  <li class="mdc-list-item">
-    <img class="mdc-list-item__start-detail" src="/users/3/profile_pic.png"
-         width="56" height="56" alt="Picture of Peter Carlsson">
-    Peter Carlsson
-  </li>
-</ul>
+  <div class="thread__signed-in">
+    <div class="textfield textfield--multiline">
+      <textarea class="textfield__input thread__input" rows="4" placeholder="Say something..."></textarea>
+    </div>
+    <div class="thread__form">
+      <img class="thread__user__avatar" src="http://lorempixel.com/24/24">
+      <span class="thread__user__name">Tin Rabzelj</span> - <a href="#" class="link-button thread__sign-out-button">Sign out</a>
+      <button class="button button--raised thread__post-button">Post</button>
+    </div>
+  </div>
+
+  <div class="thread__signed-out">
+    <div>Join the discussion.</div>
+    <a href="#" class="link-button thread__sign-in-button">Sign in</a>
+  </div>
+
+  <div class="thread__comments">
+  </div>
 
 </div>

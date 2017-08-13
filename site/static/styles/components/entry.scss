@@ -45,7 +45,7 @@
     height: 48px;
   }
 
-  &__author-avatar {
+  &__author__avatar {
     width: 40px;
     height: 40px;
     margin-left: 0;
@@ -54,20 +54,20 @@
     border: 1px solid $grey-300;
   }
 
-  &__author-info {
+  &__author__info {
     display: inline-flex;
     flex-direction: column;
     line-height: 1.5rem;
   }
 
-  &__author-name {
+  &__author__name {
     @include mdc-theme-prop(color, text-primary-on-light);
   }
 
   &__date {
     font-size: 0.875rem;
     line-height: 1.25rem;
-    @include mdc-theme-prop(color, text-secondary-on-background);
+    @include mdc-theme-prop(color, text-secondary-on-light);
   }
 
 }

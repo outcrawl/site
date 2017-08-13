@@ -20,7 +20,7 @@
 {{range .Pagers}}
     <li class="pagination__item">
   {{if eq .PageNumber $page}}
-      <a href="{{.URL}}" role="button" class="icon-button pagination__link--active">
+      <a href="{{.URL}}" role="button" class="icon-button icon-button--active">
   {{else}}
       <a href="{{.URL}}" role="button" class="icon-button">
   {{end}}

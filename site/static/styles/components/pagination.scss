@@ -10,8 +10,4 @@
   &__item {
     display: inline;
   }
-
-  &__link--active {
-    @include mdc-theme-prop(background-color, text-hint-on-light);
-  }
 }

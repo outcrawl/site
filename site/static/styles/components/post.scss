@@ -17,7 +17,7 @@
     }
   }
 
-  &__author-avatar {
+  &__author__avatar {
     @extend .mdc-list-item__start-detail;
     width: 40px;
     height: 40px;
@@ -27,17 +27,19 @@
     border: 1px solid $grey-300;
   }
 
-  &__author-info {
+  &__author__info {
     @extend .mdc-list-item__text;
     line-height: 1.5rem;
   }
 
-  &__author-name {
+  &__author__name {
     @include mdc-theme-prop(color, text-primary-on-light);
   }
 
   &__date {
-    @extend .mdc-list-item__text__secondary;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    @include mdc-theme-prop(color, text-secondary-on-light);
   }
 
   &__thumbnail {

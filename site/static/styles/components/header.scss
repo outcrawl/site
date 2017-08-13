@@ -28,7 +28,7 @@
 
   &__search {
     position: relative;
-    margin-right: 24px;
+    margin: auto 0 auto 16px;
 
     &-input {
       margin: auto 0 auto 0;
@@ -38,7 +38,7 @@
       @include mdc-elevation(2);
       padding: 0;
       position: absolute;
-      right: 0;
+      left: 0;
       background-color: $white;
 
       width: 20rem;

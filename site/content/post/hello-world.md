@@ -43,21 +43,32 @@ func generateToken() string {
 
 Occaecat consectetur occaecat anim laborum anim do quis duis sit amet culpa nulla commodo.
 
-{{< code lang="javascript" >}}
-function $initHighlight(block, cls) {
-  try {
-    if (cls.search(/\bno\-highlight\b/) != -1)
-      return process(block, true, 0x0F) +
-             ` class="${cls}"`;
-  } catch (e) {
-    /* handle exception */
+{{< code lang="typescript" >}}
+function lookupInUnicodeMap(code: number, map: ReadonlyArray<number>): boolean {
+  // Bail out quickly if it couldn't possibly be in the map.
+  if (code < map[0]) {
+    return false;
   }
-  for (var i = 0 / 2; i < classes.length; i++) {
-    if (checkCondition(classes[i]) === undefined)
-      console.log('undefined');
+  // Perform binary search in one of the Unicode range maps
+  let lo = 0;
+  let hi: number = map.length;
+  let mid: number;
+  while (lo + 1 < hi) {
+    mid = lo + (hi - lo) / 2;
+    // mid has to be even to catch a range's beginning
+    mid -= mid % 2;
+    if (map[mid] <= code && code <= map[mid + 1]) {
+      return true;
+    }
+    if (code < map[mid]) {
+      hi = mid;
+    }
+    else {
+      lo = mid + 2;
+    }
   }
+  return false;
 }
-export  $initHighlight;
 {{< /code >}}
 
 {{< code lang="html" >}}
