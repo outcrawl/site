@@ -23,7 +23,7 @@ Et officia veniam est nulla deserunt nisi.
 
 # Image
 
-{{< image src="http://lorempixel.com/1280/720" >}}
+{{< image src="https://unsplash.it/1280/720?random" >}}
 
 # Code
 
@@ -168,16 +168,6 @@ Minim **labore** ad irure amet officia aliqua laborum `print("yo!")` nulla volup
 {{% /note %}}
 
 Ad incididunt pariatur labore excepteur in consectetur minim quis nisi nulla.
-
-## Embeds
-
-Laborum do dolore ipsum magna eiusmod labore irure nisi officia proident labore veniam tempor.
-
-{{< embed >}}
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wRWIsbSXoyQ?rel=0" frameborder="0" allowfullscreen></iframe>
-{{< /embed >}}
-
-Consectetur ex quis ex non in id ipsum cupidatat aliqua.
 
 ## Charts
 

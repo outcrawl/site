@@ -1,26 +1,18 @@
-<footer class="footer">
-  <div class="footer__content">
-    <a class="footer__logo"
-       href="{{.Site.BaseURL}}">
+<footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">
       {{.Site.Title}}
-    </a>
-
-    <ul class="footer__links">
+    </div>
+    <ul class="mdl-mini-footer__link-list">
       <li>
-        <a class="footer__link"
-           href="{{.Site.BaseURL}}about">
-           About
-        </a>
+        <a href="{{.Site.BaseURL}}about">About</a>
       </li>
       <li>
-        <a class="footer__link"
-           href="{{.Site.BaseURL}}privacy">
-           Privacy
-        </a>
+        <a href="{{.Site.BaseURL}}privacy">Privacy</a>
       </li>
     </ul>
-
+  </div>
+  <div class="mdl-mini-footer__right-section">
     {{partial "footer/social.html" .}}
-
   </div>
 </footer>

@@ -9,7 +9,7 @@ module.exports = function (gulp, $) {
         return null;
       }
 
-      return gulp.src('app/images/logo.svg')
+      return gulp.src('app/images/icons/logo.svg')
         .pipe($.favicons({
           appName: "Outcrawl",
           appDescription: "Software development tutorials without nonsense",

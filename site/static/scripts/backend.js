@@ -98,7 +98,22 @@ backend.getThread = id => {
   });
 };
 
-backend.createComment = comment => {
+backend.createComment = (threadId, comment) => {
+  return new Promise((resolve, reject) => {
+    return firebase.auth().currentUser.getIdToken()
+      .then(token => axios.post(`${backend.apiUrl}/threads/${threadId}/comments`,
+          comment, {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': token
+            }
+          })
+        .then(result => resolve(result.data))
+        .catch(reject)
+      )
+      .catch(reject);
+  });
 };
 
 export default backend;

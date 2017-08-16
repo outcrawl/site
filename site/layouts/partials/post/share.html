@@ -1,24 +1,24 @@
-<div class="post__share">
+<div class="page__share">
 
-  <a class="icon-button icon-button--dark"
-      href="https://twitter.com/intent/tweet?url={{.Permalink}}&text={{.Title}}"
-      title="Share on Twitter"
-      style="background-color:#32CCFE">
-    <img class="icon-button__icon" src="/images/icons/twitter.svg">
+  <a href="https://twitter.com/intent/tweet?url={{.Permalink}}&text={{.Title}}"
+     title="Share on Twitter"
+     role="button"
+     class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored share-button share-button--twitter">
+    <img class="icon" src="/images/icons/twitter.svg">
   </a>
 
-  <a class="icon-button icon-button--dark"
-      href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}"
-      title="Share on Facebook"
-      style="background-color:#3B5998">
-    <img class="icon-button__icon" src="/images/icons/facebook.svg">
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}"
+     title="Share on Facebook"
+     role="button"
+     class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored share-button share-button--facebook">
+    <img class="icon" src="/images/icons/facebook.svg">
   </a>
 
-  <a class="icon-button icon-button--dark"
-      href="https://plus.google.com/share?url={{ .Permalink }}"
-      title="Share on Google+"
-      style="background-color:#DD4B39">
-    <img class="icon-button__icon" src="/images/icons/google-plus.svg">
+  <a href="https://plus.google.com/share?url={{ .Permalink }}"
+     title="Share on Google+"
+     role="button"
+     class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored share-button share-button--google-plus">
+    <img class="icon" src="/images/icons/google-plus.svg">
   </a>
 
 </div>

@@ -1,4 +1,7 @@
 import moment from 'moment';
+import {
+  markdown
+} from 'markdown';
 import backend from './backend';
 import dialog from './dialog';
 
@@ -8,32 +11,40 @@ const threadElement = document.querySelector('.thread .thread__comments');
 const signInButton = document.querySelector('.thread .thread__sign-in-button');
 const signOutButton = document.querySelector('.thread .thread__sign-out-button');
 
-if (postSlug) {
-  signInButton.addEventListener('click', evt => {
-    evt.preventDefault();
-    backend.signIn()
-      .then(user => {
-        setupForms();
-      })
-      .catch(error => {
-        console.log(error);
-        dialog.show('Oh no!', 'You were unable to sign in.');
-        setupForms();
-      });
-  });
-  signOutButton.addEventListener('click', evt => {
-    evt.preventDefault();
-    backend.signOut();
-    setupForms();
-  });
+(function() {
+  if (postSlug) {
+    signInButton.addEventListener('click', evt => {
+      evt.preventDefault();
+      backend.signIn()
+        .then(user => {
+          setupForms();
+        })
+        .catch(error => {
+          console.log(error);
+          dialog.show('Oh no!', 'You were unable to sign in.');
+          setupForms();
+        });
+    });
+    signOutButton.addEventListener('click', evt => {
+      evt.preventDefault();
+      backend.signOut();
+      setupForms();
+    });
 
-  backend.onAuthStateChanged(user => {
-    setupForms();
-    backend.getThread(postSlug)
-      .then(thread => buildThreadDOM(thread))
-      .catch(error => console.log(error));
-  });
-}
+    backend.onAuthStateChanged(user => {
+      setupForms();
+      backend.getThread(postSlug)
+        .then(thread => buildThreadDOM(thread))
+        .catch(error => console.log(error));
+    });
+
+    const threadInput = signedInGroup.querySelector('.thread__input');
+    const threadPostButton = signedInGroup.querySelector('.thread__post-button');
+    threadPostButton.addEventListener('click', evt => {
+      postComment(threadInput.value);
+    });
+  }
+})();
 
 function setupForms() {
   if (backend.user) {
@@ -68,7 +79,7 @@ function buildThreadDOM(thread) {
           <span class="comment__date">${moment(comment.createdAt).fromNow()}</span>
         </div>
         <div class="comment__text">
-          ${comment.text}
+          ${markdown.toHTML(comment.text)}
         </div>
         <div class="comment__actions">
           ${buildCommentActionsDOM(comment)}
@@ -112,7 +123,7 @@ function buildCommentRepliesDOM(comment) {
         <span class="comment__date">${moment(r.createdAt).fromNow()}</span>
       </div>
       <div class="comment__text">
-        ${r.text}
+        ${markdown.toHTML(r.text)}
       </div>
       <div class="comment__actions">
         ${buildCommentActionsDOM(r)}
@@ -127,6 +138,18 @@ function buildCommentRepliesDOM(comment) {
     </div>
   </div>
   `).join('');
+}
+
+function postComment(text, replyId) {
+  const data = {
+    text: text
+  };
+  if (replyId) {
+    data.replyTo = replyId;
+  }
+  backend.createComment(postSlug, data)
+    .then(comment => console.log(comment))
+    .catch(error => console.log(error));
 }
 
 function onCancelReplyClick(commentElement) {
@@ -154,11 +177,11 @@ function registerEventListeners() {
         evt.preventDefault();
         evt.stopPropagation();
         onReplyClick(commentElement);
-      } else if(evt.target.className.indexOf('comment__reply__cancel') != -1) {
+      } else if (evt.target.className.indexOf('comment__reply__cancel') != -1) {
         evt.preventDefault();
         evt.stopPropagation();
         onCancelReplyClick(commentElement);
-      } else if(evt.target.className.indexOf('comment__reply__post') != -1) {
+      } else if (evt.target.className.indexOf('comment__reply__post') != -1) {
         evt.preventDefault();
         evt.stopPropagation();
         onPostReplyClick(commentElement);

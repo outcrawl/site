@@ -1,7 +1,7 @@
 {{if .Get "src"}}
-<img class="post__image" src="{{.Get `src`}}">
+<img class="page__image" src="{{.Get `src`}}">
 {{else}}
-<img class="post__image"
+<img class="page__image"
      src="{{.Site.BaseURL}}images/{{.Page.Slug}}/{{.Get `name`}}"
      alt="{{.Get `name`}}">
 {{end}}

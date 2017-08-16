@@ -2,6 +2,7 @@ var merge = require('merge-stream');
 var replace = require('gulp-replace');
 var hljs = require('highlight.js');
 var katex = require('katex');
+var fs = require('fs');
 
 // https://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
 function escapeHTML(html) {
@@ -15,7 +16,7 @@ function escapeHTML(html) {
     '`': '&#x60;',
     '=': '&#x3D;'
   };
-  return String(html).replace(/[&<>"'`=\/]/g, function (s) {
+  return String(html).replace(/[&<>"'`=\/]/g, function(s) {
     return entityMap[s];
   });
 }
@@ -65,9 +66,9 @@ function highlight() {
     pres[i].removeAttribute('data-mark');
 
     var html = markLines(hljs.highlight(lang, sourceCode).value, mark);
-    var copyBtn = '<button class="icon-button icon-button--dense" title="Copy" style="z-index:1;"' +
+    var copyBtn = '<button class="mdl-button mdl-js-button mdl-button--icon" title="Copy" style="z-index:1;"' +
       'data-clipboard-text="' + escapeHTML(sourceCode) + '">\n' +
-      '<img class="icon-button__icon" src="/images/icons/content-copy.svg">\n' +
+      '<img class="icon" src="/images/icons/content-copy.svg">\n' +
       '</button>';
 
     pres[i].innerHTML = copyBtn + '<code class="hljs">' + html + '</code>';
@@ -81,20 +82,20 @@ function anchors() {
 
   for (var i = 0; i < h.length; i++) {
     var id = h[i].getAttribute('id');
-    h[i].outerHTML = '<a class="post__heading-link" href="' + permalink.href + '#' + id + '">' + h[i].outerHTML + '</a>';
+    h[i].outerHTML = '<a class="page__heading-link" href="' + permalink.href + '#' + id + '">' + h[i].outerHTML + '</a>';
   }
 
   return this;
 }
 
 function insertLatex() {
-  var tags = this.querySelectorAll('.latex');
+  var tags = this.querySelectorAll('.page__latex');
   for (var i = 0; i < tags.length; i++) {
     tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
       displayMode: false
     });
   }
-  tags = this.querySelectorAll('.latex--block')
+  tags = this.querySelectorAll('.page__latex--block')
   for (var i = 0; i < tags.length; i++) {
     tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
       displayMode: true
@@ -103,22 +104,41 @@ function insertLatex() {
   return this;
 }
 
-module.exports = function (gulp, $, paths) {
-  return function () {
+function injectSvg() {
+  var imgs = this.querySelectorAll('img[src$="svg"]');
+  for (var i = 0; i < imgs.length; i++) {
+    var src = imgs[i].src;
+    var svg = fs.readFileSync('dist/images/icons/' + src.replace(/.*\//, ''), 'utf8').replace(/\r?\n|\r/g, '');
+    var attrs = '';
+
+    for (var j = 0; j < imgs[i].attributes.length; j++) {
+      var a = imgs[i].attributes[j];
+      if (a.name != 'src') {
+        attrs += a.name + '="' + a.value + '"';
+      }
+    }
+
+    imgs[i].outerHTML = svg.replace('<svg ', '<svg ' + attrs);
+  }
+  return this;
+}
+
+module.exports = function(gulp, $, paths) {
+  return function() {
     return merge(
       gulp.src(paths.html)
-        .pipe($.dom(highlight))
-        .pipe($.dom(anchors))
-        .pipe($.dom(insertLatex))
-        .pipe(require('./inject-svg')())
-        .pipe(gulp.dest('dist')),
+      .pipe($.dom(highlight))
+      .pipe($.dom(anchors))
+      .pipe($.dom(insertLatex))
+      .pipe($.dom(injectSvg))
+      .pipe(gulp.dest('dist')),
       gulp.src([
         'app/**/robots.txt',
         'app/**/sitemap.xml'
       ], {
-          nodir: true
-        })
-        .pipe(gulp.dest('dist'))
+        nodir: true
+      })
+      .pipe(gulp.dest('dist'))
     );
   }
 }

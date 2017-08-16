@@ -1,47 +1,28 @@
-.footer {
-  font-size: .875rem;
-  font-weight: 400;
-  background: $grey-50;
-  padding: 24px;
+.mdl-mini-footer {
+  flex: 1 0 auto;
+  padding: 1rem 2rem;
 
-  &__content {
-    display: flex;
-    align-items: center;
+  @media screen and (max-width: $layout-screen-size-threshold) {
+    padding: 1rem;
   }
 
-  &__logo {
-    @include mdc-theme-prop(color, text-primary-on-light);
-    text-decoration: none;
-    font-weight: 500 !important;
+  &__link-list {
+    font-size: 0.875rem;
   }
 
-  &__links, &__social {
-    display: flex;
-    list-style-type: none;
+  &__right-section {
+    display: inline-flex;
   }
 
-  &__links {
-    padding: 0;
-    li {
-      margin-left: 0.5rem;
-    }
-    li:first-child {
-      margin-left: 1rem;
-    }
+  .mdl-logo {
+    color: $footer-color;
   }
 
-  &__link {
-    @include mdc-theme-prop(color, text-primary-on-light);
-  }
+  .icon-link {
+    margin: auto 0 auto 16px;
 
-  &__social {
-    margin: 0;
-    margin-left: auto;
-    li {
-      margin-left: 0.25rem;
-    }
-    li:first-child {
-      margin-left: 0;
+    .icon {
+      fill: $footer-color;
     }
   }
 }

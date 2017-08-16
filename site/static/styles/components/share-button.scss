@@ -1,0 +1,17 @@
+.share-button {
+  .icon {
+    fill: #fff;
+  }
+
+  &--twitter {
+    background: #32CCFE !important;
+  }
+
+  &--facebook {
+    background: #3B5998 !important;
+  }
+
+  &--google-plus {
+    background: #DD4B39 !important;
+  }
+}

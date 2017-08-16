@@ -1,0 +1,32 @@
+.icon {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-12px,-12px);
+  line-height: 24px;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.mdl-button--icon {
+  .icon {
+    fill: $icon-color;
+  }
+}
+
+.mdl-button--fab {
+  .icon {
+    fill: #000;
+  }
+}
+
+.mdl-button--colored {
+  .icon {
+    fill: $icon-color-light;
+  }
+}

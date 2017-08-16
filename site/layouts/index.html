@@ -2,20 +2,14 @@
 
 {{$paginator := .Paginate (where .Site.RegularPages "Type" "post") 6}}
 
-<div class="home">
-
-<div class="home__content">
-  <div class="home__inner">
+<div class="page__content page__content--home">
 {{range $paginator.Pages}}
-    <div class="home__entry">
+  <div class="page__section page__section--small">
   {{partial "entry/entry.html" .}}
-    </div>
-{{end}}
   </div>
+{{end}}
 </div>
 
 {{partial "home/pagination.html" $paginator}}
-
-</div>
 
 {{end}}

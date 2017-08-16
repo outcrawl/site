@@ -1,18 +1,21 @@
-import * as mdc from 'material-components-web/dist/material-components-web';
+import 'dialog-polyfill';
+import 'material-design-lite';
 import Clipboard from 'clipboard';
 
 import backend from './backend';
-import './dialog';
 
-backend.init();
+import dialog from './dialog';
+import newsletter from './newsletter';
+import charts from './charts';
+//import search from './search';
+import './thread';
 
-import './newsletter';
-import './charts';
-import './search';
-import './comments';
+(function() {
+  backend.init();
+  dialog.init();
+  newsletter.init();
+  charts.init();
 
-// Init MDC
-mdc.autoInit();
-
-// Register clipboard
-new Clipboard('.icon-button[data-clipboard-text]');
+  // Register clipboard
+  new Clipboard('.icon-button[data-clipboard-text]');
+})();

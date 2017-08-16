@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="{{ .Lang }}">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
   <base href="{{.Site.BaseURL}}">
 
   <title>
     {{block "title" .}}{{end}}
   </title>
 
-  <link rel="canonical" href="{{.Permalink}}">
-
-  {{partial "head_imports.html" .}}
+  <link rel="canonical"
+        href="{{.Permalink}}"> {{partial "head_imports.html" .}}
 </head>
-<body class="page">
-  {{partial "header/header.html" .}}
-  <main class="page__content">
-  {{block "main" .}}{{end}}
-  </main>
-  {{partial "footer/footer.html" .}}
-  {{partial "dialog.html" .}}
 
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    {{partial "header/header.html" .}}
+    <main class="mdl-layout__content page">
+      {{block "main" .}}{{end}}
+    </main>
+    {{partial "footer/footer.html" .}}
+  </div>
+  {{partial "dialogs.html" .}}
   {{partial "body_imports.html" .}}
 </body>
+
 </html>

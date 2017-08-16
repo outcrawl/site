@@ -1,0 +1,42 @@
+// Override MDL variables
+$trim-color-classes: true;
+$color-primary: $palette-grey-900;
+//$color-primary-dark: $palette-grey-900;
+$color-accent: $palette-blue-400;
+
+$color-primary-hex: $color-grey-900;
+
+$text-color-primary: rgba(0, 0, 0, 0.87);
+$text-color-secondary: rgba(0, 0, 0, 0.54);
+$text-color-disabled: rgba(0, 0, 0, 0.38);
+$text-color-primary-light: rgba(255, 255, 255, 1.0);
+$text-color-secondary-light: rgba(255, 255, 255, 0.70);
+$text-color-disabled-light: rgba(255, 255, 255, 0.5);
+
+$divider-color: rgba(0, 0, 0, 0.12);
+$divider-color-dark: rgba(255, 255, 255, 0.12);
+
+$icon-color: rgba(0, 0, 0, 0.54);
+$icon-color-disabled: rgba(0, 0, 0, 0.38);
+$icon-color-light: rgba(255, 255, 255, 1.0);
+$icon-color-disabled-light: rgba(255, 255, 255, 0.5);
+
+$target-elements-directly: true;
+
+$layout-header-bg-color: transparent;
+$layout-header-text-color: $text-color-primary;
+
+$footer-color: $color-grey-600;
+$footer-bg-color: $color-grey-100;
+
+// Charts
+$ct-text-color: $text-color-primary;
+$ct-text-size: 0.875rem;
+$ct-series-names: (a, b, c, d, e);
+$ct-series-colors: (
+  $color-blue-400,
+  $color-red-400,
+  $color-orange-400,
+  $color-green-400,
+  $color-purple-400
+);

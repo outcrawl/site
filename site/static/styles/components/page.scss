@@ -1,13 +1,135 @@
 .page {
-  font-family: Roboto, sans-serif;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  padding: 8px 8px 32px 8px;
 
   &__content {
-    flex: 1;
-    padding: 32px 16px;
+    @extend .mdl-grid;
+    padding: 0;
+
+    &--home {
+      max-width: 60rem;
+    }
+
+    &--post {
+      max-width: 44rem;
+    }
+  }
+
+  &__section {
+    @extend .mdl-cell;
+
+    &--small {
+      @extend .mdl-cell--6-col;
+      @extend .mdl-cell--8-col-tablet;
+    }
+
+    &--large {
+      @extend .mdl-cell--12-col;
+    }
+  }
+
+  &__heading-link {
+    color: $text-color-primary;
+    text-decoration: none !important;
+  }
+
+  &__title {
+    font-size: 4rem;
+    font-weight: 300;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 3rem;
+
+    &__avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-left: 0;
+      margin-right: 1rem;
+      border-radius: 50%;
+      border: 1px solid $divider-color;
+    }
+
+    &__info {
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 1.5rem;
+    }
+
+    &__name {
+      color: $text-color-primary;
+      font-weight: 400;
+    }
+  }
+
+  &__date {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: $text-color-secondary;
+  }
+
+  &__note {
+    @extend .mdl-shadow--2dp;
+    display: block;
+    padding: 16px;
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+
+  &__embed {
+    text-align: center;
+  }
+
+  &__chart {
+    width: 480px;
+    display: block;
+    margin: 0 auto 1rem auto;
+
+    &--pie {
+      .ct-label {
+        fill: $text-color-primary-light;
+        color: $text-color-primary-light;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &__actions {
+    @extend .mdl-grid;
+    @extend .mdl-grid--no-spacing;
+    padding: 0;
+    margin-top: 32px;
+  }
+
+  &__tags {
+    @extend .mdl-cell--4-col;
+    @extend .mdl-cell--8-col-desktop;
+    margin-bottom: 8px;
+
+    .mdl-chip {
+      margin: 0 4px 8px 0;
+    }
+  }
+
+  &__share {
+    @extend .mdl-cell--4-col;
+    @extend .mdl-cell--4-col-desktop;
+    text-align: right;
+
+    .share-button:not(:first-child) {
+      margin-left: 4px;
+    }
+  }
+
+  &__thumbnail, &__image, &__author, table, .latex-block, blockquote, &__note, &__embed {
+    width: 100%;
+    margin: 0 0 1rem 0;
   }
 }

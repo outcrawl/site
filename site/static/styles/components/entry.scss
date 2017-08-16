@@ -1,5 +1,5 @@
 .entry {
-  @include mdc-elevation(2);
+  @extend .mdl-shadow--2dp;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -16,12 +16,11 @@
   }
 
   &__content {
-    padding: 16px;
+    padding: 1rem;
   }
 
   &__permalink {
-    text-decoration: none;
-    @include mdc-theme-prop(color, text-primary-on-light);
+    color: $text-color-primary;
   }
 
   &__title {
@@ -29,45 +28,46 @@
     font-weight: 400;
     letter-spacing: normal;
     line-height: 1.85rem;
-    margin: 0;
-    margin-bottom: 16px;
-    @include mdc-theme-prop(color, text-primary-on-light);
+    margin: 0 0 1rem 0;
+    color: $text-color-primary;
 
+    /*
     @include media-phone {
       font-size: 1.5rem;
     }
+    */
   }
 
   &__author {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 48px;
-  }
+    height: 3rem;
 
-  &__author__avatar {
-    width: 40px;
-    height: 40px;
-    margin-left: 0;
-    margin-right: 16px;
-    border-radius: 50%;
-    border: 1px solid $grey-300;
-  }
+    &__avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-left: 0;
+      margin-right: 1rem;
+      border-radius: 50%;
+      border: 1px solid $divider-color;
+    }
 
-  &__author__info {
-    display: inline-flex;
-    flex-direction: column;
-    line-height: 1.5rem;
-  }
+    &__info {
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 1.5rem;
+    }
 
-  &__author__name {
-    @include mdc-theme-prop(color, text-primary-on-light);
+    &__name {
+      color: $text-color-primary;
+      font-weight: 400;
+    }
   }
 
   &__date {
     font-size: 0.875rem;
     line-height: 1.25rem;
-    @include mdc-theme-prop(color, text-secondary-on-light);
+    color: $text-color-secondary;
   }
-
 }

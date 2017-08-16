@@ -1,5 +1,7 @@
-<div class="post__tags">
+<div class="page__tags">
 {{ range .Params.tags }}
-<a tabindex="0" class="tag" href="{{$.Site.BaseURL}}tags/{{. | urlize}}" title="{{.}}">{{ . }}</a>
+<a href="{{$.Site.BaseURL}}tags/{{. | urlize}}" title="{{.}}" role="button" tabindex="0" class="mdl-chip">
+  <span class="mdl-chip__text">{{.}}</span>
+</a>
 {{ end }}
 </div>

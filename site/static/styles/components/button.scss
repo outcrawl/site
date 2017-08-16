@@ -1,24 +1,11 @@
-.button {
-  @extend .mdc-button;
-  text-decoration: none !important;
-
-  &--accent {
-    @extend .mdc-button--accent;
+.mdl-button {
+  &--active {
+    @extend .mdl-button:active;
   }
 
-  &--raised {
-    @extend .mdc-button--raised;
-  }
-
-  &--dense {
-    @extend .mdc-button--dense;
-  }
-
-  &--compact {
-    @extend .mdc-button--compact;
-  }
-
-  &--primary {
-    @extend .mdc-button--primary;
+  &:disabled {
+    .icon {
+      fill: rgba(0, 0, 0, 0.26);
+    }
   }
 }

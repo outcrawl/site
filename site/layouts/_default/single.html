@@ -5,22 +5,24 @@
 {{$params := .Params}}
 {{$data := .Site.Data}}
 
-<article class="post">
+<div class="page__content page__content--post">
+  <article class="page__section page__section--large">
 
-  <h1 class="post__title">{{.Title}}</h1>
+    <h1 class="page__title">{{.Title}}</h1>
 
-  {{partial "post/author.html" .}}
+    {{partial "post/author.html" .}}
 
-  {{partial "post/thumbnail.html" .}}
+    {{partial "post/thumbnail.html" .}}
 
-  {{.Content}}
+    {{.Content}}
 
-  {{partial "post/actions.html" .}}
+    {{partial "post/actions.html" .}}
 
-</article>
+  </article>
 
-{{partial "post/newsletter.html" .}}
+  {{partial "post/newsletter.html" .}}
 
-{{partial "post/comments.html" .}}
+  {{partial "post/thread.html" .}}
+</div>
 
 {{end}}

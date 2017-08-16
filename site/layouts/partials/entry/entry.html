@@ -5,7 +5,7 @@
 <div class="entry">
   <section class="entry__thumbnail"
   {{if eq $params.thumbnail "test"}}
-     style="background-image: url('http://lorempixel.com/1280/720?id={{.Slug | md5}}')"
+     style="background-image: url('https://unsplash.it/1280/720?random&id={{.Slug | md5}}')"
 {{else}}
      style="background-image: url('{{.Site.BaseURL}}images/thumbnails/{{$params.thumbnail}}.png')"
 {{end}}>
