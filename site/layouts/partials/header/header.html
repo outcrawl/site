@@ -1,29 +1,25 @@
-<header class="mdl-layout__header mdl-layout__header--scroll">
-<div class="mdl-layout__header-row">
-  <a class="mdl-layout-title" href="{{.Site.BaseURL}}">
-    <img height="24" src="/images/icons/logo-text.svg">
-  </a>
-  <div class="mdl-layout-spacer"></div>
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-    <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-      <img class="icon" src="/images/icons/magnify.svg">
-    </label>
-    <div class="mdl-textfield__expandable-holder">
-      <input class="mdl-textfield__input" type="text" id="search">
-      <label class="mdl-textfield__label" for="search">Search...</label>
+<header class="mdl-layout__header mdl-layout__header--scroll header">
+  <div class="mdl-layout__header-row">
+
+    <a class="mdl-layout-title"
+       href="{{.Site.BaseURL}}">
+      <img height="24" src="/images/icons/logo-text.svg">
+    </a>
+
+    <div class="mdl-layout-spacer"></div>
+
+    <div class="mdl-textfield mdl-js-textfield header__search-textfield">
+      <input class="mdl-textfield__input"
+             type="text"
+             id="search-input">
+      <label class="mdl-textfield__label"
+             for="search-input">Search...</label>
+
+      <div class="header__search-results"
+           id="search-results">
+      </div>
+
     </div>
   </div>
-</div>
-<!--
-  <div class="header__content">
-    <div class="header__left">
-      <a class="header__logo" href="{{.Site.BaseURL}}">
-        <img height="28" src="/images/logo-text.svg">
-      </a>
-      {{partial "header/search" .}}
-    </div>
-    <div class="header__right">
-    </div>
-  </div>
--->
+
 </header>

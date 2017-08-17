@@ -7,7 +7,7 @@ import backend from './backend';
 import dialog from './dialog';
 import newsletter from './newsletter';
 import charts from './charts';
-//import search from './search';
+import search from './search';
 import './thread';
 
 (function() {

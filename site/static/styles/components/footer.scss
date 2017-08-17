@@ -1,13 +1,13 @@
 .mdl-mini-footer {
   flex: 1 0 auto;
-  padding: 1rem 2rem;
+  padding: 16px 32px;
 
   @media screen and (max-width: $layout-screen-size-threshold) {
-    padding: 1rem;
+    padding: 16px;
   }
 
   &__link-list {
-    font-size: 0.875rem;
+    font-size: 14px;
   }
 
   &__right-section {
@@ -18,8 +18,8 @@
     color: $footer-color;
   }
 
-  .icon-link {
-    margin: auto 0 auto 16px;
+  .mdl-button--icon {
+    margin: auto 0 auto 8px;
 
     .icon {
       fill: $footer-color;

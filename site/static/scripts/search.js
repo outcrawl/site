@@ -3,21 +3,30 @@ import Wade from 'wade';
 const titles = posts.map(p => p.title);
 const search = Wade(titles);
 
-const searchResults = document.querySelector('.header__search-results');
-const searchInput = document.querySelector('.header__search-input .textfield__input');
+const searchResults = document.querySelector('#search-results');
+const searchInput = document.querySelector('#search-input');
 
 searchInput.addEventListener('keyup', evt => {
   const query = searchInput.value;
   const results = search(query);
 
-  searchResults.innerHTML = '';
+  while (searchResults.lastChild) {
+    searchResults.removeChild(searchResults.lastChild);
+  }
+
+  const queryRegex = new RegExp(`(${query.split(/ +/).join('|')})`, 'gi');
   for (const r of results) {
     const post = posts[r.index];
-    searchResults.innerHTML += `
-    <a href="${post.slug}" class="list__item" title="${post.title}">
-      ${post.title}
+
+    const title = post.title.replace(queryRegex, (a, b) => {
+      return `<strong>${b}</strong>`;
+    });
+
+    searchResults.insertAdjacentHTML('beforeend', `
+    <a href="${post.slug}">
+      ${title}
     </a>
-    `;
+    `);
   }
 
   searchResults.style.display = results.length == 0 ? 'none' : '';

@@ -3,27 +3,34 @@
 {{$author := (index $data.authors $params.author)}}
 
 <div class="entry">
-  <section class="entry__thumbnail"
+
+  <div class="entry__thumbnail"
   {{if eq $params.thumbnail "test"}}
      style="background-image: url('https://unsplash.it/1280/720?random&id={{.Slug | md5}}')"
 {{else}}
      style="background-image: url('{{.Site.BaseURL}}images/thumbnails/{{$params.thumbnail}}.png')"
-{{end}}>
-  </section>
-  <section class="entry__content">
+{{end}}></div>
+
+  <div class="entry__content">
+
     <a href="{{.Permalink}}" class="entry__permalink">
       <h1 class="entry__title">{{.Title}}</h1>
     </a>
 
     <div class="entry__author">
-      <img class="entry__author__avatar" src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120"></img>
-      <span class="entry__author__info">
+      <img class="entry__author__avatar" src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120">
+
+      <div class="entry__author__primary">
         <a class="entry__author__name" href="{{.Site.BaseURL}}authors/{{$author.slug}}" title="{{$author.name}}">
           {{$author.name}}
         </a>
-        <span class="entry__date">{{dateFormat `Jan 2, 2006` .Date}}</span>
-      </span>
+
+        <div class="entry__date">
+          {{dateFormat `Jan 2, 2006` .Date}}
+        </div>
+      </div>
+
     </div>
 
-  </section>
+  </div>
 </div>

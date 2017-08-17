@@ -1,16 +1,17 @@
 .page {
   padding: 8px 8px 32px 8px;
+  overflow: visible !important;
 
   &__content {
     @extend .mdl-grid;
     padding: 0;
 
     &--home {
-      max-width: 60rem;
+      max-width: 900px;
     }
 
     &--post {
-      max-width: 44rem;
+      max-width: 700px;
     }
   }
 
@@ -33,43 +34,32 @@
   }
 
   &__title {
-    font-size: 4rem;
     font-weight: 300;
-    line-height: 1.35;
-    letter-spacing: -0.02em;
   }
 
   &__author {
     display: flex;
-    align-items: center;
     justify-content: flex-start;
-    height: 3rem;
+    align-items: center;
+    padding: 8px;
 
     &__avatar {
-      width: 2.5rem;
-      height: 2.5rem;
-      margin-left: 0;
-      margin-right: 1rem;
+      height: 40px;
+      width: 40px;
+      box-sizing: border-box;
       border-radius: 50%;
       border: 1px solid $divider-color;
-    }
-
-    &__info {
-      display: inline-flex;
-      flex-direction: column;
-      line-height: 1.5rem;
+      margin-right: 16px;
     }
 
     &__name {
       color: $text-color-primary;
-      font-weight: 400;
     }
-  }
 
-  &__date {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: $text-color-secondary;
+    &__date {
+      color: $text-color-secondary;
+      margin-left: auto;
+    }
   }
 
   &__note {
@@ -78,8 +68,7 @@
     padding: 16px;
 
     p {
-      margin: 0;
-      font-size: 1rem;
+      margin-bottom: 0 !important;
     }
   }
 
@@ -90,13 +79,13 @@
   &__chart {
     width: 480px;
     display: block;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto 16px auto;
 
     &--pie {
       .ct-label {
         fill: $text-color-primary-light;
         color: $text-color-primary-light;
-        font-size: 1rem;
+        font-size: 16px;
       }
     }
   }
@@ -104,14 +93,13 @@
   &__actions {
     @extend .mdl-grid;
     @extend .mdl-grid--no-spacing;
-    padding: 0;
-    margin-top: 32px;
+    padding: 32px 0 0 0;
   }
 
   &__tags {
     @extend .mdl-cell--4-col;
     @extend .mdl-cell--8-col-desktop;
-    margin-bottom: 8px;
+    padding: 0 0 8px 0;
 
     .mdl-chip {
       margin: 0 4px 8px 0;
@@ -128,8 +116,8 @@
     }
   }
 
-  &__thumbnail, &__image, &__author, table, .latex-block, blockquote, &__note, &__embed {
+  &__thumbnail, &__image, table, .latex-block, blockquote, &__note, &__embed, p {
     width: 100%;
-    margin: 0 0 1rem 0;
+    margin-bottom: 16px;
   }
 }

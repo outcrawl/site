@@ -5,7 +5,7 @@
 
 {{if .HasPrev}}
     <li class="pagination__item">
-      <a href="{{.Prev.URL}}" role="button" class="mdl-button mdl-js-button mdl-button--icon">
+      <a href="{{.Prev.URL}}" class="mdl-button mdl-js-button mdl-button--icon">
         <img class="icon" src="/images/icons/chevron-left.svg">
       </a>
     </li>
@@ -20,9 +20,9 @@
 {{range .Pagers}}
     <li class="pagination__item">
   {{if eq .PageNumber $page}}
-      <a href="{{.URL}}" role="button" class="mdl-button mdl-button--active mdl-js-button mdl-button--icon">
+      <a href="{{.URL}}" class="mdl-button mdl-button--active mdl-js-button mdl-button--icon">
   {{else}}
-      <a href="{{.URL}}" role="button" class="mdl-button mdl-js-button mdl-button--icon">
+      <a href="{{.URL}}" class="mdl-button mdl-js-button mdl-button--icon">
   {{end}}
         <span class="icon">{{.PageNumber}}</span>
       </a>
@@ -31,7 +31,7 @@
 
 {{if .HasNext}}
     <li class="pagination__item">
-      <a href="{{.Next.URL}}" role="button" class="mdl-button mdl-js-button mdl-button--icon">
+      <a href="{{.Next.URL}}" class="mdl-button mdl-js-button mdl-button--icon">
         <img class="icon" src="/images/icons/chevron-right.svg">
       </a>
     </li>

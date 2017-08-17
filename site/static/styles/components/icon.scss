@@ -3,14 +3,19 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-12px,-12px);
+  transform: translate(-12px, -12px);
   line-height: 24px;
   width: 24px;
   height: 24px;
+  font-size: 18px;
   vertical-align: middle;
 
-  font-size: 18px;
-  line-height: 24px;
+  &--small {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    transform: translate(-9px, -9px);
+  }
 }
 
 .mdl-button--icon {

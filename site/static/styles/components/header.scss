@@ -8,9 +8,40 @@
 }
 
 .mdl-layout__header-row {
-  padding: 0 2rem;
+  padding: 0 32px;
 
   @media screen and (max-width: $layout-screen-size-threshold) {
-    padding: 0 1rem;
+    padding: 0 16px;
+  }
+}
+
+.header {
+  &__search-textfield {
+    position: relative;
+  }
+
+  &__search-results {
+    @extend .mdl-shadow--2dp;
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    margin-top: 4px;
+    width: 100%;
+
+    a {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 16px;
+      font-weight: 400;
+      color: $text-color-primary;
+      padding: 8px;
+
+      &:hover {
+        text-decoration: none;
+        background-color: $color-grey-100;
+      }
+    }
   }
 }

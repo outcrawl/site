@@ -1,18 +1,19 @@
 .newsletter {
   position: relative;
   text-align: center;
-  padding: 2rem 0;
+  padding: 34px 0;
 
   &__title {
     font-weight: 500;
-    font-size: 3rem;
-    margin: 0 0 1.5rem 0;
+    font-size: 56px;
+    margin-bottom: 32px;
   }
 
   &__subtitle {
     font-weight: 300;
-    font-size: 1.5rem;
-    margin: 1.5rem 0;
+    font-size: 24px;
+    margin: 24px auto;
+    max-width: 400px;
   }
 
   &__subscribe-button {

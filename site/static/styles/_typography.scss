@@ -1,6 +1,5 @@
 html {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -9,51 +8,71 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 h1 {
-  font-size: 3.25rem;
+  font-size: 56px;
   font-weight: 400;
   line-height: 1.35;
-  margin: 1.5rem 0;
+  letter-spacing: -0.02em;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 45px;
   font-weight: 400;
-  line-height: 3.5rem;
-  margin: 1.5rem 0;
+  line-height: 48px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 h3 {
-  font-size: 1.75rem;
+  font-size: 34px;
   font-weight: 400;
-  line-height: 3rem;
-  margin: 1.5rem 0;
+  line-height: 40px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 h4 {
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 400;
-  line-height: 2.25rem;
-  margin: 1rem 0 0.75rem 0;
+  line-height: 32px;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: 24px;
+  margin-bottom: 16px;
 }
 
 h5 {
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 500;
   line-height: 1;
-  margin: 1rem 0 0.75rem 0;
+  letter-spacing: 0.02em;
+  margin-top: 24px;
+  margin-bottom: 16px;
 }
 
 h6 {
-  font-size: 1.125rem;
+  font-size: 16px;
   font-weight: 400;
-  margin: 1rem 0 0.75rem 0;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+address {
+  font-size: 12px;
+  line-height: 1;
+  font-style: normal;
+}
+
+ul, ol {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 p {
-  font-size: 1.125rem;
-  font-weight: 400;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 a {
@@ -64,10 +83,6 @@ a {
   &:hover {
     text-decoration: underline;
   }
-}
-
-small {
-  font-size: 0.875rem;
 }
 
 strong, b {
@@ -82,15 +97,6 @@ dt {
   font-weight: 700;
 }
 
-address {
-  font-size: 0.875rem;
-  line-height: 1;
-}
-
-ul, ol {
-  font-size: 1.125rem;
-}
-
 table {
   @extend .mdl-data-table;
   @extend .mdl-shadow--2dp;
@@ -101,8 +107,8 @@ table {
 }
 
 blockquote {
-  padding-left: 1.5rem;
-  border-left: 5px solid $color-primary-hex;
+  padding-left: 16px;
+  border-left: 4px solid $color-primary-hex;
 
   cite {
     display: block;

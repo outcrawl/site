@@ -26,7 +26,7 @@
 @import "material-design-lite/src/footer/mini_footer";
 // @import "material-design-lite/src/icon-toggle/icon-toggle";
 @import "material-design-lite/src/list/list";
-// @import "material-design-lite/src/menu/menu";
+@import "material-design-lite/src/menu/menu";
 // @import "material-design-lite/src/progress/progress";
 @import "material-design-lite/src/layout/layout";
 // @import "material-design-lite/src/radio/radio";
@@ -34,7 +34,7 @@
 // @import "material-design-lite/src/snackbar/snackbar";
 // @import "material-design-lite/src/spinner/spinner";
 // @import "material-design-lite/src/switch/switch";
-// @import "material-design-lite/src/tabs/tabs";
+@import "material-design-lite/src/tabs/tabs";
 @import "material-design-lite/src/textfield/textfield";
 // @import "material-design-lite/src/tooltip/tooltip";
 @import "material-design-lite/src/shadow/shadow";
@@ -43,7 +43,6 @@
 // Components
 @import "components/page";
 @import "components/icon";
-@import "components/icon-link";
 @import "components/button";
 @import "components/header";
 @import "components/footer";
