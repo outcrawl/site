@@ -1,0 +1,72 @@
+.comment {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 0 16px 0;
+
+  &__user__avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    border: 1px solid $divider-color;
+  }
+
+  &__body {
+    padding-left: 16px;
+    width: 100%;
+  }
+
+  &__user__name {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-color-primary;
+  }
+
+  &__date {
+    color: $text-color-secondary;
+    font-size: 14px;
+  }
+
+  &__text {
+  }
+
+  &__reply-form {
+    display: none;
+    flex-direction: column;
+
+    &__textfield {
+      width: 100%;
+    }
+
+    &__actions {
+      margin: -10px 0 0 auto;
+    }
+  }
+
+  &__action {
+    color: $text-color-secondary;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin-right: 8px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &--reply {
+    padding: 16px 0 0 0;
+
+    .comment__user__avatar {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+    }
+  }
+
+  &__reply-to-name {
+    font-weight: 700;
+  }
+}

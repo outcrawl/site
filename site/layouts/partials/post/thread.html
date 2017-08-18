@@ -3,19 +3,43 @@
   <h2 class="thread__title">Comments</h2>
 
   <div class="thread__signed-in">
-    <div class="textfield textfield--multiline">
-      <textarea class="textfield__input thread__input" rows="4" placeholder="Say something..."></textarea>
+
+    <div class="thread__user">
+      <img class="thread__user__avatar">
+      <span class="thread__user__name"></span>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect thread__sign-out-button">Sign out</button>
     </div>
+
     <div class="thread__form">
-      <img class="thread__user__avatar" src="http://lorempixel.com/24/24">
-      <span class="thread__user__name">Tin Rabzelj</span> - <a href="#" class="link-button thread__sign-out-button">Sign out</a>
-      <button class="button button--raised thread__post-button">Post</button>
+      <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <div class="mdl-tabs__tab-bar">
+          <a href="#thread-panel-edit" class="mdl-tabs__tab is-active">Edit</a>
+          <a href="#thread-panel-preview" class="mdl-tabs__tab" id="thread-preview-button">Preview</a>
+        </div>
+        <div class="mdl-tabs__panel is-active" id="thread-panel-edit">
+          <div class="mdl-textfield mdl-js-textfield comment__reply-form__textfield">
+            <label class="mdl-textfield__label" for="thread-input">Write a comment...</label>
+            <textarea class="mdl-textfield__input thread__input" id="thread-input" type="text" rows="4"></textarea>
+          </div>
+        </div>
+        <div class="mdl-tabs__panel markdown" id="thread-panel-preview"></div>
+      </div>
+
+      <div class="thread__form__actions">
+        <span class="thread__form__info">
+          Supports GitHub flavored markdown.
+        </span>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect thread__post-button">Post</button>
+      </div>
     </div>
+
   </div>
 
   <div class="thread__signed-out">
-    <div>Join the discussion.</div>
-    <a href="#" class="link-button thread__sign-in-button">Sign in</a>
+    <div class="thread__instructions">
+      Sign in to leave a comment
+    </div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect thread__sign-in-button">Sign in</button>
   </div>
 
   <div class="thread__comments">

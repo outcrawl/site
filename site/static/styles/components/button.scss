@@ -3,6 +3,16 @@
     @extend .mdl-button:active;
   }
 
+  &--dense {
+    height: 32px;
+    font-size: 13px;
+    line-height: 32px;
+  }
+
+  &--compact {
+    padding: 0 8px;
+  }
+
   &:disabled {
     .icon {
       fill: rgba(0, 0, 0, 0.26);

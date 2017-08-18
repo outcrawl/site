@@ -26,7 +26,7 @@ threadBuilder.fetchUsers = thread => {
     for (let id of users.keys()) {
       axios.get(`https://www.googleapis.com/plus/v1/people/${id}`, {
         params: {
-          'key': backend.config.apiKey
+          'key': backend.googleApiKey
         }
       })
       .then(result => {
@@ -36,6 +36,7 @@ threadBuilder.fetchUsers = thread => {
         if (n === users.size) {
           for (const c of thread.comments) {
             c.user = users.get(c.userId);
+            c.user.imageUrl = c.user.image.url;
           }
           resolve();
         }
@@ -49,6 +50,7 @@ threadBuilder.restructureThread = thread => {
   let commentMap = new Map();
   for (const c of thread.comments) {
     c.replies = [];
+    c.text = c.text.replace('\\n', '\n').replace('\\t', '\t');
     commentMap.set(c.id, c);
   }
 
@@ -71,7 +73,7 @@ threadBuilder.restructureThread = thread => {
   }
 
   const sortComments = list => {
-    list.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+    list.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     for (const single of list) {
       if (single.replies) {
         sortComments(single.replies);

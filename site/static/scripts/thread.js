@@ -1,191 +1,100 @@
-import moment from 'moment';
-import {
-  markdown
-} from 'markdown';
 import backend from './backend';
 import dialog from './dialog';
+import threadDom from './thread-dom';
 
-const signedInGroup = document.querySelector('.thread .thread__signed-in');
-const signedOutGroup = document.querySelector('.thread .thread__signed-out');
-const threadElement = document.querySelector('.thread .thread__comments');
-const signInButton = document.querySelector('.thread .thread__sign-in-button');
-const signOutButton = document.querySelector('.thread .thread__sign-out-button');
+const threadCommentsElement = document.querySelector('.thread__comments');
+const signInButton = document.querySelector('.thread__sign-in-button');
+const signOutButton = document.querySelector('.thread__sign-out-button');
+const signedInElement = document.querySelector('.thread__signed-in');
+const signedOutElement = document.querySelector('.thread__signed-out');
+const userNameElement = document.querySelector('.thread__user__name');
+const userAvatarElement = document.querySelector('.thread__user__avatar');
+const threadPostButton = document.querySelector('.thread__post-button');
+const threadInput = document.querySelector('.thread__input');
+const previewButton = document.querySelector('#thread-preview-button');
+const previewElement = document.querySelector('#thread-panel-preview');
 
 (function() {
   if (postSlug) {
-    signInButton.addEventListener('click', evt => {
-      evt.preventDefault();
-      backend.signIn()
-        .then(user => {
-          setupForms();
-        })
-        .catch(error => {
-          console.log(error);
-          dialog.show('Oh no!', 'You were unable to sign in.');
-          setupForms();
-        });
-    });
-    signOutButton.addEventListener('click', evt => {
-      evt.preventDefault();
-      backend.signOut();
-      setupForms();
+    backend.addOnInitListener(user => {
+      userChanged();
     });
 
-    backend.onAuthStateChanged(user => {
-      setupForms();
-      backend.getThread(postSlug)
-        .then(thread => buildThreadDOM(thread))
-        .catch(error => console.log(error));
-    });
-
-    const threadInput = signedInGroup.querySelector('.thread__input');
-    const threadPostButton = signedInGroup.querySelector('.thread__post-button');
-    threadPostButton.addEventListener('click', evt => {
-      postComment(threadInput.value);
-    });
+    signInButton.addEventListener('click', onSignInClick);
+    signOutButton.addEventListener('click', onSignOutClick);
+    threadPostButton.addEventListener('click', onPostClick);
+    previewButton.addEventListener('click', onPreviewClick);
   }
 })();
 
-function setupForms() {
-  if (backend.user) {
-    signedInGroup.style.display = 'block';
-    signedOutGroup.style.display = 'none';
-
-    signedInGroup.querySelector('.thread__user__avatar').src = backend.user.photoURL;
-    signedInGroup.querySelector('.thread__user__name').innerText = backend.user.displayName;
-  } else {
-    signedInGroup.style.display = 'none';
-    signedOutGroup.style.display = 'block';
-  }
-}
-
-function clearThreadDOM() {
-  while (threadElement.firstChild) {
-    threadElement.removeChild(threadElement.firstChild);
-  }
-}
-
-function buildThreadDOM(thread) {
-  clearThreadDOM();
-
-  for (const comment of thread.comments) {
-    threadElement.insertAdjacentHTML('beforeend', `
-    <div class="comment" id="comment_${comment.id}">
-      <img class="comment__user__avatar"
-          src="${comment.user.image.url}"></img>
-      <div class="comment__body">
-        <div class="comment__user">
-          <span class="comment__user__name">${comment.user.displayName}</span>
-          <span class="comment__date">${moment(comment.createdAt).fromNow()}</span>
-        </div>
-        <div class="comment__text">
-          ${markdown.toHTML(comment.text)}
-        </div>
-        <div class="comment__actions">
-          ${buildCommentActionsDOM(comment)}
-        </div>
-        <div class="comment__reply-form">
-          <div class="textfield textfield--multiline">
-            <textarea class="textfield__input" rows="4" placeholder="Say something..."></textarea>
-          </div>
-          <button class="button button--dense button--compact comment__reply__cancel">Cancel</button>
-          <button class="button button--dense button--compact comment__reply__post">Post</button>
-        </div>
-        <div class="comment__replies">
-          ${buildCommentRepliesDOM(comment)}
-        </div>
-      </div>
-    </div>
-    `);
-  }
-
-  registerEventListeners();
-}
-
-function buildCommentActionsDOM(comment) {
-  if (backend.user) {
-    return `
-    <a data-reply-to="${comment.id}" href="#" class="link-button comment__action comment__action--reply">Reply</a>
-    `;
-  } else {
-    return '';
-  }
-}
-
-function buildCommentRepliesDOM(comment) {
-  return comment.replies.map(r => `
-  <div class="comment comment--reply" id="comment_${r.id}">
-    <img class="comment__user__avatar"
-        src="${r.user.image.url}"></img>
-    <div class="comment__body">
-      <div class="comment__user">
-        <span class="comment__user__name">${r.user.displayName}</span>
-        <span class="comment__date">${moment(r.createdAt).fromNow()}</span>
-      </div>
-      <div class="comment__text">
-        ${markdown.toHTML(r.text)}
-      </div>
-      <div class="comment__actions">
-        ${buildCommentActionsDOM(r)}
-      </div>
-      <div class="comment__reply-form">
-        <div class="textfield textfield--multiline">
-          <textarea class="textfield__input" rows="4" placeholder="Say something..."></textarea>
-        </div>
-        <button class="button button--dense button--compact comment__reply__cancel">Cancel</button>
-        <button class="button button--dense button--compact comment__reply__post">Post</button>
-      </div>
-    </div>
-  </div>
-  `).join('');
-}
-
-function postComment(text, replyId) {
-  const data = {
-    text: text
-  };
-  if (replyId) {
-    data.replyTo = replyId;
-  }
-  backend.createComment(postSlug, data)
-    .then(comment => console.log(comment))
-    .catch(error => console.log(error));
-}
-
-function onCancelReplyClick(commentElement) {
-  const replyForm = commentElement.querySelector('.comment__reply-form');
-  replyForm.style.display = 'none';
-}
-
-function onPostReplyClick(commentElement) {
-  const text = commentElement.querySelector('.comment__reply-form .textfield__input').value;
-
-  const replyForm = commentElement.querySelector('.comment__reply-form');
-  replyForm.style.display = 'none';
-}
-
-function onReplyClick(commentElement) {
-  const replyForm = commentElement.querySelector('.comment__reply-form');
-  replyForm.style.display = 'block';
-}
-
-function registerEventListeners() {
-  const commentElements = threadElement.querySelectorAll('.comment');
-  for (const commentElement of commentElements) {
-    commentElement.addEventListener('click', evt => {
-      if (evt.target.className.indexOf('comment__action--reply') != -1) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        onReplyClick(commentElement);
-      } else if (evt.target.className.indexOf('comment__reply__cancel') != -1) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        onCancelReplyClick(commentElement);
-      } else if (evt.target.className.indexOf('comment__reply__post') != -1) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        onPostReplyClick(commentElement);
+function onSignInClick() {
+  backend.signIn()
+    .then(_ => userChanged())
+    .catch(error => {
+      if (error.error != 'popup_closed_by_user') {
+        dialog.show('Oh no!', 'You were unable to sign in.');
       }
     });
+}
+
+function onSignOutClick() {
+  backend.signOut().then(() => userChanged());
+}
+
+function onPostClick() {
+  if (backend.user) {
+    const text = threadInput.value.trim();
+    if(text.length == 0) {
+      return;
+    }
+
+    backend.createComment(postSlug, text)
+      .then(result => {
+        // insert new comment into thread
+        const comment = result.data;
+        comment.user = {
+          displayName: backend.user.displayName,
+          createdAt: new Date(comment.createdAt),
+          imageUrl: backend.user.imageUrl
+        };
+        threadCommentsElement.insertAdjacentHTML(
+          'afterbegin',
+          threadDom.buildComment(comment, backend.user)
+        );
+
+        // reset form input
+        threadInput.value = '';
+      }).catch(error => {
+        dialog.show('Oh no!', 'Something went wrong.');
+      });
   }
+}
+
+function onPreviewClick() {
+  const text = threadInput.value.trim();
+  if (text.length == 0) {
+    previewElement.innerHTML = 'Nothing to preview';
+  } else {
+    previewElement.innerHTML = threadDom.parseMarkdown(text);
+  }
+}
+
+function userChanged() {
+  const user = backend.user;
+  if (user) {
+    userNameElement.innerText = user.displayName;
+    userAvatarElement.src = user.imageUrl;
+
+    signedInElement.style.display = 'block';
+    signedOutElement.style.display = 'none';
+  } else {
+    signedInElement.style.display = 'none';
+    signedOutElement.style.display = 'block';
+  }
+
+  backend.getThread(postSlug)
+    .then(thread => {
+      threadDom.build(threadCommentsElement, thread, user);
+    })
+    .catch(error => console.log(error));
 }

@@ -145,7 +145,7 @@ Irure quis magna duis duis laboris nulla proident cupidatat adipisicing aliqua d
 
 Irure nostrud nostrud laboris consectetur consequat laborum consectetur.
 
-## Latex
+## LaTex
 
 Officia amet sunt {{< latex >}}\displaystyle\sum_{i=1}^{k+1}i{{< /latex >}} consequat ad nulla Lorem.
 

@@ -1,5 +1,6 @@
 html {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -107,6 +108,7 @@ table {
 }
 
 blockquote {
+  margin: 0;
   padding-left: 16px;
   border-left: 4px solid $color-primary-hex;
 

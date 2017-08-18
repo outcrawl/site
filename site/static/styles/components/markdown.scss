@@ -1,0 +1,14 @@
+.markdown {
+  color: $text-color-primary;
+  font-size: 16px;
+  padding: 8px 0;
+
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  p, img {
+    width: 100%;
+    max-width: 100%;
+  }
+}

@@ -17,11 +17,11 @@ module.exports = function (gulp, $) {
         }))
         .pipe(gulp.dest('dist')),
       // scripts
-      gulp.src('dist/main.js')
+      gulp.src('dist/bundle.js')
       .pipe($.uglify())
       .pipe(gulp.dest('dist')),
       // styles
-      gulp.src('dist/main.css')
+      gulp.src('dist/bundle.css')
       .pipe($.postcss([
         require('autoprefixer')({
           browsers: [

@@ -3,87 +3,66 @@ import threadBuilder from './thread-builder';
 
 const backend = {
   apiUrl: 'https://outcrawl-backend.appspot.com/api',
-  user: null,
-  config: {
-    apiKey: 'AIzaSyC0sNooAxM1he2YgwGxTab6ZKxtQpetqSo',
-    authDomain: 'outcrawl-backend.firebaseapp.com',
-    databaseURL: 'https://outcrawl-backend.firebaseio.com',
-    projectId: 'outcrawl-backend',
-    storageBucket: 'outcrawl-backend.appspot.com',
-    messagingSenderId: '251611605216'
-  }
+  googleApiKey: 'AIzaSyDlfCuIC0UecGQG8cHsoMHr8VQXy5uUFJU',
+  googleClientId: '251611605216-g4e7n0b2i5abh9nn02rp46f79aqkublg.apps.googleusercontent.com',
+  onInitListeners: []
 };
 
 backend.init = () => {
-  firebase.initializeApp(backend.config);
-  firebase.auth().onAuthStateChanged(auth => {
-    if (auth) {
-      backend.user = JSON.parse(localStorage.getItem('user'));
-      if (backend.onAuthStateChangedListener) {
-        backend.onAuthStateChangedListener(backend.user);
+  gapi.load('client:auth2', () => {
+    gapi.client.init({
+      'apiKey': backend.googleApiKey,
+      'clientId': backend.googleClientId,
+      'scope': 'profile email'
+    }).then(() => {
+      backend.googleAuth = gapi.auth2.getAuthInstance();
+
+      const googleUser = backend.googleAuth.currentUser.get();
+      if (googleUser) {
+        backend.user = JSON.parse(localStorage.getItem('user'));
       }
-    } else {
-      backend.user = null;
-      localStorage.removeItem('user');
-      if (backend.onAuthStateChangedListener) {
-        backend.onAuthStateChangedListener(null);
+      for (const listener of backend.onInitListeners) {
+        listener(backend.user);
       }
-    }
+    });
   });
 };
 
-backend.onAuthStateChanged = listener => {
-  backend.onAuthStateChangedListener = listener;
+backend.addOnInitListener = listener => {
+  backend.onInitListeners.push(listener);
 };
 
-backend.signIn = () => new Promise((resolve, reject) => {
-  firebase.auth()
-    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(authResult => {
-      axios.post(`${backend.apiUrl}/users/signin`, null, {
+backend.signIn = () => {
+  return new Promise((resolve, reject) => {
+    backend.googleAuth.signIn({
+      'prompt': 'consent',
+    }).then(googleUser => {
+      if (googleUser.error) {
+        reject(googleUser.error);
+      } else {
+        const token = googleUser.getAuthResponse().id_token;
+        axios.post(`${backend.apiUrl}/signin`, null, {
           headers: {
             'Accept': 'application/json',
-            'Authorization': authResult.credential.idToken
+            'Authorization': token
           }
-        })
-        .then(result => {
-          const user = result.data;
-          user.displayName = authResult.user.displayName;
-          user.photoURL = authResult.user.photoURL;
-          localStorage.setItem('user', JSON.stringify(user));
-          backend.user = user;
-          resolve(user);
-        })
-        .catch(reject);
-    })
-    .catch(reject);
-});
-
-backend.signOut = () => firebase.auth().signOut();
-
-// Mail
-backend.subscribe = () => new Promise((resolve, reject) => {
-  firebase.auth()
-    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(result => {
-      axios.post(`${backend.apiUrl}/mail/subscribe`, null, {
-          headers: {
-            'Accept': 'application/json',
-            'Authorization': result.credential.idToken
-          }
-        })
-        .then(_ => resolve(result))
-        .catch(reject);
-    })
-    .catch(reject);
-});
-
-// Users
-backend.banUser = id => {
-
+        }).then(result => {
+          backend.user = buildUser(result.data, googleUser);
+          localStorage.setItem('user', JSON.stringify(backend.user));
+          resolve(backend.user);
+        }).catch(reject);
+      }
+    }, error => {
+      reject(error);
+    });
+  });
 };
 
-// Comments
+backend.signOut = () => {
+  localStorage.removeItem('user');
+  return backend.googleAuth.signOut();
+};
+
 backend.getThread = id => {
   return new Promise((resolve, reject) => {
     axios.get(`${backend.apiUrl}/threads/${id}`)
@@ -98,22 +77,31 @@ backend.getThread = id => {
   });
 };
 
-backend.createComment = (threadId, comment) => {
-  return new Promise((resolve, reject) => {
-    return firebase.auth().currentUser.getIdToken()
-      .then(token => axios.post(`${backend.apiUrl}/threads/${threadId}/comments`,
-          comment, {
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': token
-            }
-          })
-        .then(result => resolve(result.data))
-        .catch(reject)
-      )
-      .catch(reject);
+backend.createComment = (threadId, text, replyTo) => {
+  const token = backend.googleAuth.currentUser.get().getAuthResponse().id_token;
+  const comment = {
+    text: text
+  };
+  if (replyTo) {
+    comment.replyTo = replyTo;
+  }
+  return axios.post(`${backend.apiUrl}/threads/${threadId}/comments`, comment, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }
   });
 };
+
+function buildUser(user, googleUser) {
+  const profile = googleUser.getBasicProfile();
+  user.displayName = profile.getName();
+  user.email = profile.getEmail();
+  user.givenName = profile.getGivenName();
+  user.familyName = profile.getFamilyName();
+  user.imageUrl = profile.getImageUrl();
+  return user;
+}
 
 export default backend;

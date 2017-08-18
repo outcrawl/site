@@ -1,12 +1,18 @@
-<div class="header__search">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+  <label class="mdl-button mdl-js-button mdl-button--icon"
+         for="search-input">
+    <img class="icon" src="/images/icons/magnify.svg">
+  </label>
+  <div class="mdl-textfield__expandable-holder header__search-textfield">
+    <input class="mdl-textfield__input"
+           type="text"
+           id="search-input">
+    <label class="mdl-textfield__label"
+           for="search-input">Search...</label>
 
-  <div class="textfield textfield--dense header__search-input">
-    <input type="text"
-           class="textfield__input"
-           placeholder="Search">
+    <div class="header__search-results"
+         id="search-results">
+    </div>
+
   </div>
-
-  <div class="list list--dense header__search-results" style="display: none;">
-  </div>
-
 </div>

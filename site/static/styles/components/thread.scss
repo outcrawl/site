@@ -1,0 +1,87 @@
+.thread {
+  font-size: 16px;
+
+  &__title {
+    font-weight: 300;
+    font-size: 34px;
+  }
+
+  &__signed-out {
+    padding: 24px 0;
+  }
+
+  &__signed-in {
+    display: none;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+  }
+
+  &__comments {
+    padding-top: 24px;
+    border-top: 1px solid $divider-color;
+  }
+
+  &__instructions {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0 0 16px 0;
+  }
+
+  &__user {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 16px;
+
+    &__avatar {
+      margin-right: 8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid $divider-color;
+    }
+
+    &__name {
+      margin-right: 8px;
+    }
+  }
+
+  &__sign-out-button {
+    margin-left: auto;
+  }
+
+  .mdl-tabs {
+    &__tab-bar {
+      justify-content: flex-start;
+    }
+
+    &__tab {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+
+    &__actions {
+      margin: -10px 0 0 auto;
+    }
+
+    &__info {
+      font-size: 14px;
+      color: $text-color-secondary;
+      padding-right: 8px;
+    }
+  }
+
+  #thread-panel-preview {
+    padding: 16px;
+  }
+}

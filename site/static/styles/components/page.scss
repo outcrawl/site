@@ -42,6 +42,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 8px;
+    font-size: 16px;
 
     &__avatar {
       height: 40px;
@@ -81,6 +82,10 @@
     display: block;
     margin: 0 auto 16px auto;
 
+    .ct-label {
+      font-size: 14px;
+    }
+
     &--pie {
       .ct-label {
         fill: $text-color-primary-light;
@@ -116,7 +121,13 @@
     }
   }
 
-  &__thumbnail, &__image, table, .latex-block, blockquote, &__note, &__embed, p {
+  &__latex {
+    .katex-display {
+      margin: 0;
+    }
+  }
+
+  &__thumbnail, &__image, table, &__latex--block, blockquote, &__note, &__embed, p {
     width: 100%;
     margin-bottom: 16px;
   }

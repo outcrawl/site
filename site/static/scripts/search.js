@@ -1,4 +1,5 @@
 import Wade from 'wade';
+import 'material-design-lite';
 
 const titles = posts.map(p => p.title);
 const search = Wade(titles);
