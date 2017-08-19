@@ -89,13 +89,13 @@ function anchors() {
 }
 
 function insertLatex() {
-  var tags = this.querySelectorAll('.page__latex');
+  var tags = this.querySelectorAll('.latex');
   for (var i = 0; i < tags.length; i++) {
     tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
       displayMode: false
     });
   }
-  tags = this.querySelectorAll('.page__latex--block')
+  tags = this.querySelectorAll('.latex--block')
   for (var i = 0; i < tags.length; i++) {
     tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
       displayMode: true

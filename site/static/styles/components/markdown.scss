@@ -3,12 +3,33 @@
   font-size: 16px;
   padding: 8px 0;
 
-  :last-child {
-    margin-bottom: 0;
+  h4, h5, h6, p, img {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
   }
 
-  p, img {
-    width: 100%;
-    max-width: 100%;
+  h4 {
+    font-size: 34px;
+    line-height: 40px;
+    margin-bottom: 20px;
+  }
+
+  h5 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  h6 {
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  p, img, h5, h6 {
+    margin-bottom: 16px;
+  }
+
+  hr {
+    border-top: 1px solid $divider-color;
   }
 }

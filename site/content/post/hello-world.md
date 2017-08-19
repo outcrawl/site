@@ -135,16 +135,6 @@ Markdown | Less | Pretty
 *Still* | `renders` | **nicely**
 1 | 2 | 3
 
-## Quotes
-
-Enim irure elit ut aliqua ea reprehenderit do adipisicing.
-
-{{< blockquote cite="Someone somewhere" >}}
-Irure quis magna duis duis laboris nulla proident cupidatat adipisicing aliqua do laborum.
-{{< /blockquote >}}
-
-Irure nostrud nostrud laboris consectetur consequat laborum consectetur.
-
 ## LaTex
 
 Officia amet sunt {{< latex >}}\displaystyle\sum_{i=1}^{k+1}i{{< /latex >}} consequat ad nulla Lorem.

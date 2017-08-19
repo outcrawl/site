@@ -1,4 +1,3 @@
-import 'dialog-polyfill';
 import 'material-design-lite';
 import Clipboard from 'clipboard';
 

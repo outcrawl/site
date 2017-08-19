@@ -1,3 +1,5 @@
+import dialogPolyfill from 'dialog-polyfill';
+
 const dialog = {};
 
 dialog.init = () => {

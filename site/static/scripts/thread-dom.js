@@ -1,11 +1,24 @@
 import moment from 'moment';
 import marked from 'marked';
+import katex from 'katex';
 
 const markedRenderer = new marked.Renderer();
 markedRenderer.code = (code, lang) => {
   return `
   <pre><code class="language-${lang}">${code}</code></pre>
   `;
+};
+markedRenderer.heading = (text, level, raw) => {
+  switch (level) {
+    case 1:
+      return `<h4>${text}</h4>`;
+    case 2:
+      return `<h5>${text}</h5>`;
+    case 3:
+      return `<h6>${text}</h6>`;
+    default:
+      return `<h6>${text}</h6>`;
+  }
 };
 
 const threadDom = {};
@@ -120,8 +133,29 @@ function buildReplies(comment) {
   `).join('');
 }
 
+const latexRegex = /\$(.*?)\$/g;
+const blockLatexRegex = /\$\n(.*?)\n\$/g;
+
 threadDom.parseMarkdown = source => {
-  return marked(source);
+  return marked(source)
+    .replace(latexRegex, (a, b) => {
+      return `
+        <span class="latex">
+        ${katex.renderToString(b, {
+          displayMode: false
+        })}
+        </span>
+      `;
+    })
+    .replace(blockLatexRegex, (a, b) => {
+      return `
+        <span class="latex latex--block">
+        ${katex.renderToString(b, {
+          displayMode: true
+        })}
+        </span>
+      `;
+    });
 }
 
 export default threadDom;

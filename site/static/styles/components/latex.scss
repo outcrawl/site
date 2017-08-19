@@ -1,0 +1,10 @@
+.latex {
+  .katex-display {
+    margin: 0;
+  }
+
+  &--block {
+    width: 100%;
+    display: block;
+  }
+}
