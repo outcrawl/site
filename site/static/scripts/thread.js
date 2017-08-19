@@ -10,7 +10,7 @@ const signedOutElement = document.querySelector('.thread__signed-out');
 const userNameElement = document.querySelector('.thread__user__name');
 const userAvatarElement = document.querySelector('.thread__user__avatar');
 const threadPostButton = document.querySelector('.thread__post-button');
-const threadInput = document.querySelector('.thread__input');
+const threadInput = document.querySelector('.thread__form__input');
 const previewButton = document.querySelector('#thread-preview-button');
 const previewElement = document.querySelector('#thread-panel-preview');
 
@@ -24,6 +24,8 @@ const previewElement = document.querySelector('#thread-panel-preview');
     signOutButton.addEventListener('click', onSignOutClick);
     threadPostButton.addEventListener('click', onPostClick);
     previewButton.addEventListener('click', onPreviewClick);
+
+    threadInput.addEventListener('input', updateTextareaHeight);
   }
 })();
 
@@ -44,13 +46,13 @@ function onSignOutClick() {
 function onPostClick() {
   if (backend.user) {
     const text = threadInput.value.trim();
-    if(text.length == 0) {
+    if (text.length == 0) {
       return;
     }
 
     try {
       threadDom.parseMarkdown(text);
-    } catch(e) {
+    } catch (e) {
       dialog.show('Oh no!', 'Something is wrong with your LaTeX code.');
       return;
     }
@@ -84,7 +86,7 @@ function onPreviewClick() {
   } else {
     try {
       previewElement.innerHTML = threadDom.parseMarkdown(text);
-    } catch(e) {
+    } catch (e) {
       previewElement.innerText = 'Incorrect LaTeX code';
     }
   }
@@ -108,4 +110,16 @@ function userChanged() {
       threadDom.build(threadCommentsElement, thread, user);
     })
     .catch(error => console.log(error));
+}
+
+function updateTextareaHeight() {
+  let n = 3;
+  const m = threadInput.value.match(/\n/g);
+  if (m) {
+    n = m.length + 1;
+  }
+  if (n < 3) {
+    n = 3;
+  }
+  threadInput.setAttribute('rows', n);
 }

@@ -73,9 +73,7 @@ threadDom.buildComment = (comment, user) => {
         </button>
       </div>
     </div>
-    <div class="comment__replies">
-      ${buildReplies(comment)}
-    </div>
+    ${buildReplies(comment)}
   </div>
   </div>
   `;
@@ -84,11 +82,25 @@ threadDom.buildComment = (comment, user) => {
 
 function buildCommentActions(comment, user) {
   if (user) {
-    return `
-    <a href="#" data-reply-to="${comment.id}" class="comment__action comment__action--reply">
-      Reply
-    </a>
-    `;
+    if (user.admin) {
+      return `
+      <a href="#" data-comment-id="${comment.id}" class="comment__action comment__action--reply">
+        Reply
+      </a>
+      <a href="#" data-comment-id="${comment.id}" class="comment__action comment__action--delete">
+        Delete
+      </a>
+      <a href="#" data-user-id="${comment.id}" class="comment__action comment__action--ban">
+        Ban user
+      </a>
+      `;
+    } else {
+      return `
+      <a href="#" data-comment-id="${comment.id}" class="comment__action comment__action--reply">
+        Reply
+      </a>
+      `;
+    }
   } else {
     return '';
   }
@@ -98,7 +110,9 @@ function buildReplies(comment) {
   if (!comment.replies) {
     return '';
   }
-  return comment.replies
+  return `
+  <div class="comment__replies">
+  ${comment.replies
     .map(r => `
   <div class="comment comment--reply">
     <img class="comment__user__avatar"
@@ -130,7 +144,9 @@ function buildReplies(comment) {
       </div>
     </div>
   </div>
-  `).join('');
+  `).join('')}
+  </div>
+  `;
 }
 
 const latexRegex = /\$(.*?)\$/g;
