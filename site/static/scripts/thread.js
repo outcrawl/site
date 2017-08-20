@@ -1,19 +1,21 @@
 import backend from './backend';
 import dialog from './dialog';
-import threadDom from './thread-dom';
 import 'textarea-autosize';
+import threadDom from './thread-dom';
 
-const $threadCommentsElement = $('.thread__comments');
+const $threadComments = $('.thread__comments');
 const $signInButton = $('.thread__sign-in-button');
 const $signOutButton = $('.thread__sign-out-button');
-const $signedInElement = $('.thread__signed-in');
-const $signedOutElement = $('.thread__signed-out');
-const $userNameElement = $('.thread__user__name');
-const $userAvatarElement = $('.thread__user__avatar');
+const $signedInPanel = $('.thread__signed-in');
+const $signedOutPanel = $('.thread__signed-out');
+const $userName = $('.thread__user__name');
+const $userAvatar = $('.thread__user__avatar');
 const $threadPostButton = $('.thread__post-button');
 const $threadInput = $('.thread__form__input');
 const $previewButton = $('#thread-preview-button');
-const $previewElement = $('#thread-panel-preview');
+const $previewPanel = $('#thread-panel-preview');
+
+let thread = null;
 
 (function() {
   if (postSlug) {
@@ -57,17 +59,14 @@ function onPostClick() {
   backend.createComment(postSlug, text)
     .then(comment => {
       // insert new comment into thread
+      comment.createdAt = new Date(comment.createdAt);
       comment.user = {
         displayName: backend.user.displayName,
-        createdAt: new Date(comment.createdAt),
         imageUrl: backend.user.imageUrl
       };
-      $threadCommentsElement.prepend(
-        threadDom.buildComment(comment, backend.user)
-      );
-      $threadCommentsElement.find('.mdl-js-button, .mdl-js-textfield').each((i, e) => {
-        componentHandler.upgradeElement(e);
-      });
+
+      thread.comments.unshift(comment);
+      buildThread();
 
       // reset form input
       $threadInput.val('').trigger('input').trigger('keyup');
@@ -76,24 +75,24 @@ function onPostClick() {
     });
 }
 
-function buildThread(thread) {
+function buildThread() {
   // build DOM
-  threadDom.build($threadCommentsElement, thread, backend.user);
+  threadDom.build($threadComments, thread, backend.user);
 
   // upgrade MDL components
-  $threadCommentsElement.find('.mdl-js-button, .mdl-js-textfield').each((i, e) => {
+  $threadComments.find('.mdl-js-button, .mdl-js-textfield').each((i, e) => {
     componentHandler.upgradeElement(e);
   });
 
   // register listeners
-  $threadCommentsElement.children('.comment').on('click', evt => {
+  $threadComments.children('.comment').on('click', evt => {
     const $target = $(evt.target);
 
     const callCommentHandler = handler => {
       evt.preventDefault();
       evt.stopPropagation();
-      const $commentElement = $target.parent().closest('.comment');
-      const id = $target.attr('data-comment-id');
+      const $commentElement = $target.parent().parent().parent();
+      const id = $commentElement.attr('data-id');
 
       handler($commentElement, id);
     };
@@ -109,12 +108,12 @@ function buildThread(thread) {
 function onPreviewClick() {
   const text = $threadInput.val().trim();
   if (text.length == 0) {
-    $previewElement.text('Nothing to preview');
+    $previewPanel.text('Nothing to preview');
   } else {
     try {
-      $previewElement.html(threadDom.parseMarkdown(text));
+      $previewPanel.html(threadDom.parseMarkdown(text));
     } catch (e) {
-      $previewElement.text('Incorrect LaTeX code');
+      $previewPanel.text('Incorrect LaTeX code');
     }
   }
 }
@@ -122,28 +121,41 @@ function onPreviewClick() {
 function userChanged() {
   const user = backend.user;
   if (user) {
-    $userNameElement.text(user.displayName);
-    $userAvatarElement.attr('src', user.imageUrl);
+    $userName.text(user.displayName);
+    $userAvatar.attr('src', user.imageUrl);
 
-    $signedInElement.show();
-    $signedOutElement.hide();
+    $signedInPanel.show();
+    $signedOutPanel.hide();
   } else {
-    $signedInElement.hide();
-    $signedOutElement.show();
+    $signedInPanel.hide();
+    $signedOutPanel.show();
   }
 
   backend.getThread(postSlug)
-    .then(buildThread)
+    .then(data => {
+      thread = data;
+      buildThread();
+    })
     .catch(error => console.log(error));
 }
 
 function onDeleteCommentClick($commentElement, commentId) {
-  if (!backend.user) {
+  if (!backend.user || !backend.user.admin) {
+    return;
+  }
+
+  if (!confirm('Are you sure?')) {
     return;
   }
 
   backend.deleteComment(postSlug, commentId)
     .then(() => {
+      thread.comments = thread.comments.filter(c => c.id != commentId);
+      for (const c of thread.comments) {
+        if (c.replies) {
+          c.replies = c.replies.filter(rc => rc.id != commentId);
+        }
+      }
       $commentElement.remove();
     })
     .catch(() => {
@@ -152,10 +164,10 @@ function onDeleteCommentClick($commentElement, commentId) {
 }
 
 function onReplyClick($commentElement, commentId) {
-  const $replyForm = $commentElement.find('.comment__reply');
-  const $replyCancelButton = $replyForm.find('.comment__reply__action--cancel');
-  const $replyPostButton = $replyForm.find('.comment__reply__action--post');
-  const $replyInput = $replyForm.find('.comment__reply__input');
+  const $replyForm = $commentElement.find('.comment__reply:first');
+  const $replyCancelButton = $replyForm.find('.comment__reply__action--cancel:first');
+  const $replyPostButton = $replyForm.find('.comment__reply__action--post:first');
+  const $replyInput = $replyForm.find('.comment__reply__input:first');
 
   $replyForm.css('display', 'flex');
 
@@ -177,16 +189,41 @@ function onReplyClick($commentElement, commentId) {
     }
 
     backend.createComment(postSlug, text, commentId)
-    .then(comment => {
-      console.log(comment);
+      .then(comment => {
+        comment.createdAt = new Date(comment.createdAt);
+        comment.user = {
+          displayName: backend.user.displayName,
+          imageUrl: backend.user.imageUrl
+        };
 
-      $replyInput.val('');
-      $replyPostButton.off('click.postReply');
-      $replyCancelButton.off('click.cancelReply');
-      $replyForm.hide();
-    })
-    .catch(() => {
-      dialog.show('Oh no!', 'Something went wrong.');
-    });
+        // get original comment
+        let parent = thread.comments.find(c => c.id == commentId);
+        if (!parent) {
+          for (const c of thread.comments) {
+            if (c.replies) {
+              parent = c.replies.find(r => r.id == commentId);
+              if (parent) {
+                break;
+              }
+            }
+          }
+        }
+        comment.replyToName = parent.user.displayName;
+
+        if (parent.replyTo) {
+          parent = thread.comments.find(c => c.replies && c.replies.find(r => r.id = parent.id) != null);
+        }
+        if (parent.replies) {
+          parent.replies.push(comment);
+        } else {
+          parent.replies = [comment];
+        }
+
+        buildThread();
+      })
+      .catch(error => {
+        console.log(error);
+        dialog.show('Oh no!', 'Something went wrong.');
+      });
   });
 }

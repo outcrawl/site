@@ -43,7 +43,7 @@ threadDom.build = ($element, thread, user) => {
 
 threadDom.buildComment = (comment, user) => {
   return `
-  <div class="comment" id="comment-${comment.id}">
+  <div class="comment" data-id="${comment.id}">
   <img class="comment__user__avatar"
       src="${comment.user.imageUrl}"></img>
   <div class="comment__body">
@@ -68,10 +68,10 @@ function buildCommentActions(comment, user) {
   if (user) {
     if (user.admin) {
       return `
-      <a href="#" data-comment-id="${comment.id}" class="comment__action comment__action--reply">
+      <a href="#" class="comment__action comment__action--reply">
         Reply
       </a>
-      <a href="#" data-comment-id="${comment.id}" class="comment__action comment__action--delete">
+      <a href="#" class="comment__action comment__action--delete">
         Delete
       </a>
       <a href="#" data-user-id="${comment.id}" class="comment__action comment__action--ban">
@@ -80,7 +80,7 @@ function buildCommentActions(comment, user) {
       `;
     } else {
       return `
-      <a href="#" data-comment-id="${comment.id}" class="comment__action comment__action--reply">
+      <a href="#" class="comment__action comment__action--reply">
         Reply
       </a>
       `;
@@ -92,31 +92,35 @@ function buildCommentActions(comment, user) {
 
 function buildReplies(comment, user) {
   if (!comment.replies) {
-    return '';
+    return '<div class="comment__replies"></div>';
   }
   return `
   <div class="comment__replies">
   ${comment.replies
-    .map(r => `
-  <div class="comment comment--reply">
+    .map(r => threadDom.buildReply(r, user)).join('')}
+  </div>
+  `;
+}
+
+threadDom.buildReply = (comment, user) => {
+  return `
+  <div class="comment comment--reply" data-id="${comment.id}">
     <img class="comment__user__avatar"
-        src="${r.user.imageUrl}"></img>
+        src="${comment.user.imageUrl}"></img>
     <div class="comment__body">
       <div class="comment__meta">
-        <span class="comment__user__name">${r.user.displayName}</span>
-        <span class="comment__reply-to">${r.replyToName}</span>
-        <span class="comment__date">${formatDate(r.createdAt)}</span>
+        <span class="comment__user__name">${comment.user.displayName}</span>
+        <span class="comment__reply-to">${comment.replyToName}</span>
+        <span class="comment__date">${formatDate(comment.createdAt)}</span>
       </div>
       <div class="comment__text markdown">
-        ${threadDom.parseMarkdown(r.text)}
+        ${threadDom.parseMarkdown(comment.text)}
       </div>
       <div class="comment__actions">
-        ${buildCommentActions(r, user)}
+        ${buildCommentActions(comment, user)}
       </div>
-      ${buildReplyForm(r)}
+      ${buildReplyForm(comment)}
     </div>
-  </div>
-  `).join('')}
   </div>
   `;
 }

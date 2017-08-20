@@ -24,20 +24,20 @@ threadBuilder.fetchUsers = thread => {
   return new Promise((resolve, reject) => {
     for (let id of users.keys()) {
       $.get(`https://www.googleapis.com/plus/v1/people/${id}`, {
-        key: backend.googleApiKey
-      })
-      .done(data => {
-        users.set(id, data);
-        n++;
-        if (n === users.size) {
-          for (const c of thread.comments) {
-            c.user = users.get(c.userId);
-            c.user.imageUrl = c.user.image.url;
+          key: backend.googleApiKey
+        })
+        .done(data => {
+          users.set(id, data);
+          n++;
+          if (n === users.size) {
+            for (const c of thread.comments) {
+              c.user = users.get(c.userId);
+              c.user.imageUrl = c.user.image.url;
+            }
+            resolve();
           }
-          resolve();
-        }
-      })
-      .fail(reject);
+        })
+        .fail(reject);
     }
   });
 }
@@ -45,7 +45,6 @@ threadBuilder.fetchUsers = thread => {
 threadBuilder.restructureThread = thread => {
   let commentMap = new Map();
   for (const c of thread.comments) {
-    c.replies = [];
     c.text = c.text.replace('\\n', '\n').replace('\\t', '\t');
     commentMap.set(c.id, c);
   }
@@ -53,11 +52,20 @@ threadBuilder.restructureThread = thread => {
   for (const c of thread.comments) {
     if (c.replyTo) {
       let parent = commentMap.get(c.replyTo);
+      if (!parent) {
+        commentMap.delete(c.id);
+        continue;
+      }
+
       c.replyToName = parent.user.displayName;
       while (parent.replyTo) {
         parent = commentMap.get(parent.replyTo);
       }
-      parent.replies.push(c);
+      if (parent.replies) {
+        parent.replies.push(c);
+      } else {
+        parent.replies = [c];
+      }
     }
   }
 
@@ -68,11 +76,11 @@ threadBuilder.restructureThread = thread => {
     }
   }
 
-  const sortComments = list => {
-    list.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  const sortComments = (list, reversed) => {
+    list.sort((a, b) => reversed ? a.createdAt.getTime() - b.createdAt.getTime() : b.createdAt.getTime() - a.createdAt.getTime());
     for (const single of list) {
       if (single.replies) {
-        sortComments(single.replies);
+        sortComments(single.replies, true);
       }
     }
   };
