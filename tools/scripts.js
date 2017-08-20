@@ -1,24 +1,28 @@
-module.exports = function (gulp, $, paths) {
-  return function () {
-    return gulp.src(paths.scripts)
-      .pipe($.webpack({
-        output: {
-          filename: 'bundle.js'
-        },
-        module: {
-          rules: [
-            {
-              exclude: /(node_modules)/,
-              use: {
-                loader: 'babel-loader',
-                options: {
-                  presets: ['env']
-                }
-              }
-            }
-          ]
+const merge = require('merge-stream');
+const fs = require('fs');
+
+const scriptsConfig = {
+  output: {
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [{
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['env']
         }
-      }))
-      .pipe(gulp.dest('dist'));
+      }
+    }]
   }
+};
+
+module.exports = (gulp, $, paths) => {
+  return () => {
+    return gulp.src(paths.scripts)
+      .pipe($.webpack(scriptsConfig))
+      .pipe(gulp.dest('dist'));
+  };
 }

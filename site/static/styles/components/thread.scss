@@ -70,6 +70,10 @@
     flex-direction: column;
     margin-bottom: 24px;
 
+    &__textfield {
+      width: 100%;
+    }
+
     &__actions {
       margin: -10px 0 0 auto;
 
@@ -78,10 +82,18 @@
       }
     }
 
+    &__info {
+      color: $text-color-secondary;
+      font-size: 14px;
+    }
+
     &__input {
+      box-sizing: border-box;
       max-height: 336px;
+      min-height: 81px;
       font-size: 16px;
       line-height: 24px;
+      overflow-x: hidden;
     }
   }
 

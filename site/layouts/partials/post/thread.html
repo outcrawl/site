@@ -17,16 +17,16 @@
           <a href="#thread-panel-preview" class="mdl-tabs__tab" id="thread-preview-button">Preview</a>
         </div>
         <div class="mdl-tabs__panel is-active" id="thread-panel-edit">
-          <div class="mdl-textfield mdl-js-textfield comment__reply-form__textfield">
+          <div class="mdl-textfield mdl-js-textfield thread__form__textfield">
             <label class="mdl-textfield__label" for="thread-input">Write a comment...</label>
-            <textarea class="mdl-textfield__input thread__form__input" id="thread-input" type="text" rows="3"></textarea>
+            <textarea class="mdl-textfield__input thread__form__input" id="thread-input" type="text"></textarea>
           </div>
         </div>
         <div class="mdl-tabs__panel markdown" id="thread-panel-preview"></div>
       </div>
 
       <div class="thread__form__actions">
-        <button class="mdl-button mdl-js-button mdl-button--unelevated mdl-js-ripple-effect thread__post-button thread__guide-button">Markdown guide</button>
+        <span class="thread__form__info">Supports GitHub Flavored Markdown.</span>
         <button class="mdl-button mdl-js-button mdl-button--unelevated mdl-button--colored mdl-js-ripple-effect thread__post-button">Post</button>
       </div>
     </div>

@@ -11,7 +11,7 @@ var paths = {
     'app/styles/main.scss'
   ],
   scripts: [
-    'app/scripts/main.js'
+    'app/scripts/_main.js'
   ],
   images: [
     'app/images/**/*'
@@ -21,7 +21,7 @@ var paths = {
   ]
 };
 
-gulp.task('clean', function () {
+gulp.task('clean', function() {
   return $.del(['app', 'dist/*', 'dist/.favicons.html']);
 });
 
@@ -33,30 +33,32 @@ gulp.task('favicons', require('./tools/favicons')(gulp, $));
 gulp.task('minify', require('./tools/minify')(gulp, $, paths));
 
 // Build Hugo site
-gulp.task('hugo', $.shell.task('hugo --baseURL=https://outcrawl.com/ --destination=../app', { cwd: 'site' }));
-gulp.task('hugo:dev', $.shell.task('hugo --baseURL=http://localhost:3000/ --buildDrafts --destination=../app', { cwd: 'site' }));
+gulp.task('hugo', $.shell.task('hugo --baseURL=https://outcrawl.com/ --destination=../app', {
+  cwd: 'site'
+}));
+gulp.task('hugo:dev', $.shell.task('hugo --baseURL=http://localhost:3000/ --buildDrafts --destination=../app', {
+  cwd: 'site'
+}));
 
-gulp.task('build', function (cb) {
+gulp.task('build', function(cb) {
   runSequence(
     'clean',
     'hugo',
     'images',
-    'html',
-    ['favicons', 'styles', 'scripts'],
+    'html', ['favicons', 'styles', 'scripts'],
     'minify',
     cb);
 });
 
-gulp.task('build:dev', function (cb) {
+gulp.task('build:dev', function(cb) {
   runSequence(
     'hugo:dev',
     'images',
-    'html',
-    ['favicons', 'styles', 'scripts'],
+    'html', ['favicons', 'styles', 'scripts'],
     cb);
 });
 
-gulp.task('serve', ['build:dev'], function () {
+gulp.task('serve', ['build:dev'], function() {
   browserSync({
     notify: false,
     server: 'dist',

@@ -1,9 +1,9 @@
-import moment from 'moment';
 import marked from 'marked';
-import katex from 'katex';
+import timeago from 'timeago.js';
 
 const markedRenderer = new marked.Renderer();
 markedRenderer.code = (code, lang) => {
+  lang = lang || '';
   return `
   <pre><code class="language-${lang}">${code}</code></pre>
   `;
@@ -23,7 +23,7 @@ markedRenderer.heading = (text, level, raw) => {
 
 const threadDom = {};
 
-threadDom.build = (element, thread, user) => {
+threadDom.build = ($element, thread, user) => {
   marked.setOptions({
     gfm: true,
     tables: false,
@@ -35,11 +35,9 @@ threadDom.build = (element, thread, user) => {
     renderer: markedRenderer
   });
 
-  while (element.lastChild) {
-    element.removeChild(element.lastChild);
-  }
+  $element.empty();
   for (const comment of thread.comments) {
-    element.insertAdjacentHTML('beforeend', threadDom.buildComment(comment, user));
+    $element.append(threadDom.buildComment(comment, user));
   }
 };
 
@@ -51,7 +49,7 @@ threadDom.buildComment = (comment, user) => {
   <div class="comment__body">
     <div class="comment__user">
       <span class="comment__user__name">${comment.user.displayName}</span>
-      <span class="comment__date">${moment(comment.createdAt).fromNow()}</span>
+      <span class="comment__date">${formatDate(comment.createdAt)}</span>
     </div>
     <div class="comment__text markdown">
       ${threadDom.parseMarkdown(comment.text)}
@@ -59,26 +57,12 @@ threadDom.buildComment = (comment, user) => {
     <div class="comment__actions">
       ${buildCommentActions(comment, user)}
     </div>
-    <div class="comment__reply-form">
-      <div class="mdl-textfield mdl-js-textfield comment__reply-form__textfield">
-        <label class="mdl-textfield__label" for="comment-reply-input-${comment.id}">Add a public reply...</label>
-        <textarea class="mdl-textfield__input" id="comment-reply-input-${comment.id}" type="text" rows="4"></textarea>
-      </div>
-      <div class="comment__reply-form__actions">
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect comment__reply-form__cancel">
-          Cancel
-        </button>
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect comment__reply-form__post">
-          Post
-        </button>
-      </div>
-    </div>
-    ${buildReplies(comment)}
+    ${buildReplyForm(comment)}
+    ${buildReplies(comment, user)}
   </div>
   </div>
   `;
 }
-
 
 function buildCommentActions(comment, user) {
   if (user) {
@@ -106,7 +90,7 @@ function buildCommentActions(comment, user) {
   }
 }
 
-function buildReplies(comment) {
+function buildReplies(comment, user) {
   if (!comment.replies) {
     return '';
   }
@@ -118,9 +102,10 @@ function buildReplies(comment) {
     <img class="comment__user__avatar"
         src="${r.user.imageUrl}"></img>
     <div class="comment__body">
-      <div class="comment__user">
+      <div class="comment__meta">
         <span class="comment__user__name">${r.user.displayName}</span>
-        <span class="comment__date">${moment(r.createdAt).fromNow()}</span>
+        <span class="comment__reply-to">${r.replyToName}</span>
+        <span class="comment__date">${formatDate(r.createdAt)}</span>
       </div>
       <div class="comment__text markdown">
         ${threadDom.parseMarkdown(r.text)}
@@ -128,20 +113,7 @@ function buildReplies(comment) {
       <div class="comment__actions">
         ${buildCommentActions(r, user)}
       </div>
-      <div class="comment__reply-form">
-        <div class="mdl-textfield mdl-js-textfield comment__reply-form__textfield">
-          <label class="mdl-textfield__label" for="comment-reply-input-${r.id}">Add a public reply...</label>
-          <textarea class="mdl-textfield__input" id="comment-reply-input-${r.id}" type="text" rows="4"></textarea>
-        </div>
-        <div class="comment__reply-form__actions">
-          <button class="mdl-button mdl-js-button mdl-js-ripple-effect comment__reply-form__cancel">
-            Cancel
-          </button>
-          <button class="mdl-button mdl-js-button mdl-js-ripple-effect comment__reply-form__post">
-            Post
-          </button>
-        </div>
-      </div>
+      ${buildReplyForm(r)}
     </div>
   </div>
   `).join('')}
@@ -149,29 +121,33 @@ function buildReplies(comment) {
   `;
 }
 
-const latexRegex = /\$(.*?)\$/g;
-const blockLatexRegex = /\$\n(.*?)\n\$/g;
+function buildReplyForm(comment) {
+  return `
+  <div class="comment__reply">
+    <div class="mdl-textfield mdl-js-textfield comment__reply__textfield">
+      <label class="mdl-textfield__label" for="comment-reply-input-${comment.id}">
+        Add a public reply...
+      </label>
+      <textarea class="mdl-textfield__input comment__reply__input" id="comment-reply-input-${comment.id}" type="text"></textarea>
+    </div>
+    <div class="comment__reply__actions">
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect comment__reply__action comment__reply__action--cancel">
+        Cancel
+      </button>
+      <button class="mdl-button mdl-js-button mdl-button--unelevated mdl-button--colored mdl-js-ripple-effect comment__reply__action comment__reply__action--post">
+        Post
+      </button>
+    </div>
+  </div>
+  `;
+}
+
+function formatDate(date) {
+  return timeago().format(date);
+}
 
 threadDom.parseMarkdown = source => {
-  return marked(source)
-    .replace(latexRegex, (a, b) => {
-      return `
-        <span class="latex">
-        ${katex.renderToString(b, {
-          displayMode: false
-        })}
-        </span>
-      `;
-    })
-    .replace(blockLatexRegex, (a, b) => {
-      return `
-        <span class="latex latex--block">
-        ${katex.renderToString(b, {
-          displayMode: true
-        })}
-        </span>
-      `;
-    });
+  return marked(source);
 }
 
 export default threadDom;

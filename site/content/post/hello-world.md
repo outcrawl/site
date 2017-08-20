@@ -158,39 +158,3 @@ Minim **labore** ad irure amet officia aliqua laborum `print("yo!")` nulla volup
 {{% /note %}}
 
 Ad incididunt pariatur labore excepteur in consectetur minim quis nisi nulla.
-
-## Charts
-
-Irure ut non sint officia.
-
-{{< chart type="line" >}}
-{
-  labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-  series: [
-    [5, 5, 10, 8, 7, 5, 4, null, null, null, 10, 10, 7, 8, 6, 9],
-    [10, 15, null, 12, null, 10, 12, 15, null, null, 12, null, 14, null, null, null],
-    [null, null, null, null, 3, 4, 1, 3, 4,  6,  7,  9, 5, null, null, null],
-    [{x:3, y: 3},{x: 4, y: 3}, {x: 5, y: undefined}, {x: 6, y: 4}, {x: 7, y: null}, {x: 8, y: 4}, {x: 9, y: 4}]
-  ]
-}
-{{< /chart >}}
-
-{{< chart type="bar" >}}
-{
-  labels: ['First quarter of the year', 'Second quarter of the year', 'Third quarter of the year', 'Fourth quarter of the year'],
-  series: [
-    [60000, 40000, 80000, 70000],
-    [40000, 30000, 70000, 65000],
-    [8000, 3000, 10000, 6000]
-  ],
-  stackBars: true
-}
-{{< /chart >}}
-
-{{< chart type="pie" >}}
-{
-  series: [20, 10, 30, 40]
-}
-{{< /chart >}}
-
-Nostrud tempor minim do culpa.

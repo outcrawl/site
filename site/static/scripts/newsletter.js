@@ -1,4 +1,3 @@
-import axios from 'axios';
 import backend from './backend';
 import dialog from './dialog';
 

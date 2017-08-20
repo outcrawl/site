@@ -25,12 +25,22 @@
   &__date {
     color: $text-color-secondary;
     font-size: 14px;
+    padding-left: 6px;
   }
 
-  &__text {
+  &__reply-to {
+    font-size: 14px;
+    color: $text-color-secondary;
+    padding-left: 4px;
+
+    &:before {
+      content: ">";
+      padding-right: 4px;
+      display: inline-block;
+    }
   }
 
-  &__reply-form {
+  &__reply {
     display: none;
     flex-direction: column;
 
@@ -41,15 +51,19 @@
     &__actions {
       margin: -10px 0 0 auto;
     }
+
+    &__action {
+      margin-left: 8px;
+    }
   }
 
   &__action {
     color: $text-color-secondary;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 0;
-    margin-right: 8px;
+    margin-right: 6px;
 
     &:hover {
       text-decoration: none;
@@ -64,9 +78,5 @@
       height: 24px;
       min-width: 24px;
     }
-  }
-
-  &__reply-to-name {
-    font-weight: 700;
   }
 }

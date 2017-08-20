@@ -78,24 +78,6 @@
     text-align: center;
   }
 
-  &__chart {
-    width: 480px;
-    display: block;
-    margin: 0 auto 16px auto;
-
-    .ct-label {
-      font-size: 14px;
-    }
-
-    &--pie {
-      .ct-label {
-        fill: $text-color-primary-light;
-        color: $text-color-primary-light;
-        font-size: 16px;
-      }
-    }
-  }
-
   &__actions {
     @extend .mdl-grid;
     @extend .mdl-grid--no-spacing;

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import backend from './backend';
 
 const threadBuilder = {};
@@ -24,15 +23,12 @@ threadBuilder.fetchUsers = thread => {
   let n = 0;
   return new Promise((resolve, reject) => {
     for (let id of users.keys()) {
-      axios.get(`https://www.googleapis.com/plus/v1/people/${id}`, {
-        params: {
-          'key': backend.googleApiKey
-        }
+      $.get(`https://www.googleapis.com/plus/v1/people/${id}`, {
+        key: backend.googleApiKey
       })
-      .then(result => {
-        users.set(id, result.data);
+      .done(data => {
+        users.set(id, data);
         n++;
-
         if (n === users.size) {
           for (const c of thread.comments) {
             c.user = users.get(c.userId);
@@ -41,7 +37,7 @@ threadBuilder.fetchUsers = thread => {
           resolve();
         }
       })
-      .catch(reject);
+      .fail(reject);
     }
   });
 }

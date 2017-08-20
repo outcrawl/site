@@ -1,18 +1,19 @@
 import backend from './backend';
 import dialog from './dialog';
 import threadDom from './thread-dom';
+import 'textarea-autosize';
 
-const threadCommentsElement = document.querySelector('.thread__comments');
-const signInButton = document.querySelector('.thread__sign-in-button');
-const signOutButton = document.querySelector('.thread__sign-out-button');
-const signedInElement = document.querySelector('.thread__signed-in');
-const signedOutElement = document.querySelector('.thread__signed-out');
-const userNameElement = document.querySelector('.thread__user__name');
-const userAvatarElement = document.querySelector('.thread__user__avatar');
-const threadPostButton = document.querySelector('.thread__post-button');
-const threadInput = document.querySelector('.thread__form__input');
-const previewButton = document.querySelector('#thread-preview-button');
-const previewElement = document.querySelector('#thread-panel-preview');
+const $threadCommentsElement = $('.thread__comments');
+const $signInButton = $('.thread__sign-in-button');
+const $signOutButton = $('.thread__sign-out-button');
+const $signedInElement = $('.thread__signed-in');
+const $signedOutElement = $('.thread__signed-out');
+const $userNameElement = $('.thread__user__name');
+const $userAvatarElement = $('.thread__user__avatar');
+const $threadPostButton = $('.thread__post-button');
+const $threadInput = $('.thread__form__input');
+const $previewButton = $('#thread-preview-button');
+const $previewElement = $('#thread-panel-preview');
 
 (function() {
   if (postSlug) {
@@ -20,12 +21,12 @@ const previewElement = document.querySelector('#thread-panel-preview');
       userChanged();
     });
 
-    signInButton.addEventListener('click', onSignInClick);
-    signOutButton.addEventListener('click', onSignOutClick);
-    threadPostButton.addEventListener('click', onPostClick);
-    previewButton.addEventListener('click', onPreviewClick);
+    $signInButton.on('click', onSignInClick);
+    $signOutButton.on('click', onSignOutClick);
+    $threadPostButton.on('click', onPostClick);
+    $previewButton.on('click', onPreviewClick);
 
-    threadInput.addEventListener('input', updateTextareaHeight);
+    $threadInput.textareaAutoSize();
   }
 })();
 
@@ -44,50 +45,76 @@ function onSignOutClick() {
 }
 
 function onPostClick() {
-  if (backend.user) {
-    const text = threadInput.value.trim();
-    if (text.length == 0) {
-      return;
-    }
-
-    try {
-      threadDom.parseMarkdown(text);
-    } catch (e) {
-      dialog.show('Oh no!', 'Something is wrong with your LaTeX code.');
-      return;
-    }
-
-    backend.createComment(postSlug, text)
-      .then(result => {
-        // insert new comment into thread
-        const comment = result.data;
-        comment.user = {
-          displayName: backend.user.displayName,
-          createdAt: new Date(comment.createdAt),
-          imageUrl: backend.user.imageUrl
-        };
-        threadCommentsElement.insertAdjacentHTML(
-          'afterbegin',
-          threadDom.buildComment(comment, backend.user)
-        );
-
-        // reset form input
-        threadInput.value = '';
-      }).catch(error => {
-        dialog.show('Oh no!', 'Something went wrong.');
-      });
+  if (!backend.user) {
+    return;
   }
+
+  const text = $threadInput.val().trim();
+  if (text.length == 0) {
+    return;
+  }
+
+  backend.createComment(postSlug, text)
+    .then(comment => {
+      // insert new comment into thread
+      comment.user = {
+        displayName: backend.user.displayName,
+        createdAt: new Date(comment.createdAt),
+        imageUrl: backend.user.imageUrl
+      };
+      $threadCommentsElement.prepend(
+        threadDom.buildComment(comment, backend.user)
+      );
+      $threadCommentsElement.find('.mdl-js-button, .mdl-js-textfield').each((i, e) => {
+        componentHandler.upgradeElement(e);
+      });
+
+      // reset form input
+      $threadInput.val('').trigger('input').trigger('keyup');
+    }).catch(error => {
+      dialog.show('Oh no!', 'Something went wrong.');
+    });
+}
+
+function buildThread(thread) {
+  // build DOM
+  threadDom.build($threadCommentsElement, thread, backend.user);
+
+  // upgrade MDL components
+  $threadCommentsElement.find('.mdl-js-button, .mdl-js-textfield').each((i, e) => {
+    componentHandler.upgradeElement(e);
+  });
+
+  // register listeners
+  $threadCommentsElement.children('.comment').on('click', evt => {
+    const $target = $(evt.target);
+
+    const callCommentHandler = handler => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      const $commentElement = $target.parent().closest('.comment');
+      const id = $target.attr('data-comment-id');
+
+      handler($commentElement, id);
+    };
+
+    if ($target.hasClass('comment__action--delete')) {
+      callCommentHandler(onDeleteCommentClick);
+    } else if ($target.hasClass('comment__action--reply')) {
+      callCommentHandler(onReplyClick);
+    }
+  });
 }
 
 function onPreviewClick() {
-  const text = threadInput.value.trim();
+  const text = $threadInput.val().trim();
   if (text.length == 0) {
-    previewElement.innerText = 'Nothing to preview';
+    $previewElement.text('Nothing to preview');
   } else {
     try {
-      previewElement.innerHTML = threadDom.parseMarkdown(text);
+      $previewElement.html(threadDom.parseMarkdown(text));
     } catch (e) {
-      previewElement.innerText = 'Incorrect LaTeX code';
+      $previewElement.text('Incorrect LaTeX code');
     }
   }
 }
@@ -95,31 +122,71 @@ function onPreviewClick() {
 function userChanged() {
   const user = backend.user;
   if (user) {
-    userNameElement.innerText = user.displayName;
-    userAvatarElement.src = user.imageUrl;
+    $userNameElement.text(user.displayName);
+    $userAvatarElement.attr('src', user.imageUrl);
 
-    signedInElement.style.display = 'block';
-    signedOutElement.style.display = 'none';
+    $signedInElement.show();
+    $signedOutElement.hide();
   } else {
-    signedInElement.style.display = 'none';
-    signedOutElement.style.display = 'block';
+    $signedInElement.hide();
+    $signedOutElement.show();
   }
 
   backend.getThread(postSlug)
-    .then(thread => {
-      threadDom.build(threadCommentsElement, thread, user);
-    })
+    .then(buildThread)
     .catch(error => console.log(error));
 }
 
-function updateTextareaHeight() {
-  let n = 3;
-  const m = threadInput.value.match(/\n/g);
-  if (m) {
-    n = m.length + 1;
+function onDeleteCommentClick($commentElement, commentId) {
+  if (!backend.user) {
+    return;
   }
-  if (n < 3) {
-    n = 3;
-  }
-  threadInput.setAttribute('rows', n);
+
+  backend.deleteComment(postSlug, commentId)
+    .then(() => {
+      $commentElement.remove();
+    })
+    .catch(() => {
+      dialog.show('Oh no!', 'Could not delete this comment.');
+    });
+}
+
+function onReplyClick($commentElement, commentId) {
+  const $replyForm = $commentElement.find('.comment__reply');
+  const $replyCancelButton = $replyForm.find('.comment__reply__action--cancel');
+  const $replyPostButton = $replyForm.find('.comment__reply__action--post');
+  const $replyInput = $replyForm.find('.comment__reply__input');
+
+  $replyForm.css('display', 'flex');
+
+  $replyCancelButton.on('click.cancelReply', evt => {
+    evt.preventDefault();
+    evt.stopPropagation();
+    $replyCancelButton.off('click.cancelReply');
+    $replyPostButton.off('click.postReply');
+    $replyForm.hide();
+  });
+
+  $replyPostButton.on('click.postReply', evt => {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    const text = $replyInput.val().trim();
+    if (text.length == 0) {
+      return;
+    }
+
+    backend.createComment(postSlug, text, commentId)
+    .then(comment => {
+      console.log(comment);
+
+      $replyInput.val('');
+      $replyPostButton.off('click.postReply');
+      $replyCancelButton.off('click.cancelReply');
+      $replyForm.hide();
+    })
+    .catch(() => {
+      dialog.show('Oh no!', 'Something went wrong.');
+    });
+  });
 }

@@ -1,19 +1,16 @@
 import Wade from 'wade';
-import 'material-design-lite';
 
 const titles = posts.map(p => p.title);
 const search = Wade(titles);
 
-const searchResults = document.querySelector('#search-results');
-const searchInput = document.querySelector('#search-input');
+const $searchResults = $('#search-results');
+const $searchInput = $('#search-input');
 
-searchInput.addEventListener('keyup', evt => {
-  const query = searchInput.value;
+$searchInput.on('keyup', evt => {
+  const query = $searchInput.val();
   const results = search(query);
 
-  while (searchResults.lastChild) {
-    searchResults.removeChild(searchResults.lastChild);
-  }
+  $searchResults.empty();
 
   const queryRegex = new RegExp(`(${query.split(/ +/).join('|')})`, 'gi');
   for (const r of results) {
@@ -23,19 +20,23 @@ searchInput.addEventListener('keyup', evt => {
       return `<strong>${b}</strong>`;
     });
 
-    searchResults.insertAdjacentHTML('beforeend', `
+    $searchResults.append(`
     <a href="${post.slug}">
       ${title}
     </a>
     `);
   }
 
-  searchResults.style.display = results.length == 0 ? 'none' : '';
+  if (results.length == 0) {
+    $searchResults.hide();
+  } else {
+    $searchResults.show();
+  }
 });
 
 // close on unfocus
 window.addEventListener('click', evt => {
-  if (!searchResults.contains(evt.target)) {
-    searchResults.style.display = 'none';
+  if (!$.contains($searchResults.get(), evt.target)) {
+    $searchResults.hide();
   }
 });
