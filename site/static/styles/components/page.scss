@@ -7,11 +7,11 @@
     padding: 0;
 
     &--home {
-      max-width: 900px;
+      max-width: $home-max-width;
     }
 
     &--post {
-      max-width: 700px;
+      max-width: $post-max-width;
     }
   }
 

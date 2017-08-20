@@ -12,8 +12,13 @@
   }
 
   &__body {
-    padding-left: 16px;
+    margin-left: 16px;
+    overflow-x: auto;
     width: 100%;
+  }
+
+  &__text {
+    padding: 8px 0;
   }
 
   &__user__name {
@@ -25,17 +30,17 @@
   &__date {
     color: $text-color-secondary;
     font-size: 14px;
-    padding-left: 6px;
+    margin-left: 6px;
   }
 
   &__reply-to {
     font-size: 14px;
     color: $text-color-secondary;
-    padding-left: 4px;
+    margin-left: 4px;
 
     &:before {
       content: ">";
-      padding-right: 4px;
+      margin-right: 4px;
       display: inline-block;
     }
   }

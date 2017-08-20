@@ -89,7 +89,7 @@ function anchors() {
 }
 
 function insertLatex() {
-  var tags = this.querySelectorAll('.latex');
+  var tags = this.querySelectorAll('.latex--inline');
   for (var i = 0; i < tags.length; i++) {
     tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
       displayMode: false

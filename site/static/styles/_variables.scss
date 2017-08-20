@@ -29,14 +29,5 @@ $layout-header-text-color: $text-color-primary;
 $footer-color: $color-grey-600;
 $footer-bg-color: $color-grey-100;
 
-// Charts
-$ct-text-color: $text-color-primary;
-$ct-text-size: 0.875rem;
-$ct-series-names: (a, b, c, d, e);
-$ct-series-colors: (
-  $color-blue-400,
-  $color-red-400,
-  $color-orange-400,
-  $color-green-400,
-  $color-purple-400
-);
+$home-max-width: 900px;
+$post-max-width: 700px;
