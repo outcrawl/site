@@ -28,3 +28,9 @@ $layout-header-text-color: $text-color-primary;
 
 $footer-color: $color-grey-600;
 $footer-bg-color: $color-grey-100;
+
+// Responsive
+$media-breakpoint-sm: 600px - 16px;
+$media-breakpoint-md: 960px - 16px;
+$media-breakpoint-lg: 1280px - 16px;
+$media-breakpoint-xl: 1920px - 16px;

@@ -1,7 +1,8 @@
 {{if .Get "src"}}
 <img class="page__image" src="{{.Get `src`}}">
 {{else}}
-<img class="page__image"
-     src="{{.Site.BaseURL}}images/{{.Page.Slug}}/{{.Get `name`}}"
+<img class="page__image progressive progressive--image progressive--not-loaded"
+     src="{{.Site.BaseURL}}images/{{.Page.Slug}}/small-{{.Get `name`}}"
+     data-final-image="{{.Site.BaseURL}}images/{{.Page.Slug}}/{{.Get `name`}}"
      alt="{{.Get `name`}}">
 {{end}}

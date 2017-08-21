@@ -1,17 +1,31 @@
+body {
+  position: relative;
+}
+
 .page {
-  padding: 8px 8px 32px 8px;
-  overflow: visible !important;
+  width: 100%;
+  height: 100%;
 
   &__content {
     @extend .mdl-grid;
-    padding: 0;
+    padding: 16px 0;
+    // footer height
+    margin-bottom: 68px;
 
     &--home {
       max-width: 1024px;
+
+      @include media-xl-only {
+        max-width: 1280px;
+      }
     }
 
     &--post {
       max-width: 700px;
+
+      @include media-xl-only {
+        max-width: 840px;
+      }
     }
   }
 
@@ -30,10 +44,10 @@
 
   &__heading-link {
     color: $text-color-primary;
-    text-decoration: none !important;
   }
 
   &__title {
+    font-size: 3.75rem;
     font-weight: 300;
     letter-spacing: -0.02em;
   }
@@ -42,7 +56,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 8px;
+    padding: 8px 0;
     font-size: 16px;
 
     &__avatar {
@@ -106,6 +120,6 @@
 
   &__thumbnail, &__image, table, .latex--block, blockquote, &__note, &__embed, p {
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 }

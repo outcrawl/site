@@ -3,7 +3,7 @@
      src="https://unsplash.it/16/9">
 {{else}}
   <img class="page__thumbnail progressive progressive--image progressive--not-loaded"
-       src="{{$.Site.BaseURL}}images/post/{{.Slug}}/small-thumbnail.jpg"
-       data-final-image="{{$.Site.BaseURL}}images/post/{{.Slug}}/thumbnail.jpg"
+       src="{{$.Site.BaseURL}}images/{{.Slug}}/small-thumbnail.jpg"
+       data-final-image="{{$.Site.BaseURL}}images/{{.Slug}}/thumbnail.jpg"
        alt="{{.Slug}}-thumbnail">
 {{end}}

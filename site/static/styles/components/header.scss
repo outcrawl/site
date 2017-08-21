@@ -1,21 +1,33 @@
-.mdl-layout__header {
+.header {
+  @extend .mdl-layout__header;
+  @extend .mdl-layout__header--scroll;
   fill: $layout-header-text-color !important;
   display: flex !important;
 
   svg path, svg polygon {
     fill: $layout-header-text-color !important;
   }
-}
 
-.mdl-layout__header-row {
-  padding: 0 32px;
-
-  @media screen and (max-width: $layout-screen-size-threshold) {
-    padding: 0 16px;
+  &__logo {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
   }
-}
 
-.header {
+  &__spacer {
+    flex-shrink: 0;
+    flex-grow: 1;
+  }
+
+  &__content {
+    @extend .mdl-layout__header-row;
+    padding: 0 32px;
+
+    @media screen and (max-width: $layout-screen-size-threshold) {
+      padding: 0 16px;
+    }
+  }
+
   &__search-textfield {
     position: relative;
   }
@@ -27,6 +39,7 @@
     right: 0;
     margin-top: 4px;
     width: 100%;
+    z-index: 5;
 
     a {
       display: block;

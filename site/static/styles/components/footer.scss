@@ -1,22 +1,49 @@
-.mdl-mini-footer {
-  flex: 1 0 auto;
+.footer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  color: $footer-color;
+  background-color: $footer-bg-color;
   padding: 16px 32px;
   font-size: 16px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   @media screen and (max-width: $layout-screen-size-threshold) {
     padding: 16px;
   }
 
+  &__left {
+    display: flex;
+    order: 0;
+    justify-content: flex-start;
+    align-self: center;
+  }
+
+  &__right {
+    display: inline-block;
+    order: 1;
+  }
+
   &__link-list {
-    font-size: 14px;
+    display: flex;
+    flex-flow: row nowrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      font-size: 16px;
+      color: $footer-color;
+      margin-right: 8px;
+    }
   }
 
-  &__right-section {
-    display: inline-flex;
-  }
-
-  .mdl-logo {
+  &__logo {
     color: $footer-color;
+    margin-right: 16px;
   }
 
   .mdl-button--icon {

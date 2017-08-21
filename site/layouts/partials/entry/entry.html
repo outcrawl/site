@@ -6,11 +6,11 @@
 
   <div class="entry__thumbnail progressive progressive--background progressive--not-loaded"
   {{if $params.thumbnail}}
-      data-final-image="https://unsplash.it/1280/720?random&id={{.Slug | md5}}"
-      style="background-image: url('https://unsplash.it/160/90?random&id={{.Slug | md5}}')"
+      data-final-image="http://lorempixel.com/1280/720?id={{.Slug | md5}}"
+      style="background-image: url('http://lorempixel.com/1280/720?id={{.Slug | md5}}')"
   {{else}}
-      data-final-image="{{$.Site.BaseURL}}images/post/{{.Slug}}/thumbnail.jpg"
-      style="background-image: url('{{.Site.BaseURL}}images/post/{{.Slug}}/small-thumbnail.jpg')"
+      data-final-image="{{$.Site.BaseURL}}images/{{.Slug}}/thumbnail.jpg"
+      style="background-image: url('{{.Site.BaseURL}}images/{{.Slug}}/small-thumbnail.jpg')"
   {{end}}>
   </div>
 

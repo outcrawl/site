@@ -77,7 +77,7 @@ function highlight() {
 }
 
 function anchors() {
-  var h = this.querySelectorAll('h1[id], h2[id]');
+  var h = this.querySelectorAll('h1[id], h2[id], h3[id]');
   var permalink = this.querySelector('link[rel="canonical"]');
 
   for (var i = 0; i < h.length; i++) {

@@ -8,8 +8,9 @@
   {{partial "entry/entry.html" .}}
   </div>
 {{end}}
+<div class="page__section page__section--large">
+  {{partial "home/pagination.html" $paginator}}
 </div>
-
-{{partial "home/pagination.html" $paginator}}
+</div>
 
 {{end}}

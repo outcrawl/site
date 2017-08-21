@@ -17,10 +17,9 @@
 </head>
 
 <body>
-  <!-- BUG: mdl-js-layout breaks loading -->
-  <div class="mdl-layout">
+  <div class="page">
     {{partial "header/header.html" .}}
-    <main class="mdl-layout__content page">
+    <main>
       {{block "main" .}}{{end}}
     </main>
     {{partial "footer/footer.html" .}}
