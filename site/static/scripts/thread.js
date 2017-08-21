@@ -15,6 +15,10 @@ const $threadInput = $('.thread__form__input');
 const $previewButton = $('#thread-preview-button');
 const $previewPanel = $('#thread-panel-preview');
 
+const $window = $(window);
+const $threadTitle = $('.thread__title');
+
+let threadStartedLoading = false;
 let thread = null;
 
 $(document).ready(() => {
@@ -23,25 +27,9 @@ $(document).ready(() => {
       userChanged();
     });
 
-    const $layout = $('.mdl-layout');
-    const $window = $(window);
-    const $target = $('.thread__title');
-    $layout.on('scroll', () => {
-      const ty = $target.offset().top;
-      if (ty < $window.height()) {
-        backend.getThread(postSlug)
-          .then(data => {
-            thread = data;
-            buildThread();
-            hideLoading();
-          })
-          .catch(error => {
-            $threadComments.remove();
-            $('.thread__loading-error').show();
-            hideLoading();
-          });
-        $layout.off('scroll');
-      }
+    maybeLoadComments();
+    $window.on('scroll.thread', () => {
+      maybeLoadComments();
     });
 
     $signInButton.on('click', onSignInClick);
@@ -52,6 +40,29 @@ $(document).ready(() => {
     $threadInput.textareaAutoSize();
   }
 });
+
+function maybeLoadComments() {
+  if (threadStartedLoading) {
+    $window.off('scroll.thread');
+    return;
+  }
+
+  if ($window.scrollTop() + $window.height() > $threadTitle.offset().top) {
+    threadStartedLoading = true;
+
+    backend.getThread(postSlug)
+      .then(data => {
+        thread = data;
+        buildThread();
+        hideLoading();
+      })
+      .catch(() => {
+        $('.thread__loading-error').show();
+        hideLoading();
+      });
+    $window.off('scroll.thread');
+  }
+}
 
 function hideLoading() {
   const $loading = $('.thread__loading');

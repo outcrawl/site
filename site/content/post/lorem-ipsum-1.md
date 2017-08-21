@@ -5,6 +5,7 @@ author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
 date: "2017-07-01"
 thumbnail: "test"
+draft: true
 ---
 
 Aenean at justo porta, tincidunt purus ac, aliquam nunc. Aenean ut consectetur est, vitae rhoncus ante. In ultricies vulputate viverra. Sed a facilisis enim. Quisque in quam sagittis, ornare dolor a, elementum sapien. Nam tempus tempus efficitur. Praesent nunc velit, semper nec cursus sed, malesuada sit amet nulla. Sed est nunc, placerat sed felis id, tempor fermentum nibh. Phasellus at lorem ultrices, convallis lorem non, mattis tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis arcu ligula, vestibulum ut blandit eget, luctus eget sem. Mauris tortor magna, luctus id quam a, faucibus tincidunt magna. Fusce in ipsum felis. Aliquam feugiat odio urna, id hendrerit tortor vulputate sit amet.

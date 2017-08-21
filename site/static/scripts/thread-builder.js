@@ -22,6 +22,11 @@ threadBuilder.fetchUsers = thread => {
 
   let n = 0;
   return new Promise((resolve, reject) => {
+    if (users.size == 0) {
+      resolve();
+      return;
+    }
+
     for (let id of users.keys()) {
       $.get(`https://www.googleapis.com/plus/v1/people/${id}`, {
           key: backend.googleApiKey
