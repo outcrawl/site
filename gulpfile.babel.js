@@ -14,7 +14,7 @@ var paths = {
     'app/scripts/_main.js'
   ],
   images: [
-    'app/images/**/*'
+    'app/images'
   ],
   html: [
     'app/**/*.html'

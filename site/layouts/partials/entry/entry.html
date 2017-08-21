@@ -4,11 +4,12 @@
 
 <div class="entry">
 
-  <div class="entry__thumbnail"
-  {{if eq $params.thumbnail "test"}}
+  <div class="entry__thumbnail progressive progressive--background"
+  data-final-image="{{$.Site.BaseURL}}images/post/{{.Slug}}/thumbnail.jpg"
+  {{if $params.thumbnail}}
      style="background-image: url('https://unsplash.it/1280/720?random&id={{.Slug | md5}}')"
 {{else}}
-     style="background-image: url('{{.Site.BaseURL}}images/thumbnails/{{$params.thumbnail}}.png')"
+     style="background-image: url('{{.Site.BaseURL}}images/post/{{.Slug}}/small-thumbnail.jpg')"
 {{end}}></div>
 
   <div class="entry__content">

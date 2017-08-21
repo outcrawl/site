@@ -1,7 +1,9 @@
-{{with .Params.thumbnail}}
-  {{if eq . "test"}}
-  <img class="page__thumbnail" src="https://unsplash.it/700/360">
-  {{else}}
-  <img class="page__thumbnail" src="{{$.Site.BaseURL}}images/thumbnails/{{.}}.png" alt="{{.}}">
-  {{end}}
+{{if .Params.thumbnail}}
+<img class="page__thumbnail"
+     src="https://unsplash.it/16/9">
+{{else}}
+  <img class="page__thumbnail progressive progressive--not-loaded"
+       src="{{$.Site.BaseURL}}images/post/{{.Slug}}/small-thumbnail.jpg"
+       data-final-image="{{$.Site.BaseURL}}images/post/{{.Slug}}/thumbnail.jpg"
+       alt="{{.Slug}}-thumbnail">
 {{end}}

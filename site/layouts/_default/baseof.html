@@ -17,7 +17,8 @@
 </head>
 
 <body>
-  <div class="mdl-layout mdl-js-layout">
+  <!-- BUG: mdl-js-layout breaks loading -->
+  <div class="mdl-layout">
     {{partial "header/header.html" .}}
     <main class="mdl-layout__content page">
       {{block "main" .}}{{end}}

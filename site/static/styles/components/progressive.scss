@@ -1,0 +1,20 @@
+.progressive {
+
+  &--not-loaded {
+    filter: blur(18px);
+  }
+
+  &--loaded {
+    animation: sharpen 0.5s;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes sharpen {
+  from {
+    filter: blur(18px);
+  }
+  to {
+    filter: blur(0px);
+  }
+}

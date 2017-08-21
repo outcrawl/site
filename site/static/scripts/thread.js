@@ -17,7 +17,7 @@ const $previewPanel = $('#thread-panel-preview');
 
 let thread = null;
 
-(function() {
+$(document).ready(() => {
   if (postSlug) {
     backend.addOnInitListener(user => {
       userChanged();
@@ -30,17 +30,16 @@ let thread = null;
       const ty = $target.offset().top;
       if (ty < $window.height()) {
         backend.getThread(postSlug)
-        .then(data => {
-          thread = data;
-          buildThread();
-          hideLoading();
-        })
-        .catch(error => {
-          console.log(error);
-          $threadComments.remove();
-          $('.thread__loading-error').show();
-          hideLoading();
-        });
+          .then(data => {
+            thread = data;
+            buildThread();
+            hideLoading();
+          })
+          .catch(error => {
+            $threadComments.remove();
+            $('.thread__loading-error').show();
+            hideLoading();
+          });
         $layout.off('scroll');
       }
     });
@@ -52,7 +51,7 @@ let thread = null;
 
     $threadInput.textareaAutoSize();
   }
-})();
+});
 
 function hideLoading() {
   const $loading = $('.thread__loading');

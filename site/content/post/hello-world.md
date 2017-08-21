@@ -4,7 +4,6 @@ slug: "hello-world"
 author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
 date: "2018-01-01"
-thumbnail: "test"
 ---
 
 Eu consectetur ad veniam quis ex minim. Anim laboris esse voluptate incididunt aliquip sunt ipsum anim pariatur excepteur ut. Qui officia quis laborum eu qui culpa dolore proident ullamco commodo aliqua nulla mollit. In culpa sunt ea deserunt exercitation aute velit laboris ipsum non. In tempor id eiusmod amet magna occaecat laboris irure eiusmod sit ullamco enim.
@@ -21,9 +20,9 @@ Cillum dolor tempor ad commodo laborum esse.
 
 Et officia veniam est nulla deserunt nisi.
 
-# Image
+# Images
 
-{{< image src="https://unsplash.it/1280/720?random" >}}
+{{< image src="https://4.bp.blogspot.com/-_o3uc6YLn8c/VUSjf9jtqWI/AAAAAAABh-o/qj8L6SaZsFc/s690/Celestial_Fireworks_Hubble_25th_Anniversary_uhd.jpg" >}}
 
 # Code
 
