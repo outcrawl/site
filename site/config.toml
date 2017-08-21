@@ -2,6 +2,7 @@ languageCode = "en-us"
 title = "Outcrawl"
 
 enableRobotsTXT = true
+paginate = 6
 
 [blackfriday]
 hrefTargetBlank = true

@@ -1,8 +1,12 @@
 {{define "main"}}
 
-{{$paginator := .Paginate (where .Site.RegularPages "Type" "post") 6}}
+{{$paginator := .Paginate .Data.Pages}}
 
 <div class="page__content page__content--home">
+
+  <div class="page__section page__section--large">
+    <h1 class="page__title">{{.Title}}</h1>
+  </div>
 
 {{range $paginator.Pages}}
   <div class="page__section page__section--small">
