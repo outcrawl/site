@@ -29,10 +29,19 @@ progressive.init = () => {
 
 function check(scroll, $image) {
   if (scroll > $image.offset().top) {
-    $image.attr('src', $image.data('final-image'))
+    if ($image.hasClass('progressive--image')) {
+      $image.attr('src', $image.data('final-image'))
       .on('load', () => {
         $image.addClass('progressive--loaded');
       });
+    } else {
+      $('<img/>').attr('src', $image.data('final-image'))
+      .on('load', () => {
+        $(this).remove();
+        $image.css('background-image', `url('${$image.data('final-image')}')`);
+        $image.addClass('progressive--loaded');
+      });
+    }
   }
 }
 

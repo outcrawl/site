@@ -4,25 +4,31 @@
 
 <div class="entry">
 
-  <div class="entry__thumbnail progressive progressive--background"
-  data-final-image="{{$.Site.BaseURL}}images/post/{{.Slug}}/thumbnail.jpg"
+  <div class="entry__thumbnail progressive progressive--background progressive--not-loaded"
   {{if $params.thumbnail}}
-     style="background-image: url('https://unsplash.it/1280/720?random&id={{.Slug | md5}}')"
-{{else}}
-     style="background-image: url('{{.Site.BaseURL}}images/post/{{.Slug}}/small-thumbnail.jpg')"
-{{end}}></div>
+      data-final-image="https://unsplash.it/1280/720?random&id={{.Slug | md5}}"
+      style="background-image: url('https://unsplash.it/160/90?random&id={{.Slug | md5}}')"
+  {{else}}
+      data-final-image="{{$.Site.BaseURL}}images/post/{{.Slug}}/thumbnail.jpg"
+      style="background-image: url('{{.Site.BaseURL}}images/post/{{.Slug}}/small-thumbnail.jpg')"
+  {{end}}>
+  </div>
 
   <div class="entry__content">
 
-    <a href="{{.Permalink}}" class="entry__permalink">
+    <a href="{{.Permalink}}"
+       class="entry__permalink">
       <h1 class="entry__title">{{.Title}}</h1>
     </a>
 
     <div class="entry__author">
-      <img class="entry__author__avatar" src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120">
+      <img class="entry__author__avatar"
+           src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120">
 
       <div class="entry__author__primary">
-        <a class="entry__author__name" href="{{.Site.BaseURL}}authors/{{$author.slug}}" title="{{$author.name}}">
+        <a class="entry__author__name"
+           href="{{.Site.BaseURL}}authors/{{$author.slug}}"
+           title="{{$author.name}}">
           {{$author.name}}
         </a>
 
