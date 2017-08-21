@@ -23,6 +23,28 @@ let thread = null;
       userChanged();
     });
 
+    const $layout = $('.mdl-layout');
+    const $window = $(window);
+    const $target = $('.thread__title');
+    $layout.on('scroll', () => {
+      const ty = $target.offset().top;
+      if (ty < $window.height()) {
+        backend.getThread(postSlug)
+        .then(data => {
+          thread = data;
+          buildThread();
+          hideLoading();
+        })
+        .catch(error => {
+          console.log(error);
+          $threadComments.remove();
+          $('.thread__loading-error').show();
+          hideLoading();
+        });
+        $layout.off('scroll');
+      }
+    });
+
     $signInButton.on('click', onSignInClick);
     $signOutButton.on('click', onSignOutClick);
     $threadPostButton.on('click', onPostClick);
@@ -31,6 +53,11 @@ let thread = null;
     $threadInput.textareaAutoSize();
   }
 })();
+
+function hideLoading() {
+  const $loading = $('.thread__loading');
+  $loading.remove();
+}
 
 function onSignInClick() {
   backend.signIn()
@@ -43,7 +70,8 @@ function onSignInClick() {
 }
 
 function onSignOutClick() {
-  backend.signOut().then(() => userChanged());
+  backend.signOut();
+  userChanged();
 }
 
 function onPostClick() {
@@ -128,15 +156,8 @@ function userChanged() {
     $signedOutPanel.hide();
   } else {
     $signedInPanel.hide();
-    $signedOutPanel.show();
+    $signedOutPanel.css('display', 'flex');
   }
-
-  backend.getThread(postSlug)
-    .then(data => {
-      thread = data;
-      buildThread();
-    })
-    .catch(error => console.log(error));
 }
 
 function onDeleteCommentClick($commentElement, commentId) {

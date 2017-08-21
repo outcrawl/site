@@ -13,16 +13,24 @@
     <div class="thread__form">
       <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
         <div class="mdl-tabs__tab-bar">
-          <a href="#thread-panel-edit" class="mdl-tabs__tab is-active">Edit</a>
-          <a href="#thread-panel-preview" class="mdl-tabs__tab" id="thread-preview-button">Preview</a>
+          <a href="#thread-panel-edit"
+             class="mdl-tabs__tab is-active">Edit</a>
+          <a href="#thread-panel-preview"
+             class="mdl-tabs__tab"
+             id="thread-preview-button">Preview</a>
         </div>
-        <div class="mdl-tabs__panel is-active" id="thread-panel-edit">
+        <div class="mdl-tabs__panel is-active"
+             id="thread-panel-edit">
           <div class="mdl-textfield mdl-js-textfield thread__form__textfield">
-            <label class="mdl-textfield__label" for="thread-input">Write a comment...</label>
-            <textarea class="mdl-textfield__input thread__form__input" id="thread-input" type="text"></textarea>
+            <label class="mdl-textfield__label"
+                   for="thread-input">Write a comment...</label>
+            <textarea class="mdl-textfield__input thread__form__input"
+                      id="thread-input"
+                      type="text"></textarea>
           </div>
         </div>
-        <div class="mdl-tabs__panel markdown" id="thread-panel-preview"></div>
+        <div class="mdl-tabs__panel markdown"
+             id="thread-panel-preview"></div>
       </div>
 
       <div class="thread__form__actions">
@@ -38,6 +46,14 @@
       Sign in to leave a comment
     </div>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect thread__sign-in-button">Sign in</button>
+  </div>
+
+  <div class="thread__loading">
+    <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+  </div>
+
+  <div class="thread__loading-error">
+    A problem occurred while loading comments. Try refreshing the page.
   </div>
 
   <div class="thread__comments">

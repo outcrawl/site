@@ -52,7 +52,10 @@ backend.signIn = () => {
             localStorage.setItem('user', JSON.stringify(backend.user));
             resolve(backend.user);
           })
-          .fail(reject);
+          .fail(error => {
+            backend.googleAuth.signOut();
+            reject();
+          });
       }
     }, reject);
   });
@@ -60,7 +63,8 @@ backend.signIn = () => {
 
 backend.signOut = () => {
   localStorage.removeItem('user');
-  return backend.googleAuth.signOut();
+  backend.user = null;
+  backend.googleAuth.signOut();
 };
 
 backend.getThread = id => {

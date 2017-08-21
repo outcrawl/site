@@ -7,7 +7,23 @@
   }
 
   &__signed-out {
-    padding: 24px 0;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+
+  &__instructions {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__sign-in-button {
+    margin-left: auto;
+  }
+
+  &__sign-out-button {
+    margin-left: auto;
   }
 
   &__signed-in {
@@ -19,15 +35,18 @@
     align-items: center;
   }
 
-  &__comments {
-    padding-top: 24px;
-    border-top: 1px solid $divider-color;
+  &__loading {
+    display: flex;
+    justify-content: center;
   }
 
-  &__instructions {
-    font-size: 18px;
-    font-weight: 700;
-    padding: 0 0 16px 0;
+  &__loading-error {
+    display: none;
+    text-align: center;
+  }
+
+  &__comments {
+    padding-top: 24px;
   }
 
   &__user {
@@ -47,10 +66,6 @@
     &__name {
       margin-right: 8px;
     }
-  }
-
-  &__sign-out-button {
-    margin-left: auto;
   }
 
   .mdl-tabs {
