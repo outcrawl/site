@@ -37,7 +37,7 @@ module.exports = function (gulp, $) {
         '!dist/.favicons.html'
       ])
       .pipe($.replace(/<\/head>/, function(h) {
-        var file = fs.readFileSync('dist/.favicons.html', 'utf8');
+        const file = fs.readFileSync('dist/.favicons.html', 'utf8');
         return file + '</head>';
       }))
       .pipe(gulp.dest('dist'));

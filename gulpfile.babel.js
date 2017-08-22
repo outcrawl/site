@@ -1,12 +1,11 @@
-var gulp = require('gulp');
-var runSequence = require('run-sequence');
-var browserSync = require('browser-sync');
-var merge = require('merge-stream');
-var injectSvg = require('./tools/inject-svg');
-var $ = require('gulp-load-plugins')();
+const gulp = require('gulp');
+const runSequence = require('run-sequence');
+const browserSync = require('browser-sync');
+const merge = require('merge-stream');
+const $ = require('gulp-load-plugins')();
 $.del = require('del');
 
-var paths = {
+const paths = {
   styles: [
     'app/styles/main.scss'
   ],

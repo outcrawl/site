@@ -158,3 +158,9 @@ Minim **labore** ad irure amet officia aliqua laborum `print("yo!")` nulla volup
 {{% /note %}}
 
 Ad incididunt pariatur labore excepteur in consectetur minim quis nisi nulla.
+
+## Links
+
+To another article.
+
+{{< reference slug="lorem-ipsum-7" >}}

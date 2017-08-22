@@ -1,12 +1,12 @@
-var merge = require('merge-stream');
-var replace = require('gulp-replace');
-var hljs = require('highlight.js');
-var katex = require('katex');
-var fs = require('fs');
+const merge = require('merge-stream');
+const replace = require('gulp-replace');
+const hljs = require('highlight.js');
+const katex = require('katex');
+const fs = require('fs');
 
 // https://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
 function escapeHTML(html) {
-  var entityMap = {
+  const entityMap = {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
@@ -26,15 +26,15 @@ function markLines(html, mark) {
     return html;
   }
 
-  var htmlLines = html.split('\n');
-  var lines = mark.split(',');
+  const htmlLines = html.split('\n');
+  const lines = mark.split(',');
 
-  for (var i = 0; i < htmlLines.length; i++) {
-    var doMark = false;
+  for (let i = 0; i < htmlLines.length; i++) {
+    let doMark = false;
 
-    for (var j = 0; j < lines.length; j++) {
+    for (let j = 0; j < lines.length; j++) {
       if (lines[j].indexOf('-') != -1) {
-        var range = lines[j].split('-');
+        const range = lines[j].split('-');
         if ((i + 1) >= +range[0] && (i + 1) <= +range[1]) {
           doMark = true;
           break;
@@ -56,47 +56,68 @@ function markLines(html, mark) {
 }
 
 function highlight() {
-  var pres = this.querySelectorAll('pre');
-  for (var i = 0; i < pres.length; i++) {
-    var codeNode = pres[i].firstChild;
-    var sourceCode = codeNode.textContent;
-    var lang = codeNode.getAttribute('class').replace('language-', '');
+  const pres = this.querySelectorAll('pre');
+  for (let i = 0; i < pres.length; i++) {
+    const codeNode = pres[i].firstChild;
+    const sourceCode = codeNode.textContent;
+    const lang = codeNode.getAttribute('class').replace('language-', '');
 
-    var mark = pres[i].getAttribute('data-mark');
+    const mark = pres[i].getAttribute('data-mark');
     pres[i].removeAttribute('data-mark');
 
-    var html = markLines(hljs.highlight(lang, sourceCode).value, mark);
-    var copyBtn = '<button class="mdl-button mdl-js-button mdl-button--icon" title="Copy" style="z-index:1;"' +
-      'data-clipboard-text="' + escapeHTML(sourceCode) + '">\n' +
-      '<img class="icon" src="/images/icons/content-copy.svg">\n' +
-      '</button>';
+    const html = markLines(hljs.highlight(lang, sourceCode).value, mark);
+    const copyBtn = `
+    <button class="mdl-button mdl-js-button mdl-button--icon"
+            title="Copy"
+            style="z-index:1;"
+            data-clipboard-text="${escapeHTML(sourceCode)}"
+      <img class="icon" src="/images/icons/content-copy.svg">
+    </button>
+    `;
 
-    pres[i].innerHTML = copyBtn + '<code class="hljs">' + html + '</code>';
+    pres[i].innerHTML = `${copyBtn}<code class="hljs">${html}</code>`;
   }
   return this;
 }
 
-function anchors() {
-  var h = this.querySelectorAll('h1[id], h2[id], h3[id]');
-  var permalink = this.querySelector('link[rel="canonical"]');
+function headingAnchors() {
+  const h = this.querySelectorAll('h1[id], h2[id], h3[id]');
+  const permalink = this.querySelector('link[rel="canonical"]');
 
-  for (var i = 0; i < h.length; i++) {
-    var id = h[i].getAttribute('id');
-    h[i].outerHTML = '<a class="page__heading-link" href="' + permalink.href + '#' + id + '">' + h[i].outerHTML + '</a>';
+  for (let i = 0; i < h.length; i++) {
+    const id = h[i].getAttribute('id');
+    let el = 'h2';
+    const text = h[i].innerHTML;
+
+    switch(h[i].localName) {
+      case 'h2':
+      el = 'h3';
+      break;
+      case 'h3':
+      el = 'h4';
+      break;
+    }
+
+    h[i].outerHTML = `
+    <a class="page__heading-link"
+       href="${permalink.href}#${id}">
+      <${el} id="${id}">${text}</${el}>
+    </a>
+    `;
   }
 
   return this;
 }
 
 function insertLatex() {
-  var tags = this.querySelectorAll('.latex--inline');
-  for (var i = 0; i < tags.length; i++) {
+  let tags = this.querySelectorAll('.latex--inline');
+  for (let i = 0; i < tags.length; i++) {
     tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
       displayMode: false
     });
   }
   tags = this.querySelectorAll('.latex--block')
-  for (var i = 0; i < tags.length; i++) {
+  for (let i = 0; i < tags.length; i++) {
     tags[i].innerHTML = katex.renderToString(tags[i].innerHTML, {
       displayMode: true
     });
@@ -105,14 +126,14 @@ function insertLatex() {
 }
 
 function injectSvg() {
-  var imgs = this.querySelectorAll('img[src$="svg"]');
-  for (var i = 0; i < imgs.length; i++) {
-    var src = imgs[i].src;
-    var svg = fs.readFileSync('dist/images/icons/' + src.replace(/.*\//, ''), 'utf8').replace(/\r?\n|\r/g, '');
-    var attrs = '';
+  const imgs = this.querySelectorAll('img[src$="svg"]');
+  for (let i = 0; i < imgs.length; i++) {
+    const src = imgs[i].src;
+    const svg = fs.readFileSync('dist/images/icons/' + src.replace(/.*\//, ''), 'utf8').replace(/\r?\n|\r/g, '');
+    let attrs = '';
 
-    for (var j = 0; j < imgs[i].attributes.length; j++) {
-      var a = imgs[i].attributes[j];
+    for (let j = 0; j < imgs[i].attributes.length; j++) {
+      const a = imgs[i].attributes[j];
       if (a.name != 'src') {
         attrs += a.name + '="' + a.value + '"';
       }
@@ -128,7 +149,7 @@ module.exports = function(gulp, $, paths) {
     return merge(
       gulp.src(paths.html)
       .pipe($.dom(highlight))
-      .pipe($.dom(anchors))
+      .pipe($.dom(headingAnchors))
       .pipe($.dom(insertLatex))
       .pipe($.dom(injectSvg))
       .pipe(gulp.dest('dist')),

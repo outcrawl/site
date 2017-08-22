@@ -1,10 +1,10 @@
-<section class="page__section page__section--large author__profile">
-  <img class="author__avatar"
+<section class="page__section page__section--large author-page__profile">
+  <img class="author-page__avatar"
        src="https://www.gravatar.com/avatar/{{.email | lower | md5}}?s=160">
-  <h1 class="author__name">{{.name}}</h1>
-  <p class="author__bio">{{.bio}}</p>
+  <h1 class="author-page__name">{{.name}}</h1>
+  <p class="author-page__bio">{{.bio}}</p>
 
-  <div class="author__social">
+  <div class="author-page__social">
 
     {{with .social.twitter}}
     <a href="https://twitter.com/{{.}}"
