@@ -1,0 +1,39 @@
+<section class="page__section page__section--large author__profile">
+  <img class="author__avatar"
+       src="https://www.gravatar.com/avatar/{{.email | lower | md5}}?s=160">
+  <h1 class="author__name">{{.name}}</h1>
+  <p class="author__bio">{{.bio}}</p>
+
+  <div class="author__social">
+
+    {{with .social.twitter}}
+    <a href="https://twitter.com/{{.}}"
+       class="mdl-button mdl-js-button mdl-button--icon">
+      <img class="icon" src="/images/icons/twitter.svg">
+    </a>
+    {{end}}
+
+    {{with .social.github}}
+    <a href="https://github.com/{{.}}"
+       class="mdl-button mdl-js-button mdl-button--icon">
+      <img class="icon" src="/images/icons/github.svg">
+    </a>
+    {{end}}
+
+    {{with .social.facebook}}
+    <a href="https://facebook.com/{{.}}"
+       class="mdl-button mdl-js-button mdl-button--icon">
+      <img class="icon" src="/images/icons/facebook.svg">
+    </a>
+    {{end}}
+
+    {{with .social.googlePlus}}
+    <a href="https://plus.google.com/{{.}}"
+       class="mdl-button mdl-js-button mdl-button--icon">
+      <img class="icon" src="/images/icons/google-plus.svg">
+    </a>
+    {{end}}
+
+  </div>
+
+</section>

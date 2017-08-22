@@ -1,14 +1,14 @@
 {{$author := (index .Site.Data.authors .Params.author)}}
 
-<div class="page__author">
-  <img class="page__author__avatar" src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120">
+<div class="post__author">
+  <img class="post__author__avatar" src="https://www.gravatar.com/avatar/{{$author.email | lower | md5}}?s=120">
 
-  <div class="page__author__primary">
-    <a class="page__author__name" href="{{.Site.BaseURL}}authors/{{$author.slug}}" title="{{$author.name}}">
+  <div class="post__author__primary">
+    <a class="post__author__name" href="{{.Site.BaseURL}}authors/{{$author.slug}}" title="{{$author.name}}">
       {{$author.name}}
     </a>
   </div>
 
-  <div class="page__author__date">{{dateFormat `Jan 2, 2006` .Date}}</div>
+  <div class="post__author__date">{{dateFormat `Jan 2, 2006` .Date}}</div>
 
 </div>

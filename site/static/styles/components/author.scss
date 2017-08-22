@@ -1,0 +1,32 @@
+.author {
+  max-width: 700px;
+
+  @include media-xl-only {
+    max-width: 840px;
+  }
+
+  &__profile {
+    text-align: center;
+  }
+
+  &__avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 1px solid $divider-color;
+  }
+
+  &__name {
+    margin-bottom: 1rem;
+  }
+
+  &__bio {
+    margin-bottom: 1rem;
+  }
+
+  &__social {
+    a {
+      margin: 0 4px;
+    }
+  }
+}

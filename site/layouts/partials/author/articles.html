@@ -1,0 +1,19 @@
+{{$author := (index .Site.Data.authors .Slug)}}
+{{$posts := (where (where .Site.Pages "Type" "post") "Params.author" $author.slug)}}
+
+<section class="page__section page__section--large">
+  <h2>Articles</h2>
+
+  <div class="author__articles">
+  {{range $posts.GroupByDate "2006-01"}}
+    <h4 class="author__article__header">{{.Key}}</h4>
+    <ul class="author__article__list">
+    {{range .Pages}}
+      <li class="author__article__title">
+        <a href="{{.Permalink}}">{{.Title}}</a>
+      </li>
+    {{end}}
+    </ul>
+  {{end}}
+  </div>
+</section>

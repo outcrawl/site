@@ -9,23 +9,12 @@ body {
   &__content {
     @extend .mdl-grid;
     padding: 16px 0;
+    max-width: 1024px;
     // footer height
     margin-bottom: 68px;
 
-    &--home {
-      max-width: 1024px;
-
-      @include media-xl-only {
-        max-width: 1280px;
-      }
-    }
-
-    &--post {
-      max-width: 700px;
-
-      @include media-xl-only {
-        max-width: 840px;
-      }
+    @include media-xl-only {
+      max-width: 1280px;
     }
   }
 
@@ -52,32 +41,6 @@ body {
     letter-spacing: -0.02em;
   }
 
-  &__author {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 8px 0;
-    font-size: 16px;
-
-    &__avatar {
-      height: 40px;
-      width: 40px;
-      box-sizing: border-box;
-      border-radius: 50%;
-      border: 1px solid $divider-color;
-      margin-right: 16px;
-    }
-
-    &__name {
-      color: $text-color-primary;
-    }
-
-    &__date {
-      color: $text-color-secondary;
-      margin-left: auto;
-    }
-  }
-
   &__note {
     @extend .mdl-shadow--2dp;
     display: block;
@@ -90,32 +53,6 @@ body {
 
   &__embed {
     text-align: center;
-  }
-
-  &__actions {
-    @extend .mdl-grid;
-    @extend .mdl-grid--no-spacing;
-    padding: 32px 0 0 0;
-  }
-
-  &__tags {
-    @extend .mdl-cell--4-col;
-    @extend .mdl-cell--8-col-desktop;
-    padding: 0 0 8px 0;
-
-    .mdl-chip {
-      margin: 0 4px 8px 0;
-    }
-  }
-
-  &__share {
-    @extend .mdl-cell--4-col;
-    @extend .mdl-cell--4-col-desktop;
-    text-align: right;
-
-    .share-button:not(:first-child) {
-      margin-left: 4px;
-    }
   }
 
   &__thumbnail, &__image, table, .latex--block, blockquote, &__note, &__embed, p {

@@ -3,24 +3,12 @@
 {{$author := (index .Site.Data.authors .Slug)}}
 {{$baseURL := .Site.BaseURL}}
 
-<h1>{{$author.name}}</h1>
+<div class="page__content author">
 
-<div class="mdc-list-group">
-  <h3 class="mdc-list-group__subheader">List 1</h3>
-  <ul class="mdc-list">
-    <li class="mdc-list-item">Single-line item</li>
-    <li class="mdc-list-item">Single-line item</li>
-    <li class="mdc-list-item">Single-line item</li>
-  </ul>
+  {{partial "author/profile.html" $author}}
 
-  <hr class="mdc-list-divider">
+  {{partial "author/articles.html" .}}
 
-  <h3 class="mdc-list-group__subheader">List 2</h3>
-  <ul class="mdc-list">
-    <li class="mdc-list-item">Single-line item</li>
-    <li class="mdc-list-item">Single-line item</li>
-    <li class="mdc-list-item">Single-line item</li>
-  </ul>
 </div>
 
 {{end}}

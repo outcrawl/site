@@ -2,17 +2,17 @@
 
 {{$paginator := .Paginate (where .Site.RegularPages "Type" "post") 6}}
 
-<div class="page__content page__content--home">
+<div class="page__content">
 
 {{range $paginator.Pages}}
-  <div class="page__section page__section--small">
+  <section class="page__section page__section--small">
   {{partial "entry/entry.html" .}}
-  </div>
+  </section>
 {{end}}
 
-  <div class="page__section page__section--large">
+  <section class="page__section page__section--large">
   {{partial "pagination.html" $paginator}}
-  </div>
+  </section>
 
 </div>
 
