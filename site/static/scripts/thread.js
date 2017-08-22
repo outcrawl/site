@@ -16,7 +16,7 @@ const $previewButton = $('#thread-preview-button');
 const $previewPanel = $('#thread-panel-preview');
 
 const $window = $(window);
-const $threadTitle = $('.thread__title');
+const $threadElement = $('.thread');
 
 let threadStartedLoading = false;
 let thread = null;
@@ -47,7 +47,7 @@ function maybeLoadComments() {
     return;
   }
 
-  if ($window.scrollTop() + $window.height() > $threadTitle.offset().top) {
+  if ($window.scrollTop() + $window.height() > $threadElement.offset().top) {
     threadStartedLoading = true;
 
     backend.getThread(postSlug)

@@ -1,3 +1,7 @@
+@function pixel-to-rem($x) {
+  @return $x / 16 + rem;
+}
+
 html {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-size: pixel-to-rem(16);
@@ -11,10 +15,6 @@ html {
   }
 }
 
-@function pixel-to-rem($x) {
-  @return $x / 16 + rem;
-}
-
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
@@ -24,7 +24,9 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 h1 {
-  font-size: pixel-to-rem(56);
+  font-size: pixel-to-rem(60);
+  font-weight: 300;
+  letter-spacing: -0.02em;
   line-height: 1.35;
   margin-top: pixel-to-rem(24);
   margin-bottom: pixel-to-rem(24);

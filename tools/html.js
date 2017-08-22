@@ -66,14 +66,12 @@ function highlight() {
     pres[i].removeAttribute('data-mark');
 
     const html = markLines(hljs.highlight(lang, sourceCode).value, mark);
-    const copyBtn = `
-    <button class="mdl-button mdl-js-button mdl-button--icon"
+    const copyBtn = `<button class="mdl-button mdl-js-button mdl-button--icon"
             title="Copy"
             style="z-index:1;"
-            data-clipboard-text="${escapeHTML(sourceCode)}"
+            data-clipboard-text="${escapeHTML(sourceCode)}">
       <img class="icon" src="/images/icons/content-copy.svg">
-    </button>
-    `;
+    </button>`;
 
     pres[i].innerHTML = `${copyBtn}<code class="hljs">${html}</code>`;
   }

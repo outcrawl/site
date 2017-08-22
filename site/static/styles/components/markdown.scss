@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     font-weight: 400;
+    width: 100%;
     @include word-wrap;
   }
 
@@ -40,5 +41,23 @@
 
   hr {
     border-top: 1px solid $divider-color;
+  }
+
+  pre, code {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  code {
+    padding: 2px 4px;
+  }
+
+  pre code {
+    padding: 16px;
+  }
+
+  ul, ol {
+    font-size: 16px;
+    line-height: 24px;
   }
 }

@@ -35,12 +35,6 @@ body {
     color: $text-color-primary;
   }
 
-  &__title {
-    font-size: 3.75rem;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-  }
-
   &__note {
     @extend .mdl-shadow--2dp;
     display: block;
