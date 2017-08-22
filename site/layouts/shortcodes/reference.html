@@ -1,0 +1,5 @@
+<a href="{{.Site.BaseURL}}/{{.Get `slug`}}">
+  {{range (first 1 (where .Site.Pages "Slug" (.Get "slug")))}}
+    {{.Title}}
+  {{end}}
+</a>
