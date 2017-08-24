@@ -3,8 +3,8 @@ import Clipboard from 'clipboard';
 
 import backend from './backend';
 import dialog from './dialog';
-import newsletter from './newsletter';
 import search from './search';
+import './newsletter';
 import './thread';
 import progressive from './progressive';
 
@@ -12,7 +12,6 @@ progressive.init();
 
 $(document).ready(() => {
   dialog.init();
-  newsletter.init();
 
   try {
     backend.init();

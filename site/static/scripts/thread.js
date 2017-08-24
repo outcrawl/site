@@ -47,10 +47,8 @@ function maybeLoadComments() {
     return;
   }
 
-  console.log($window.scrollTop());
   if ($window.scrollTop() + $window.height() > $threadElement.offset().top) {
     threadStartedLoading = true;
-    console.log('loading');
 
     backend.getThread(postSlug)
       .then(data => {

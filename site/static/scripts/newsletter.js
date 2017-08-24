@@ -1,23 +1,18 @@
 import backend from './backend';
 import dialog from './dialog';
 
-const newsletter = {};
-
-newsletter.init = () => {
-  const subscribeButton = document.querySelector('.newsletter__subscribe-button');
-
-  if (subscribeButton) {
-    subscribeButton.addEventListener('click', evt => {
+$(document).ready(() => {
+  const $subscribeButton = $('.newsletter__subscribe-button');
+  if ($subscribeButton) {
+    $subscribeButton.on('click', () => {
       backend.subscribe()
-        .then(data => {
-          const name = data.user.displayName.split(/ +/)[0];
-          dialog.show('You have subscribed!', `See you soon, ${name}!`);
+        .then(googleUser => {
+          const profile = googleUser.getBasicProfile();
+          dialog.show('You have subscribed!', `See you soon, ${profile.getGivenName()}!`);
         })
         .catch(error => {
           dialog.show('Oh no!', 'Something bad happened.');
         });
     });
   }
-}
-
-export default newsletter;
+});

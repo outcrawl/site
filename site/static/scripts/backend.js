@@ -67,6 +67,29 @@ backend.signOut = () => {
   backend.googleAuth.signOut();
 };
 
+backend.subscribe = () => {
+  return new Promise((resolve, reject) => {
+    backend.googleAuth.signIn({
+        'prompt': 'consent',
+      })
+      .then(googleUser => {
+        if (googleUser.error) {
+          reject(googleUser.error);
+        } else {
+          const token = googleUser.getAuthResponse().id_token;
+          $.ajax(`${backend.apiUrl}/mail/subscribe`, {
+              method: 'POST',
+              headers: {
+                'Authorization': token
+              }
+            })
+            .then(_ => resolve(googleUser))
+            .fail(reject);
+        }
+      }, reject);
+  });
+};
+
 backend.getThread = id => {
   return new Promise((resolve, reject) => {
     $.get(`${backend.apiUrl}/threads/${id}`)
@@ -108,13 +131,13 @@ backend.deleteComment = (threadId, commentId) => {
   const token = backend.googleAuth.currentUser.get().getAuthResponse().id_token;
   return new Promise((resolve, reject) => {
     $.ajax(`${backend.apiUrl}/threads/${threadId}/comments/${commentId}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': token
-      }
-    })
-    .done(resolve)
-    .fail(reject);
+        method: 'DELETE',
+        headers: {
+          'Authorization': token
+        }
+      })
+      .done(resolve)
+      .fail(reject);
   });
 };
 
