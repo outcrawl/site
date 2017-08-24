@@ -20,21 +20,20 @@ markedRenderer.heading = (text, level, raw) => {
       return `<h6>${text}</h6>`;
   }
 };
+marked.setOptions({
+  gfm: true,
+  tables: false,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false,
+  renderer: markedRenderer
+});
 
 const threadDom = {};
 
 threadDom.build = ($element, thread, user) => {
-  marked.setOptions({
-    gfm: true,
-    tables: false,
-    breaks: false,
-    pedantic: false,
-    sanitize: true,
-    smartLists: true,
-    smartypants: false,
-    renderer: markedRenderer
-  });
-
   $element.empty();
   for (const comment of thread.comments) {
     $element.append(threadDom.buildComment(comment, user));

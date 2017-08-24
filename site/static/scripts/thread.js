@@ -47,8 +47,10 @@ function maybeLoadComments() {
     return;
   }
 
+  console.log($window.scrollTop());
   if ($window.scrollTop() + $window.height() > $threadElement.offset().top) {
     threadStartedLoading = true;
+    console.log('loading');
 
     backend.getThread(postSlug)
       .then(data => {
@@ -151,7 +153,7 @@ function onPreviewClick() {
     try {
       $previewPanel.html(threadDom.parseMarkdown(text));
     } catch (e) {
-      $previewPanel.text('Incorrect LaTeX code');
+      $previewPanel.text('Something went wrong');
     }
   }
 }

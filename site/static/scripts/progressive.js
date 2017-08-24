@@ -10,7 +10,7 @@ progressive.init = () => {
     }
   }
 
-  $window.on('scroll', () => {
+  $window.on('scroll.progressive', () => {
     const dy = $window.scrollTop();
     const h = $window.height();
 
@@ -22,7 +22,7 @@ progressive.init = () => {
     }
 
     if (images.length == 0) {
-      $window.off('scroll');
+      $window.off('scroll.progressive');
     }
   });
 };
