@@ -1,0 +1,15 @@
+{{define "title"}}404 - {{.Site.Title}}{{end}}
+
+{{define "main"}}
+
+{{$paginator := .Paginate (where .Site.RegularPages "Type" "post") 6}}
+
+<div class="page__content">
+
+  <section class="page__section page__section--large">
+    <h1 class="page__title">404</h1>
+  </section>
+
+</div>
+
+{{end}}

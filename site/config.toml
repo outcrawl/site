@@ -12,3 +12,8 @@ tag = "tags"
 
 [permalinks]
 post = "/:slug"
+
+[params]
+tagline = "Software development tutorials without nonsense"
+keywords = ["software", "development", "tutorial", "go", "angular", "typescript"]
+facebookAppId = "863987620425609"

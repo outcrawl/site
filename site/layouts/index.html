@@ -1,5 +1,31 @@
 {{define "title"}}{{.Site.Title}}{{end}}
 
+{{define "meta"}}
+<meta name="title" content="{{.Site.Title}} – {{.Site.Params.tagline}}" />
+<meta name="description" content="{{.Site.Params.tagline}}" />
+
+{{$keywords := .Site.Params.keywords}}
+<meta name="keywords" content="
+{{- range $index, $kw := $keywords -}}
+{{- $kw -}}{{if lt $index (sub (len $keywords) 1) }},{{end}}
+{{- end -}}
+">
+<meta property="fb:app_id" content="{{.Site.Params.FacebookAppId}}" />
+<meta property="og:title" content="{{.Site.Title}} – {{.Site.Params.tagline}}" />
+<meta property="og:url" content="{{.Site.BaseURL}}" />
+<meta property="og:description" content="{{.Site.Params.tagline}}" />
+<meta property="og:site_name" content="{{.Site.Title}}" />
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{.Site.BaseURL}}images/featured.jpg" />
+<meta name="twitter:description" content="{{.Site.Params.tagline}}" />
+<meta name="twitter:image:src" content="{{.Site.BaseURL}}images/featured.jpg" />
+<meta name="twitter:site" content="@tinrab" />
+<meta name="twitter:creator" content="@tinrab" />
+<meta name="twitter:card" content="summary_large_image">
+<meta property="al:web:url" content="{{.Site.BaseURL}}" />
+<meta name="google" content="notranslate" />
+{{end}}
+
 {{define "main"}}
 
 {{$paginator := .Paginate (where .Site.RegularPages "Type" "post") 6}}

@@ -253,7 +253,6 @@ function onReplyClick($commentElement, commentId) {
         buildThread();
       })
       .catch(error => {
-        console.log(error);
         dialog.show('Oh no!', 'Something went wrong.');
       });
   });

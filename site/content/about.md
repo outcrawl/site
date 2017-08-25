@@ -5,6 +5,4 @@ type: "page"
 layout: "page"
 ---
 
-# About Outcrawl
-
-...
+The shape of things to come.

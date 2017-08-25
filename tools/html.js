@@ -79,7 +79,7 @@ function highlight() {
 }
 
 function headingAnchors() {
-  const h = this.querySelectorAll('.page__content post h1[id], .page__content post h2[id], .page__content post h3[id]');
+  const h = this.querySelectorAll('.page__content h1[id], .page__content h2[id], .page__content h3[id]');
   const permalink = this.querySelector('link[rel="canonical"]');
 
   for (let i = 0; i < h.length; i++) {

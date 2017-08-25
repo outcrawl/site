@@ -1,5 +1,9 @@
 {{define "title"}}{{.Title}} - {{.Site.Title}}{{end}}
 
+{{define "meta"}}
+{{partial "post/meta.html" .}}
+{{end}}
+
 {{define "main"}}
 
 {{$params := .Params}}
