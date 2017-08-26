@@ -42,7 +42,9 @@ function check(scroll, $image) {
         $image.addClass('progressive--loaded');
       });
     }
+    return true;
   }
+  return false;
 }
 
 export default progressive;
