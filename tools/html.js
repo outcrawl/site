@@ -1,6 +1,6 @@
 const merge = require('merge-stream');
 const replace = require('gulp-replace');
-const hljs = require('highlight.js');
+const Prism = require('prismjs');
 const katex = require('katex');
 const fs = require('fs');
 
@@ -48,32 +48,37 @@ function markLines(html, mark) {
     }
 
     if (doMark) {
-      htmlLines[i] = '<mark class="highlight-line">' + htmlLines[i] + '</mark>';
+      htmlLines[i] = '<mark class="marked-line">' + htmlLines[i] + '</mark>';
     }
   }
 
-  return htmlLines.join('\n');
+  return htmlLines.join('\n') + '\n';
 }
 
 function highlight() {
   const pres = this.querySelectorAll('pre');
   for (let i = 0; i < pres.length; i++) {
     const codeNode = pres[i].firstChild;
-    const sourceCode = codeNode.textContent;
+    const code = codeNode.textContent;
     const lang = codeNode.getAttribute('class').replace('language-', '');
 
-    const mark = pres[i].getAttribute('data-mark');
-    pres[i].removeAttribute('data-mark');
-
-    const html = markLines(hljs.highlight(lang, sourceCode).value, mark);
     const copyBtn = `<button class="mdl-button mdl-js-button mdl-button--icon"
-            title="Copy"
-            style="z-index:1;"
-            data-clipboard-text="${escapeHTML(sourceCode)}">
-      <img class="icon" src="/images/icons/content-copy.svg">
+        title="Copy"
+        style="z-index:1;"
+        data-clipboard-text="${escapeHTML(code)}">
+    <img class="icon" src="/images/icons/content-copy.svg">
     </button>`;
 
-    pres[i].innerHTML = `${copyBtn}<code class="hljs">${html}</code>`;
+    if (lang) {
+      if (!Prism.languages[lang]) {
+        require(`prismjs/components/prism-${lang}.js`);
+      }
+      const mark = pres[i].getAttribute('data-mark');
+      const html = markLines(Prism.highlight(code, Prism.languages[lang]), mark);
+      pres[i].innerHTML = `${copyBtn}<code class="language-${lang}">${html}</code>`;
+    } else {
+      pres[i].innerHTML = `${copyBtn}<code class="terminal">${code}</code>`;
+    }
   }
   return this;
 }
@@ -87,13 +92,13 @@ function headingAnchors() {
     let el = 'h2';
     const text = h[i].innerHTML;
 
-    switch(h[i].localName) {
+    switch (h[i].localName) {
       case 'h2':
-      el = 'h3';
-      break;
+        el = 'h3';
+        break;
       case 'h3':
-      el = 'h4';
-      break;
+        el = 'h4';
+        break;
     }
 
     h[i].outerHTML = `

@@ -1,119 +1,133 @@
 pre, code {
   font-family: 'Roboto Mono', monospace;
-  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 1.25rem;
   color: $color-grey-900;
   background-color: $color-grey-100;
   tab-size: 2;
+  hyphens: none;
 }
 
 pre {
   display: block;
-  margin: 0 0 1rem 0;
   position: relative;
   overflow-x: hidden;
 
   .mdl-button[data-clipboard-text] {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 6px;
+    right: 6px;
   }
 }
 
 code {
   padding: 0.1rem 0.2rem;
-  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 pre code {
-  padding: 1rem;
+  padding: 16px;
   display: block;
+  position: relative;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 20px;
 }
 
-.hljs { }
-
-.hljs-comment,
-.hljs-quote {
-  color: #757575;
+// Colors
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray;
 }
 
-.hljs-keyword {
-  color: #1E88E5;
+// Override thread comment styles
+.token.comment {
+  padding: 0;
+  display: inline;
 }
 
-.hljs-selector-tag,
-.hljs-subst {
-  color: #333;
+.token.punctuation {
+  color: #999;
 }
 
-.hljs-number,
-.hljs-title,
-.hljs-section,
-.hljs-literal,
-.hljs-selector-id {
-  color: #EF6C00;
+.namespace {
 }
 
-.hljs-type,
-.hljs-class {
-  color: #e53935;
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #905;
 }
 
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag .hljs-attr {
-  color: #8E24AA;
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #690;
 }
 
-.hljs-string,
-.hljs-doctag,
-.hljs-regexp,
-.hljs-link {
-  color: #43A047;
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #a67f59;
 }
 
-.hljs-tag,
-.hljs-symbol,
-.hljs-bullet {
-  color: #757575;
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #07a;
 }
 
-.hljs-name,
-.hljs-attribute {
-  color: #1E88E5;
+.token.function {
+  color: #DD4A68;
 }
 
-.hljs-built_in,
-.hljs-builtin-name {
-  color: #8E24AA;
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e90;
 }
 
-.hljs-meta {
-  color: #757575;
+.token.important,
+.token.bold {
 }
 
-.hljs-deletion {
+.token.italic {
 }
 
-.hljs-addition {
+.token.entity {
 }
 
-.hljs-emphasis {
-}
-
-.hljs-strong {
-}
-
-.highlight-line {
+// Marked lines
+.marked-line {
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: transparent;
+  background: rgba(0, 0, 0, 0.05);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.05) 60%, transparent);
   position: absolute;
   left: 0;
   right: 0;
-  padding-left: 1rem;
+  padding-left: 16px;
 }
 
-.highlight-line span {
+.marked-line span {
   background: none !important;
+}
+
+// Terminal
+.terminal {
+  &:before {
+    content: "$ ";
+    color: $color-grey-700;
+  }
 }
