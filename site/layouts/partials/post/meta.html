@@ -15,6 +15,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="{{.Site.Title}}" />
 
+{{$keywords := .Params.keywords}}
+<meta name="keywords" content="
+{{- range $index, $kw := $keywords -}}
+{{- $kw -}}{{if lt $index (sub (len $keywords) 1) }},{{end}}
+{{- end -}}
+">
+
 {{$page_link := .Permalink}}
 {{$tags := .Params.tags}}
 {{range $page := .Site.Pages}}

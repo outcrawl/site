@@ -59,7 +59,7 @@ function highlight() {
   const pres = this.querySelectorAll('pre');
   for (let i = 0; i < pres.length; i++) {
     const codeNode = pres[i].firstChild;
-    const code = codeNode.textContent;
+    let code = codeNode.textContent;
     const lang = codeNode.getAttribute('class').replace('language-', '');
 
     const copyBtn = `<button class="mdl-button mdl-js-button mdl-button--icon"
@@ -77,6 +77,7 @@ function highlight() {
       const html = markLines(Prism.highlight(code, Prism.languages[lang]), mark);
       pres[i].innerHTML = `${copyBtn}<code class="language-${lang}">${html}</code>`;
     } else {
+      code = code.replace(/^[A-Za-z](?:[\s\S]*?[^\\]$)?/gm, '<span>$&</span>');
       pres[i].innerHTML = `${copyBtn}<code class="terminal">${code}</code>`;
     }
   }

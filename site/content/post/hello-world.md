@@ -3,7 +3,7 @@ title: "Hello World"
 slug: "hello-world"
 author: "tin-rabzelj"
 tags: ["Angular", "Typescript", "Go"]
-date: "2018-01-01"
+date: "2017-08-25"
 draft: true
 ---
 
@@ -153,9 +153,3 @@ Minim **labore** ad irure amet officia aliqua laborum `print("yo!")` nulla volup
 {{% /note %}}
 
 Ad incididunt pariatur labore excepteur in consectetur minim quis nisi nulla.
-
-## Links
-
-To another article.
-
-{{< reference slug="lorem-ipsum-7" >}}

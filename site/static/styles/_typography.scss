@@ -1,10 +1,6 @@
-@function pixel-to-rem($x) {
-  @return $x / 16 + rem;
-}
-
 html {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-size: pixel-to-rem(16);
+  font-size: 16px;
 
   @include media-lg-only {
     font-size: 18px;
@@ -24,48 +20,34 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 h1 {
-  font-size: pixel-to-rem(60);
+  font-size: 3.75rem;
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.35;
-  margin-top: pixel-to-rem(24);
-  margin-bottom: pixel-to-rem(24);
+  margin: 0 0 2rem 0;
 }
 
 h2 {
-  font-size: pixel-to-rem(45);
-  line-height: pixel-to-rem(48);
-  margin-top: pixel-to-rem(24);
-  margin-bottom: pixel-to-rem(24);
+  font-size: 2.75rem;
+  line-height: 3rem;
+  margin: 3rem 0 2rem 0;
 }
 
 h3 {
-  font-size: pixel-to-rem(34);
-  line-height: pixel-to-rem(40);
-  margin-top: pixel-to-rem(24);
-  margin-bottom: pixel-to-rem(24);
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  margin: 2.5rem 0 2rem 0;
 }
 
 h4 {
-  font-size: pixel-to-rem(24);
-  line-height: pixel-to-rem(32);
-  -moz-osx-font-smoothing: grayscale;
-  margin-top: pixel-to-rem(24);
-  margin-bottom: pixel-to-rem(16);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 2rem 0 1.5rem 0;
 }
 
-h5 {
-  font-size: pixel-to-rem(20);
-  line-height: 1;
-  margin-top: pixel-to-rem(24);
-  margin-bottom: pixel-to-rem(16);
-}
-
-h6 {
-  font-size: pixel-to-rem(16);
-  line-height: pixel-to-rem(24);
-  margin-top: pixel-to-rem(24);
-  margin-bottom: pixel-to-rem(16);
+p {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 address {
@@ -75,11 +57,6 @@ address {
 }
 
 ul, ol {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-p {
   font-size: 1rem;
   line-height: 1.5rem;
 }
@@ -123,4 +100,10 @@ blockquote {
   cite {
     display: block;
   }
+}
+
+figure, figcaption {
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
 }

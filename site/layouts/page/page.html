@@ -1,5 +1,33 @@
 {{define "title"}}{{.Title}} - {{.Site.Title}}{{end}}
 
+{{define "meta"}}
+{{$description := (.Content | truncate 160)}}
+
+<meta name="title" content="{{.Title}} - {{.Site.Title}}" />
+<meta name="description" content="{{$description}}" />
+
+{{$keywords := .Site.Params.keywords}}
+<meta name="keywords" content="
+{{- range $index, $kw := $keywords -}}
+{{- $kw -}}{{if lt $index (sub (len $keywords) 1) }},{{end}}
+{{- end -}}
+">
+<meta property="fb:app_id" content="{{.Site.Params.FacebookAppId}}" />
+<meta property="og:title" content="{{.Title}} - {{.Site.Title}}" />
+<meta property="og:url" content="{{.Permalink}}" />
+<meta property="og:description" content="{{$description}}" />
+<meta property="og:site_name" content="{{.Site.Title}}" />
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{.Site.BaseURL}}images/featured.jpg" />
+<meta name="twitter:description" content="{{$description}}" />
+<meta name="twitter:image:src" content="{{.Site.BaseURL}}images/featured.jpg" />
+<meta name="twitter:site" content="@tinrab" />
+<meta name="twitter:creator" content="@tinrab" />
+<meta name="twitter:card" content="summary_large_image">
+<meta property="al:web:url" content="{{.Permalink}}" />
+<meta name="google" content="notranslate" />
+{{end}}
+
 {{define "main"}}
 
 <div class="page__content general-page">

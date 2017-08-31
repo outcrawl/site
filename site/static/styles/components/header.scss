@@ -1,7 +1,6 @@
 .header {
   @extend .mdl-layout__header;
   @extend .mdl-layout__header--scroll;
-  fill: $layout-header-text-color !important;
   display: flex !important;
 
   svg path, svg polygon {

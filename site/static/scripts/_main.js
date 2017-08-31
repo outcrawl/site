@@ -20,5 +20,5 @@ $(document).ready(() => {
   }
 
   // Register clipboard
-  new Clipboard('.icon-button[data-clipboard-text]');
+  new Clipboard('button[data-clipboard-text]');
 });

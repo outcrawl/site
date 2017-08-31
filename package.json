@@ -15,7 +15,7 @@
     "url": "git+https://github.com/outcrawl/site.git"
   },
   "author": "",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/outcrawl/site/issues"
   },
