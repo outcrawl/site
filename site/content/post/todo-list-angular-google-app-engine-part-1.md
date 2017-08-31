@@ -5,7 +5,7 @@ author: "tin-rabzelj"
 tags: ["Go", "Google App Engine"]
 date: "2017-08-30"
 description: "The world needs more todo lists. Let us deliver another one."
-keywords: ["Todo List", "Angular", "Go", "Google App Engine"]
+keywords: ["Todo List", "Angular", "Angular 4", "Go", "Google App Engine"]
 ---
 
 The world needs more todo lists. Let us deliver another one.
@@ -497,6 +497,6 @@ curl localhost:8080/api/todos/[TODO_ID] -X DELETE \
 
 That's it for the back-end. In the next part you'll create the front-end and deploy it to the Google App Engine.
 
-Second part: coming soon.
+Second part: {{< reference slug="todo-list-angular-google-app-engine-part-2" >}}.
 
 Source code for this tutorial is available on [GitHub](https://github.com/tinrab/todo-angular-appengine).
