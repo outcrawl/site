@@ -8,9 +8,8 @@ import './newsletter';
 import './thread';
 import progressive from './progressive';
 
-progressive.init();
-
 $(document).ready(() => {
+  progressive.init();
   dialog.init();
 
   try {

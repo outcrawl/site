@@ -4,7 +4,7 @@ progressive.init = () => {
   const $window = $(window);
   const images = $('.progressive').toArray();
 
-  for (let i = 0; i < images.length; i++) {
+  for (let i = images.length - 1; i >= 0; i--) {
     if (check($window.height(), $(images[i]))) {
       images.splice(i, 1);
     }

@@ -7,8 +7,8 @@
     "build": "gulp build",
     "clean": "gulp clean",
     "serve": "gulp serve",
-    "deploy": "aws s3 cp dist s3://outcrawl.com/ --recursive --exclude '.*'",
-    "purge": "aws s3 rm s3://outcrawl.com/ --recursive"
+    "deploy": "aws s3 sync dist s3://outcrawl.com --exclude '.*'",
+    "purge": "aws s3 rm s3://outcrawl.com --recursive"
   },
   "repository": {
     "type": "git",
