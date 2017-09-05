@@ -1,7 +1,7 @@
 ---
 title: "Adipisicing duis elit et labore in Lorem esse velit Lorem amet nisi fugiat non excepteur"
 layout: post
-date: "2017-08-21"
+date: "2017-08-04"
 tags:
   - Angular
   - Typescript

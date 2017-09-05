@@ -1,7 +1,7 @@
 ---
 title: "Lorem ullamco sit consectetur laboris anim"
 layout: post
-date: "2017-08-21"
+date: "2017-08-01"
 tags:
   - Angular
   - Typescript

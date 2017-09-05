@@ -1,7 +1,7 @@
 ---
 title: "Excepteur ad ea elit in"
 layout: post
-date: "2017-08-21"
+date: "2017-08-07"
 tags:
   - Angular
   - Typescript

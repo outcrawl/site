@@ -1,7 +1,7 @@
 ---
 title: "Sit in aute eiusmod tempor"
 layout: post
-date: "2017-08-21"
+date: "2017-08-05"
 tags:
   - Angular
   - Typescript
