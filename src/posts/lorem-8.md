@@ -1,5 +1,6 @@
 ---
 title: "Lorem ullamco sit consectetur laboris anim"
+layout: post
 date: "2017-08-21"
 tags:
   - Angular

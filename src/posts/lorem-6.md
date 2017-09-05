@@ -1,5 +1,6 @@
 ---
 title: "Anim fugiat laborum enim labore"
+layout: post
 date: "2017-08-21"
 tags:
   - Angular

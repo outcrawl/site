@@ -4,7 +4,7 @@ const {
 } = require('gatsby-source-filesystem');
 const slug = require('slug');
 
-exports.createPostFields = params => {
+exports.createNodeFields = params => {
   const {
     node,
     getNode,
@@ -14,6 +14,11 @@ exports.createPostFields = params => {
     createNodeField
   } = boundActionCreators;
   if (node.internal.type === 'MarkdownRemark') {
+    let basePath = 'posts';
+    if (node.frontmatter.layout === 'page') {
+      basePath = 'pages';
+    }
+
     // Slug
     createNodeField({
       node,
@@ -21,17 +26,20 @@ exports.createPostFields = params => {
       value: createFilePath({
         node,
         getNode,
-        basePath: 'posts'
+        basePath: basePath
       })
     });
-    // Slugify tags
-    const slugTags = node.frontmatter.tags.map(tag => slug(tag, {
-      lower: true
-    }));
-    createNodeField({
-      node,
-      name: 'slugTags',
-      value: slugTags
-    });
+
+    // Slugify post tags
+    if (basePath === 'posts') {
+      const slugTags = node.frontmatter.tags.map(tag => slug(tag, {
+        lower: true
+      }));
+      createNodeField({
+        node,
+        name: 'slugTags',
+        value: slugTags
+      });
+    }
   }
 };

@@ -12,20 +12,20 @@ export default ({ data }) => (
 );
 
 export const query = graphql`
-  query IndexQuery {
-    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
-      totalCount
-      edges {
-        node {
-          frontmatter {
-            title
-            date(formatString: "DD MMMM, YYYY")
-          }
-          fields {
-            slug
-          }
+query IndexQuery {
+  allMarkdownRemark(filter: {frontmatter: {layout: {eq: "post"}}}) {
+    totalCount
+    edges {
+      node {
+        frontmatter {
+          title
+          date(formatString: "DD MMMM, YYYY")
+        }
+        fields {
+          slug
         }
       }
     }
   }
+}
 `;

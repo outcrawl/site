@@ -1,5 +1,6 @@
 ---
 title: "Laborum irure exercitation in qui magna anim nisi commodo cillum sunt"
+layout: post
 date: "2017-08-21"
 tags:
   - Angular

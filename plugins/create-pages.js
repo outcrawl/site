@@ -1,6 +1,6 @@
 const path = require('path');
 
-exports.createPosts = (params) => {
+exports.createPages = (params) => {
   const {
     graphql,
     boundActionCreators
@@ -8,12 +8,12 @@ exports.createPosts = (params) => {
   const {
     createPage
   } = boundActionCreators;
-  const postTemplate = path.resolve('src/templates/post.jsx');
+  const pageTemplate = path.resolve('src/templates/page.jsx');
 
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark(filter: {frontmatter: {layout: {eq: "post"}}}) {
+        allMarkdownRemark(filter: {frontmatter: {layout: {eq: "page"}}}) {
           edges {
             node {
               fields {
@@ -34,7 +34,7 @@ exports.createPosts = (params) => {
         } of result.data.allMarkdownRemark.edges) {
         createPage({
           path: node.fields.slug,
-          component: postTemplate,
+          component: pageTemplate,
           context: {
             slug: node.fields.slug
           }

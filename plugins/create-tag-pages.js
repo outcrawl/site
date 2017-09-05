@@ -17,7 +17,7 @@ exports.createTagPages = params => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark {
+        allMarkdownRemark(filter: {frontmatter: {layout: {eq: "post"}}}) {
           edges {
             node {
               frontmatter {

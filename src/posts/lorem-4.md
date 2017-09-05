@@ -1,5 +1,6 @@
 ---
 title: "Sit in aute eiusmod tempor"
+layout: post
 date: "2017-08-21"
 tags:
   - Angular
