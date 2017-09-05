@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Link from 'gatsby-link';
 
-import './index.scss';
+import '../styles/index.scss';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-const TemplateWrapper = ({ children }) => (
+export default props => (
   <div>
-    {children()}
+    <Header />
+    <main>
+      {props.children()}
+    </main>
+    <Footer />
   </div>
 );
-
-TemplateWrapper.propTypes = {
-  children: PropTypes.func,
-};
-
-export default TemplateWrapper;
