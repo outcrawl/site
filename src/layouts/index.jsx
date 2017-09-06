@@ -1,15 +1,19 @@
 import React from 'react';
+import 'sanitize.css';
+import { MuiThemeProvider } from 'material-ui/styles';
 
-import '../styles/index.scss';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import lightTheme from '../utils/light-theme.js';
+import Header from '../components/header';
+import Footer from '../components/footer';
 
 export default props => (
-  <div>
-    <Header />
-    <main>
-      {props.children()}
-    </main>
-    <Footer />
-  </div>
+  <MuiThemeProvider theme={lightTheme}>
+    <div>
+      <Header />
+      <main>
+        {props.children()}
+      </main>
+      <Footer />
+    </div>
+  </MuiThemeProvider>
 );

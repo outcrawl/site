@@ -3,7 +3,7 @@ import Link from 'gatsby-link';
 
 export default ({ data }) => {
   const posts = data.allMarkdownRemark.edges
-    .map(({ node }) => Object.assign({}, node.frontmatter, node.fields));
+    .map(({ node }) => ({ ...node.frontmatter, ...node.fields }));
   return (
     <div>
       {posts.map(post =>

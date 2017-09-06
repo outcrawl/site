@@ -2,8 +2,11 @@ import React from 'react';
 import Link from 'gatsby-link';
 
 export default ({ data }) => {
-  const page = data.markdownRemark;
-  Object.assign(page, page.frontmatter);
+  const page = {
+    ...data.markdownRemark,
+    ...data.markdownRemark.frontmatter
+  };
+
   return (
     <div>
       <h1>

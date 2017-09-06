@@ -13,6 +13,7 @@ export default ({ data }) => {
   const post = data.markdownRemark;
   Object.assign(post, post.frontmatter);
   Object.assign(post, post.fields);
+
   return (
     <div>
       <h1>

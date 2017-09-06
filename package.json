@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Tin Rabzelj <tin.rabzelj@gmail.com>",
   "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "gatsby": "^1.9.17",
     "gatsby-link": "^1.6.15",
     "gatsby-plugin-react-helmet": "^1.0.5",
@@ -40,6 +41,7 @@
     "gatsby-remark-prismjs": "^1.2.0",
     "gatsby-source-filesystem": "^1.0.1",
     "gatsby-transformer-remark": "^1.7.4",
-    "slug": "^0.9.1"
+    "slug": "^0.9.1",
+    "svg-react-loader": "^0.4.5"
   }
 }
