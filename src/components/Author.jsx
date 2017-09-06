@@ -7,8 +7,7 @@ import authors from '../data/authors.js';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    fontFamily: theme.typography.fontFamily
+    display: 'flex'
   },
   avatar: {
     width: 40,

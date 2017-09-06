@@ -27,7 +27,6 @@ const styles = theme => ({
     justifyContent: 'flex-end'
   },
   title: {
-    ...theme.typography.headline,
     color: theme.palette.shades.dark.text.primary,
     margin: [0, 0, 8, 0],
     textDecoration: 'none'

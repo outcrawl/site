@@ -1,19 +1,33 @@
 import React from 'react';
-import { MuiThemeProvider } from 'material-ui/styles';
+import { MuiThemeProvider, withStyles } from 'material-ui/styles';
 import 'sanitize.css';
 
 import lightTheme from '../utils/light-theme.js';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default props => (
-  <MuiThemeProvider theme={lightTheme}>
-    <div>
-      <Header />
-      <main>
-        {props.children()}
-      </main>
-      <Footer />
-    </div>
-  </MuiThemeProvider>
-);
+const styles = theme => ({
+  root: {
+    fontFamily: theme.typography.fontFamily
+  },
+  content: {
+    minHeight: '100vh'
+  }
+});
+
+const Index = props => {
+  const classes = props.classes;
+  return (
+    <MuiThemeProvider theme={lightTheme}>
+      <div className={classes.root}>
+        <Header />
+        <main className={classes.content}>
+          {props.children()}
+        </main>
+        <Footer />
+      </div>
+    </MuiThemeProvider>
+  );
+};
+
+export default withStyles(styles)(Index);
