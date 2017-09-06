@@ -2,7 +2,8 @@ import React from 'react';
 import Link from 'gatsby-link';
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
-import Avatar from 'material-ui/Avatar';
+
+import Author from './Author';
 
 const styles = theme => ({
   root: {
@@ -28,25 +29,13 @@ const styles = theme => ({
   title: {
     ...theme.typography.headline,
     color: theme.palette.shades.dark.text.primary,
-    margin: 0,
+    margin: [0, 0, 8, 0],
     textDecoration: 'none'
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    marginRight: 16
+  postLink: {
+    textDecoration: 'none'
   }
 });
-
-const Author = props => (
-  <div>
-    <Avatar
-      alt="Adelle Charles"
-      src={`http://lorempixel.com/40/40`}
-      className={styles.avatar}
-    />
-  </div>
-);
 
 const Entry = props => {
   const classes = props.classes;
@@ -58,10 +47,10 @@ const Entry = props => {
       backgroundImage: `url(http://lorempixel.com/1280/720?id=${post.slug})`
     }}>
       <div className={classes.content}>
-        <Link to={`${post.slug}`} style={{ textDecoration: 'none' }}>
+        <Link to={`${post.slug}`} className={classes.postLink}>
           <h2 className={classes.title}>{post.title}</h2>
         </Link>
-        <Author />
+        <Author post={post}/>
       </div>
     </Paper>
   );

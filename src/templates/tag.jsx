@@ -22,7 +22,9 @@ query TagQuery($tag: [String]!) {
       node {
         frontmatter {
           title
+          author
           tags
+          date(formatString: "DD MMMM, YYYY")
         }
         fields {
           slug

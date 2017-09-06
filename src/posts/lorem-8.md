@@ -2,6 +2,7 @@
 title: "Lorem ullamco sit consectetur laboris anim"
 layout: post
 date: "2017-08-01"
+author: tin-rabzelj
 tags:
   - Angular
   - Typescript

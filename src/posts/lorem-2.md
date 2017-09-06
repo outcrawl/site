@@ -2,6 +2,7 @@
 title: "Excepteur ad ea elit in"
 layout: post
 date: "2017-08-07"
+author: tin-rabzelj
 tags:
   - Angular
   - Typescript

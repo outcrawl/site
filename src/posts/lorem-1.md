@@ -2,6 +2,7 @@
 title: "Laborum irure exercitation in qui magna anim nisi commodo cillum sunt"
 layout: post
 date: "2017-08-08"
+author: tin-rabzelj
 tags:
   - Angular
   - Typescript

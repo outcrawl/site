@@ -2,6 +2,7 @@
 title: "Nulla ea adipisicing aliqua excepteur officia"
 layout: post
 date: "2017-08-02"
+author: tin-rabzelj
 tags:
   - Angular
   - Typescript

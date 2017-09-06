@@ -2,6 +2,7 @@
 title: Hello World
 layout: post
 date: "2017-08-21"
+author: tin-rabzelj
 tags:
   - Angular
   - Typescript

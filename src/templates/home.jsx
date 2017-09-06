@@ -3,8 +3,8 @@ import Link from 'gatsby-link';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
 
-import Entry from '../components/entry';
-import Pagination from '../components/pagination';
+import Entry from '../components/Entry';
+import Pagination from '../components/Pagination';
 
 const styles = theme => ({
   root: {
@@ -45,6 +45,7 @@ query HomeQuery($skip: Int!, $limit: Int!) {
       node {
         frontmatter {
           title
+          author
           date(formatString: "DD MMMM, YYYY")
         }
         fields {

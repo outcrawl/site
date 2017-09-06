@@ -2,16 +2,12 @@ import {
   createMuiTheme
 } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
-import purple from 'material-ui/colors/purple';
-import green from 'material-ui/colors/green';
+import grey from 'material-ui/colors/grey';
 
 const lightTheme = createMuiTheme({
   palette: {
-    primary: purple,
-    secondary: {
-      ...green,
-      A400: '#00e677'
-    }
+    primary: grey,
+    secondary: grey
   }
 });
 

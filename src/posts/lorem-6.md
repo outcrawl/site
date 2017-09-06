@@ -2,6 +2,7 @@
 title: "Anim fugiat laborum enim labore"
 layout: post
 date: "2017-08-03"
+author: tin-rabzelj
 tags:
   - Angular
   - Typescript

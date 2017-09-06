@@ -31,7 +31,9 @@ export const query = graphql`
       html
       frontmatter {
         title
+        author
         tags
+        date(formatString: "DD MMMM, YYYY")
       }
       fields {
         slugTags
