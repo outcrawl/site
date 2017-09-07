@@ -11,6 +11,9 @@ const styles = theme => ({
     flexGrow: 1,
     maxWidth: 1024,
     margin: [24, 'auto', 24, 'auto']
+  },
+  entry: {
+    padding: 8
   }
 });
 
@@ -24,9 +27,9 @@ const Home = (props) => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={16}>
+      <Grid container spacing={0}>
         {posts.map(post =>
-          <Grid key={post.slug} item xs={12} sm={6}>
+          <Grid key={post.slug} className={classes.entry} item xs={12} sm={6}>
             <Entry post={post} />
           </Grid>
         )}

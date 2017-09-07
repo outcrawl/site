@@ -21,15 +21,19 @@ const styles = theme => ({
     bottom: 0,
     left: 0,
     padding: theme.spacing.unit * 2,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    background: 'linear-gradient(0, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.3) 100%)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end'
   },
   title: {
     color: theme.palette.shades.dark.text.primary,
-    margin: [0, 0, 8, 0],
-    textDecoration: 'none'
+    fontWeight: 400,
+    margin: 0,
+    paddingBottom: 16,
+    textDecoration: 'none',
+    fontSize: 24,
+    lineHeight: 1.25
   },
   postLink: {
     textDecoration: 'none'
