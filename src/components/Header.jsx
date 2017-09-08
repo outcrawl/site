@@ -22,7 +22,7 @@ const LogoTextIcon = props => (
 );
 
 const Header = ({ classes }) => (
-  <AppBar className={classes.root} position="static" elevation={4} square={true}>
+  <AppBar className={classes.root} position="static" elevation={0} square={true}>
     <Toolbar>
       <Link to={''}>
         <LogoTextIcon className={classes.logo} />
