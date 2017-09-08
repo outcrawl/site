@@ -1,3 +1,30 @@
 @import "~sanitize.css";
 
 @import "code";
+
+.page-heading {
+  a {
+    float: left;
+    padding-right: 4px;
+    margin-left: -24px;
+    text-decoration: none;
+
+    @media (max-width: 700px) {
+      float: none;
+      margin-left: 4px;
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: #212121;
+    visibility: hidden;
+  }
+
+  &:hover {
+    svg {
+      visibility: visible;
+    }
+  }
+}
