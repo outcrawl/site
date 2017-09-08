@@ -1,4 +1,33 @@
 const path = require('path');
+const cheerio = require('cheerio');
+
+function transformHTML(html) {
+  const $ = cheerio.load(html);
+
+  // Modify gifs
+  $('img').each(function() {
+    const src = $(this).attr('src');
+    if (src && src.endsWith('.gif')) {
+      $(this).css('display', 'block');
+      $(this).css('margin-left', 'auto');
+      $(this).css('margin-right', 'auto');
+      $(this).css('max-width', '100%');
+    }
+  });
+
+  // Lower heading level
+  $('h1, h2, h3').each(function() {
+    if ($(this).is('h1')) {
+      $(this).replaceWith(`<h2>${$(this).text()}</h2>`);
+    } else if ($(this).is('h2')) {
+      $(this).replaceWith(`<h3>${$(this).text()}</h3>`);
+    } else {
+      $(this).replaceWith(`<h4>${$(this).text()}</h4>`);
+    }
+  });
+
+  return $.html();
+}
 
 exports.createPages = (params) => {
   const {
@@ -8,14 +37,19 @@ exports.createPages = (params) => {
   const {
     createPage
   } = boundActionCreators;
-  const pageTemplate = path.resolve('src/templates/page.jsx');
+  const pageTemplate = path.resolve('src/templates/general-page.jsx');
+  const postTemplate = path.resolve('src/templates/post.jsx');
 
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark(filter: {frontmatter: {layout: {eq: "page"}}}) {
+        allMarkdownRemark {
           edges {
             node {
+              html
+              frontmatter {
+                layout
+              }
               fields {
                 slug
               }
@@ -32,13 +66,24 @@ exports.createPages = (params) => {
       for (const {
           node
         } of result.data.allMarkdownRemark.edges) {
-        createPage({
-          path: node.fields.slug,
-          component: pageTemplate,
-          context: {
-            slug: node.fields.slug
-          }
-        });
+        const ctx = {
+          slug: node.fields.slug,
+          html: transformHTML(node.html)
+        };
+
+        if (node.frontmatter.layout === 'post') {
+          createPage({
+            path: node.fields.slug,
+            component: postTemplate,
+            context: ctx
+          });
+        } else {
+          createPage({
+            path: node.fields.slug,
+            component: pageTemplate,
+            context: ctx
+          });
+        }
       }
 
       resolve();

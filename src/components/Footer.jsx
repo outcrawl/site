@@ -26,7 +26,6 @@ const FacebookIcon = props => (
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.default,
-    padding: [theme.spacing.unit * 2, theme.spacing.unit * 4],
     width: '100%',
     display: 'block',
     color: theme.palette.text.primary,
@@ -35,7 +34,11 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    fontSize: 14
+    fontSize: 14,
+    padding: [theme.spacing.unit * 2, theme.spacing.unit * 4],
+    [theme.breakpoints.down('sm')]: {
+      padding: [theme.spacing.unit, theme.spacing.unit * 2]
+    }
   },
   content: {
     padding: 0,
@@ -63,22 +66,22 @@ const Footer = props => {
   const classes = props.classes;
   return (
     <div className={classes.root}>
-        <div className={classes.content}>
-          <Logo className={classes.logo} />
-          <Link className={classes.link} to="about">About</Link>
-          <Link className={classes.link} to="privacy">Privacy</Link>
-        </div>
-        <div className={classes.content}>
-          <IconButton className={classes.button} aria-label="Twitter">
-            <TwitterIcon className={classes.icon} aria-label="Twitter" />
-          </IconButton>
-          <IconButton className={classes.button} aria-label="GitHub">
-            <GitHubIcon className={classes.icon} aria-label="GitHub" />
-          </IconButton>
-          <IconButton className={classes.button} aria-label="Facebook">
-            <FacebookIcon className={classes.icon} aria-label="Facebook" />
-          </IconButton>
-        </div>
+      <div className={classes.content}>
+        <Logo className={classes.logo} />
+        <Link className={classes.link} to="about">About</Link>
+        <Link className={classes.link} to="privacy">Privacy</Link>
+      </div>
+      <div className={classes.content}>
+        <IconButton className={classes.button} aria-label="Twitter">
+          <TwitterIcon className={classes.icon} aria-label="Twitter" />
+        </IconButton>
+        <IconButton className={classes.button} aria-label="GitHub">
+          <GitHubIcon className={classes.icon} aria-label="GitHub" />
+        </IconButton>
+        <IconButton className={classes.button} aria-label="Facebook">
+          <FacebookIcon className={classes.icon} aria-label="Facebook" />
+        </IconButton>
+      </div>
     </div>
   );
 };

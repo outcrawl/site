@@ -2,9 +2,6 @@ import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
 import Avatar from 'material-ui/Avatar';
-import md5 from 'md5';
-
-import authors from '../data/authors.js';
 
 const styles = theme => ({
   root: {
@@ -36,13 +33,13 @@ const styles = theme => ({
 const Author = props => {
   const classes = props.classes;
   const post = props.post;
-  const author = authors[post.author];
+  const author = post.authorData;
 
   return (
     <div className={classes.root}>
       <Avatar
         alt="Author Avatar"
-        src={`https://www.gravatar.com/avatar/${md5(author.email.toLowerCase())}?s=120`}
+        src={`https://www.gravatar.com/avatar/${author.emailHash}?s=120`}
         className={classes.avatar}
       />
       <div className={classes.info}>

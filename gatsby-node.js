@@ -12,9 +12,6 @@ exports.onCreateNode = params => {
 };
 
 const {
-  createPosts
-} = require('./plugins/create-posts');
-const {
   createTagPages
 } = require('./plugins/create-tag-pages');
 const {
@@ -25,7 +22,6 @@ const {
 } = require('./plugins/create-home');
 
 exports.createPages = params => {
-  createPosts(params);
   createPages(params);
   createTagPages(params);
   createHome(params);

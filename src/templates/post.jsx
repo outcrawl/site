@@ -1,34 +1,43 @@
 import React from 'react';
 import Link from 'gatsby-link';
 
-const Tags = props => (
+import Page from '../components/Page';
+import PageSection from '../components/PageSection';
+
+const Tags = ({post}) => (
   <div>
-    {props.post.tags.map((tag, i) =>
-      <Link to={`/tags/${props.post.slugTags[i]}`}>{tag}</Link>
+    {post.tags.map((tag, i) =>
+      <Link key={tag} to={`/tags/${post.slugTags[i]}`}>{tag}</Link>
     )}
   </div>
 );
 
-export default ({ data }) => {
+const Post = ({data, pathContext}) => {
   const post = data.markdownRemark;
   Object.assign(post, post.frontmatter);
   Object.assign(post, post.fields);
+  const html = pathContext.html;
 
   return (
-    <div>
-      <h1>
-        {post.title}
-      </h1>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
-      <Tags post={post} />
-    </div>
+    <Page contained={true}>
+      <PageSection component="article">
+        <h1>
+          {post.title}
+        </h1>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+      </PageSection>
+      <PageSection>
+        <Tags post={post} />
+      </PageSection>
+    </Page>
   );
-}
+};
 
-export const query = graphql`
+export default Post;
+
+export const postQuery = graphql`
   query PostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
       frontmatter {
         title
         author
@@ -37,6 +46,10 @@ export const query = graphql`
       }
       fields {
         slugTags
+        authorData {
+          name
+          emailHash
+        }
       }
     }
   }

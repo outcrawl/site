@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 
-export default ({ data }) => {
+const TagPage = ({ data }) => {
   const posts = data.allMarkdownRemark.edges
     .map(({ node }) => ({ ...node.frontmatter, ...node.fields }));
   return (
@@ -13,10 +13,12 @@ export default ({ data }) => {
       )}
     </div>
   );
-}
+};
 
-export const query = graphql`
-query TagQuery($tag: [String]!) {
+export default TagPage;
+
+export const tagPageQuery = graphql`
+query TagPageQuery($tag: [String]!) {
   allMarkdownRemark(filter: {frontmatter: {tags: {in: $tag}}}) {
     edges {
       node {

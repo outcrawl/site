@@ -1,47 +1,30 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import Grid from 'material-ui/Grid';
-import { withStyles } from 'material-ui/styles';
 
+import Page from '../components/Page';
+import PageSection from '../components/PageSection';
 import Entry from '../components/Entry';
 import Pagination from '../components/Pagination';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 1024,
-    margin: [24, 'auto', 24, 'auto']
-  },
-  entry: {
-    padding: 8
-  }
-});
-
-const Home = (props) => {
-  const { data, pathContext, classes } = props;
-
+const Home = ({ data, pathContext, classes }) => {
   const page = pathContext.skip / pathContext.limit + 1;
   const total = Math.floor(pathContext.total / pathContext.limit);
   const posts = data.allMarkdownRemark.edges
     .map(({ node }) => Object.assign({}, node.frontmatter, node.fields));
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={0}>
-        {posts.map(post =>
-          <Grid key={post.slug} className={classes.entry} item xs={12} sm={6}>
-            <Entry post={post} />
-          </Grid>
-        )}
-      </Grid>
+    <Page>
+      {posts.map(post =>
+        <Entry key={post.slug} post={post} />
+      )}
       <Pagination page={page} total={total} />
-    </div>
+    </Page>
   );
 };
 
-export default withStyles(styles)(Home);
+export default Home;
 
-export const query = graphql`
+export const pageQuery = graphql`
 query HomeQuery($skip: Int!, $limit: Int!) {
   allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {layout: {eq: "post"}}}, sort: {fields: [frontmatter___date], order: DESC}) {
     edges {
@@ -53,6 +36,10 @@ query HomeQuery($skip: Int!, $limit: Int!) {
         }
         fields {
           slug
+          authorData {
+            name
+            emailHash
+          }
         }
       }
     }

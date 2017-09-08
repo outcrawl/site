@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
 import IconButton from 'material-ui/IconButton';
 
 const ChevronLeftIcon = props => (
@@ -16,6 +17,8 @@ const ChevronRightIcon = props => (
 
 const styles = theme => ({
   root: {
+    textAlign: 'center',
+    padding: [24, 0]
   },
   icon: {
     width: 24,
@@ -57,7 +60,7 @@ const Pagination = props => {
   const pages = [];
   for (let i = 1; i <= props.total; i++) {
     pages.push(<IconButton
-      className={[classes.button, props.page === i ? classes.currentPage : '']}
+      className={`${classes.button} ${props.page === i ? classes.currentPage : ''}`}
       component={Link}
       to={i === 1 ? '/' : `/page/${i}`}
       key={i}>{i}
@@ -65,11 +68,11 @@ const Pagination = props => {
   }
 
   return (
-    <div className={classes.root}>
+    <Grid className={classes.root} item xs={12}>
       {prevButton}
       {pages}
       {nextButton}
-    </div>
+    </Grid>
   );
 };
 

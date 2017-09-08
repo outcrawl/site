@@ -8,7 +8,12 @@ const remark = {
       }
     }, {
       resolve: 'gatsby-remark-images',
-      maxWidth: 1280,
+      options: {
+        maxWidth: 1280,
+        linkImagesToOriginal: false
+      }
+    }, {
+      resolve: 'gatsby-remark-copy-linked-files'
     }]
   }
 };
@@ -47,7 +52,6 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
-    'gatsby-remark-autolink-headers',
     remark,
     sass,
     fs,

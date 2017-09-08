@@ -1,14 +1,15 @@
 import React from 'react';
 import { MuiThemeProvider, withStyles } from 'material-ui/styles';
-import 'sanitize.css';
 
+import '../styles/index.scss';
 import lightTheme from '../utils/light-theme.js';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const styles = theme => ({
   root: {
-    fontFamily: theme.typography.fontFamily
+    fontFamily: theme.typography.fontFamily,
+    color: theme.palette.text.primary
   },
   content: {
     minHeight: '100vh'

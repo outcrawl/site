@@ -1,4 +1,4 @@
-export default {
+exports.authors = {
   'tin-rabzelj': {
     name: 'Tin Rabzelj',
     email: 'tin.rabzelj@gmail.com',
