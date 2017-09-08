@@ -4,7 +4,7 @@ import Link from 'gatsby-link';
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
 
-const Tags = ({post}) => (
+const Tags = ({ post }) => (
   <div>
     {post.tags.map((tag, i) =>
       <Link key={tag} to={`/tags/${post.slugTags[i]}`}>{tag}</Link>
@@ -12,7 +12,7 @@ const Tags = ({post}) => (
   </div>
 );
 
-const Post = ({data, pathContext}) => {
+const Post = ({ data, pathContext }) => {
   const post = data.markdownRemark;
   Object.assign(post, post.frontmatter);
   Object.assign(post, post.fields);
@@ -35,7 +35,7 @@ const Post = ({data, pathContext}) => {
 
 export default Post;
 
-export const postQuery = graphql`
+export const pageQuery = graphql`
   query PostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       frontmatter {

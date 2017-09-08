@@ -17,7 +17,7 @@ const TagPage = ({ data }) => {
 
 export default TagPage;
 
-export const tagPageQuery = graphql`
+export const pageQuery = graphql`
 query TagPageQuery($tag: [String]!) {
   allMarkdownRemark(filter: {frontmatter: {tags: {in: $tag}}}) {
     edges {

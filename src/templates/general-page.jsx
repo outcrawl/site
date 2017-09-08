@@ -23,7 +23,7 @@ const GeneralPage = ({ data, pathContext }) => {
 
 export default GeneralPage;
 
-export const generalPageQuery = graphql`
+export const pageQuery = graphql`
   query GeneralPageQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       frontmatter {

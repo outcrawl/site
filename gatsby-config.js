@@ -1,20 +1,23 @@
 const remark = {
   resolve: 'gatsby-transformer-remark',
   options: {
-    plugins: [{
-      resolve: 'gatsby-remark-prismjs',
-      options: {
-        classPrefix: 'language-',
+    plugins: [
+      'gatsby-remark-autolink-headers',
+      'gatsby-remark-copy-linked-files',
+      {
+        resolve: 'gatsby-remark-prismjs',
+        options: {
+          classPrefix: 'language-',
+        }
+      },
+      {
+        resolve: 'gatsby-remark-images',
+        options: {
+          maxWidth: 1280,
+          linkImagesToOriginal: true
+        }
       }
-    }, {
-      resolve: 'gatsby-remark-images',
-      options: {
-        maxWidth: 1280,
-        linkImagesToOriginal: false
-      }
-    }, {
-      resolve: 'gatsby-remark-copy-linked-files'
-    }]
+    ]
   }
 };
 
@@ -28,8 +31,8 @@ const sass = {
 const fs = {
   resolve: 'gatsby-source-filesystem',
   options: {
-    name: 'src',
-    path: `${__dirname}/src/`,
+    name: 'data',
+    path: `${__dirname}/data/`,
   }
 };
 
@@ -37,6 +40,18 @@ const canonicalUrls = {
   resolve: 'gatsby-plugin-canonical-urls',
   options: {
     siteUrl: 'https://outcrawl.com',
+  }
+};
+
+const manifest = {
+  resolve: 'gatsby-plugin-manifest',
+  options: {
+    name: 'Outcrawl',
+    short_name: 'Outcrawl',
+    start_url: '/',
+    background_color: '#FFFFFF',
+    theme_color: '#FFFFFF',
+    display: 'minimal-ui'
   }
 };
 
@@ -50,6 +65,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     //'gatsby-plugin-favicon',
     'gatsby-plugin-catch-links',
+    'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
     remark,
