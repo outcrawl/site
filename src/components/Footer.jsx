@@ -50,28 +50,25 @@ const styles = theme => ({
   }
 });
 
-const Footer = props => {
-  const classes = props.classes;
-  return (
-    <div className={classes.root}>
-      <div className={classes.content}>
-        <LogoIcon className={classes.logo} />
-        <Link className={classes.link} to="about">About</Link>
-        <Link className={classes.link} to="privacy">Privacy</Link>
-      </div>
-      <div className={classes.content}>
-        <IconButton className={classes.button} aria-label="Twitter">
-          <TwitterIcon className={classes.icon} aria-label="Twitter" />
-        </IconButton>
-        <IconButton className={classes.button} aria-label="GitHub">
-          <GitHubIcon className={classes.icon} aria-label="GitHub" />
-        </IconButton>
-        <IconButton className={classes.button} aria-label="Facebook">
-          <FacebookIcon className={classes.icon} aria-label="Facebook" />
-        </IconButton>
-      </div>
+const Footer = ({ classes }) => (
+  <div className={classes.root}>
+    <div className={classes.content}>
+      <LogoIcon className={classes.logo} />
+      <Link className={classes.link} to="about">About</Link>
+      <Link className={classes.link} to="privacy">Privacy</Link>
     </div>
-  );
-};
+    <div className={classes.content}>
+      <IconButton className={classes.button} aria-label="Twitter">
+        <TwitterIcon className={classes.icon} aria-label="Twitter" />
+      </IconButton>
+      <IconButton className={classes.button} aria-label="GitHub">
+        <GitHubIcon className={classes.icon} aria-label="GitHub" />
+      </IconButton>
+      <IconButton className={classes.button} aria-label="Facebook">
+        <FacebookIcon className={classes.icon} aria-label="Facebook" />
+      </IconButton>
+    </div>
+  </div>
+);
 
 export default withStyles(styles)(Footer);

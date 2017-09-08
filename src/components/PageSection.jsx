@@ -18,7 +18,9 @@ const PageSection = props => {
   const classes = props.classes;
   return (
     <Grid component={props.component} className={classes.root}
-      item xs={12}
+      item
+      xs={12}
+      sm={props.half ? 6 : 12}
       dangerouslySetInnerHTML={props.dangerouslySetInnerHTML}>
       {props.children}
     </Grid>

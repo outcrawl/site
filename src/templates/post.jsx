@@ -1,22 +1,16 @@
 import React from 'react';
-import Link from 'gatsby-link';
 
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
-
-const Tags = ({ post }) => (
-  <div>
-    {post.tags.map((tag, i) =>
-      <Link key={tag} to={`/tags/${post.slugTags[i]}`}>{tag}</Link>
-    )}
-  </div>
-);
+import Tags from '../components/Post/Tags';
+import Share from '../components/Post/Share';
 
 const Post = ({ data, pathContext }) => {
   const post = data.markdownRemark;
   Object.assign(post, post.frontmatter);
   Object.assign(post, post.fields);
   const html = pathContext.html;
+  post.permalink = `${data.site.siteMetadata.siteUrl}${post.slug}`;
 
   return (
     <Page contained={true}>
@@ -26,8 +20,11 @@ const Post = ({ data, pathContext }) => {
         </h1>
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </PageSection>
-      <PageSection>
+      <PageSection half={true}>
         <Tags post={post} />
+      </PageSection>
+      <PageSection half={true}>
+        <Share post={post} />
       </PageSection>
     </Page>
   );
@@ -45,11 +42,17 @@ export const pageQuery = graphql`
         date(formatString: "DD MMMM, YYYY")
       }
       fields {
+        slug
         slugTags
         authorData {
           name
           emailHash
         }
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
       }
     }
   }
