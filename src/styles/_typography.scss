@@ -1,0 +1,45 @@
+html {
+  font-size: 16px;
+
+  @media (max-width: 1919.99px) and (min-width: 1280px) {
+    font-size: 18px;
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 21px;
+  }
+}
+
+.page-heading {
+  a {
+    float: left;
+    padding-right: 4px;
+    margin-left: -24px;
+    text-decoration: none;
+
+    @media (max-width: 700px) {
+      float: none;
+      margin-left: 4px;
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: #212121;
+    visibility: hidden;
+  }
+
+  &:hover {
+    svg {
+      visibility: visible;
+    }
+  }
+}
+
+blockquote {
+  display: block;
+  padding-right: 16px;
+  padding-left: 16px;
+  border-left: 4px solid #212121;
+}

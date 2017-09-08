@@ -14,19 +14,19 @@ code {
 
 .gatsby-highlight {
   background-color: #F5F5F5;
-  margin: .5em 0;
-  padding: 1em;
+  margin: 8px 0;
+  padding: 16px;
   overflow: auto;
 }
 
 .gatsby-highlight-code-line {
   background-color: #E0E0E0;
   display: block;
-  margin-right: -1em;
-  margin-left: -1em;
-  padding-right: 1em;
-  padding-left: 0.75em;
-  border-left: 0.25em solid #212121;
+  margin-right: -16px;
+  margin-left: -16px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border-left: 4px solid #212121;
 }
 
 .gatsby-highlight pre[class*="language-"] {

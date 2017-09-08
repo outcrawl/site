@@ -9,10 +9,16 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing.unit
+    },
+    [theme.breakpoints.up('xl')]: {
+      maxWidth: 1280
     }
   },
   containedPage: {
-    maxWidth: 700
+    maxWidth: 700,
+    [theme.breakpoints.up('xl')]: {
+      maxWidth: 900
+    }
   }
 });
 

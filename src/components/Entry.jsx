@@ -12,7 +12,10 @@ const styles = theme => ({
     height: 250,
     boxSizing: 'border-box',
     position: 'relative',
-    padding: theme.spacing.unit
+    padding: theme.spacing.unit,
+    [theme.breakpoints.up('xl')]: {
+      height: 350
+    }
   },
   paper: {
     position: 'absolute',
@@ -39,7 +42,10 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     textDecoration: 'none',
     fontSize: 24,
-    lineHeight: 1.25
+    lineHeight: 1.25,
+    [theme.breakpoints.up('xl')]: {
+      fontSize: 34
+    }
   },
   postLink: {
     textDecoration: 'none'
