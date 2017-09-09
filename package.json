@@ -6,7 +6,7 @@
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
     "cheerio": "^1.0.0-rc.2",
-    "gatsby": "^1.9.24",
+    "gatsby": "^1.9.26",
     "gatsby-link": "^1.6.16",
     "gatsby-plugin-canonical-urls": "^1.0.6",
     "gatsby-plugin-catch-links": "^1.0.8",
@@ -22,14 +22,13 @@
     "gatsby-remark-autolink-headers": "^1.4.7",
     "gatsby-remark-copy-linked-files": "^1.5.7",
     "gatsby-remark-images": "^1.5.11",
-    "gatsby-remark-prismjs": "^1.2.7",
+    "gatsby-remark-prismjs": "^1.2.8",
     "gatsby-source-filesystem": "^1.4.12",
     "gatsby-transformer-remark": "^1.7.7",
     "gatsby-transformer-sharp": "^1.6.5",
     "material-ui": "^1.0.0-beta.8",
     "md5": "^2.2.1",
-    "prismjs": "^1.6.0",
-    "prop-types": "^15.5.10",
+    "prismjs": "^1.7.0",
     "sanitize.css": "^5.0.0",
     "slug": "^0.9.1"
   },
@@ -39,9 +38,5 @@
     "build": "gatsby build",
     "dev": "gatsby develop",
     "clean": "rm -rf .cache public"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "gatsby-cli": "^1.1.6"
   }
 }

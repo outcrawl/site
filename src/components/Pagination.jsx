@@ -37,12 +37,13 @@ const styles = theme => ({
 
 const Pagination = props => {
   const classes = props.classes;
+  const basePath = props.basePath;
 
   let prevButton =
     <IconButton
       className={classes.button}
       component={Link}
-      to={props.page === 2 ? '/' : `/page/${props.page - 1}`}
+      to={props.page === 2 ? basePath : `${basePath}page/${props.page - 1}`}
       disabled={props.page === 1}
       aria-label="Previous page">
       <ChevronLeftIcon className={classes.icon} />
@@ -51,7 +52,7 @@ const Pagination = props => {
     <IconButton
       className={classes.button}
       component={Link}
-      to={`/page/${props.page + 1}`}
+      to={`${basePath}page/${props.page + 1}`}
       disabled={props.page === props.total}
       aria-label="Next page">
       <ChevronRightIcon className={classes.icon} />
@@ -62,7 +63,7 @@ const Pagination = props => {
     pages.push(<IconButton
       className={`${classes.button} ${props.page === i ? classes.currentPage : ''}`}
       component={Link}
-      to={i === 1 ? '/' : `/page/${i}`}
+      to={i === 1 ? basePath : `${basePath}page/${i}`}
       key={i}>{i}
     </IconButton>);
   }

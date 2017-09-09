@@ -58,7 +58,8 @@ module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
     description: 'Software development tutorials without nonsense',
-    siteUrl: 'https://outcrawl.com'
+    siteUrl: 'https://outcrawl.com',
+    postsPerPage: 3
   },
   plugins: [
     'gatsby-plugin-react-helmet',

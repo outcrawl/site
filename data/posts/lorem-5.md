@@ -4,7 +4,6 @@ layout: post
 date: "2017-08-04"
 author: tin-rabzelj
 tags:
-  - Angular
   - Typescript
   - Google App Engine
   - Go

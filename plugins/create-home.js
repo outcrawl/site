@@ -1,4 +1,7 @@
 const path = require('path');
+const Promise = require('bluebird');
+const data = require('../gatsby-config').siteMetadata;
+const postsPerPage = data.postsPerPage;
 
 exports.createHome = params => {
   const {
@@ -9,10 +12,10 @@ exports.createHome = params => {
     createPage
   } = boundActionCreators;
   const homeTemplate = path.resolve('src/templates/home.jsx');
-  const postsPerPage = 3;
 
   return new Promise((resolve, reject) => {
-    graphql(`
+    resolve(
+      graphql(`
       {
         allMarkdownRemark(filter: {frontmatter: {layout: {eq: "post"}}}, sort: {fields: [frontmatter___date], order: DESC}) {
           totalCount
@@ -24,30 +27,28 @@ exports.createHome = params => {
         }
       }
     `).then(result => {
-      if (result.errors) {
-        reject(result.errors)
-        return;
-      }
+        if (result.errors) {
+          reject(result.errors)
+          return;
+        }
 
-      const data = result.data.allMarkdownRemark;
-      const total = data.totalCount;
-      let page = 1;
+        const data = result.data.allMarkdownRemark;
+        const total = data.totalCount;
+        let page = 1;
 
-      for (let i = 0; i < total; i += postsPerPage) {
-        createPage({
-          path: page === 1 ? '/': `/page/${page}`,
-          component: homeTemplate,
-          context: {
-            skip: i,
-            limit: postsPerPage,
-            total: total
-          }
-        });
-
-        page++;
-      }
-
-      resolve();
-    })
+        for (let i = 0; i < total; i += postsPerPage) {
+          createPage({
+            path: page === 1 ? '/' : `/page/${page}`,
+            component: homeTemplate,
+            context: {
+              skip: i,
+              limit: postsPerPage,
+              total: total
+            }
+          });
+          page++;
+        }
+      })
+    );
   });
 };

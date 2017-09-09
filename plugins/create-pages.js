@@ -1,4 +1,5 @@
 const path = require('path');
+const Promise = require('bluebird');
 const cheerio = require('cheerio');
 const slug = require('slug');
 
@@ -56,7 +57,8 @@ exports.createPages = (params) => {
   const postTemplate = path.resolve('src/templates/post.jsx');
 
   return new Promise((resolve, reject) => {
-    graphql(`
+    resolve(
+      graphql(`
       {
         allMarkdownRemark {
           edges {
@@ -73,35 +75,34 @@ exports.createPages = (params) => {
         }
       }
     `).then(result => {
-      if (result.errors) {
-        reject(result.errors)
-        return;
-      }
-
-      for (const {
-          node
-        } of result.data.allMarkdownRemark.edges) {
-        const ctx = {
-          slug: node.fields.slug,
-          html: transformHTML(node.html)
-        };
-
-        if (node.frontmatter.layout === 'post') {
-          createPage({
-            path: node.fields.slug,
-            component: postTemplate,
-            context: ctx
-          });
-        } else {
-          createPage({
-            path: node.fields.slug,
-            component: pageTemplate,
-            context: ctx
-          });
+        if (result.errors) {
+          reject(result.errors)
+          return;
         }
-      }
 
-      resolve();
-    })
+        for (const {
+            node
+          } of result.data.allMarkdownRemark.edges) {
+          const ctx = {
+            slug: node.fields.slug,
+            html: transformHTML(node.html)
+          };
+
+          if (node.frontmatter.layout === 'post') {
+            createPage({
+              path: node.fields.slug,
+              component: postTemplate,
+              context: ctx
+            });
+          } else {
+            createPage({
+              path: node.fields.slug,
+              component: pageTemplate,
+              context: ctx
+            });
+          }
+        }
+      })
+    );
   });
 };

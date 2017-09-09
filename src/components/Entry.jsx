@@ -55,8 +55,7 @@ const styles = theme => ({
 const Entry = props => {
   const classes = props.classes;
   const post = props.post;
-  Object.assign(post, post.frontmatter);
-  Object.assign(post, post.fields);
+
   return (
     <Grid className={classes.root} item xs={12} sm={6}>
       <Paper className={classes.paper} style={{

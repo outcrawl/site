@@ -17,9 +17,13 @@ const {
 const {
   createHome
 } = require('./plugins/create-home');
+const {
+  createAuthorPages
+} = require('./plugins/create-author-pages');
 
 exports.createPages = params => {
   createPages(params);
   createTagPages(params);
   createHome(params);
+  createAuthorPages(params);
 };

@@ -5,7 +5,8 @@ import PageSection from '../components/PageSection';
 import Tags from '../components/Post/Tags';
 import Share from '../components/Post/Share';
 
-const Post = ({ data, pathContext }) => {
+const Post = props => {
+  const { data, pathContext } = props;
   const post = data.markdownRemark;
   Object.assign(post, post.frontmatter);
   Object.assign(post, post.fields);
@@ -33,7 +34,7 @@ const Post = ({ data, pathContext }) => {
 export default Post;
 
 export const pageQuery = graphql`
-  query PostQuery($slug: String!) {
+  query PostBySlug($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       frontmatter {
         title

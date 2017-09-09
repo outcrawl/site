@@ -1,7 +1,7 @@
 const path = require('path');
-const {
-  createFilePath
-} = require('gatsby-source-filesystem');
+const Promise = require('bluebird');
+const data = require('../gatsby-config').siteMetadata;
+const postsPerPage = data.postsPerPage;
 const slug = require('slug');
 
 exports.createTagPages = params => {
@@ -15,9 +15,11 @@ exports.createTagPages = params => {
   const tagTemplate = path.resolve('src/templates/tag.jsx');
 
   return new Promise((resolve, reject) => {
-    graphql(`
+    resolve(
+      graphql(`
       {
         allMarkdownRemark(filter: {frontmatter: {layout: {eq: "post"}}}) {
+          totalCount
           edges {
             node {
               frontmatter {
@@ -28,36 +30,52 @@ exports.createTagPages = params => {
         }
       }
     `).then(result => {
-      if (result.errors) {
-        reject(result.errors)
-        return;
-      }
-
-      // Get all tags
-      const tags = new Set();
-      for (const {
-          node
-        } of result.data.allMarkdownRemark.edges) {
-        for (const tag of node.frontmatter.tags) {
-          tags.add(tag);
+        if (result.errors) {
+          reject(result.errors)
+          return;
         }
-      }
 
-      // Create page for each tag
-      for (const tag of tags) {
-        const path = slug(tag, {
-          lower: true
-        });
-        createPage({
-          path: `/tags/${path}/`,
-          component: tagTemplate,
-          context: {
-            tag: tag
+        const data = result.data.allMarkdownRemark;
+
+        // Get all tags and post count
+        const postCountForTag = {};
+        for (const {
+            node
+          } of data.edges) {
+          for (const tag of node.frontmatter.tags) {
+            if (postCountForTag[tag]) {
+              postCountForTag[tag]++;
+            } else {
+              postCountForTag[tag] = 1;
+            }
           }
-        });
-      }
+        }
 
-      resolve();
-    })
+        // Create pages for each tag
+        for (const tag in postCountForTag) {
+          const total = postCountForTag[tag];
+          const path = slug(tag, {
+            lower: true
+          });
+          const basePath = `/tags/${slug(tag,{lower:true})}/`;
+          let page = 1;
+
+          for (let i = 0; i < total; i += postsPerPage) {
+            createPage({
+              path: page === 1 ? basePath : `${basePath}page/${page}`,
+              component: tagTemplate,
+              context: {
+                skip: i,
+                limit: postsPerPage,
+                total: total,
+                tag: tag,
+                basePath: basePath
+              }
+            });
+            page++;
+          }
+        }
+      })
+    );
   });
 };
