@@ -1,5 +1,6 @@
 const path = require('path');
-const authors = require('../data/authors');
+const authors = require('../data/authors').authors;
+const md5 = require('md5');
 
 exports.createAuthorPages = params => {
   const {
@@ -12,12 +13,14 @@ exports.createAuthorPages = params => {
 
   for (const slug in authors) {
     const author = authors[slug];
+    author.emailHash = md5(author.email.toLowerCase());
 
     createPage({
       path: `/authors/${slug}/`,
       component: authorTemplate,
       context: {
-        slug: slug
+        author: slug,
+        authorData: author
       }
     });
   }

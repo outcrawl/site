@@ -34,7 +34,7 @@ const Post = props => {
 export default Post;
 
 export const pageQuery = graphql`
-  query PostBySlug($slug: String!) {
+  query PostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       frontmatter {
         title

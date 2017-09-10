@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 const styles = theme => ({
   root: {
     maxWidth: 1024,
-    margin: [0, 'auto', 0, 'auto'],
+    margin: [24, 'auto'],
     padding: theme.spacing.unit * 2,
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing.unit

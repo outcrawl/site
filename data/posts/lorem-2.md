@@ -1,7 +1,7 @@
 ---
 title: "Excepteur ad ea elit in"
 layout: post
-date: "2017-08-07"
+date: "2017-07-07"
 author: tin-rabzelj
 tags:
   - Angular

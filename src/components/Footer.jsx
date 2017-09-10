@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
-import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 
 import {
@@ -23,9 +22,11 @@ const styles = theme => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     fontSize: 14,
-    padding: [theme.spacing.unit * 2, theme.spacing.unit * 4],
+    height: 80,
+    padding: [0, theme.spacing.unit * 4],
     [theme.breakpoints.down('sm')]: {
-      padding: [theme.spacing.unit, theme.spacing.unit * 2]
+      height: 64,
+      padding: [0, theme.spacing.unit * 2]
     }
   },
   content: {
@@ -58,14 +59,14 @@ const Footer = ({ classes }) => (
       <Link className={classes.link} to="privacy">Privacy</Link>
     </div>
     <div className={classes.content}>
-      <IconButton className={classes.button} aria-label="Twitter">
-        <TwitterIcon className={classes.icon} aria-label="Twitter" />
+      <IconButton aria-label="Twitter" href="https://twitter.com/tinrab">
+        <TwitterIcon className={classes.icon} />
       </IconButton>
-      <IconButton className={classes.button} aria-label="GitHub">
-        <GitHubIcon className={classes.icon} aria-label="GitHub" />
+      <IconButton aria-label="GitHub" href="https://github.com/tinrab">
+        <GitHubIcon className={classes.icon} />
       </IconButton>
-      <IconButton className={classes.button} aria-label="Facebook">
-        <FacebookIcon className={classes.icon} aria-label="Facebook" />
+      <IconButton aria-label="Facebook" href="https://www.facebook.com/outcrawl">
+        <FacebookIcon className={classes.icon} />
       </IconButton>
     </div>
   </div>

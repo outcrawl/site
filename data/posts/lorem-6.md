@@ -1,7 +1,7 @@
 ---
 title: "Anim fugiat laborum enim labore"
 layout: post
-date: "2017-08-03"
+date: "2017-06-03"
 author: tin-rabzelj
 tags:
   - Angular

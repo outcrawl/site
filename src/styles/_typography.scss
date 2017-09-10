@@ -1,5 +1,6 @@
 html {
   font-size: 16px;
+  line-height: 1;
 
   @media (max-width: 1919.99px) and (min-width: 1280px) {
     font-size: 18px;
@@ -8,6 +9,66 @@ html {
   @media (min-width: 1920px) {
     font-size: 21px;
   }
+}
+
+h1, h2, h3, h4, p, a {
+  padding: 0;
+  margin: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+h1 {
+  font-size: 3.75rem;
+  font-weight: 300;
+  letter-spacing: -.04em;
+  margin: 0 0 1.5rem 0;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+h2 {
+  font-size: 2.75rem;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  margin: 2rem 0 1.5rem 0;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 1.5rem 0 1rem 0;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 1.5rem 0 1rem 0;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+p {
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+a {
+  color: #039BE5;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.gatsby-highlight, blockquote {
+  margin: 0 0 1rem 0;
 }
 
 .page-heading {

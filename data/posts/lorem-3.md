@@ -1,7 +1,7 @@
 ---
 title: "Elit consectetur officia eu sunt aliqua laboris"
 layout: post
-date: "2017-08-06"
+date: "2017-07-06"
 author: tin-rabzelj
 tags:
   - Angular

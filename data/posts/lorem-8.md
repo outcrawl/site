@@ -1,7 +1,7 @@
 ---
 title: "Lorem ullamco sit consectetur laboris anim"
 layout: post
-date: "2017-08-01"
+date: "2017-05-20"
 author: tin-rabzelj
 tags:
   - Angular

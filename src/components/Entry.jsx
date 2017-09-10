@@ -39,7 +39,6 @@ const styles = theme => ({
     color: theme.palette.shades.dark.text.primary,
     fontWeight: 400,
     margin: 0,
-    paddingBottom: theme.spacing.unit * 2,
     textDecoration: 'none',
     fontSize: 24,
     lineHeight: 1.25,
@@ -48,7 +47,14 @@ const styles = theme => ({
     }
   },
   postLink: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'flex-end',
+    paddingBottom: theme.spacing.unit * 2,
+    '&:hover': {
+      textDecoration: 'none'
+    }
   }
 });
 
@@ -62,7 +68,7 @@ const Entry = props => {
         backgroundImage: `url(http://lorempixel.com/1280/720?id=${post.slug})`
       }}>
         <div className={classes.content}>
-          <Link to={`${post.slug}`} className={classes.postLink}>
+          <Link to={post.slug} className={classes.postLink}>
             <h2 className={classes.title}>{post.title}</h2>
           </Link>
           <Author post={post} />

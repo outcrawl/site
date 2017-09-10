@@ -1,7 +1,7 @@
 ---
 title: "Sit in aute eiusmod tempor"
 layout: post
-date: "2017-08-05"
+date: "2017-06-05"
 author: tin-rabzelj
 tags:
   - Angular
