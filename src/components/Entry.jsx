@@ -61,11 +61,12 @@ const styles = theme => ({
 const Entry = props => {
   const classes = props.classes;
   const post = props.post;
+  const cover = post.cover ? post.cover : `http://lorempixel.com/1280/720?id=${post.slug}`;
 
   return (
     <Grid className={classes.root} item xs={12} sm={6}>
       <Paper className={classes.paper} style={{
-        backgroundImage: `url(http://lorempixel.com/1280/720?id=${post.slug})`
+        backgroundImage: `url(${cover})`
       }}>
         <div className={classes.content}>
           <Link to={post.slug} className={classes.postLink}>

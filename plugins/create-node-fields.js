@@ -46,6 +46,18 @@ function createPageFields(createNodeField, node, getNode, basePath) {
   }
 }
 
+function createImageFields(createNodeField, node) {
+  const path = node.id.split(/ +/)[0].split('/');
+  if (path[path.length - 1] === 'cover.jpg') {
+    const slug = path[path.length - 2];
+    createNodeField({
+      node,
+      name: 'postSlug',
+      value: `/${slug}/`
+    });
+  }
+}
+
 exports.createNodeFields = params => {
   const {
     node,
@@ -62,5 +74,7 @@ exports.createNodeFields = params => {
       basePath = 'pages';
     }
     createPageFields(createNodeField, node, getNode, basePath);
+  } else if (node.internal.type === 'ImageSharp') {
+    createImageFields(createNodeField, node);
   }
 };

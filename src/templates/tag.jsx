@@ -13,7 +13,14 @@ const TagPage = props => {
   const { tag, basePath } = pathContext;
 
   const posts = data.allMarkdownRemark.edges
-    .map(({ node }) => ({ ...node.frontmatter, ...node.fields }));
+  .map(({ node: post }) => {
+    const coverImage = data.allImageSharp.edges.find(({ node: image }) => image.fields.postSlug == post.fields.slug);
+    return {
+      ...post.frontmatter,
+      ...post.fields,
+      cover: coverImage ? coverImage.node.original.src : null
+    };
+  });
 
   return (
     <Page>
@@ -34,6 +41,7 @@ export default TagPage;
 
 export const pageQuery = graphql`
 query TagPageQuery($tag: [String]!, $skip: Int!, $limit: Int!) {
+
   allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {tags: {in: $tag}}}) {
     edges {
       node {
@@ -53,5 +61,19 @@ query TagPageQuery($tag: [String]!, $skip: Int!, $limit: Int!) {
       }
     }
   }
+
+  allImageSharp(filter: {fields: {postSlug: {ne: null}}}) {
+    edges {
+      node {
+        original {
+          src
+        }
+        fields {
+          postSlug
+        }
+      }
+    }
+  }
+
 }
 `;
