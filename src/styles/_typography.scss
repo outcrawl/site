@@ -104,3 +104,9 @@ blockquote {
   padding-left: 16px;
   border-left: 4px solid #212121;
 }
+
+.overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

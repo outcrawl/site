@@ -19,14 +19,13 @@ const styles = theme => ({
   }
 });
 
-const Index = props => {
-  const classes = props.classes;
+const Index = ({ classes, children, history }) => {
   return (
     <MuiThemeProvider theme={lightTheme}>
       <div className={classes.root}>
-        <Header />
+        <Header history={history} />
         <main className={classes.content}>
-          {props.children()}
+          {children()}
         </main>
         <Footer />
       </div>
