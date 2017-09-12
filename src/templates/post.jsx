@@ -5,6 +5,7 @@ import PageSection from '../components/PageSection';
 import Tags from '../components/Post/Tags';
 import Share from '../components/Post/Share';
 import Newsletter from '../components/Post/Newsletter';
+import Comments from '../components/Post/Comments';
 import backend from '../utils/backend.js';
 
 class Post extends React.Component {
@@ -41,6 +42,9 @@ class Post extends React.Component {
         </PageSection>
         <PageSection>
           <Newsletter />
+        </PageSection>
+        <PageSection>
+          <Comments threadId={this.post.slug} />
         </PageSection>
       </Page>
     );

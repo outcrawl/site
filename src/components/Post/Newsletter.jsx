@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -9,6 +8,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
+import Button from '../Button';
 import backend from '../../utils/backend.js';
 
 const styles = theme => ({
@@ -22,10 +22,6 @@ const styles = theme => ({
     fontSize: '1.5rem',
     fontWeight: 300,
     marginBottom: '1rem'
-  },
-  button: {
-    backgroundColor: theme.palette.primary[900],
-    color: '#fff'
   }
 });
 
@@ -47,7 +43,7 @@ class Newsletter extends React.Component {
           <p className={classes.lead}>
             Get awesome articles delivered right to your doorstep
         </p>
-          <Button onClick={this.onSubscribeClick} className={classes.button} raised color="primary">Subscribe</Button>
+          <Button onClick={this.onSubscribeClick} primary raised>Subscribe</Button>
         </div>
 
         <Dialog open={this.state.dialogOpen} onRequestClose={this.closeDialog}>
