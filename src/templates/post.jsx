@@ -4,32 +4,48 @@ import Page from '../components/Page';
 import PageSection from '../components/PageSection';
 import Tags from '../components/Post/Tags';
 import Share from '../components/Post/Share';
+import Newsletter from '../components/Post/Newsletter';
+import backend from '../utils/backend.js';
 
-const Post = props => {
-  const { data, pathContext } = props;
-  const post = data.markdownRemark;
-  Object.assign(post, post.frontmatter);
-  Object.assign(post, post.fields);
-  const html = pathContext.html;
-  post.permalink = `${data.site.siteMetadata.siteUrl}${post.slug}`;
+class Post extends React.Component {
+  constructor(props) {
+    super();
 
-  return (
-    <Page contained={true}>
-      <PageSection component="article">
-        <h1>
-          {post.title}
-        </h1>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-      </PageSection>
-      <PageSection half={true}>
-        <Tags post={post} />
-      </PageSection>
-      <PageSection half={true}>
-        <Share post={post} />
-      </PageSection>
-    </Page>
-  );
-};
+    backend.init();
+
+    const { data, pathContext } = props;
+    const post = data.markdownRemark;
+    Object.assign(post, post.frontmatter);
+    Object.assign(post, post.fields);
+    const html = pathContext.html;
+    post.permalink = `${data.site.siteMetadata.siteUrl}${post.slug}`;
+
+    this.post = post;
+    this.html = html;
+  }
+
+  render() {
+    return (
+      <Page contained={true}>
+        <PageSection component="article">
+          <h1>
+            {this.post.title}
+          </h1>
+          <div dangerouslySetInnerHTML={{ __html: this.html }} />
+        </PageSection>
+        <PageSection half>
+          <Tags post={this.post} />
+        </PageSection>
+        <PageSection half>
+          <Share post={this.post} />
+        </PageSection>
+        <PageSection>
+          <Newsletter />
+        </PageSection>
+      </Page>
+    );
+  }
+}
 
 export default Post;
 

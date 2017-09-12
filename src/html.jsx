@@ -30,6 +30,7 @@ module.exports = class HTML extends React.Component {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400,500,700" rel="stylesheet" />
+          <script async defer src="https://apis.google.com/js/api.js"></script>
           {this.props.headComponents}
           {css}
         </head>

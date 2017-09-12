@@ -40,7 +40,8 @@ class Header extends React.Component {
           <form noValidate autoComplete="off" onSubmit={this.onSearch}>
             <TextField
               onChange={this.handleChangeQuery}
-              placeholder="Search..." />
+              InputProps={{disableUnderline: true}}
+              placeholder="Search" />
           </form>
         </Toolbar>
       </AppBar>
