@@ -42,21 +42,20 @@ backend.signIn = () => {
       } else {
         const token = googleUser.getAuthResponse().id_token;
 
-        $.ajax(`${backend.apiUrl}/signin`, {
-            method: 'POST',
+        axios.post(`${backend.apiUrl}/signin`, null, {
             headers: {
               'Accept': 'application/json',
               'Authorization': token
             }
           })
-          .then(data => {
-            backend.user = buildUser(data, googleUser);
+          .then(result => {
+            backend.user = buildUser(result.data, googleUser);
             localStorage.setItem('user', JSON.stringify(backend.user));
             resolve(backend.user);
           })
-          .fail(error => {
+          .catch(error => {
             backend.googleAuth.signOut();
-            reject();
+            reject(error);
           });
       }
     }, reject);

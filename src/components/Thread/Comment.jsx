@@ -70,30 +70,25 @@ const Reply = ({ classes, comment }) => (
   </div>
 );
 
-class Comment extends React.Component {
-  render() {
-    const { classes, comment } = this.props;
-    return (
-      <div className={classes.root}>
-        <img src={comment.user.imageUrl} className={classes.avatar} />
-        <div className={classes.body}>
-          <div className={classes.head}>
-            <span className={classes.userName}>{comment.user.displayName}</span>
-            <span className={classes.date}>{timeago().format(comment.createdAt)}</span>
-          </div>
-          <div
-            className={classes.content}
-            dangerouslySetInnerHTML={{ __html: comment.html }}></div>
-          <Actions classes={classes} comment={comment} />
-          <div>
-            {comment.replies.map(reply =>
-              <Reply key={reply.id} comment={reply} classes={classes} />
-            )}
-          </div>
-        </div>
+const Comment = ({ classes, comment }) => (
+  <div className={classes.root}>
+    <img src={comment.user.imageUrl} className={classes.avatar} />
+    <div className={classes.body}>
+      <div className={classes.head}>
+        <span className={classes.userName}>{comment.user.displayName}</span>
+        <span className={classes.date}>{timeago().format(comment.createdAt)}</span>
       </div>
-    );
-  }
-}
+      <div
+        className={classes.content}
+        dangerouslySetInnerHTML={{ __html: comment.html }}></div>
+      <Actions classes={classes} comment={comment} />
+      <div>
+        {comment.replies.map(reply =>
+          <Reply key={reply.id} comment={reply} classes={classes} />
+        )}
+      </div>
+    </div>
+  </div>
+);
 
 export default withStyles(styles)(Comment);

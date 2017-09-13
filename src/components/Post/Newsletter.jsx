@@ -62,26 +62,29 @@ class Newsletter extends React.Component {
     );
   }
 
+  onSubscribeClick = () => {
+    backend.subscribe()
+      .then(googleUser => {
+        this.showDialog(
+          'You have subscribed!',
+          `See you soon, ${googleUser.getBasicProfile().getGivenName()}!`
+        );
+      })
+      .catch(error => {
+        this.showDialog('Something bad happened.', '');
+      });
+  }
+
   closeDialog = () => {
     this.setState({ dialogOpen: false });
   }
 
-  onSubscribeClick = () => {
-    backend.subscribe()
-      .then(googleUser => {
-        this.setState({
-          title: 'You have subscribed!',
-          message: `See you soon, ${googleUser.getBasicProfile().getGivenName()}!`,
-          dialogOpen: true
-        });
-      })
-      .catch(error => {
-        this.setState({
-          title: 'Something bad happened.',
-          message: '',
-          dialogOpen: true
-        });
-      });
+  showDialog = (title, message) => {
+    this.setState({
+      dialogOpen: true,
+      message: message,
+      title: title
+    });
   }
 }
 

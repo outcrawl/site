@@ -11,7 +11,7 @@ const styles = theme => ({
 
 const Button = props => (
   <MaterialButton
-    className={props.primary ? props.classes.primary : ''}
+    className={`${props.primary ? props.classes.primary : ''} ${props.className}`}
     color={props.primary ? 'primary' : 'default'}
     raised={props.raised}
     onClick={props.onClick}>
