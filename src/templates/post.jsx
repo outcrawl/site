@@ -23,6 +23,7 @@ class Post extends React.Component {
 
     this.post = post;
     this.html = html;
+    this.threadId = post.slug.substr(1, post.slug.length - 2);
   }
 
   render() {
@@ -44,7 +45,7 @@ class Post extends React.Component {
           <Newsletter />
         </PageSection>
         <PageSection>
-          <Comments threadId={this.post.slug} />
+          <Comments threadId={this.threadId} />
         </PageSection>
       </Page>
     );

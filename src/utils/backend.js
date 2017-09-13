@@ -1,4 +1,5 @@
 import axios from 'axios';
+import threadBuilder from './thread-builder';
 
 const backend = {
   apiUrl: 'https://outcrawl-backend.appspot.com/api',
@@ -92,15 +93,15 @@ backend.subscribe = () => {
 
 backend.getThread = id => {
   return new Promise((resolve, reject) => {
-    $.get(`${backend.apiUrl}/threads/${id}`)
-      .done(data => {
-        threadBuilder.build(data)
+    axios.get(`${backend.apiUrl}/threads/${id}`)
+      .then(result => {
+        threadBuilder.build(result.data)
           .then(thread => {
             resolve(thread);
           })
           .catch(reject);
       })
-      .fail(reject);
+      .catch(reject);
   });
 };
 
