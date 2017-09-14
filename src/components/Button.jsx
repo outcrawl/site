@@ -5,7 +5,10 @@ import MaterialButton from 'material-ui/Button';
 const styles = theme => ({
   primary: {
     backgroundColor: theme.palette.primary[900],
-    color: '#fff'
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: theme.palette.primary[700]
+    }
   }
 });
 

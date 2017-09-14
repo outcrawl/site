@@ -2,10 +2,14 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import Button from '../Button';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import TextField from 'material-ui/TextField';
+
+import threadBuilder from '../../utils/thread-builder.js';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    fontSize: 16
   },
   tabIndicator: {
     backgroundColor: theme.palette.primary[900]
@@ -13,18 +17,44 @@ const styles = theme => ({
   tabSelected: {
     color: theme.palette.primary[900]
   },
-  userInfo: {
+  auth: {
     display: 'flex',
     alignItems: 'center'
   },
   authButton: {
     marginLeft: 'auto'
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: '50%',
+    marginRight: 16
+  },
+  actions: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  postInfo: {
+    color: theme.palette.text.secondary,
+    fontSize: 14,
+    marginRight: 8
+  },
+  form: {
+    padding: [8, 0]
+  },
+  commentInput: {
+    margin: [8, 0]
+  },
+  commentPreview: {
+    margin: [8, 0]
   }
 });
 
 class Form extends React.Component {
   state = {
-    tab: 0
+    tab: 0,
+    enteredValue: ''
   };
 
   render() {
@@ -32,8 +62,9 @@ class Form extends React.Component {
     return (
       <div className={classes.root}>
         {user ?
-          <div className={classes.userInfo}>
-            {user.displayName}
+          <div className={classes.auth}>
+            <img src={user.imageUrl} className={classes.avatar} />
+            <div>{user.displayName}</div>
             <Button
               className={classes.authButton}
               onClick={this.props.onSignOutClick}>
@@ -41,7 +72,7 @@ class Form extends React.Component {
             </Button>
           </div>
           :
-          <div className={classes.userInfo}>
+          <div className={classes.auth}>
             <div>Sign in to post a comment</div>
             <Button
               className={classes.authButton}
@@ -50,22 +81,54 @@ class Form extends React.Component {
             </Button>
           </div>
         }
-        <Tabs
-          value={this.state.tab}
-          onChange={this.handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-          indicatorClassName={classes.tabIndicator}>
-          <Tab label="Edit" classes={{ rootPrimarySelected: classes.tabSelected }} />
-          <Tab label="Preview" classes={{ rootPrimarySelected: classes.tabSelected }} />
-        </Tabs>
-        <div>
-          {this.state.tab}
+        <div className={classes.form}>
+          <Tabs
+            value={this.state.tab}
+            onChange={this.handleTabChange}
+            indicatorColor="primary"
+            textColor="primary"
+            indicatorClassName={classes.tabIndicator}>
+            <Tab label="Edit" classes={{ rootPrimarySelected: classes.tabSelected }} />
+            <Tab label="Preview" classes={{ rootPrimarySelected: classes.tabSelected }} />
+          </Tabs>
+          {this.state.tab == 0 ?
+            <TextField
+              multiline
+              fullWidth
+              rows="4"
+              rowsMax="16"
+              placeholder="Write a comment"
+              onChange={this.handleChangePost}
+              value={this.state.enteredValue}
+              className={classes.commentInput} />
+            :
+            <div
+              className={`${classes.commentPreview} markdown`}
+              dangerouslySetInnerHTML={{
+                __html: this.state.enteredValue ?
+                  threadBuilder.parseContent(this.state.enteredValue.trim()) :
+                  'Nothing to preview'
+              }}>
+            </div>
+          }
+          <div className={classes.actions}>
+            <div className={classes.postInfo}>Supports GitHub Flavored Markdown.</div>
+            <Button primary onClick={this.handlePost}>Post</Button>
+          </div>
         </div>
       </div>
     );
   }
+
+  handleChangePost = event => {
+    this.setState({
+      enteredValue: event.target.value,
+    });
+  };
+
+  handlePost = () => {
+    this.props.onPostComment(this.state.enteredValue);
+  };
 
   handleTabChange = (event, value) => {
     this.setState({ tab: value });

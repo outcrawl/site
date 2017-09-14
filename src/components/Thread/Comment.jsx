@@ -63,7 +63,7 @@ const Reply = ({ classes, comment }) => (
         <span className={classes.date}>{timeago().format(comment.createdAt)}</span>
       </div>
       <div
-        className={classes.content}
+        className={`${classes.content} markdown`}
         dangerouslySetInnerHTML={{ __html: comment.html }}></div>
       <Actions classes={classes} comment={comment} />
     </div>
@@ -79,7 +79,7 @@ const Comment = ({ classes, comment }) => (
         <span className={classes.date}>{timeago().format(comment.createdAt)}</span>
       </div>
       <div
-        className={classes.content}
+        className={`${classes.content} markdown`}
         dangerouslySetInnerHTML={{ __html: comment.html }}></div>
       <Actions classes={classes} comment={comment} />
       <div>

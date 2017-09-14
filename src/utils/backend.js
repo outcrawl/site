@@ -113,17 +113,15 @@ backend.createComment = (threadId, text, replyTo) => {
     comment.replyTo = replyTo;
   }
   return new Promise((resolve, reject) => {
-    $.ajax(`${backend.apiUrl}/threads/${threadId}/comments`, {
-        method: 'POST',
+    axios.post(`${backend.apiUrl}/threads/${threadId}/comments`, comment, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': token
-        },
-        data: JSON.stringify(comment)
+        }
       })
-      .done(resolve)
-      .fail(reject);
+      .then(result => resolve(result.data))
+      .catch(reject);
   });
 };
 

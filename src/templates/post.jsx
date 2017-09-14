@@ -7,13 +7,11 @@ import Share from '../components/Post/Share';
 import Newsletter from '../components/Post/Newsletter';
 import Thread from '../components/Thread/Thread';
 import backend from '../utils/backend.js';
+import threadBuilder from '../utils/thread-builder.js';
 
 class Post extends React.Component {
   constructor(props) {
     super();
-
-    backend.init();
-
     const { data, pathContext } = props;
     const post = data.markdownRemark;
     Object.assign(post, post.frontmatter);
@@ -24,6 +22,11 @@ class Post extends React.Component {
     this.post = post;
     this.html = html;
     this.threadId = post.slug.substr(1, post.slug.length - 2);
+  }
+
+  componentDidMount() {
+    threadBuilder.init();
+    backend.init();
   }
 
   render() {

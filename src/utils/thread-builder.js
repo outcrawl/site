@@ -4,7 +4,7 @@ import marked from 'marked';
 
 const threadBuilder = {};
 
-threadBuilder.build = thread => {
+threadBuilder.init = () => {
   const markedRenderer = new marked.Renderer();
   markedRenderer.code = (code, lang) => {
     lang = lang || '';
@@ -27,12 +27,14 @@ threadBuilder.build = thread => {
     tables: false,
     breaks: false,
     pedantic: false,
-    sanitize: true,
+    sanitize: false,
     smartLists: true,
     smartypants: false,
     renderer: markedRenderer
   });
+};
 
+threadBuilder.build = thread => {
   return new Promise((resolve, reject) => {
     threadBuilder.fetchUsers(thread)
       .then(() => {
@@ -41,7 +43,7 @@ threadBuilder.build = thread => {
       })
       .catch(reject);
   });
-}
+};
 
 threadBuilder.fetchUsers = thread => {
   const users = new Map();
@@ -83,7 +85,8 @@ threadBuilder.restructureThread = thread => {
   const commentMap = new Map();
   for (const c of thread.comments) {
     c.text = c.text.replace('\\n', '\n').replace('\\t', '\t');
-    c.html = marked(c.text);
+    c.html = threadBuilder.parseContent(c.text);
+    c.replies = [];
     commentMap.set(c.id, c);
   }
 
@@ -99,11 +102,7 @@ threadBuilder.restructureThread = thread => {
       while (parent.replyTo) {
         parent = commentMap.get(parent.replyTo);
       }
-      if (parent.replies) {
-        parent.replies.push(c);
-      } else {
-        parent.replies = [c];
-      }
+      parent.replies.push(c);
     }
   }
 
@@ -117,12 +116,21 @@ threadBuilder.restructureThread = thread => {
   const sortComments = (list, reversed) => {
     list.sort((a, b) => reversed ? a.createdAt.getTime() - b.createdAt.getTime() : b.createdAt.getTime() - a.createdAt.getTime());
     for (const single of list) {
-      if (single.replies) {
+      if (single.replies.length != 0) {
         sortComments(single.replies, true);
       }
     }
   };
   sortComments(thread.comments);
 }
+
+threadBuilder.parseContent = source => {
+  const text = source
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+  return marked(text);
+};
 
 export default threadBuilder;

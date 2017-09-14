@@ -36,11 +36,8 @@ class Thread extends React.Component {
     }
   };
 
-  constructor(props) {
-    super();
-    this.threadId = props.threadId;
-
-    backend.addOnInitListener(user => this.setState({ user: user }));
+  componentDidMount() {
+    this.threadId = this.props.threadId;
     backend.getThread(this.threadId)
       .then(thread => this.setState({ thread: thread }))
       .catch(error => this.setState({ error: error }));
@@ -56,7 +53,8 @@ class Thread extends React.Component {
         <Form
           user={this.state.user}
           onSignInClick={this.handleSignIn}
-          onSignOutClick={this.handleSignOut} />
+          onSignOutClick={this.handleSignOut}
+          onPostComment={this.handlePostComment} />
         {this.state.thread ?
           <div>
             {this.state.thread.comments.map(comment => (
@@ -94,6 +92,29 @@ class Thread extends React.Component {
   handleSignOut = () => {
     backend.signOut();
     this.setState({ user: null });
+  }
+
+  handlePostComment = text => {
+    text = text.trim();
+    if (!backend.user || text.length == 0) {
+      return;
+    }
+
+    backend.createComment(this.threadId, text)
+      .then(comment => {
+        comment.createdAt = new Date(comment.createdAt);
+        comment.replies = [];
+        comment.user = {
+          displayName: backend.user.displayName,
+          imageUrl: backend.user.imageUrl
+        };
+
+        const thread = this.state.thread;
+        thread.comments.unshift(comment);
+
+        this.setState({ thread: thread });
+      })
+      .catch(error => this.showDialog('Oh no!', 'Something went wrong.'));
   }
 
   closeDialog = () => {
