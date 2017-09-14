@@ -128,14 +128,13 @@ backend.createComment = (threadId, text, replyTo) => {
 backend.deleteComment = (threadId, commentId) => {
   const token = backend.googleAuth.currentUser.get().getAuthResponse().id_token;
   return new Promise((resolve, reject) => {
-    $.ajax(`${backend.apiUrl}/threads/${threadId}/comments/${commentId}`, {
-        method: 'DELETE',
+    axios.delete(`${backend.apiUrl}/threads/${threadId}/comments/${commentId}`, {
         headers: {
           'Authorization': token
         }
       })
-      .done(resolve)
-      .fail(reject);
+      .then(result => resolve(result.data))
+      .catch(reject);
   });
 };
 

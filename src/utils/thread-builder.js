@@ -82,32 +82,35 @@ threadBuilder.fetchUsers = thread => {
 }
 
 threadBuilder.restructureThread = thread => {
-  const commentMap = new Map();
+  const commentMap = {};
+  console.log(thread);
+
   for (const c of thread.comments) {
     c.text = c.text.replace('\\n', '\n').replace('\\t', '\t');
     c.html = threadBuilder.parseContent(c.text);
     c.replies = [];
-    commentMap.set(c.id, c);
+    commentMap[c.id] = c;
   }
 
   for (const c of thread.comments) {
     if (c.replyTo) {
-      let parent = commentMap.get(c.replyTo);
+      let parent = commentMap[c.replyTo];
       if (!parent) {
-        commentMap.delete(c.id);
+        delete commentMap[c.id];
         continue;
       }
 
       c.replyToName = parent.user.displayName;
       while (parent.replyTo) {
-        parent = commentMap.get(parent.replyTo);
+        parent = commentMap[parent.replyTo];
       }
       parent.replies.push(c);
     }
   }
 
   thread.comments = [];
-  for (const c of commentMap.values()) {
+  for (const id of Object.keys(commentMap)) {
+    const c = commentMap[id];
     if (!c.replyTo) {
       thread.comments.push(c);
     }

@@ -17,6 +17,7 @@ const Button = props => (
     className={`${props.primary ? props.classes.primary : ''} ${props.className}`}
     color={props.primary ? 'primary' : 'default'}
     raised={props.raised}
+    dense={props.dense}
     onClick={props.onClick}>
     {props.children}
   </MaterialButton>

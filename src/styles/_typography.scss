@@ -24,12 +24,15 @@ h1, h2, h3, h4, p, a {
   hyphens: auto;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: rgba(0, 0, 0, 0.54);
+}
+
 h1 {
   font-size: 3.75rem;
   font-weight: 300;
   letter-spacing: -.04em;
   margin: 0 0 1.5rem 0;
-  color: rgba(0, 0, 0, 0.54);
 }
 
 h2 {
@@ -37,21 +40,18 @@ h2 {
   font-weight: 400;
   letter-spacing: -.02em;
   margin: 2rem 0 1.5rem 0;
-  color: rgba(0, 0, 0, 0.54);
 }
 
 h3 {
   font-size: 2rem;
   font-weight: 400;
   margin: 1.5rem 0 1rem 0;
-  color: rgba(0, 0, 0, 0.54);
 }
 
 h4 {
   font-size: 1.25rem;
   font-weight: 400;
   margin: 1.5rem 0 1rem 0;
-  color: rgba(0, 0, 0, 0.54);
 }
 
 p {

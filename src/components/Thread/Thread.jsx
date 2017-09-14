@@ -10,6 +10,7 @@ import Dialog, {
 import { CircularProgress } from 'material-ui/Progress';
 
 import backend from '../../utils/backend.js';
+import threadBuilder from '../../utils/thread-builder.js';
 import Button from '../Button';
 import Comment from './Comment';
 import Form from './Form';
@@ -21,6 +22,9 @@ const styles = theme => ({
   progress: {
     display: 'block',
     margin: [0, 'auto']
+  },
+  comments: {
+    marginTop: 24
   }
 });
 
@@ -28,7 +32,6 @@ class Thread extends React.Component {
   state = {
     thread: null,
     user: null,
-    error: null,
     dialog: {
       open: false,
       message: '',
@@ -38,9 +41,10 @@ class Thread extends React.Component {
 
   componentDidMount() {
     this.threadId = this.props.threadId;
+    backend.addOnInitListener(user => this.setState({ user: user }));
     backend.getThread(this.threadId)
       .then(thread => this.setState({ thread: thread }))
-      .catch(error => this.setState({ error: error }));
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -54,19 +58,27 @@ class Thread extends React.Component {
           user={this.state.user}
           onSignInClick={this.handleSignIn}
           onSignOutClick={this.handleSignOut}
-          onPostComment={this.handlePostComment} />
+          postComment={this.postComment} />
         {this.state.thread ?
-          <div>
-            {this.state.thread.comments.map(comment => (
-              <Comment key={comment.id} comment={comment} />
+          <div className={classes.comments}>
+            {this.state.thread.comments.map((comment, i) => (
+              <Comment key={i}
+                comment={comment}
+                postReply={this.postReply}
+                deleteComment={this.deleteComment}>
+                {comment.replies.map((reply, j) => <Comment key={j} reply
+                  comment={reply}
+                  postReply={this.postReply}
+                  deleteComment={this.deleteComment} />)}
+              </Comment>
             ))}
           </div>
           : <CircularProgress className={classes.progress} />}
 
         <Dialog open={this.state.dialog.open} onRequestClose={this.closeDialog}>
-          {this.state.title ? <DialogTitle>{this.state.title}</DialogTitle> : null}
-          {this.state.message ? <DialogContent>
-            <DialogContentText>{this.state.message}</DialogContentText>
+          {this.state.dialog.title ? <DialogTitle>{this.state.dialog.title}</DialogTitle> : null}
+          {this.state.dialog.message ? <DialogContent>
+            <DialogContentText>{this.state.dialog.message}</DialogContentText>
           </DialogContent> : null}
           <DialogActions>
             <Button onClick={this.closeDialog} color="primary">
@@ -94,28 +106,96 @@ class Thread extends React.Component {
     this.setState({ user: null });
   }
 
-  handlePostComment = text => {
+  postComment = text => {
     text = text.trim();
     if (!backend.user || text.length == 0) {
       return;
     }
 
-    backend.createComment(this.threadId, text)
-      .then(comment => {
-        comment.createdAt = new Date(comment.createdAt);
-        comment.replies = [];
-        comment.user = {
-          displayName: backend.user.displayName,
-          imageUrl: backend.user.imageUrl
-        };
+    return new Promise((resolve, reject) => {
+      backend.createComment(this.threadId, text)
+        .then(comment => {
+          comment.createdAt = new Date(comment.createdAt);
+          comment.replies = [];
+          comment.html = threadBuilder.parseContent(comment.text);
+          comment.user = {
+            displayName: backend.user.displayName,
+            imageUrl: backend.user.imageUrl
+          };
 
+          const thread = this.state.thread;
+          thread.comments.unshift(comment);
+
+          this.setState({ thread: thread });
+          resolve();
+        })
+        .catch(error => {
+          this.showDialog('Oh no!', 'Something went wrong.');
+          reject(error);
+        });
+    });
+  }
+
+  postReply = (commentId, text) => {
+    text = text.trim();
+    if (!backend.user || text.length == 0) {
+      return;
+    }
+
+    return new Promise((resolve, reject) => {
+      backend.createComment(this.threadId, text, commentId)
+        .then(comment => {
+          comment.createdAt = new Date(comment.createdAt);
+          comment.html = threadBuilder.parseContent(comment.text);
+          comment.user = {
+            displayName: backend.user.displayName,
+            imageUrl: backend.user.imageUrl
+          };
+
+          // Find original comment
+          const thread = this.state.thread;
+          let parent = thread.comments.find(c => c.id == commentId);
+          if (!parent) {
+            for (const c of thread.comments) {
+              if (c.replies) {
+                parent = c.replies.find(r => r.id == commentId);
+                if (parent) {
+                  break;
+                }
+              }
+            }
+          }
+          comment.replyToName = parent.user.displayName;
+
+          // Update parent
+          if (parent.replyTo) {
+            parent = thread.comments.find(c => c.replies && c.replies.find(r => r.id = parent.id) != null);
+          }
+          parent.replies.push(comment);
+
+          // Update state
+          this.setState({ thread: thread });
+          resolve();
+        })
+        .catch(error => {
+          this.showDialog('Oh no!', 'Something went wrong.');
+          reject(error);
+        });
+    });
+  }
+
+  deleteComment = commentId => {
+    backend.deleteComment(this.threadId, commentId)
+      .then(() => {
         const thread = this.state.thread;
-        thread.comments.unshift(comment);
-
+        thread.comments = thread.comments.filter(c => c.id != commentId);
+        for (const c of thread.comments) {
+          c.replies = c.replies.filter(rc => rc.id != commentId);
+        }
         this.setState({ thread: thread });
       })
-      .catch(error => this.showDialog('Oh no!', 'Something went wrong.'));
-  }
+      .catch(() => this.showDialog('Oh no!', 'Could not delete this comment.'));
+  };
 
   closeDialog = () => {
     this.setState({ dialog: { open: false } });

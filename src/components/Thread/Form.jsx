@@ -62,14 +62,51 @@ class Form extends React.Component {
     return (
       <div className={classes.root}>
         {user ?
-          <div className={classes.auth}>
-            <img src={user.imageUrl} className={classes.avatar} />
-            <div>{user.displayName}</div>
-            <Button
-              className={classes.authButton}
-              onClick={this.props.onSignOutClick}>
-              Sign out
+          <div>
+            <div className={classes.auth}>
+              <img src={user.imageUrl} className={classes.avatar} />
+              <div>{user.displayName}</div>
+              <Button
+                className={classes.authButton}
+                onClick={this.props.onSignOutClick}>
+                Sign out
             </Button>
+            </div>
+            <div className={classes.form}>
+              <Tabs
+                value={this.state.tab}
+                onChange={this.handleTabChange}
+                indicatorColor="primary"
+                textColor="primary"
+                indicatorClassName={classes.tabIndicator}>
+                <Tab label="Edit" classes={{ rootPrimarySelected: classes.tabSelected }} />
+                <Tab label="Preview" classes={{ rootPrimarySelected: classes.tabSelected }} />
+              </Tabs>
+              {this.state.tab == 0 ?
+                <TextField
+                  multiline
+                  fullWidth
+                  rows="4"
+                  rowsMax="16"
+                  placeholder="Write a comment"
+                  onChange={this.handleChangePost}
+                  value={this.state.enteredValue}
+                  className={classes.commentInput} />
+                :
+                <div
+                  className={`${classes.commentPreview} markdown`}
+                  dangerouslySetInnerHTML={{
+                    __html: this.state.enteredValue ?
+                      threadBuilder.parseContent(this.state.enteredValue.trim()) :
+                      'Nothing to preview'
+                  }}>
+                </div>
+              }
+              <div className={classes.actions}>
+                <div className={classes.postInfo}>Supports GitHub Flavored Markdown.</div>
+                <Button primary onClick={this.handlePost}>Post</Button>
+              </div>
+            </div>
           </div>
           :
           <div className={classes.auth}>
@@ -81,41 +118,6 @@ class Form extends React.Component {
             </Button>
           </div>
         }
-        <div className={classes.form}>
-          <Tabs
-            value={this.state.tab}
-            onChange={this.handleTabChange}
-            indicatorColor="primary"
-            textColor="primary"
-            indicatorClassName={classes.tabIndicator}>
-            <Tab label="Edit" classes={{ rootPrimarySelected: classes.tabSelected }} />
-            <Tab label="Preview" classes={{ rootPrimarySelected: classes.tabSelected }} />
-          </Tabs>
-          {this.state.tab == 0 ?
-            <TextField
-              multiline
-              fullWidth
-              rows="4"
-              rowsMax="16"
-              placeholder="Write a comment"
-              onChange={this.handleChangePost}
-              value={this.state.enteredValue}
-              className={classes.commentInput} />
-            :
-            <div
-              className={`${classes.commentPreview} markdown`}
-              dangerouslySetInnerHTML={{
-                __html: this.state.enteredValue ?
-                  threadBuilder.parseContent(this.state.enteredValue.trim()) :
-                  'Nothing to preview'
-              }}>
-            </div>
-          }
-          <div className={classes.actions}>
-            <div className={classes.postInfo}>Supports GitHub Flavored Markdown.</div>
-            <Button primary onClick={this.handlePost}>Post</Button>
-          </div>
-        </div>
       </div>
     );
   }
@@ -127,7 +129,8 @@ class Form extends React.Component {
   };
 
   handlePost = () => {
-    this.props.onPostComment(this.state.enteredValue);
+    this.props.postComment(this.state.enteredValue)
+      .then(() => this.setState({ enteredValue: '' }));
   };
 
   handleTabChange = (event, value) => {

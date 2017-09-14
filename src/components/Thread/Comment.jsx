@@ -1,13 +1,15 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import timeago from 'timeago.js';
+import TextField from 'material-ui/TextField';
 
 import backend from '../../utils/backend.js';
 import Button from '../Button';
 
 const styles = theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    marginBottom: 16
   },
   avatar: {
     width: 40,
@@ -20,7 +22,8 @@ const styles = theme => ({
     borderRadius: '50%'
   },
   body: {
-    paddingLeft: 16
+    paddingLeft: 16,
+    width: '100%'
   },
   head: {
     fontSize: 14
@@ -35,60 +38,140 @@ const styles = theme => ({
   content: {
     fontSize: 16,
     padding: [8, 0]
+  },
+  actions: {
+    marginLeft: -8,
+    marginTop: -8
+  },
+  actionButton: {
+    minWidth: 0,
+    color: theme.palette.text.secondary
+  },
+  replies: {
+    marginTop: 16
+  },
+  replyActions: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: 8
+  },
+  replyActionButton: {
+    marginLeft: 8
   }
 });
 
-const Actions = ({ classes, comment }) => (
-  <div>
-    {backend.user ? (
-      backend.user.admin ? (
-        <span>
-          <Button>Reply</Button>
-          <Button>Delete</Button>
-          <Button>Ban user</Button>
-        </span>
-      ) : (
-          <Button>Reply</Button>
-        )
-    ) : ''}
-  </div>
-);
+class Comment extends React.Component {
+  state = {
+    replyFormVisible: false,
+    replyText: ''
+  };
 
-const Reply = ({ classes, comment }) => (
-  <div className={classes.root}>
-    <img src={comment.user.imageUrl} className={classes.replyAvatar} />
-    <div className={classes.body}>
-      <div className={classes.head}>
-        <span className={classes.userName}>{comment.user.displayName}</span>
-        <span className={classes.date}>{timeago().format(comment.createdAt)}</span>
-      </div>
-      <div
-        className={`${classes.content} markdown`}
-        dangerouslySetInnerHTML={{ __html: comment.html }}></div>
-      <Actions classes={classes} comment={comment} />
-    </div>
-  </div>
-);
+  constructor(props) {
+    super();
+    this.commentId = props.comment.id;
+  }
 
-const Comment = ({ classes, comment }) => (
-  <div className={classes.root}>
-    <img src={comment.user.imageUrl} className={classes.avatar} />
-    <div className={classes.body}>
-      <div className={classes.head}>
-        <span className={classes.userName}>{comment.user.displayName}</span>
-        <span className={classes.date}>{timeago().format(comment.createdAt)}</span>
+  render() {
+    const { classes, comment, children } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <img src={comment.user.imageUrl} className={this.props.reply ? classes.replyAvatar : classes.avatar} />
+        <div className={classes.body}>
+          <div className={classes.head}>
+            <span className={classes.userName}>{comment.user.displayName}</span>
+            <span className={classes.date}>{timeago().format(comment.createdAt)}</span>
+          </div>
+          <div
+            className={`${classes.content} markdown`}
+            dangerouslySetInnerHTML={{ __html: comment.html }}></div>
+          {this.renderActions(comment)}
+          {this.state.replyFormVisible ? this.renderReplyForm() : ''}
+          {children && children.length != 0 ?
+            <div className={classes.replies}>
+              {children}
+            </div> : ''
+          }
+        </div>
       </div>
-      <div
-        className={`${classes.content} markdown`}
-        dangerouslySetInnerHTML={{ __html: comment.html }}></div>
-      <Actions classes={classes} comment={comment} />
+    );
+  }
+
+  renderReplyForm = () => {
+    const { classes } = this.props;
+    return (
       <div>
-        {comment.replies.map(reply =>
-          <Reply key={reply.id} comment={reply} classes={classes} />
-        )}
+        <TextField
+          multiline
+          fullWidth
+          rows="4"
+          rowsMax="16"
+          placeholder="Write a reply"
+          onChange={this.handleReplyChange}
+          value={this.state.replyText}
+          className={classes.replyInput} />
+        <div className={classes.replyActions}>
+          <Button
+            onClick={this.handleCancelReply}
+            className={classes.replyActionButton}>Cancel</Button>
+          <Button primary
+            onClick={this.handlePostReply}
+            className={classes.replyActionButton}>Post</Button>
+        </div>
       </div>
-    </div>
-  </div>
-);
+    );
+  };
+
+  renderActions = comment => {
+    const { classes } = this.props;
+    return (
+      backend.user ? (
+        backend.user.admin ? (
+          <div className={classes.actions}>
+            <Button dense
+              className={classes.actionButton}
+              onClick={this.handleReplyClick}>Reply</Button>
+            <Button dense
+              className={classes.actionButton}
+              onClick={this.handleDelete}>Delete</Button>
+          </div>
+        ) :
+          (
+            <div className={classes.actions}>
+              <Button dense
+                className={classes.actionButton}
+                onClick={this.handleReplyClick}>Reply</Button>
+            </div>
+          )
+      ) : null
+    );
+  };
+
+  handleReplyClick = () => {
+    this.setState({ replyFormVisible: true });
+  };
+
+  handleReplyChange = event => {
+    this.setState({ replyText: event.target.value });
+  };
+
+  handlePostReply = () => {
+    this.props.postReply(this.commentId, this.state.replyText)
+      .then(() => {
+        this.setState({
+          replyFormVisible: false,
+          replyText: ''
+        });
+      });
+  };
+
+  handleDelete = () => {
+    this.props.deleteComment(this.commentId);
+  };
+
+  handleCancelReply = () => {
+    this.setState({ replyFormVisible: false });
+  };
+}
 
 export default withStyles(styles)(Comment);
