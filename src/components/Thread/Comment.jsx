@@ -2,9 +2,9 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import timeago from 'timeago.js';
 import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 
 import backend from '../../utils/backend.js';
-import Button from '../Button';
 
 const styles = theme => ({
   root: {
@@ -116,6 +116,8 @@ class Comment extends React.Component {
             className={classes.replyActionButton}>Cancel</Button>
           <Button primary
             onClick={this.handlePostReply}
+            color="primary"
+            raised
             className={classes.replyActionButton}>Post</Button>
         </div>
       </div>

@@ -2,8 +2,8 @@ import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
+import IconButton from 'material-ui/IconButton';
 
-import IconButton from './IconButton';
 import { ChevronLeftIcon, ChevronRightIcon } from './Icons';
 
 const styles = theme => ({

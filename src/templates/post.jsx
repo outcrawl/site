@@ -1,4 +1,5 @@
 import React from 'react';
+import Grid from 'material-ui/Grid';
 
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
@@ -6,6 +7,7 @@ import Tags from '../components/Post/Tags';
 import Share from '../components/Post/Share';
 import Newsletter from '../components/Post/Newsletter';
 import Thread from '../components/Thread/Thread';
+import Author from '../components/Author';
 import backend from '../utils/backend.js';
 import threadBuilder from '../utils/thread-builder.js';
 

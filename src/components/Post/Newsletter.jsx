@@ -7,8 +7,8 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 
-import Button from '../Button';
 import backend from '../../utils/backend.js';
 
 const styles = theme => ({
@@ -43,7 +43,7 @@ class Newsletter extends React.Component {
           <p className={classes.lead}>
             Get awesome articles delivered right to your doorstep
         </p>
-          <Button onClick={this.onSubscribeClick} primary raised>Subscribe</Button>
+          <Button onClick={this.onSubscribeClick} color="primary" raised>Subscribe</Button>
         </div>
 
         <Dialog open={this.state.dialogOpen} onRequestClose={this.closeDialog}>

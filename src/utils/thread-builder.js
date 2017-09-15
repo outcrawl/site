@@ -83,8 +83,6 @@ threadBuilder.fetchUsers = thread => {
 
 threadBuilder.restructureThread = thread => {
   const commentMap = {};
-  console.log(thread);
-
   for (const c of thread.comments) {
     c.text = c.text.replace('\\n', '\n').replace('\\t', '\t');
     c.html = threadBuilder.parseContent(c.text);

@@ -8,10 +8,10 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 import { CircularProgress } from 'material-ui/Progress';
+import Button from 'material-ui/Button';
 
 import backend from '../../utils/backend.js';
 import threadBuilder from '../../utils/thread-builder.js';
-import Button from '../Button';
 import Comment from './Comment';
 import Form from './Form';
 
@@ -188,9 +188,9 @@ class Thread extends React.Component {
     backend.deleteComment(this.threadId, commentId)
       .then(() => {
         const thread = this.state.thread;
-        thread.comments = thread.comments.filter(c => c.id != commentId);
+        thread.comments = thread.comments.filter(c => c.id != commentId && c.replyTo != commentId);
         for (const c of thread.comments) {
-          c.replies = c.replies.filter(rc => rc.id != commentId);
+          c.replies = c.replies.filter(rc => rc.id != commentId && rc.replyTo != commentId);
         }
         this.setState({ thread: thread });
       })

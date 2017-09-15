@@ -9,6 +9,26 @@ const lightTheme = createMuiTheme({
   palette: {
     primary: grey,
     secondary: lightBlue
+  },
+  overrides: {
+    MuiButton: {
+      raisedPrimary: {
+        backgroundColor: grey[900],
+        color: '#fff',
+        '&:hover': {
+          backgroundColor: grey[700]
+        }
+      }
+    },
+    MuiIconButton: {
+      root: {
+        fontSize: 18,
+        fontWeight: 500,
+        lineHeight: '24px',
+        verticalAlign: 'middle',
+        textDecoration: 'none'
+      }
+    }
   }
 });
 

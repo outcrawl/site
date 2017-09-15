@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
-import Button from '../Button';
+import Button from 'material-ui/Button';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import TextField from 'material-ui/TextField';
 
@@ -48,6 +48,9 @@ const styles = theme => ({
   },
   commentPreview: {
     margin: [8, 0]
+  },
+  postButton: {
+
   }
 });
 
@@ -104,7 +107,7 @@ class Form extends React.Component {
               }
               <div className={classes.actions}>
                 <div className={classes.postInfo}>Supports GitHub Flavored Markdown.</div>
-                <Button primary onClick={this.handlePost}>Post</Button>
+                <Button color="primary" raised onClick={this.handlePost}>Post</Button>
               </div>
             </div>
           </div>
