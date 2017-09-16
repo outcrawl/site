@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
+import { withStyles } from 'material-ui/styles';
 
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
@@ -10,6 +11,12 @@ import Thread from '../components/Thread/Thread';
 import Author from '../components/Author';
 import backend from '../utils/backend.js';
 import threadBuilder from '../utils/thread-builder.js';
+
+const styles = theme => ({
+  author: {
+    marginBottom: 8
+  }
+});
 
 class Post extends React.Component {
   constructor(props) {
@@ -32,12 +39,21 @@ class Post extends React.Component {
   }
 
   render() {
+    const classes = this.props.classes;
     return (
       <Page contained={true}>
         <PageSection component="article">
           <h1>
             {this.post.title}
           </h1>
+          <Grid container spacing={0} className={classes.author}>
+            <Grid item xs={12} sm={6}>
+              <Author post={this.post} dark />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Share post={this.post} />
+            </Grid>
+          </Grid>
           <div dangerouslySetInnerHTML={{ __html: this.html }} />
         </PageSection>
         <PageSection half>
@@ -57,7 +73,7 @@ class Post extends React.Component {
   }
 }
 
-export default Post;
+export default withStyles(styles)(Post);
 
 export const pageQuery = graphql`
   query PostQuery($slug: String!) {

@@ -21,8 +21,8 @@ const styles = theme => ({
     height: 36
   },
   icon: {
-    width: 20,
-    height: 20,
+    width: '20px !important',
+    height: '20px !important',
     fill: '#fff'
   }
 });
