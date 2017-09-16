@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
+import TextField from 'material-ui/TextField';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -29,7 +30,8 @@ class Newsletter extends React.Component {
   state = {
     dialogOpen: false,
     message: '',
-    title: ''
+    title: '',
+    email: ''
   };
 
   render() {
@@ -43,7 +45,23 @@ class Newsletter extends React.Component {
           <p className={classes.lead}>
             Get awesome articles delivered right to your doorstep
         </p>
-          <Button onClick={this.onSubscribeClick} color="primary" raised>Subscribe</Button>
+
+          <form className={classes.container} autoComplete="on" onSubmit={this.handleSubscribe}>
+            <TextField
+              required
+              type="email"
+              name="email"
+              value={this.state.value}
+              onChange={this.handleChangeEmail}
+              placeholder="Email"
+              autoComplete="email"
+              margin="none" />
+            <Button
+              type="submit"
+              color="primary"
+              raised>Subscribe</Button>
+          </form>
+
         </div>
 
         <Dialog open={this.state.dialogOpen} onRequestClose={this.closeDialog}>
@@ -62,13 +80,18 @@ class Newsletter extends React.Component {
     );
   }
 
-  onSubscribeClick = () => {
-    backend.subscribe()
-      .then(googleUser => {
-        this.showDialog(
-          'You have subscribed!',
-          `See you soon, ${googleUser.getBasicProfile().getGivenName()}!`
-        );
+  handleChangeEmail = event => {
+    this.setState({ email: event.target.value });
+  }
+
+  handleSubscribe = () => {
+    const email = this.state.email.trim();
+    if (email.length == 0) {
+      return;
+    }
+    backend.subscribe(email)
+      .then(() => {
+        this.showDialog('You have subscribed!', '');
       })
       .catch(error => {
         this.showDialog('Something bad happened.', '');

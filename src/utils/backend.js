@@ -68,25 +68,11 @@ backend.signOut = () => {
   backend.googleAuth.signOut();
 };
 
-backend.subscribe = () => {
+backend.subscribe = (email) => {
   return new Promise((resolve, reject) => {
-    backend.googleAuth.signIn({
-        'prompt': 'consent',
-      })
-      .then(googleUser => {
-        if (googleUser.error) {
-          reject(googleUser.error);
-        } else {
-          const token = googleUser.getAuthResponse().id_token;
-          axios.post(`${backend.apiUrl}/mail/subscribe`, null, {
-              headers: {
-                'Authorization': token
-              }
-            })
-            .then(_ => resolve(googleUser))
-            .catch(reject);
-        }
-      }, reject);
+    axios.post(`${backend.apiUrl}/mail/subscribe/${email}`, null)
+      .then(_ => resolve())
+      .catch(reject);
   });
 };
 

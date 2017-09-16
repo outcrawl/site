@@ -22,6 +22,11 @@ h1, h2, h3, h4, p, a {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+  cursor: text;
+}
+
+a {
+  cursor: pointer;
 }
 
 h1, h2, h3, h4, h5, h6 {
