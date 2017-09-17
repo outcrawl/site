@@ -68,9 +68,9 @@ backend.signOut = () => {
   backend.googleAuth.signOut();
 };
 
-backend.subscribe = (email) => {
+backend.subscribe = (email, reCaptcha) => {
   return new Promise((resolve, reject) => {
-    axios.post(`${backend.apiUrl}/mail/subscribe/${email}`, null)
+    axios.post(`${backend.apiUrl}/mail/subscribe/${email}/${reCaptcha}`, null)
       .then(_ => resolve())
       .catch(reject);
   });

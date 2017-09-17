@@ -27,6 +27,10 @@ h1, h2, h3, h4, p, a {
 
 a {
   cursor: pointer;
+
+  h2 {
+    cursor: pointer;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -124,7 +128,7 @@ blockquote {
     width: 100%;
   }
 
-  :last-child {
+   :last-child {
     margin-bottom: 0 !important;
   }
 

@@ -9,6 +9,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import backend from '../../utils/backend.js';
 
@@ -23,6 +24,11 @@ const styles = theme => ({
     fontSize: '1.5rem',
     fontWeight: 300,
     marginBottom: '1rem'
+  },
+  captchaNote: {
+    fontSize: 13,
+    color: theme.palette.text.secondary,
+    padding: [8, 0]
   }
 });
 
@@ -33,6 +39,7 @@ class Newsletter extends React.Component {
     title: '',
     email: ''
   };
+  captcha = null;
 
   render() {
     const classes = this.props.classes;
@@ -60,6 +67,16 @@ class Newsletter extends React.Component {
               type="submit"
               color="primary"
               raised>Subscribe</Button>
+            <ReCAPTCHA
+              style={{ display: 'none' }}
+              ref={e => { this.captcha = e; }}
+              size="invisible"
+              sitekey="6LcCEDEUAAAAAKvjiu87ZjZn7FZOX4LI-7tKyOLW"
+              badge="inline"
+              onChange={this.handleReCaptchaChange} />
+            <div className={classes.captchaNote}>
+              Protected by reCAPTCHA <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
+            </div>
           </form>
 
         </div>
@@ -84,18 +101,9 @@ class Newsletter extends React.Component {
     this.setState({ email: event.target.value });
   }
 
-  handleSubscribe = () => {
-    const email = this.state.email.trim();
-    if (email.length == 0) {
-      return;
-    }
-    backend.subscribe(email)
-      .then(() => {
-        this.showDialog('You have subscribed!', '');
-      })
-      .catch(error => {
-        this.showDialog('Something bad happened.', '');
-      });
+  handleSubscribe = event => {
+    event.preventDefault();
+    this.captcha.execute();
   }
 
   closeDialog = () => {
@@ -108,6 +116,22 @@ class Newsletter extends React.Component {
       message: message,
       title: title
     });
+  }
+
+  handleReCaptchaChange = value => {
+    const email = this.state.email.trim();
+    if (email.length == 0) {
+      return;
+    }
+    backend.subscribe(email, value)
+      .then(() => {
+        this.showDialog('You have subscribed!', '');
+        this.captcha.reset();
+      })
+      .catch(error => {
+        this.showDialog('Something bad happened.', '');
+        this.captcha.reset();
+      });
   }
 }
 
