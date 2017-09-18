@@ -58,7 +58,9 @@ module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
     description: 'Software development tutorials without nonsense',
-    siteUrl: 'https://outcrawl.com',
+    siteUrl: process.env.NODE_ENV == 'production' ? 'https://outcrawl.com' : 'http://localhost:8000',
+    keywords: ['software', 'development', 'tutorial', 'go', 'angular', 'typescript'],
+    facebookPublisherUrl: 'https://www.facebook.com/outcrawl',
     postsPerPage: 3
   },
   plugins: [
@@ -68,6 +70,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-react-helmet',
     remark,
     sass,
     fs,

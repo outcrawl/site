@@ -9,6 +9,7 @@ import Share from '../components/Post/Share';
 import Newsletter from '../components/Post/Newsletter';
 import Thread from '../components/Thread/Thread';
 import Author from '../components/Author';
+import Meta from '../components/Post/Meta';
 import backend from '../utils/backend.js';
 import threadBuilder from '../utils/thread-builder.js';
 
@@ -42,6 +43,7 @@ class Post extends React.Component {
     const classes = this.props.classes;
     return (
       <Page contained={true}>
+        <Meta post={this.post} meta={this.props.data.site.siteMetadata} />
         <PageSection component="article">
           <h1>
             {this.post.title}
@@ -90,12 +92,21 @@ export const pageQuery = graphql`
         authorData {
           name
           emailHash
+          social {
+            twitter
+            github
+            facebook
+            googlePlus
+          }
         }
       }
     }
     site {
       siteMetadata {
+        title
+        description
         siteUrl
+        facebookPublisherUrl
       }
     }
   }
