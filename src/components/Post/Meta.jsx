@@ -25,7 +25,7 @@ const Meta = ({ post, meta }) => (
     <meta property="og:title" content={post.title} />
     {post.authorData.social.facebook ? <meta property="article:author" content={post.authorData.social.facebook} /> : ''}
     <meta property="og:url" content={post.permalink} />
-    <meta property="og:image" content="cover" />
+    <meta property="og:image" content={post.coverSrc} />
     <meta property="og:image:width" content="1280" />
     <meta property="og:image:height" content="720" />
     <meta property="og:description" content={post.description} />
@@ -34,7 +34,7 @@ const Meta = ({ post, meta }) => (
 
     {/* Twitter */}
     <meta name="twitter:description" content={post.description} />
-    <meta name="twitter:image:src" content="cover" />
+    <meta name="twitter:image:src" content={post.coverSrc} />
     <meta name="twitter:site" content="@tinrab" />
     <meta name="twitter:card" content="summary_large_image" />
     {post.authorData.social.twitter ? <meta name="twitter:creator" content={`@${post.authorData.social.twitter}`} /> : ''}

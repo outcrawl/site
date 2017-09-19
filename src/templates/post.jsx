@@ -23,15 +23,17 @@ class Post extends React.Component {
   constructor(props) {
     super();
     const { data, pathContext } = props;
-    const post = data.markdownRemark;
-    Object.assign(post, post.frontmatter);
-    Object.assign(post, post.fields);
-    const html = pathContext.html;
-    post.permalink = `${data.site.siteMetadata.siteUrl}${post.slug}`;
 
-    this.post = post;
-    this.html = html;
-    this.threadId = post.slug.substr(1, post.slug.length - 2);
+    this.meta = data.site.siteMetadata;
+
+    this.post = data.markdownRemark;
+    Object.assign(this.post, this.post.frontmatter);
+    Object.assign(this.post, this.post.fields);
+    this.post.permalink = `${this.meta.siteUrl}${this.post.slug}`;
+    this.post.coverSrc = data.imageSharp.original.src;
+
+    this.html = pathContext.html;
+    this.threadId = this.post.slug.substr(1, this.post.slug.length - 2);
   }
 
   componentDidMount() {
@@ -43,7 +45,7 @@ class Post extends React.Component {
     const classes = this.props.classes;
     return (
       <Page contained={true}>
-        <Meta post={this.post} meta={this.props.data.site.siteMetadata} />
+        <Meta post={this.post} meta={this.meta} />
         <PageSection component="article">
           <h1>
             {this.post.title}
@@ -107,6 +109,12 @@ export const pageQuery = graphql`
         description
         siteUrl
         facebookPublisherUrl
+      }
+    }
+    imageSharp(fields: {postSlug: {eq: $slug}}) {
+      id
+      original {
+        src
       }
     }
   }
