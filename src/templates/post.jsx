@@ -103,6 +103,7 @@ export const pageQuery = graphql`
         }
       }
     }
+
     site {
       siteMetadata {
         title
@@ -111,6 +112,7 @@ export const pageQuery = graphql`
         facebookPublisherUrl
       }
     }
+
     imageSharp(fields: {postSlug: {eq: $slug}}) {
       id
       original {
