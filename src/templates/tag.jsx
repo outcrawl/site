@@ -5,6 +5,7 @@ import Page from '../components/Page';
 import PageSection from '../components/PageSection';
 import Entry from '../components/Entry';
 import Pagination from '../components/Pagination';
+import FeaturedImage from '../images/featured.jpg';
 
 const TagPage = props => {
   const { data, pathContext } = props;

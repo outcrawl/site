@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import Divider from 'material-ui/Divider';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
+import Helmet from 'react-helmet';
 
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
@@ -14,6 +15,7 @@ import {
   FacebookIcon,
   GooglePlusIcon
 } from '../components/Icons';
+import Meta from '../components/Meta';
 
 const styles = theme => ({
   icon: {
@@ -57,7 +59,9 @@ const styles = theme => ({
 const AuthorPage = props => {
   const { data, pathContext } = props;
   const author = pathContext.authorData;
+  author.slug = pathContext.author;
   const classes = props.classes;
+  const siteMeta = data.site.siteMetadata;
 
   const postsForDate = [];
   let lastDate = null;
@@ -110,6 +114,17 @@ const AuthorPage = props => {
 
   return (
     <Page contained={true}>
+      <Meta siteMeta={siteMeta} />
+      <Helmet>
+        <title>{`${author.name} - ${siteMeta.title}`}</title>
+        <meta name="description" content={siteMeta.description} />
+        <meta name="twitter:description" content={siteMeta.description} />
+        <meta property="al:web:url" content={`${siteMeta.siteUrl}/authors/${author.slug}`} />
+        <meta property="og:title" content={`${author.name} - ${siteMeta.title}`} />
+        <meta property="og:url" content={`${siteMeta.siteUrl}/authors/${author.slug}`} />
+        <meta property="og:description" content={siteMeta.description} />
+      </Helmet>
+
       <PageSection className={classes.profile}>
         <img
           alt={author.name}
@@ -164,6 +179,16 @@ export const pageQuery = graphql`
             slugTags
           }
         }
+      }
+    }
+
+    site {
+      siteMetadata {
+        title
+        description
+        siteUrl
+        facebookPublisherUrl
+        keywords
       }
     }
   }

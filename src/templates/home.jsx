@@ -20,29 +20,31 @@ const HomePage = props => {
         cover: coverImage ? coverImage.node.original.src : null
       };
     });
-  const meta = data.site.siteMetadata;
+  const siteMeta = data.site.siteMetadata;
 
   return (
     <Page>
       <Helmet>
-        <title>{meta.title}</title>
-        <meta name="title" content={`${meta.title} - ${meta.description}`} />
-        <meta name="description" content={meta.description} />
-        <meta name="keywords" content={meta.keywords.join(',')} />
-        <meta property="og:title" content={`${meta.title} - ${meta.description}`} />
-        <meta property="og:url" content={meta.siteUrl} />
-        <meta property="og:description" content={meta.description} />
-        <meta property="og:site_name" content={meta.title} />
+        <title>{siteMeta.title}</title>
+        <meta name="title" content={`${siteMeta.title} - ${siteMeta.description}`} />
+        <meta name="description" content={siteMeta.description} />
+
+        <meta name="keywords" content={siteMeta.keywords.join(',')} />
+        <meta property="og:title" content={`${siteMeta.title} - ${siteMeta.description}`} />
+        <meta property="og:url" content={siteMeta.siteUrl} />
+        <meta property="og:description" content={siteMeta.description} />
+        <meta property="og:site_name" content={siteMeta.title} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={FeaturedImage} />
-        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:description" content={siteMeta.description} />
         <meta name="twitter:image:src" content={FeaturedImage} />
         <meta name="twitter:site" content="@tinrab" />
         <meta name="twitter:creator" content="@tinrab" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="al:web:url" content={meta.siteUrl} />
+        <meta property="al:web:url" content={siteMeta.siteUrl} />
         <meta name="google" content="notranslate" />
       </Helmet>
+
       {posts.map(post =>
         <Entry key={post.slug} post={post} />
       )}
@@ -55,40 +57,38 @@ export default HomePage;
 
 export const pageQuery = graphql`
 query HomePageQuery($skip: Int!, $limit: Int!) {
-        allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {layout: {eq: "post"}}}, sort: {fields: [frontmatter___date], order: DESC}) {
-        edges {
+  allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {layout: {eq: "post"}}}, sort: {fields: [frontmatter___date], order: DESC}) {
+    edges {
       node {
         frontmatter {
-      title
+          title
           author
           date(formatString: "DD MMMM, YYYY")
         }
         fields {
-        slug
+          slug
           authorData {
-        name
+            name
             emailHash
-      }
+          }
         }
       }
     }
   }
-
   allImageSharp(filter: {fields: {postSlug: {ne: null}}}) {
-        edges {
+    edges {
       node {
         original {
-      src
+          src
         }
         fields {
-        postSlug
-      }
+          postSlug
+        }
       }
     }
   }
-
   site {
-        siteMetadata {
+    siteMetadata {
       title
       description
       siteUrl
