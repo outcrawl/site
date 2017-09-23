@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
+import Helmet from 'react-helmet';
 
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
@@ -46,6 +47,9 @@ class Post extends React.Component {
     return (
       <Page contained={true}>
         <Meta post={this.post} meta={this.meta} />
+        <Helmet>
+          <meta property="og:type" content="article" />
+        </Helmet>
         <PageSection component="article">
           <h1>
             {this.post.title}

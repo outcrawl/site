@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import Page from '../components/Page';
 import Entry from '../components/Entry';
 import Pagination from '../components/Pagination';
-import FeaturedImage from '../images/featured.jpg';
+import Meta from '../components/Meta';
 
 const HomePage = props => {
   const { data, pathContext } = props;
@@ -24,25 +24,19 @@ const HomePage = props => {
 
   return (
     <Page>
+      <Meta siteMeta={siteMeta} />
       <Helmet>
         <title>{siteMeta.title}</title>
         <meta name="title" content={`${siteMeta.title} - ${siteMeta.description}`} />
         <meta name="description" content={siteMeta.description} />
 
-        <meta name="keywords" content={siteMeta.keywords.join(',')} />
         <meta property="og:title" content={`${siteMeta.title} - ${siteMeta.description}`} />
         <meta property="og:url" content={siteMeta.siteUrl} />
         <meta property="og:description" content={siteMeta.description} />
         <meta property="og:site_name" content={siteMeta.title} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={FeaturedImage} />
         <meta name="twitter:description" content={siteMeta.description} />
-        <meta name="twitter:image:src" content={FeaturedImage} />
-        <meta name="twitter:site" content="@tinrab" />
-        <meta name="twitter:creator" content="@tinrab" />
-        <meta name="twitter:card" content="summary_large_image" />
         <meta property="al:web:url" content={siteMeta.siteUrl} />
-        <meta name="google" content="notranslate" />
       </Helmet>
 
       {posts.map(post =>
