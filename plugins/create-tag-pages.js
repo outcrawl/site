@@ -57,7 +57,8 @@ exports.createTagPages = params => {
           const path = slug(tag, {
             lower: true
           });
-          const basePath = `/tags/${slug(tag,{lower:true})}/`;
+          const tagSlug = slug(tag,{lower:true});
+          const basePath = `/tags/${tagSlug}/`;
           let page = 1;
 
           for (let i = 0; i < total; i += postsPerPage) {
@@ -69,6 +70,7 @@ exports.createTagPages = params => {
                 limit: postsPerPage,
                 total: total,
                 tag: tag,
+                tagSlug: tagSlug,
                 basePath: basePath
               }
             });
