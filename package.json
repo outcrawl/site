@@ -45,6 +45,9 @@
   "scripts": {
     "build": "gatsby build",
     "dev": "gatsby develop",
-    "clean": "rm -rf .cache public"
+    "clean": "del-cli .cache public"
+  },
+  "devDependencies": {
+    "del-cli": "^1.1.0"
   }
 }
