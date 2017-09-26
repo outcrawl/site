@@ -11,7 +11,10 @@ const styles = theme => ({
   },
   tag: {
     margin: 4,
-    textDecoration: 'none'
+
+    '&:hover': {
+      textDecoration: 'none'
+    }
   }
 });
 

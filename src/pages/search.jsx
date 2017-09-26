@@ -6,7 +6,12 @@ import Wade from 'wade';
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
 
-const styles = theme => ({});
+const styles = theme => ({
+  result: {
+    display: 'block',
+    lineHeight: 1.5
+  }
+});
 
 function parseParams(queryString) {
   var params = {};
@@ -21,23 +26,26 @@ const Search = ({ classes, data, location }) => {
   const params = parseParams(location.search);
   const searchQuery = params['q'];
 
-  const search = Wade(posts.map(post => post.title));
-  const results = search(searchQuery);
-
-  return (
-    <Page>
-      <PageSection>
-        <h1>
-          Results for "{searchQuery}"
+  if (searchQuery) {
+    const search = Wade(posts.map(post => post.title));
+    const results = search(searchQuery);
+    return (
+      <Page>
+        <PageSection>
+          <h1>
+            Results for "{searchQuery}"
         </h1>
-      </PageSection>
-      <PageSection>
-        {results.map(({index}) =>
-          <Link key={index} to={posts[index].slug}>{posts[index].title}</Link>
-        )}
-      </PageSection>
-    </Page>
-  );
+        </PageSection>
+        <PageSection>
+          {results.map(({ index }) =>
+            <Link key={index} className={classes.result} to={posts[index].slug}>{posts[index].title}</Link>
+          )}
+        </PageSection>
+      </Page>
+    );
+  } else {
+    return <Page />;
+  }
 };
 
 export default withStyles(styles)(Search);

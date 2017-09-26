@@ -1,8 +1,17 @@
 import React from 'react';
 
+import Page from '../components/Page';
+import PageSection from '../components/PageSection';
+
 export default () => (
-  <div>
-    <h1>404</h1>
-    <p>Nothing to see here.</p>
-  </div>
+  <Page>
+    <PageSection>
+      <h1>
+        404
+      </h1>
+    </PageSection>
+    <PageSection>
+      Nothing to see here.
+    </PageSection>
+  </Page>
 );

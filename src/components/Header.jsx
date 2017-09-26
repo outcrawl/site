@@ -20,6 +20,10 @@ const styles = theme => ({
   },
   logoLink: {
     flex: 1
+  },
+  searchField: {
+    backgroundColor: theme.palette.primary[100],
+    padding: [0, 8]
   }
 });
 
@@ -39,8 +43,9 @@ class Header extends React.Component {
           </Link>
           <form noValidate autoComplete="off" onSubmit={this.onSearch}>
             <TextField
+              className={classes.searchField}
               onChange={this.handleChangeQuery}
-              InputProps={{disableUnderline: true}}
+              InputProps={{ disableUnderline: true }}
               placeholder="Search" />
           </form>
         </Toolbar>

@@ -19,18 +19,14 @@ const styles = theme => ({
   }
 });
 
-const Index = ({ classes, children, history }) => {
-  return (
-    <MuiThemeProvider theme={lightTheme}>
-      <div className={classes.root}>
-        <Header history={history} />
-        <main className={classes.content}>
-          {children()}
-        </main>
-        <Footer />
-      </div>
-    </MuiThemeProvider>
-  );
-};
-
-export default withStyles(styles)(Index);
+export default withStyles(styles)(({ classes, children, history }) => (
+  <MuiThemeProvider theme={lightTheme}>
+    <div className={classes.root}>
+      <Header history={history} />
+      <main className={classes.content}>
+        {children()}
+      </main>
+      <Footer />
+    </div>
+  </MuiThemeProvider>
+));

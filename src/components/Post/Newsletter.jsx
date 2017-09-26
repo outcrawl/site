@@ -29,6 +29,9 @@ const styles = theme => ({
     fontSize: 13,
     color: theme.palette.text.secondary,
     padding: [8, 0]
+  },
+  subscribeButton: {
+    marginLeft: 8
   }
 });
 
@@ -62,8 +65,12 @@ class Newsletter extends React.Component {
               onChange={this.handleChangeEmail}
               placeholder="Email"
               autoComplete="email"
-              margin="none" />
+              margin="none"
+              InputProps={{
+                disableUnderline: false
+              }}/>
             <Button
+              className={classes.subscribeButton}
               type="submit"
               color="primary"
               raised>Subscribe</Button>
@@ -75,7 +82,7 @@ class Newsletter extends React.Component {
               badge="inline"
               onChange={this.handleReCaptchaChange} />
             <div className={classes.captchaNote}>
-              Protected by reCAPTCHA <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
+              Protected by reCAPTCHA - <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> - <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
             </div>
           </form>
 

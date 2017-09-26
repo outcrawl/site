@@ -17,24 +17,26 @@ import threadBuilder from '../utils/thread-builder.js';
 const styles = theme => ({
   author: {
     marginBottom: 8
+  },
+  coverImage: {
+    width: '100%',
+    marginBottom: '1rem'
   }
 });
 
 class Post extends React.Component {
-  constructor(props) {
+  constructor({ data, pathContext }) {
     super();
-    const { data, pathContext } = props;
-
     this.meta = data.site.siteMetadata;
-
     this.post = data.markdownRemark;
     Object.assign(this.post, this.post.frontmatter);
     Object.assign(this.post, this.post.fields);
     this.post.permalink = `${this.meta.siteUrl}${this.post.slug}`;
-    this.post.coverSrc = data.imageSharp.original.src;
-
-    this.html = pathContext.html;
     this.threadId = this.post.slug.substr(1, this.post.slug.length - 2);
+
+    if (data.allImageSharp && data.allImageSharp.edges) {
+      this.post.coverSrc = data.allImageSharp.edges[0].node.original.src;
+    }
   }
 
   componentDidMount() {
@@ -62,7 +64,11 @@ class Post extends React.Component {
               <Share post={this.post} />
             </Grid>
           </Grid>
-          <div dangerouslySetInnerHTML={{ __html: this.html }} />
+          <img
+            className={classes.coverImage}
+            src={this.post.coverSrc}
+            alt={this.post.title} />
+          <div dangerouslySetInnerHTML={{ __html: this.post.html }} />
         </PageSection>
         <PageSection half>
           <Tags post={this.post} />
@@ -83,45 +89,49 @@ class Post extends React.Component {
 
 export default withStyles(styles)(Post);
 
-export const pageQuery = graphql`
-  query PostQuery($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      frontmatter {
-        title
-        author
-        tags
-        date(formatString: "DD MMMM, YYYY")
-      }
-      fields {
-        slug
-        slugTags
-        authorData {
-          name
-          emailHash
-          social {
-            twitter
-            github
-            facebook
-            googlePlus
-          }
+export const query = graphql`
+query PostQuery($slug: String!) {
+  markdownRemark(fields: {slug: {eq: $slug}}) {
+    html
+    frontmatter {
+      title
+      author
+      tags
+      date(formatString: "DD MMMM, YYYY")
+    }
+    fields {
+      slug
+      slugTags
+      authorData {
+        name
+        emailHash
+        social {
+          twitter
+          github
+          facebook
+          googlePlus
         }
       }
     }
+  }
 
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-        facebookPublisherUrl
-      }
+  site {
+    siteMetadata {
+      title
+      description
+      siteUrl
+      facebookPublisherUrl
     }
+  }
 
-    imageSharp(fields: {postSlug: {eq: $slug}}) {
-      id
-      original {
-        src
+  allImageSharp(filter: {fields: {postSlug: {eq: $slug}}}) {
+    edges {
+      node {
+        original {
+          src
+        }
       }
     }
   }
+}
 `;

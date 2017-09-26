@@ -1,15 +1,13 @@
 import React from 'react';
-import Link from 'gatsby-link';
 
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
 import Meta from '../components/Meta';
 
-const GeneralPage = props => {
-  const { data, pathContext } = props;
-  const page = data.markdownRemark.frontmatter;
+export default ({ data }) => {
+  const page = data.markdownRemark;
+  Object.assign(page, data.markdownRemark.frontmatter);
   Object.assign(page, data.markdownRemark.fields);
-  const html = pathContext.html;
   const siteMeta = data.site.siteMetadata;
 
   return (
@@ -20,17 +18,16 @@ const GeneralPage = props => {
           {page.title}
         </h1>
       </PageSection>
-      <PageSection dangerouslySetInnerHTML={{ __html: html }}>
+      <PageSection dangerouslySetInnerHTML={{ __html: page.html }}>
       </PageSection>
     </Page>
   );
 };
 
-export default GeneralPage;
-
-export const pageQuery = graphql`
-query GeneralPageQuery($slug: String!) {
+export const query = graphql`
+query PageQuery($slug: String!) {
   markdownRemark(fields: {slug: {eq: $slug}}) {
+    html
     frontmatter {
       title
       description
@@ -39,6 +36,7 @@ query GeneralPageQuery($slug: String!) {
       slug
     }
   }
+
   site {
     siteMetadata {
       title

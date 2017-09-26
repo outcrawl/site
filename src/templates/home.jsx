@@ -7,10 +7,9 @@ import Entry from '../components/Entry';
 import Pagination from '../components/Pagination';
 import Meta from '../components/Meta';
 
-const HomePage = props => {
-  const { data, pathContext } = props;
+export default ({ data, pathContext }) => {
   const page = pathContext.skip / pathContext.limit + 1;
-  const total = Math.floor(pathContext.total / pathContext.limit);
+  const total = Math.ceil(pathContext.total / pathContext.limit);
   const posts = data.allMarkdownRemark.edges
     .map(({ node: post }) => {
       const coverImage = data.allImageSharp.edges.find(({ node: image }) => image.fields.postSlug == post.fields.slug);
@@ -47,10 +46,8 @@ const HomePage = props => {
   );
 };
 
-export default HomePage;
-
-export const pageQuery = graphql`
-query HomePageQuery($skip: Int!, $limit: Int!) {
+export const query = graphql`
+query HomeQuery($skip: Int!, $limit: Int!) {
   allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {layout: {eq: "post"}}}, sort: {fields: [frontmatter___date], order: DESC}) {
     edges {
       node {
@@ -92,3 +89,4 @@ query HomePageQuery($skip: Int!, $limit: Int!) {
   }
 }
 `;
+

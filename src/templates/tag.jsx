@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 
 import Page from '../components/Page';
@@ -8,10 +7,9 @@ import Entry from '../components/Entry';
 import Pagination from '../components/Pagination';
 import Meta from '../components/Meta';
 
-const TagPage = props => {
-  const { data, pathContext } = props;
+export default ({ data, pathContext }) => {
   const page = pathContext.skip / pathContext.limit + 1;
-  const total = Math.floor(pathContext.total / pathContext.limit);
+  const total = Math.ceil(pathContext.total / pathContext.limit);
   const { tag, basePath } = pathContext;
   const siteMeta = data.site.siteMetadata;
   const tagSlug = pathContext.tagSlug;
@@ -51,12 +49,9 @@ const TagPage = props => {
   );
 };
 
-export default TagPage;
-
-export const pageQuery = graphql`
+export const query = graphql`
 query TagPageQuery($tag: [String]!, $skip: Int!, $limit: Int!) {
-
-  allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {tags: {in: $tag}}}) {
+  allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {tags: {in: $tag}}}, sort: {fields: [frontmatter___date], order: DESC}) {
     edges {
       node {
         frontmatter {
@@ -98,6 +93,5 @@ query TagPageQuery($tag: [String]!, $skip: Int!, $limit: Int!) {
       keywords
     }
   }
-
 }
 `;

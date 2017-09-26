@@ -11,6 +11,11 @@ const styles = theme => ({
     textAlign: 'center',
     padding: [24, 0]
   },
+  pageButton: {
+    '&:hover': {
+      textDecoration: 'none'
+    }
+  },
   currentPage: {
     color: theme.palette.text.primary
   }
@@ -40,7 +45,7 @@ const Pagination = props => {
   const pages = [];
   for (let i = 1; i <= props.total; i++) {
     pages.push(<IconButton
-      className={props.page === i ? classes.currentPage : ''}
+      className={`${classes.pageButton} ${props.page === i ? classes.currentPage : ''}`}
       component={Link}
       to={i === 1 ? basePath : `${basePath}page/${i}`}
       key={i}>{i}

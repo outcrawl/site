@@ -1,8 +1,10 @@
 const path = require('path');
-const authors = require('../data/authors').authors;
 const md5 = require('md5');
+const {
+  authors
+} = require('../../data/authors');
 
-exports.createAuthorPages = params => {
+exports.createPages = params => {
   const {
     boundActionCreators
   } = params;
@@ -24,4 +26,4 @@ exports.createAuthorPages = params => {
       }
     });
   }
-}
+};

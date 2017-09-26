@@ -8,7 +8,7 @@ threadBuilder.init = () => {
   const markedRenderer = new marked.Renderer();
   markedRenderer.code = (code, lang) => {
     lang = lang || '';
-    return `<pre><code class="language-${lang}">${code}</code></pre>`;
+    return `<div class="gatsby-highlight"><pre class="language-"><code>${code}</code></pre></div>`;
   };
   markedRenderer.heading = (text, level, raw) => {
     switch (level) {

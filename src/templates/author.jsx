@@ -164,32 +164,32 @@ const AuthorPage = props => {
 
 export default withStyles(styles)(AuthorPage);
 
-export const pageQuery = graphql`
-  query AuthorPageQuery($author: String!) {
-    allMarkdownRemark(filter: {frontmatter: {author: {eq: $author}}}, sort: {fields: [frontmatter___date], order: DESC}) {
-      edges {
-        node {
-          frontmatter {
-            title
-            tags
-            date(formatString: "DD MMMM, YYYY")
-          }
-          fields {
-            slug
-            slugTags
-          }
+export const query = graphql`
+query AuthorPageQuery($author: String!) {
+  allMarkdownRemark(filter: {frontmatter: {author: {eq: $author}}}, sort: {fields: [frontmatter___date], order: DESC}) {
+    edges {
+      node {
+        frontmatter {
+          title
+          tags
+          date(formatString: "DD MMMM, YYYY")
+        }
+        fields {
+          slug
+          slugTags
         }
       }
     }
+  }
 
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-        facebookPublisherUrl
-        keywords
-      }
+  site {
+    siteMetadata {
+      title
+      description
+      siteUrl
+      facebookPublisherUrl
+      keywords
     }
   }
+}
 `;
