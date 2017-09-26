@@ -1,6 +1,7 @@
 const visit = require('unist-util-visit');
-const $ = require('cheerio');
+const cheerio = require('cheerio');
 const slug = require('slug');
+const marked = require('marked');
 
 module.exports = ({
   files,
@@ -31,4 +32,19 @@ module.exports = ({
       `;
     }
   });
+
+  visit(markdownAST, 'html', node => {
+    if (node.value.startsWith('<note')) {
+      createNote(node);
+    }
+  });
 };
+
+function createNote(node) {
+  const e = cheerio.load(node.value);
+  node.value = `
+    <div class="note">
+      ${marked(e.text())}
+    </div>
+  `;
+}

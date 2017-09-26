@@ -127,6 +127,17 @@ blockquote {
   max-width: 100%;
 }
 
+.note {
+  display: block;
+  padding: 16px;
+  background-color: #212121;
+  color: #fff;
+
+  :last-child {
+    margin: 0;
+  }
+}
+
 .markdown {
   h4, h5, h6, p, img, hr, pre {
     margin: 0;
