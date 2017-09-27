@@ -12,10 +12,7 @@ const styles = theme => ({
     color: theme.palette.text.primary
   },
   content: {
-    minHeight: 'calc(100vh - 144px)',
-    [theme.breakpoints.down('sm')]: {
-      minHeight: 'calc(100vh - 128px)',
-    }
+    minHeight: 'calc(100vh - 144px - 48px)'
   }
 });
 

@@ -9,7 +9,8 @@ import { LogoTextIcon } from './Icons';
 
 const styles = theme => ({
   root: {
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    height: 64
   },
   logo: {
     width: 'auto',
@@ -18,8 +19,8 @@ const styles = theme => ({
       fill: `${theme.palette.text.primary} !important`
     }
   },
-  logoLink: {
-    flex: 1
+  searchForm: {
+    marginLeft: 'auto'
   },
   searchField: {
     backgroundColor: theme.palette.primary[100],
@@ -38,10 +39,10 @@ class Header extends React.Component {
     return (
       <AppBar className={classes.root} position="static" elevation={0} square={true}>
         <Toolbar>
-          <Link className={classes.logoLink} to={''}>
+          <Link to={''}>
             <LogoTextIcon className={classes.logo} />
           </Link>
-          <form noValidate autoComplete="off" onSubmit={this.onSearch}>
+          <form noValidate autoComplete="off" onSubmit={this.onSearch} className={classes.searchForm}>
             <TextField
               className={classes.searchField}
               onChange={this.handleChangeQuery}
