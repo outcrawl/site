@@ -49,8 +49,8 @@ module.exports = {
   plugins: [{
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'src',
-        path: `${__dirname}/src/`,
+        name: 'data',
+        path: `${__dirname}/data/`,
       }
     }, {
       resolve: 'gatsby-plugin-sass',

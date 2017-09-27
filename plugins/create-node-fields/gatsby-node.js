@@ -16,6 +16,11 @@ exports.onCreateNode = ({
     createNodeField
   } = boundActionCreators;
   if (node.internal.type === 'MarkdownRemark') {
+    let basePath = 'posts';
+    if (node.frontmatter.layout === 'page') {
+      basePath = 'pages';
+    }
+
     // Slug
     createNodeField({
       node,
@@ -23,7 +28,7 @@ exports.onCreateNode = ({
       value: createFilePath({
         node,
         getNode,
-        basePath: 'pages'
+        basePath: basePath
       })
     });
 
