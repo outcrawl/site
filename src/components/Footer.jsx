@@ -1,13 +1,9 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
-import IconButton from 'material-ui/IconButton';
 
 import {
   LogoIcon,
-  TwitterIcon,
-  GitHubIcon,
-  FacebookIcon
 } from './Icons.jsx';
 
 const styles = theme => ({
@@ -15,8 +11,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     width: '100%',
     display: 'block',
-    color: theme.palette.text.primary,
-    fill: theme.palette.text.primary,
+    color: theme.palette.text.secondary,
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'space-between',
@@ -35,18 +30,15 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center'
   },
-  icon: {
-    width: 24,
-    height: 24
-  },
   logo: {
     width: 24,
     height: 24,
-    marginRight: 16
+    marginRight: 16,
+    fill: theme.palette.text.primary
   },
   link: {
     textDecoration: 'none',
-    color: theme.palette.text.primary,
+    color: theme.palette.text.secondary,
     marginRight: 10
   }
 });
@@ -59,15 +51,9 @@ const Footer = ({ classes }) => (
       <Link className={classes.link} to="privacy">Privacy</Link>
     </div>
     <div className={classes.content}>
-      <IconButton aria-label="Twitter" href="https://twitter.com/tinrab">
-        <TwitterIcon className={classes.icon} />
-      </IconButton>
-      <IconButton aria-label="GitHub" href="https://github.com/tinrab">
-        <GitHubIcon className={classes.icon} />
-      </IconButton>
-      <IconButton aria-label="Facebook" href="https://www.facebook.com/outcrawl">
-        <FacebookIcon className={classes.icon} />
-      </IconButton>
+      <a className={classes.link} href="https://twitter.com/tinrab">Twitter</a>
+      <a className={classes.link} href="https://github.com/tinrab">GitHub</a>
+      <a className={classes.link} href="https://www.facebook.com/outcrawl">Facebook</a>
     </div>
   </div>
 );

@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 const styles = theme => ({
   root: {
     maxWidth: 1024,
-    margin: [24, 'auto'],
+    margin: [0, 'auto'],
     padding: theme.spacing.unit * 2,
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing.unit
@@ -16,6 +16,8 @@ const styles = theme => ({
   },
   containedPage: {
     maxWidth: 700,
+    paddingTop: 48,
+    paddingBottom: 48,
     [theme.breakpoints.up('xl')]: {
       maxWidth: 900
     }

@@ -12,7 +12,7 @@ const styles = theme => ({
     color: theme.palette.text.primary
   },
   content: {
-    minHeight: 'calc(100vh - 144px - 48px)'
+    minHeight: 'calc(100vh - 144px)'
   }
 });
 

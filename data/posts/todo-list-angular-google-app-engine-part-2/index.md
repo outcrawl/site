@@ -16,7 +16,7 @@ keywords:
   - Google App Engine
 ---
 
-In the first part (<reference slug="todo-list-angular-google-app-engine-part-1" />) you have created a Google App Engine back-end service. Now it's time to make an app interacting with it.
+In the first part ([Build a Todo List with Angular and Google App Engine - Part 1](/todo-list-angular-google-app-engine-part-1)) you have created a Google App Engine back-end service. Now it's time to make an app interacting with it.
 
 # Getting started
 

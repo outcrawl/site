@@ -504,6 +504,6 @@ $ curl localhost:8080/api/todos/[TODO_ID] -X DELETE \
 
 That's it for the back-end. In the next part you'll create the front-end and deploy it to the Google App Engine.
 
-Second part: <reference slug="todo-list-angular-google-app-engine-part-2" />.
+Second part: [Build a Todo List with Angular and Google App Engine - Part 2](/todo-list-angular-google-app-engine-part-2).
 
 Source code for this tutorial is available on [GitHub](https://github.com/tinrab/todo-angular-appengine).
