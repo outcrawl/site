@@ -25,10 +25,10 @@ module.exports = class HTML extends React.Component {
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
-          <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400,500,700" rel="stylesheet" />
-          <script src="https://apis.google.com/js/api.js"></script>
           {this.props.headComponents}
           {css}
+          <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400,500,700" rel="stylesheet" />
+          <script src="https://apis.google.com/js/api.js"></script>
         </head>
         <body>
           {this.props.preBodyComponents}

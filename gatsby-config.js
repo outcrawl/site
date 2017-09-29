@@ -38,6 +38,40 @@ const custom = [
   }
 ];
 
+const analytics = {
+  resolve: 'gatsby-plugin-google-analytics',
+  options: {
+    trackingId: 'UA-103565863-1'
+  }
+};
+
+const manifest = {
+  resolve: 'gatsby-plugin-manifest',
+  options: {
+    name: 'Outcrawl',
+    short_name: 'Outcrawl',
+    start_url: '/',
+    background_color: '#ffffff',
+    theme_color: '#ffffff',
+    display: 'minimal-ui',
+    icons: [{
+        // Everything in /static will be copied to an equivalent
+        // directory in /public during development and build, so
+        // assuming your favicons are in /static/favicons,
+        // you can reference them here
+        src: '/favicons/android-chrome-192x192.png',
+        sizes: '192x192',
+        type: 'image/png'
+      },
+      {
+        src: '/favicons/android-chrome-512x512.png',
+        sizes: '512x512',
+        type: 'image/png'
+      }
+    ]
+  }
+};
+
 module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
@@ -52,16 +86,32 @@ module.exports = {
         name: 'data',
         path: `${__dirname}/data/`,
       }
-    }, {
+    },
+    {
       resolve: 'gatsby-plugin-sass',
       options: {
         precision: 10,
       }
     },
+    'gatsby-plugin-purify-css',
+    {
+      resolve: 'gatsby-plugin-postcss-sass',
+      options: {
+        postCssPlugins: [
+          require('postcss-import')(),
+          require('autoprefixer')()
+        ]
+      }
+    },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    'gatsby-plugin-catch-links',
     remark,
+    analytics,
+    manifest,
+    'gatsby-plugin-offline',
+    'gatsby-plugin-sitemap',
     ...custom
   ],
 }
