@@ -1,5 +1,5 @@
 {
-  "name": "outcrawl-site",
+  "name": "outcrawl",
   "description": "Outcrawl site",
   "version": "1.0.0",
   "author": "Tin Rabzelj <tin.rabzelj@gmail.com>",
@@ -12,6 +12,7 @@
     "gatsby": "^1.9.48",
     "gatsby-link": "^1.6.17",
     "gatsby-plugin-catch-links": "^1.0.8",
+    "gatsby-plugin-favicon": "^1.0.0",
     "gatsby-plugin-google-analytics": "^1.0.7",
     "gatsby-plugin-google-tagmanager": "^1.0.7",
     "gatsby-plugin-manifest": "^1.0.8",
