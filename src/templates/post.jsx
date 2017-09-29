@@ -10,7 +10,7 @@ import Share from '../components/Post/Share';
 import Newsletter from '../components/Post/Newsletter';
 import Thread from '../components/Thread/Thread';
 import Author from '../components/Author';
-import Meta from '../components/Post/Meta';
+import Meta from '../components/Meta';
 import backend from '../utils/backend.js';
 import threadBuilder from '../utils/thread-builder.js';
 
@@ -43,14 +43,49 @@ class Post extends React.Component {
 
   render() {
     const classes = this.props.classes;
+    const post = this.post;
+    const meta = this.meta;
+
     return (
       <Page contained={true}>
-        <Meta post={this.post} meta={this.meta} />
+        <Meta page={post} siteMeta={meta} />
         <Helmet>
+          <title>{post.title}</title>
+          <meta name="title" content={post.title} />
+          <meta property="author" content={post.authorData.name} />
+          <meta property="al:web:url" content={post.permalink} />
+
           <meta property="og:type" content="article" />
-          <meta property="og:image" content={this.post.cover} />
-          <meta name="twitter:image:src" content={this.post.cover} />
+          <meta property="og:image" content={post.cover} />
+          <meta name="twitter:image:src" content={post.cover} />
+
+          {/* Article */}
+          <meta property="article:published_time" content={new Date(Date.parse(post.date)).toISOString()} />
+          <meta property="article:modified_time" content={new Date(Date.parse(post.date)).toISOString()} />
+          <meta property="article:publisher" content={meta.facebookPublisherUrl} />
+          {post.keywords ? <meta name="keywords" content={post.keywords.join(',')} /> : ''}
+          {post.tags.map(tag => <meta key={tag} property="article:tag" content={tag.toLowerCase()} />)}
+
+          {/* Facebook */}
+          <meta property="og:title" content={post.title} />
+          {post.authorData.social.facebook ? <meta property="article:author" content={post.authorData.social.facebook} /> : ''}
+          <meta property="og:url" content={post.permalink} />
+          <meta property="og:image" content={post.coverSrc} />
+          <meta property="og:image:width" content="1280" />
+          <meta property="og:image:height" content="720" />
+          <meta property="og:description" content={post.description} />
+          <meta property="og:type" content="article" />
+          <meta property="og:site_name" content={meta.title} />
+
+          {/* Twitter */}
+          <meta name="twitter:description" content={post.description} />
+          <meta name="twitter:image:src" content={post.cover} />
+          <meta name="twitter:site" content="@tinrab" />
+          <meta name="twitter:card" content="summary_large_image" />
+          {post.authorData.social.twitter ? <meta name="twitter:creator" content={`@${post.authorData.social.twitter}`} /> : ''}
+
         </Helmet>
+
         <PageSection component="article">
           <h1>
             {this.post.title}
@@ -94,6 +129,7 @@ query PostQuery($slug: String!) {
     html
     frontmatter {
       title
+      description
       author
       tags
       date(formatString: "DD MMMM, YYYY")
@@ -127,6 +163,7 @@ query PostQuery($slug: String!) {
       description
       siteUrl
       facebookPublisherUrl
+      keywords
     }
   }
 }

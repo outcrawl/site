@@ -37,6 +37,7 @@ const Meta = ({ page, siteMeta }) => {
       <meta name="twitter:creator" content="@tinrab" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="google" content="notranslate" />
+      <meta name="robots" content="index, follow" />
     </Helmet>
   );
 };
