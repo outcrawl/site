@@ -15,14 +15,11 @@ export default ({ data, pathContext }) => {
   const tagSlug = pathContext.tagSlug;
 
   const posts = data.allMarkdownRemark.edges
-    .map(({ node: post }) => {
-      const coverImage = data.allImageSharp.edges.find(({ node: image }) => image.fields.postSlug == post.fields.slug);
-      return {
-        ...post.frontmatter,
-        ...post.fields,
-        cover: coverImage ? coverImage.node.original.src : null
-      };
-    });
+  .map(({node: post}) => ({
+    ...post.frontmatter,
+    ...post.fields,
+    cover: siteMeta.siteUrl + post.frontmatter.cover.childImageSharp.original.src
+  }));
 
   return (
     <Page>
@@ -59,6 +56,13 @@ query TagPageQuery($tag: [String]!, $skip: Int!, $limit: Int!) {
           author
           tags
           date(formatString: "DD MMMM, YYYY")
+          cover {
+            childImageSharp {
+              original {
+                src
+              }
+            }
+          }
         }
         fields {
           slug
@@ -66,19 +70,6 @@ query TagPageQuery($tag: [String]!, $skip: Int!, $limit: Int!) {
             name
             emailHash
           }
-        }
-      }
-    }
-  }
-
-  allImageSharp(filter: {fields: {postSlug: {ne: null}}}) {
-    edges {
-      node {
-        original {
-          src
-        }
-        fields {
-          postSlug
         }
       }
     }

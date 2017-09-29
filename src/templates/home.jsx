@@ -10,16 +10,13 @@ import Meta from '../components/Meta';
 export default ({ data, pathContext }) => {
   const page = pathContext.skip / pathContext.limit + 1;
   const total = Math.ceil(pathContext.total / pathContext.limit);
-  const posts = data.allMarkdownRemark.edges
-    .map(({ node: post }) => {
-      const coverImage = data.allImageSharp.edges.find(({ node: image }) => image.fields.postSlug == post.fields.slug);
-      return {
-        ...post.frontmatter,
-        ...post.fields,
-        cover: coverImage ? coverImage.node.original.src : null
-      };
-    });
   const siteMeta = data.site.siteMetadata;
+  const posts = data.allMarkdownRemark.edges
+  .map(({node: post}) => ({
+    ...post.frontmatter,
+    ...post.fields,
+    cover: siteMeta.siteUrl + post.frontmatter.cover.childImageSharp.original.src
+  }));
 
   return (
     <Page>
@@ -55,6 +52,13 @@ query HomeQuery($skip: Int!, $limit: Int!) {
           title
           author
           date(formatString: "DD MMMM, YYYY")
+          cover {
+            childImageSharp {
+              original {
+                src
+              }
+            }
+          }
         }
         fields {
           slug
@@ -62,18 +66,6 @@ query HomeQuery($skip: Int!, $limit: Int!) {
             name
             emailHash
           }
-        }
-      }
-    }
-  }
-  allImageSharp(filter: {fields: {postSlug: {ne: null}}}) {
-    edges {
-      node {
-        original {
-          src
-        }
-        fields {
-          postSlug
         }
       }
     }

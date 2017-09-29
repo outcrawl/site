@@ -32,11 +32,8 @@ class Post extends React.Component {
     Object.assign(this.post, this.post.frontmatter);
     Object.assign(this.post, this.post.fields);
     this.post.permalink = `${this.meta.siteUrl}${this.post.slug}`;
+    this.post.cover = this.meta.siteUrl + this.post.cover.childImageSharp.original.src;
     this.threadId = this.post.slug.substr(1, this.post.slug.length - 2);
-
-    if (data.allImageSharp && data.allImageSharp.edges) {
-      this.post.coverSrc = data.allImageSharp.edges[0].node.original.src;
-    }
   }
 
   componentDidMount() {
@@ -51,6 +48,8 @@ class Post extends React.Component {
         <Meta post={this.post} meta={this.meta} />
         <Helmet>
           <meta property="og:type" content="article" />
+          <meta property="og:image" content={this.post.cover} />
+          <meta name="twitter:image:src" content={this.post.cover} />
         </Helmet>
         <PageSection component="article">
           <h1>
@@ -66,7 +65,7 @@ class Post extends React.Component {
           </Grid>
           <img
             className={classes.coverImage}
-            src={this.post.coverSrc}
+            src={this.post.cover}
             alt={this.post.title} />
           <div dangerouslySetInnerHTML={{ __html: this.post.html }} />
         </PageSection>
@@ -98,6 +97,13 @@ query PostQuery($slug: String!) {
       author
       tags
       date(formatString: "DD MMMM, YYYY")
+      cover {
+        childImageSharp {
+          original {
+            src
+          }
+        }
+      }
     }
     fields {
       slug
@@ -121,16 +127,6 @@ query PostQuery($slug: String!) {
       description
       siteUrl
       facebookPublisherUrl
-    }
-  }
-
-  allImageSharp(filter: {fields: {postSlug: {eq: $slug}}}) {
-    edges {
-      node {
-        original {
-          src
-        }
-      }
     }
   }
 }

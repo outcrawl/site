@@ -14,6 +14,7 @@ keywords:
   - Angular 4
   - Go
   - Google App Engine
+cover: ./cover.jpg
 ---
 
 In the first part ([Build a Todo List with Angular and Google App Engine - Part 1](/todo-list-angular-google-app-engine-part-1)) you have created a Google App Engine back-end service. Now it's time to make an app interacting with it.

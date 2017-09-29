@@ -54,16 +54,5 @@ exports.onCreateNode = ({
         }))
       });
     }
-  } else if (node.internal.type === 'ImageSharp') {
-    // Cover for post
-    const path = node.id.split(/ +/)[0].split('/');
-    if (path[path.length - 1] === 'cover.jpg') {
-      const slug = path[path.length - 2];
-      createNodeField({
-        node,
-        name: 'postSlug',
-        value: `/${slug}/`
-      });
-    }
   }
 };

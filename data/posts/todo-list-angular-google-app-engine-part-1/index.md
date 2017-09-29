@@ -13,6 +13,7 @@ keywords:
   - Angular 4
   - Go
   - Google App Engine
+cover: ./cover.jpg
 ---
 
 The world needs more todo lists. Let us deliver another one.

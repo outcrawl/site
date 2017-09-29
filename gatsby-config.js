@@ -87,12 +87,6 @@ module.exports = {
         path: `${__dirname}/data/`,
       }
     },
-    {
-      resolve: 'gatsby-plugin-sass',
-      options: {
-        precision: 10,
-      }
-    },
     'gatsby-plugin-purify-css',
     {
       resolve: 'gatsby-plugin-postcss-sass',
