@@ -47,7 +47,7 @@
   "keywords": [],
   "license": "Apache-2.0",
   "scripts": {
-    "build": "npm run clean && gatsby build --prefix-paths",
+    "build": "npm run clean && gatsby build",
     "dev": "gatsby develop",
     "clean": "del-cli .cache public",
     "deploy": "aws s3 cp public s3://outcrawl.com/ --recursive --exclude '.*'",
