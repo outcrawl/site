@@ -21,7 +21,7 @@ const remark = {
 };
 
 const custom = [
-  'remove-trailing-slashes',
+  'remove-trailing-slash',
   'create-node-fields',
   'create-pages',
   {
@@ -90,7 +90,6 @@ module.exports = {
     remark,
     analytics,
     manifest,
-    'gatsby-plugin-offline',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-favicon',
     ...custom

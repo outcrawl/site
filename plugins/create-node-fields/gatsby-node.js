@@ -22,6 +22,8 @@ exports.onCreateNode = ({
     }
 
     // Slug
+
+    // Slug
     let pageSlug = createFilePath({
       node,
       getNode,
