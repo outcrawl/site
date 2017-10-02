@@ -22,14 +22,18 @@ exports.onCreateNode = ({
     }
 
     // Slug
+    let pageSlug = createFilePath({
+      node,
+      getNode,
+      basePath: basePath
+    });
+    if (pageSlug.endsWith('/')) {
+      pageSlug = pageSlug.substr(0, pageSlug.length - 1);
+    }
     createNodeField({
       node,
       name: 'slug',
-      value: createFilePath({
-        node,
-        getNode,
-        basePath: basePath
-      })
+      value: pageSlug
     });
 
     if (node.frontmatter.layout === 'post') {

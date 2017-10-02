@@ -33,7 +33,7 @@ class Post extends React.Component {
     Object.assign(this.post, this.post.fields);
     this.post.permalink = `${this.meta.siteUrl}${this.post.slug}`;
     this.post.cover = this.meta.siteUrl + this.post.cover.childImageSharp.original.src;
-    this.threadId = this.post.slug.substr(1, this.post.slug.length - 2);
+    this.threadId = this.post.slug.substr(1);
   }
 
   componentDidMount() {

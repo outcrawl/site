@@ -21,6 +21,7 @@ const remark = {
 };
 
 const custom = [
+  'remove-trailing-slashes',
   'create-node-fields',
   'create-pages',
   {
@@ -61,7 +62,7 @@ module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
     description: 'Software development tutorials without nonsense',
-    siteUrl: process.env.NODE_ENV == 'production' ? 'https://outcrawl.com' : 'http://localhost:8000',
+    siteUrl: process.env.NODE_ENV == 'production' ? 'https://outcrawl.com' : 'http://localhost:8001',
     keywords: ['software', 'development', 'tutorial', 'go', 'angular', 'typescript'],
     facebookPublisherUrl: 'https://www.facebook.com/outcrawl'
   },
