@@ -90,6 +90,7 @@ module.exports = {
     remark,
     analytics,
     manifest,
+    'gatsby-plugin-offline',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-favicon',
     ...custom

@@ -4,8 +4,9 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
+import Hidden from 'material-ui/Hidden';
 
-import { LogoTextIcon } from './Icons';
+import { LogoTextIcon, LogoIcon } from './Icons';
 
 const styles = theme => ({
   root: {
@@ -40,7 +41,12 @@ class Header extends React.Component {
       <AppBar className={classes.root} position="static" elevation={0} square={true}>
         <Toolbar>
           <Link to={''}>
-            <LogoTextIcon className={classes.logo} />
+            <Hidden only={'xs'}>
+              <LogoTextIcon className={classes.logo} />
+            </Hidden>
+            <Hidden smUp>
+              <LogoIcon className={classes.logo} />
+            </Hidden>
           </Link>
           <form noValidate autoComplete="off" onSubmit={this.onSearch} className={classes.searchForm}>
             <TextField

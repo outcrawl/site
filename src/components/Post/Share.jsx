@@ -14,6 +14,7 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'flex-end',
     flexWrap: 'wrap',
+    paddingBottom: 8
   },
   button: {
     margin: 4,

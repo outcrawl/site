@@ -17,7 +17,10 @@ import Form from './Form';
 
 const styles = theme => ({
   root: {
-    padding: [48, 0]
+    padding: [16, 0],
+    [theme.breakpoints.up('sm')]: {
+      padding: [48, 0]
+    }
   },
   progress: {
     display: 'block',

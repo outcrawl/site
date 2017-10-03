@@ -5,7 +5,8 @@ import Avatar from 'material-ui/Avatar';
 
 const styles = theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    paddingBottom: 8
   },
   avatar: {
     width: 40,

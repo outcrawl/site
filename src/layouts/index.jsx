@@ -2,9 +2,9 @@ import React from 'react';
 import { MuiThemeProvider, withStyles } from 'material-ui/styles';
 
 import '../styles/index.scss';
-import lightTheme from '../utils/light-theme.js';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import lightTheme from '../utils/light-theme.js';
 
 const styles = theme => ({
   root: {

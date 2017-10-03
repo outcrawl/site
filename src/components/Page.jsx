@@ -16,10 +16,12 @@ const styles = theme => ({
   },
   containedPage: {
     maxWidth: 700,
-    paddingTop: 48,
-    paddingBottom: 48,
     [theme.breakpoints.up('xl')]: {
       maxWidth: 900
+    },
+    padding: [16, 8],
+    [theme.breakpoints.up('sm')]: {
+      padding: [48, 8]
     }
   }
 });
