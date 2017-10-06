@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import featuredImage from '../images/featured.jpg';
+import featuredImage from '../featured.jpg';
 import unwrap from '../utils/unwrap.js';
 
 const Meta = ({ page, siteMeta }) => {
@@ -42,12 +42,9 @@ const Meta = ({ page, siteMeta }) => {
 
       {page ? unwrap(
         <wrap>
-          <title>{`${page.title} - ${siteMeta.title}`}</title>
-          <meta name="title" content={`${page.title} - ${siteMeta.title}`} />
           <meta name="description" content={page.description} />
           <meta name="twitter:description" content={page.description} />
           <meta property="al:web:url" content={`${siteMeta.siteUrl}${page.slug}`} />
-          <meta property="og:title" content={`${page.title} - ${siteMeta.title}`} />
           <meta property="og:url" content={`${siteMeta.siteUrl}${page.slug}`} />
           <meta property="og:description" content={page.description} />
         </wrap>

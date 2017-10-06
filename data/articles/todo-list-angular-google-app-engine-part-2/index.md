@@ -1,6 +1,6 @@
 ---
 title: Build a Todo List with Angular and Google App Engine - Part 2
-layout: post
+layout: article
 date: "2017-09-01"
 author: tin-rabzelj
 tags:

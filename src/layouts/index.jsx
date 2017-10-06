@@ -1,10 +1,12 @@
 import React from 'react';
-import { MuiThemeProvider, withStyles } from 'material-ui/styles';
+import { MuiThemeProvider } from 'material-ui/styles';
 
 import '../styles/index.scss';
+
+import theme from '../utils/theme.js';
+import withStyles from '../components/ui/withStyles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import lightTheme from '../utils/light-theme.js';
 
 const styles = theme => ({
   root: {
@@ -16,8 +18,8 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ classes, children, history }) => (
-  <MuiThemeProvider theme={lightTheme}>
+export default withStyles(styles)(({ children, history, classes }) => (
+  <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
     <div className={classes.root}>
       <Header history={history} />
       <main className={classes.content}>

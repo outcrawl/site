@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui/styles';
-import Avatar from 'material-ui/Avatar';
+
+import withStyles from './ui/withStyles';
 
 const styles = theme => ({
   root: {
@@ -48,25 +48,28 @@ const styles = theme => ({
   }
 });
 
-const Author = props => {
+export default withStyles(styles)(props => {
   const classes = props.classes;
-  const post = props.post;
-  const author = post.authorData;
+  const article = props.article;
+  const author = article.authorData;
   const dark = props.dark;
 
   return (
     <div className={classes.root}>
-      <Avatar
-        alt="Author Avatar"
+      <img
+        alt={`${author.name} avatar`}
         src={`https://www.gravatar.com/avatar/${author.emailHash}?s=120`}
         className={dark ? classes.avatarDark : classes.avatar}
       />
       <div className={classes.info}>
-        <Link to={`authors/${post.author}`} className={dark ? classes.nameDark : classes.name}>{author.name}</Link>
-        <div className={dark ? classes.dateDark : classes.date}>{post.date}</div>
+        <Link
+          to={`authors/${article.author}`}
+          className={dark ? classes.nameDark : classes.name}
+          title={author.name}>
+          {author.name}
+        </Link>
+        <div className={dark ? classes.dateDark : classes.date}>{article.date}</div>
       </div>
     </div>
   );
-};
-
-export default withStyles(styles)(Author);
+});

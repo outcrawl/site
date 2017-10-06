@@ -1,19 +1,17 @@
 html {
   font-size: 16px;
-  line-height: 1;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  -webkit-text-size-adjust: 100%;
 
   @media (max-width: 1919.99px) and (min-width: 1280px) {
     font-size: 18px;
-  }
-
-  @media (min-width: 1920px) {
-    font-size: 21px;
   }
 }
 
 h1, h2, h3, h4, p, a {
   padding: 0;
   margin: 0;
+  font-weight: 400;
   overflow-wrap: break-word;
   word-wrap: break-word;
   -ms-word-break: break-all;
@@ -22,95 +20,68 @@ h1, h2, h3, h4, p, a {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-  cursor: text;
 }
 
-a {
-  cursor: pointer;
-
-  h2 {
-    cursor: pointer;
-  }
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: rgba(0, 0, 0, 0.54);
-}
-
+// Headings
 h1 {
-  font-size: 3.75rem;
+  font-size: 2.875rem;
+  line-height: 3.5rem;
   font-weight: 300;
-  letter-spacing: -.04em;
-  margin: 0 0 1.5rem 0;
-
-  @media (max-width: 600px) {
-    font-size: 2.5rem;
-  }
+  letter-spacing: -.02em;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 2.75rem;
-  font-weight: 400;
-  letter-spacing: -.02em;
-  margin: 2.5rem 0 1.5rem 0;
+  font-size: 2.125rem;
+  line-height: 2.5rem;
+  margin: 2rem 0 1rem 0;
 }
 
 h3 {
-  font-size: 2rem;
-  font-weight: 400;
-  margin: 2rem 0 1.5rem 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 1.5rem 0 1rem 0;
 }
 
 h4 {
   font-size: 1.25rem;
-  font-weight: 400;
-  margin: 2rem 0 1.5rem 0;
+  line-height: 1;
+  margin: 1.5rem 0 1rem 0;
 }
 
-p {
-  line-height: 1.6;
-  margin: 0 0 1rem 0;
+// Text
+h1, h2, h3, h4, p, code, ul, ol {
+  cursor: text;
 }
 
 a {
-  color: #039BE5;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
+  h1, h2, h3, h4, p {
+    cursor: pointer;
   }
 }
 
-ul, ol {
+p, ul, ol, a, code {
   line-height: 1.6;
 }
 
-.page-heading {
-  a {
-    float: left;
-    padding-right: 4px;
-    margin-left: -24px;
-    text-decoration: none;
+p {
+  margin-bottom: 1rem;
+}
 
-    @media (max-width: 700px) {
-      float: none;
-      margin-left: 4px;
-    }
-  }
+ul, ol {
+  line-height: 1.5;
+}
 
-  svg {
-    width: 20px;
-    height: 20px;
-    fill: #212121;
-    visibility: hidden;
-  }
-
+a {
+  color: #039be5;
+  outline: 0;
+  text-decoration: none;
   &:hover {
-    svg {
-      visibility: visible;
-    }
+    text-decoration: none;
   }
 }
 
+// Components
 blockquote {
   display: block;
   padding-right: 16px;
@@ -139,7 +110,7 @@ blockquote {
   color: #fff;
   margin-bottom: 1rem;
 
-  :last-child {
+   :last-child {
     margin: 0;
   }
 }
@@ -152,7 +123,7 @@ blockquote {
     width: 100%;
   }
 
-   :last-child {
+  :last-child {
     margin-bottom: 0 !important;
   }
 

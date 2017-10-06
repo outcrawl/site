@@ -21,20 +21,20 @@ const remark = {
 };
 
 const custom = [
-  'remove-trailing-slash',
+  'link-components',
   'create-node-fields',
   'create-pages',
   {
     resolve: 'create-home',
     options: {
-      postsPerPage: 3
+      articlesPerPage: 6
     }
   },
   'create-author-pages',
   {
     resolve: 'create-tag-pages',
     options: {
-      postsPerPage: 3
+      articlesPerPage: 6
     }
   }
 ];
@@ -84,13 +84,13 @@ module.exports = {
       }
     },
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-jss',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-catch-links',
     remark,
     analytics,
     manifest,
-    'gatsby-plugin-offline',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-favicon',
     ...custom

@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
+
+import withStyles from '../ui/withStyles';
+import Button from '../ui/Button';
 
 import {
   TwitterIcon,
@@ -28,30 +29,28 @@ const styles = theme => ({
   }
 });
 
-const Share = ({ post, classes }) => (
+export default withStyles(styles)(({ article, classes }) => (
   <div className={classes.root}>
     <Button fab dense aria-label="Share on Twitter" className={classes.button}
-      href={`https://twitter.com/intent/tweet?url=${post.permalink}&text=${post.title}`}
+      href={`https://twitter.com/intent/tweet?url=${article.permalink}&text=${article.title}`}
       style={{
         backgroundColor: '#32CCFE'
       }}>
       <TwitterIcon className={classes.icon} />
     </Button>
     <Button fab dense aria-label="Share on Facebook" className={classes.button}
-      href={`https://www.facebook.com/sharer/sharer.php?u=${post.permalink}`}
+      href={`https://www.facebook.com/sharer/sharer.php?u=${article.permalink}`}
       style={{
         backgroundColor: '#3B5998'
       }}>
       <FacebookIcon className={classes.icon} />
     </Button>
     <Button fab dense aria-label="Share on Google+" className={classes.button}
-      href={`https://plus.google.com/share?url=${post.permalink}`}
+      href={`https://plus.google.com/share?url=${article.permalink}`}
       style={{
         backgroundColor: '#DD4B39'
       }}>
       <GooglePlusIcon className={classes.icon} />
     </Button>
   </div>
-);
-
-export default withStyles(styles)(Share);
+));

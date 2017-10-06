@@ -1,22 +1,21 @@
 import React from 'react';
-import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 
 import Page from '../components/Page';
-import Entry from '../components/Entry';
 import Pagination from '../components/Pagination';
 import Meta from '../components/Meta';
+import Entry from '../components/Entry';
 
 export default ({ data, pathContext }) => {
   const page = pathContext.skip / pathContext.limit + 1;
   const total = Math.ceil(pathContext.total / pathContext.limit);
   const siteMeta = data.site.siteMetadata;
-  const posts = data.allMarkdownRemark.edges
-  .map(({node: post}) => ({
-    ...post.frontmatter,
-    ...post.fields,
-    cover: siteMeta.siteUrl + post.frontmatter.cover.childImageSharp.original.src
-  }));
+  const articles = data.allMarkdownRemark.edges
+    .map(({ node: article }) => ({
+      ...article.frontmatter,
+      ...article.fields,
+      cover: siteMeta.siteUrl + article.frontmatter.cover.childImageSharp.original.src
+    }));
 
   return (
     <Page>
@@ -35,8 +34,8 @@ export default ({ data, pathContext }) => {
         <meta property="al:web:url" content={siteMeta.siteUrl} />
       </Helmet>
 
-      {posts.map(post =>
-        <Entry key={post.slug} post={post} />
+      {articles.map(article =>
+        <Entry key={article.slug} article={article} />
       )}
       <Pagination page={page} total={total} basePath={'/'} />
     </Page>
@@ -45,7 +44,7 @@ export default ({ data, pathContext }) => {
 
 export const query = graphql`
 query HomeQuery($skip: Int!, $limit: Int!) {
-  allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {layout: {eq: "post"}}}, sort: {fields: [frontmatter___date], order: DESC}) {
+  allMarkdownRemark(skip: $skip, limit: $limit, filter: {frontmatter: {layout: {eq: "article"}}}, sort: {fields: [frontmatter___date], order: DESC}) {
     edges {
       node {
         frontmatter {
@@ -81,4 +80,3 @@ query HomeQuery($skip: Int!, $limit: Int!) {
   }
 }
 `;
-

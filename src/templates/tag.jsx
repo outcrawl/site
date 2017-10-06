@@ -11,21 +11,23 @@ export default ({ data, pathContext }) => {
   const page = pathContext.skip / pathContext.limit + 1;
   const total = Math.ceil(pathContext.total / pathContext.limit);
   const { tag, basePath } = pathContext;
-  const siteMeta = data.site.siteMetadata;
   const tagSlug = pathContext.tagSlug;
+  const siteMeta = data.site.siteMetadata;
 
-  const posts = data.allMarkdownRemark.edges
-  .map(({node: post}) => ({
-    ...post.frontmatter,
-    ...post.fields,
-    cover: siteMeta.siteUrl + post.frontmatter.cover.childImageSharp.original.src
-  }));
+  const articles = data.allMarkdownRemark.edges
+    .map(({ node: article }) => ({
+      ...article.frontmatter,
+      ...article.fields,
+      cover: siteMeta.siteUrl + article.frontmatter.cover.childImageSharp.original.src
+    }));
 
   return (
     <Page>
       <Meta siteMeta={siteMeta} />
       <Helmet>
-        <title>{`${tag} - ${siteMeta.title}`}</title>
+        <title>{tag} - {siteMeta.title}}</title>
+        <meta name="title" content={`${tag} - ${siteMeta.title}`} />
+
         <meta name="description" content={siteMeta.description} />
         <meta name="twitter:description" content={siteMeta.description} />
         <meta property="al:web:url" content={`${siteMeta.siteUrl}/tags/${tagSlug}`} />
@@ -34,12 +36,10 @@ export default ({ data, pathContext }) => {
         <meta property="og:description" content={siteMeta.description} />
       </Helmet>
       <PageSection>
-        <h1>
-          {tag}
-        </h1>
+        <h1>{tag}</h1>
       </PageSection>
-      {posts.map(post =>
-        <Entry key={post.slug} post={post} />
+      {articles.map(article =>
+        <Entry key={article.slug} article={article} />
       )}
       <Pagination page={page} total={total} basePath={basePath} />
     </Page>

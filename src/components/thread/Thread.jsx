@@ -1,15 +1,16 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui/styles';
-import Dialog, {
+
+import withStyles from '../ui/withStyles';
+import {
+  Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from 'material-ui/Dialog';
-import { CircularProgress } from 'material-ui/Progress';
-import Button from 'material-ui/Button';
-
+} from '../ui/Dialog';
+import { CircularProgress } from '../ui/Progress';
+import Button from '../ui/Button';
 import backend from '../../utils/backend.js';
 import threadBuilder from '../../utils/thread-builder.js';
 import Comment from './Comment';
@@ -19,7 +20,7 @@ const styles = theme => ({
   root: {
     padding: [16, 0],
     [theme.breakpoints.up('sm')]: {
-      padding: [48, 0]
+      padding: [48, 0, 24, 0]
     }
   },
   progress: {
@@ -47,7 +48,7 @@ class Thread extends React.Component {
     backend.addOnInitListener(user => this.setState({ user: user }));
     backend.getThread(this.threadId)
       .then(thread => this.setState({ thread: thread }))
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }
 
   render() {

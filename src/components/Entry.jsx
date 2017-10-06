@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-import { withStyles } from 'material-ui/styles';
 
+import withStyles from './ui/withStyles';
+import Paper from './ui/Paper';
+import Grid from './ui/Grid';
 import Author from './Author';
+
 
 const styles = theme => ({
   root: {
@@ -12,25 +13,25 @@ const styles = theme => ({
     height: 250,
     boxSizing: 'border-box',
     position: 'relative',
-    padding: theme.spacing.unit,
+    padding: 8,
     [theme.breakpoints.up('xl')]: {
       height: 350
     }
   },
   paper: {
     position: 'absolute',
-    top: theme.spacing.unit,
-    right: theme.spacing.unit,
-    bottom: theme.spacing.unit,
-    left: theme.spacing.unit,
+    top: 8,
+    right: 8,
+    bottom: 8,
+    left: 8,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat'
   },
   content: {
     width: '100%',
     height: '100%',
-    padding: theme.spacing.unit * 2,
-    background: 'linear-gradient(0, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.3) 100%)',
+    padding: 16,
+    background: 'linear-gradient(0, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.3) 100%)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end'
@@ -46,22 +47,20 @@ const styles = theme => ({
       fontSize: 34
     }
   },
-  postLink: {
+  articleLink: {
     textDecoration: 'none',
     flexGrow: 1,
     display: 'flex',
     alignItems: 'flex-end',
-    paddingBottom: theme.spacing.unit * 2,
+    paddingBottom: 16,
     '&:hover': {
       textDecoration: 'none'
     }
   }
 });
 
-const Entry = props => {
-  const classes = props.classes;
-  const post = props.post;
-  const cover = post.cover ? post.cover : `http://lorempixel.com/1280/720?id=${post.slug}`;
+export default withStyles(styles)(({ classes, article }) => {
+  const cover = article.cover ? article.cover : `http://lorempixel.com/1280/720?id=${article.slug}`;
 
   return (
     <Grid className={classes.root} item xs={12} sm={6}>
@@ -69,14 +68,12 @@ const Entry = props => {
         backgroundImage: `url(${cover})`
       }}>
         <div className={classes.content}>
-          <Link to={post.slug} className={classes.postLink}>
-            <h2 className={classes.title}>{post.title}</h2>
+          <Link to={article.slug} className={classes.articleLink} aria-label={article.title}>
+            <h2 className={classes.title}>{article.title}</h2>
           </Link>
-          <Author post={post} />
+          <Author article={article} />
         </div>
       </Paper>
     </Grid>
   );
-};
-
-export default withStyles(styles)(Entry);
+});

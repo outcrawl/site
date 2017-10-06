@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import IconButton from 'material-ui/IconButton';
 
+import withStyles from './ui/withStyles';
+import Grid from './ui/Grid';
+import IconButton from './ui/IconButton';
 import { ChevronLeftIcon, ChevronRightIcon } from './Icons';
 
 const styles = theme => ({
@@ -21,44 +21,39 @@ const styles = theme => ({
   }
 });
 
-const Pagination = props => {
-  const classes = props.classes;
-  const basePath = props.basePath;
-
+export default withStyles(styles)(({ classes, basePath, page, total }) => {
   let prevButton =
     <IconButton
       component={Link}
-      to={props.page === 2 ? basePath : `${basePath}page/${props.page - 1}`}
-      disabled={props.page === 1}
+      to={page === 2 ? basePath : `${basePath}page/${page - 1}/`}
+      disabled={page === 1}
       aria-label="Previous page">
       <ChevronLeftIcon />
     </IconButton>;
   let nextButton =
     <IconButton
       component={Link}
-      to={`${basePath}page/${props.page + 1}`}
-      disabled={props.page === props.total}
+      to={`${basePath}page/${page + 1}/`}
+      disabled={page === total}
       aria-label="Next page">
       <ChevronRightIcon />
     </IconButton>;
 
   const pages = [];
-  for (let i = 1; i <= props.total; i++) {
+  for (let i = 1; i <= total; i++) {
     pages.push(<IconButton
-      className={`${classes.pageButton} ${props.page === i ? classes.currentPage : ''}`}
+      className={`${classes.pageButton} ${page === i ? classes.currentPage : ''}`}
       component={Link}
-      to={i === 1 ? basePath : `${basePath}page/${i}`}
+      to={i === 1 ? basePath : `${basePath}page/${i}/`}
       key={i}>{i}
     </IconButton>);
   }
 
   return (
-    <Grid className={classes.root} item xs={12}>
+    <Grid item xs={12} className={classes.root}>
       {prevButton}
       {pages}
       {nextButton}
     </Grid>
   );
-};
-
-export default withStyles(styles)(Pagination);
+});

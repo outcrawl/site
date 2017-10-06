@@ -1,6 +1,6 @@
 ---
 title: Create a GraphQL Server with Go and Google App Engine
-layout: post
+layout: article
 date: "2017-10-02"
 author: tin-rabzelj
 tags:
@@ -11,7 +11,7 @@ description: This article describes how to get GraphQL server running on Google 
 keywords: 
   - GraphQL
   - Go
-  - Google App Engine
+  - App Engine
 cover: ./cover.jpg
 ---
 

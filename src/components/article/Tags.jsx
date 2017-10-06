@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui/styles';
-import Chip from 'material-ui/Chip';
+
+import withStyles from '../ui/withStyles';
+import Chip from '../ui/Chip';
 
 const styles = theme => ({
   root: {
@@ -11,17 +12,17 @@ const styles = theme => ({
   },
   tag: {
     margin: 4,
-
+    textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none'
     }
   }
 });
 
-const Tags = ({ post, classes }) => (
+const Tags = ({ article, classes }) => (
   <div className={classes.root}>
-    {post.tags.map((tag, i) =>
-      <Link key={i} className={classes.tag} to={`/tags/${post.slugTags[i]}`}>
+    {article.tags.map((tag, i) =>
+      <Link key={i} className={classes.tag} to={`/tags/${article.slugTags[i]}`}>
         <Chip label={tag} onClick={() => { }} />
       </Link>
     )}

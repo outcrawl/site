@@ -1,11 +1,10 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import TextField from 'material-ui/TextField';
-import Hidden from 'material-ui/Hidden';
 
+import withStyles from './ui/withStyles';
+import ToolBar from './ui/ToolBar';
+import TextField from './ui/TextField';
+import Hidden from './ui/Hidden';
 import { LogoTextIcon, LogoIcon } from './Icons';
 
 const styles = theme => ({
@@ -16,9 +15,7 @@ const styles = theme => ({
   logo: {
     width: 'auto',
     height: 24,
-    '& path, & polygon': {
-      fill: `${theme.palette.text.primary} !important`
-    }
+    fill: theme.palette.text.primary
   },
   searchForm: {
     marginLeft: 'auto'
@@ -35,28 +32,26 @@ class Header extends React.Component {
   };
 
   render() {
-    const { classes, history } = this.props;
-    this.history = history;
+    this.history = this.props.history;
+    const classes = this.props.classes;
     return (
-      <AppBar className={classes.root} position="static" elevation={0} square={true}>
-        <Toolbar>
-          <Link to={''}>
-            <Hidden only={'xs'}>
-              <LogoTextIcon className={classes.logo} />
-            </Hidden>
-            <Hidden smUp>
-              <LogoIcon className={classes.logo} />
-            </Hidden>
-          </Link>
-          <form noValidate autoComplete="off" onSubmit={this.onSearch} className={classes.searchForm}>
-            <TextField
-              className={classes.searchField}
-              onChange={this.handleChangeQuery}
-              InputProps={{ disableUnderline: true }}
-              placeholder="Search" />
-          </form>
-        </Toolbar>
-      </AppBar>
+      <ToolBar className={classes.root}>
+        <Link to={''}>
+          <Hidden only={'xs'}>
+            <LogoTextIcon className={classes.logo} />
+          </Hidden>
+          <Hidden smUp>
+            <LogoIcon className={classes.logo} />
+          </Hidden>
+        </Link>
+        <form noValidate autoComplete="off" onSubmit={this.onSearch} className={classes.searchForm}>
+          <TextField
+            className={classes.searchField}
+            onChange={this.handleChangeQuery}
+            InputProps={{ disableUnderline: true }}
+            placeholder="Search" />
+        </form>
+      </ToolBar>
     );
   }
 
@@ -66,7 +61,7 @@ class Header extends React.Component {
 
   onSearch = event => {
     event.preventDefault();
-    this.history.push(`/search?q=${this.state.searchQuery}`);
+    window.location.assign(`/search/?q=${this.state.searchQuery}`);
   }
 }
 

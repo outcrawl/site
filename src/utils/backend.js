@@ -81,9 +81,7 @@ backend.getThread = id => {
     axios.get(`${backend.apiUrl}/threads/${id}`)
       .then(result => {
         threadBuilder.build(result.data)
-          .then(thread => {
-            resolve(thread);
-          })
+          .then(thread => resolve(thread))
           .catch(reject);
       })
       .catch(reject);

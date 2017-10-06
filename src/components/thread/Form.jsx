@@ -1,9 +1,9 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import TextField from 'material-ui/TextField';
 
+import withStyles from '../ui/withStyles';
+import Button from '../ui/Button';
+import { Tabs, Tab } from '../ui/Tabs';
+import TextField from '../ui/TextField';
 import threadBuilder from '../../utils/thread-builder.js';
 
 const styles = theme => ({
@@ -48,9 +48,6 @@ const styles = theme => ({
   },
   commentPreview: {
     margin: [8, 0]
-  },
-  postButton: {
-
   }
 });
 

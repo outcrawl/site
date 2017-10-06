@@ -1,25 +1,31 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
 import Meta from '../components/Meta';
 
 export default ({ data }) => {
-  const page = data.markdownRemark;
-  Object.assign(page, data.markdownRemark.frontmatter);
-  Object.assign(page, data.markdownRemark.fields);
+  const page = {
+    ...data.markdownRemark,
+    ...data.markdownRemark.frontmatter,
+    ...data.markdownRemark.fields
+  };
   const siteMeta = data.site.siteMetadata;
 
   return (
-    <Page contained={true}>
+    <Page component="article" narrow>
       <Meta page={page} siteMeta={siteMeta} />
+      <Helmet>
+        <title>{`${page.title} - ${siteMeta.title}`}</title>
+        <meta name="title" content={`${page.title} - ${siteMeta.title}`} />
+        <meta property="og:title" content={`${page.title} - ${siteMeta.title}`} />
+      </Helmet>
+
       <PageSection>
-        <h1>
-          {page.title}
-        </h1>
+        <h1>{page.title}</h1>
       </PageSection>
-      <PageSection dangerouslySetInnerHTML={{ __html: page.html }}>
-      </PageSection>
+      <PageSection dangerouslySetInnerHTML={{ __html: page.html }} />
     </Page>
   );
 };

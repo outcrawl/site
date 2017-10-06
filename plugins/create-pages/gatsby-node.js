@@ -24,7 +24,7 @@ exports.createPages = ({
         }
       }
     `).then(result => {
-      const postTemplate = path.resolve('./src/templates/post.jsx');
+      const articleTemplate = path.resolve('./src/templates/article.jsx');
       const pageTemplate = path.resolve('./src/templates/page.jsx');
 
       result.data.allMarkdownRemark.edges.map(({
@@ -32,7 +32,7 @@ exports.createPages = ({
       }) => {
         createPage({
           path: node.fields.slug,
-          component: node.frontmatter.layout === 'post' ? postTemplate : pageTemplate,
+          component: node.frontmatter.layout === 'article' ? articleTemplate : pageTemplate,
           context: {
             slug: node.fields.slug
           }

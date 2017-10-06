@@ -1,6 +1,7 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
+
+import withStyles from './ui/withStyles';
+import Grid from './ui/Grid';
 
 const styles = theme => ({
   root: {
@@ -14,7 +15,7 @@ const styles = theme => ({
       maxWidth: 1280
     }
   },
-  containedPage: {
+  narrow: {
     maxWidth: 700,
     [theme.breakpoints.up('xl')]: {
       maxWidth: 900
@@ -26,16 +27,9 @@ const styles = theme => ({
   }
 });
 
-const Page = props => {
-  const classes = props.classes;
-  return (
-    <Grid
-      className={`${classes.root} ${props.contained ? classes.containedPage : ''}`}
-      container
-      spacing={0}>
-      {props.children}
-    </Grid>
-  );
-};
-
-export default withStyles(styles)(Page);
+export default withStyles(styles)(({ classes, children, narrow }) => (
+  <Grid container spacing={0}
+    className={`${classes.root} ${narrow ? classes.narrow : ''}`}>
+    {children}
+  </Grid>
+));

@@ -1,23 +1,24 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Dialog, {
+import ReCAPTCHA from 'react-google-recaptcha';
+
+import withStyles from '../ui/withStyles';
+import TextField from '../ui/TextField';
+import {
+  Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from 'material-ui/Dialog';
-import Button from 'material-ui/Button';
-import ReCAPTCHA from 'react-google-recaptcha';
-
+} from '../ui/Dialog';
+import Button from '../ui/Button';
 import backend from '../../utils/backend.js';
 
 const styles = theme => ({
   root: {
     padding: [16, 0],
     [theme.breakpoints.up('sm')]: {
-      padding: [48, 0]
+      padding: [48, 0, 24, 0]
     }
   },
   content: {
@@ -32,6 +33,9 @@ const styles = theme => ({
     fontSize: 13,
     color: theme.palette.text.secondary,
     padding: [8, 0]
+  },
+  emailField: {
+    verticalAlign: 'middle'
   },
   subscribeButton: {
     marginLeft: 8
@@ -57,10 +61,11 @@ class Newsletter extends React.Component {
         <div className={classes.content}>
           <p className={classes.lead}>
             Get awesome articles delivered right to your doorstep
-        </p>
+          </p>
 
           <form className={classes.container} autoComplete="on" onSubmit={this.handleSubscribe}>
             <TextField
+              className={classes.emailField}
               required
               type="email"
               name="email"
@@ -71,7 +76,7 @@ class Newsletter extends React.Component {
               margin="none"
               InputProps={{
                 disableUnderline: false
-              }}/>
+              }} />
             <Button
               className={classes.subscribeButton}
               type="submit"

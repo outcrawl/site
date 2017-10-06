@@ -16,29 +16,28 @@ exports.onCreateNode = ({
     createNodeField
   } = boundActionCreators;
   if (node.internal.type === 'MarkdownRemark') {
-    let basePath = 'posts';
+    let basePath = 'articles';
     if (node.frontmatter.layout === 'page') {
       basePath = 'pages';
     }
 
     // Slug
-
-    // Slug
-    let pageSlug = createFilePath({
-      node,
-      getNode,
-      basePath: basePath
-    });
-    if (pageSlug.endsWith('/')) {
-      pageSlug = pageSlug.substr(0, pageSlug.length - 1);
-    }
     createNodeField({
       node,
       name: 'slug',
-      value: pageSlug
+      value: createFilePath({
+        node,
+        getNode,
+        basePath: basePath
+      })
     });
 
-    if (node.frontmatter.layout === 'post') {
+    if (node.frontmatter.layout === 'article') {
+      // Insert cover image
+      const content = node.internal.content;
+      const front = content.indexOf('---', 3) + 3;
+      node.internal.content = content.substr(0, front) + '![](./cover.jpg)' + content.substr(front);
+
       // Author data
       const author = authors[node.frontmatter.author];
       createNodeField({
