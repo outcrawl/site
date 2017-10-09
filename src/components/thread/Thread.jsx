@@ -99,7 +99,9 @@ class Thread extends React.Component {
     backend.signIn()
       .then(_ => {
         this.setState({ user: backend.user });
-        ga('send', 'event', 'Comments', 'signIn');
+        if (ga) {
+          ga('send', 'event', 'Comments', 'signIn');
+        }
       })
       .catch(error => {
         if (error.error != 'popup_closed_by_user') {
@@ -134,7 +136,9 @@ class Thread extends React.Component {
           thread.comments.unshift(comment);
 
           this.setState({ thread: thread });
-          ga('send', 'event', 'Newsletter', 'createComment');
+          if (ga) {
+            ga('send', 'event', 'Newsletter', 'createComment');
+          }
           resolve();
         })
         .catch(error => {

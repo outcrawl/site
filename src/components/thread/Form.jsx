@@ -97,7 +97,7 @@ class Form extends React.Component {
                   className={`${classes.commentPreview} markdown`}
                   dangerouslySetInnerHTML={{
                     __html: this.state.enteredValue ?
-                      threadBuilder.parseContent(this.state.enteredValue.trim()) :
+                      threadBuilder.parseRawContent(this.state.enteredValue.trim()) :
                       'Nothing to preview'
                   }}>
                 </div>

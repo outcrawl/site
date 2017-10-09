@@ -125,7 +125,7 @@ threadBuilder.restructureThread = thread => {
   sortComments(thread.comments);
 }
 
-threadBuilder.parseContent = source => {
+threadBuilder.parseRawContent = source => {
   const text = source
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -133,5 +133,7 @@ threadBuilder.parseContent = source => {
     .replace(/"/g, '&quot;');
   return marked(text);
 };
+
+threadBuilder.parseContent = source => marked(source);
 
 export default threadBuilder;
