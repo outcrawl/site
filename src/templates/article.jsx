@@ -11,6 +11,7 @@ import Tags from '../components/article/Tags';
 import Share from '../components/article/Share';
 import Newsletter from '../components/Newsletter';
 import Thread from '../components/thread/Thread';
+import Related from '../components/article/Related';
 import Author from '../components/Author';
 import backend from '../utils/backend.js';
 import threadBuilder from '../utils/thread-builder.js';
@@ -29,6 +30,11 @@ class Article extends React.Component {
       ...data.markdownRemark.frontmatter,
       ...data.markdownRemark.fields
     };
+    this.related = data.related.edges.map(({ node: article }) => ({
+      ...article.frontmatter,
+      ...article.fields
+    }));
+
     this.siteMeta = data.site.siteMetadata;
     this.article.permalink = `${this.siteMeta.siteUrl}${this.article.slug}`;
     this.threadId = this.article.slug.replace(/^\/+|\/+$/g, '');
@@ -114,6 +120,9 @@ class Article extends React.Component {
           <Newsletter />
         </PageSection>
         <PageSection>
+          <Related articles={this.related} />
+        </PageSection>
+        <PageSection>
           <Thread threadId={this.threadId} />
         </PageSection>
       </Page>
@@ -124,7 +133,7 @@ class Article extends React.Component {
 export default withStyles(styles)(Article);
 
 export const query = graphql`
-query ArticleQuery($slug: String!) {
+query ArticleQuery($slug: String!, $tags: [String]!) {
   markdownRemark(fields: {slug: {eq: $slug}}) {
     html
     frontmatter {
@@ -145,6 +154,20 @@ query ArticleQuery($slug: String!) {
           github
           facebook
           googlePlus
+        }
+      }
+    }
+  }
+
+  related: allMarkdownRemark(filter: {frontmatter: {layout: {eq: "article"}, tags: {in: $tags}}}) {
+    edges {
+      node {
+        frontmatter {
+          title
+          tags
+        }
+        fields {
+          slug
         }
       }
     }

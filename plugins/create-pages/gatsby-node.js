@@ -15,6 +15,7 @@ exports.createPages = ({
             node {
               frontmatter {
                 layout
+                tags
               }
               fields {
                 slug
@@ -34,7 +35,8 @@ exports.createPages = ({
           path: node.fields.slug,
           component: node.frontmatter.layout === 'article' ? articleTemplate : pageTemplate,
           context: {
-            slug: node.fields.slug
+            slug: node.fields.slug,
+            tags: node.frontmatter.layout === 'article' ? node.frontmatter.tags : []
           }
         });
       });
