@@ -97,7 +97,10 @@ class Thread extends React.Component {
 
   handleSignIn = () => {
     backend.signIn()
-      .then(_ => this.setState({ user: backend.user }))
+      .then(_ => {
+        this.setState({ user: backend.user });
+        ga('send', 'event', 'Comments', 'signIn');
+      })
       .catch(error => {
         if (error.error != 'popup_closed_by_user') {
           this.showDialog('Oh no!', 'You were unable to sign in.');
@@ -131,6 +134,7 @@ class Thread extends React.Component {
           thread.comments.unshift(comment);
 
           this.setState({ thread: thread });
+          ga('send', 'event', 'Newsletter', 'createComment');
           resolve();
         })
         .catch(error => {
@@ -179,6 +183,7 @@ class Thread extends React.Component {
 
           // Update state
           this.setState({ thread: thread });
+          ga('send', 'event', 'Newsletter', 'createComment');
           resolve();
         })
         .catch(error => {

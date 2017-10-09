@@ -5,7 +5,8 @@ const remark = {
         resolve: 'gatsby-remark-images',
         options: {
           maxWidth: 1280,
-          linkImagesToOriginal: true
+          linkImagesToOriginal: true,
+          quality: 90
         }
       },
       {
@@ -85,7 +86,6 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-jss',
-    'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-catch-links',
     remark,
@@ -94,5 +94,5 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-favicon',
     ...custom
-  ],
+  ]
 }

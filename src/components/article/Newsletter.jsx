@@ -142,6 +142,7 @@ class Newsletter extends React.Component {
       .then(() => {
         this.showDialog('You have subscribed!', '');
         this.captcha.reset();
+        ga('send', 'event', 'Newsletter', 'subscribe');
       })
       .catch(error => {
         this.showDialog('Something bad happened.', '');

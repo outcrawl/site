@@ -27,13 +27,16 @@ const Search = ({ data, location }) => {
           <h1>Results for "{searchQuery}"</h1>
         </PageSection>
         <PageSection>
-          {results.map(({ index }) =>
-            <Link
-              style={{ display: 'block' }}
-              key={index} to={articles[index].slug}>
-              {articles[index].title}
-            </Link>
-          )}
+          {results.length == 0 ? (
+            <p>No results.</p>
+          ) :
+            results.map(({ index }) =>
+              <Link
+                style={{ display: 'block' }}
+                key={index} to={articles[index].slug}>
+                {articles[index].title}
+              </Link>
+            )}
         </PageSection>
       </Page>
     );
