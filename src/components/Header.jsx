@@ -61,7 +61,7 @@ class Header extends React.Component {
 
   onSearch = event => {
     event.preventDefault();
-    window.location.assign(`/search?q=${this.state.searchQuery}`);
+    window.location.assign(`/search/?q=${this.state.searchQuery}`);
   }
 }
 

@@ -4,13 +4,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 import withStyles from './ui/withStyles';
 import TextField from './ui/TextField';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from './ui/Dialog';
+import Snackbar from './ui/Snackbar';
 import Button from './ui/Button';
 import backend from '../utils/backend.js';
 
@@ -44,9 +38,10 @@ const styles = theme => ({
 
 class Newsletter extends React.Component {
   state = {
-    dialogOpen: false,
-    message: '',
-    title: '',
+    snackbar: {
+      open: false,
+      message: ''
+    },
     email: ''
   };
   captcha = null;
@@ -96,17 +91,11 @@ class Newsletter extends React.Component {
 
         </div>
 
-        <Dialog open={this.state.dialogOpen} onRequestClose={this.closeDialog}>
-          {this.state.title ? <DialogTitle>{this.state.title}</DialogTitle> : null}
-          {this.state.message ? <DialogContent>
-            <DialogContentText>{this.state.message}</DialogContentText>
-          </DialogContent> : null}
-          <DialogActions>
-            <Button onClick={this.closeDialog} color="primary">
-              Ok
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <Snackbar
+          open={this.state.snackbar.open}
+          message={this.state.snackbar.message}
+          onRequestClose={this.handleSnackbarClose}
+        />
 
       </div>
     );
@@ -121,15 +110,21 @@ class Newsletter extends React.Component {
     this.captcha.execute();
   }
 
-  closeDialog = () => {
-    this.setState({ dialogOpen: false });
+  handleSnackbarClose = () => {
+    this.setState({
+      snackbar: {
+        open: false,
+        message: ''
+      }
+    });
   }
 
-  showDialog = (title, message) => {
+  showSnackbar = message => {
     this.setState({
-      dialogOpen: true,
-      message: message,
-      title: title
+      snackbar: {
+        open: true,
+        message: message
+      }
     });
   }
 
@@ -140,12 +135,12 @@ class Newsletter extends React.Component {
     }
     backend.subscribe(email, value)
       .then(() => {
-        this.showDialog('You have subscribed!', '');
+        this.showSnackbar('You have subscribed!');
         this.captcha.reset();
         ga('send', 'event', 'Newsletter', 'subscribe');
       })
       .catch(error => {
-        this.showDialog('Something bad happened.', '');
+        this.showSnackbar('Something bad happened.');
         this.captcha.reset();
       });
   }

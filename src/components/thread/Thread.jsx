@@ -2,13 +2,7 @@ import React from 'react';
 import Link from 'gatsby-link';
 
 import withStyles from '../ui/withStyles';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '../ui/Dialog';
+import Snackbar from '../ui/Snackbar';
 import { CircularProgress } from '../ui/Progress';
 import Button from '../ui/Button';
 import backend from '../../utils/backend.js';
@@ -36,10 +30,9 @@ class Thread extends React.Component {
   state = {
     thread: null,
     user: null,
-    dialog: {
+    snackbar: {
       open: false,
-      message: '',
-      title: ''
+      message: ''
     }
   };
 
@@ -79,17 +72,11 @@ class Thread extends React.Component {
           </div>
           : <CircularProgress className={classes.progress} />}
 
-        <Dialog open={this.state.dialog.open} onRequestClose={this.closeDialog}>
-          {this.state.dialog.title ? <DialogTitle>{this.state.dialog.title}</DialogTitle> : null}
-          {this.state.dialog.message ? <DialogContent>
-            <DialogContentText>{this.state.dialog.message}</DialogContentText>
-          </DialogContent> : null}
-          <DialogActions>
-            <Button onClick={this.closeDialog} color="primary">
-              Ok
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <Snackbar
+          open={this.state.snackbar.open}
+          message={this.state.snackbar.message}
+          onRequestClose={this.handleSnackbarClose}
+        />
 
       </div>
     );
@@ -105,7 +92,7 @@ class Thread extends React.Component {
       })
       .catch(error => {
         if (error.error != 'popup_closed_by_user') {
-          this.showDialog('Oh no!', 'You were unable to sign in.');
+          this.showSnackbar('You were unable to sign in.');
         }
       });
   };
@@ -142,7 +129,7 @@ class Thread extends React.Component {
           resolve();
         })
         .catch(error => {
-          this.showDialog('Oh no!', 'Something went wrong.');
+          this.showSnackbar('Something went wrong.');
           reject(error);
         });
     });
@@ -191,7 +178,7 @@ class Thread extends React.Component {
           resolve();
         })
         .catch(error => {
-          this.showDialog('Oh no!', 'Something went wrong.');
+          this.showSnackbar('Something went wrong.');
           reject(error);
         });
     });
@@ -207,19 +194,23 @@ class Thread extends React.Component {
         }
         this.setState({ thread: thread });
       })
-      .catch(() => this.showDialog('Oh no!', 'Could not delete this comment.'));
+      .catch(() => this.showSnackbar('Could not delete this comment.'));
   };
 
-  closeDialog = () => {
-    this.setState({ dialog: { open: false } });
+  handleSnackbarClose = () => {
+    this.setState({
+      snackbar: {
+        open: false,
+        message: ''
+      }
+    });
   }
 
-  showDialog = (title, message) => {
+  showSnackbar = message => {
     this.setState({
-      dialog: {
+      snackbar: {
         open: true,
-        message: message,
-        title: title
+        message: message
       }
     });
   }
