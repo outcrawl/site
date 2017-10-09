@@ -22,7 +22,6 @@ const remark = {
 };
 
 const custom = [
-  'link-components',
   'create-node-fields',
   'create-pages',
   {
@@ -64,28 +63,20 @@ module.exports = {
     title: 'Outcrawl',
     description: 'Software development tutorials without nonsense',
     siteUrl: process.env.NODE_ENV == 'production' ? 'https://outcrawl.com' : 'http://localhost:8001',
-    keywords: ['software', 'development', 'tutorial', 'go', 'angular', 'typescript'],
+    keywords: ['software', 'development', 'tutorial', 'go', 'microservices', 'angular'],
     facebookPublisherUrl: 'https://www.facebook.com/outcrawl'
   },
-  plugins: [{
+  plugins: [
+    'gatsby-plugin-sass',
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'data',
         path: `${__dirname}/data/`,
       }
     },
-    'gatsby-plugin-purify-css',
-    {
-      resolve: 'gatsby-plugin-postcss-sass',
-      options: {
-        postCssPlugins: [
-          require('postcss-import')(),
-          require('autoprefixer')()
-        ]
-      }
-    },
-    'gatsby-plugin-react-helmet',
     'gatsby-plugin-jss',
+    'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
     'gatsby-plugin-catch-links',
     remark,

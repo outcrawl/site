@@ -25,7 +25,11 @@ export default createMuiTheme({
         fontWeight: 500,
         lineHeight: '24px',
         verticalAlign: 'middle',
-        textDecoration: 'none'
+        textDecoration: 'none',
+        fill: 'rgba(0, 0, 0, 0.54)'
+      },
+      disabled: {
+        fill: 'rgba(0, 0, 0, 0.26)'
       }
     }
   }

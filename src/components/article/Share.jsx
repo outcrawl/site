@@ -29,28 +29,44 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ article, classes }) => (
-  <div className={classes.root}>
-    <Button fab dense aria-label="Share on Twitter" className={classes.button}
-      href={`https://twitter.com/intent/tweet?url=${article.permalink}&text=${article.title}`}
-      style={{
-        backgroundColor: '#32CCFE'
-      }}>
-      <TwitterIcon className={classes.icon} />
-    </Button>
-    <Button fab dense aria-label="Share on Facebook" className={classes.button}
-      href={`https://www.facebook.com/sharer/sharer.php?u=${article.permalink}`}
-      style={{
-        backgroundColor: '#3B5998'
-      }}>
-      <FacebookIcon className={classes.icon} />
-    </Button>
-    <Button fab dense aria-label="Share on Google+" className={classes.button}
-      href={`https://plus.google.com/share?url=${article.permalink}`}
-      style={{
-        backgroundColor: '#DD4B39'
-      }}>
-      <GooglePlusIcon className={classes.icon} />
-    </Button>
-  </div>
-));
+class Share extends React.Component {
+  render() {
+    const { article, classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <Button fab dense aria-label="Share on Twitter" className={classes.button}
+          href={`https://twitter.com/intent/tweet?url=${article.permalink}&text=${article.title}`}
+          onClick={() => this.handleShareClick('twitter')}
+          style={{
+            backgroundColor: '#32CCFE'
+          }}>
+          <TwitterIcon className={classes.icon} />
+        </Button>
+        <Button fab dense aria-label="Share on Facebook" className={classes.button}
+          href={`https://www.facebook.com/sharer/sharer.php?u=${article.permalink}`}
+          onClick={() => this.handleShareClick('facebook')}
+          style={{
+            backgroundColor: '#3B5998'
+          }}>
+          <FacebookIcon className={classes.icon} />
+        </Button>
+        <Button fab dense aria-label="Share on Google+" className={classes.button}
+          href={`https://plus.google.com/share?url=${article.permalink}`}
+          onClick={() => this.handleShareClick('googlePlus')}
+          style={{
+            backgroundColor: '#DD4B39'
+          }}>
+          <GooglePlusIcon className={classes.icon} />
+        </Button>
+      </div>
+    );
+  }
+
+  handleShareClick = (event, site) => {
+    if (ga) {
+      ga('send', 'event', 'Share', site);
+    }
+  }
+}
+
+export default withStyles(styles)(Share);

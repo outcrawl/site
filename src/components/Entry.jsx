@@ -34,7 +34,8 @@ const styles = theme => ({
     background: 'linear-gradient(0, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.3) 100%)',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    boxSizing: 'border-box'
   },
   title: {
     color: theme.palette.shades.dark.text.primary,

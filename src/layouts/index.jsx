@@ -1,7 +1,7 @@
 import React from 'react';
 import { MuiThemeProvider } from 'material-ui/styles';
 
-import '../styles/index.scss';
+import '../styles/main.scss';
 
 import theme from '../utils/theme.js';
 import withStyles from '../components/ui/withStyles';
