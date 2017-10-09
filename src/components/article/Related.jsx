@@ -14,8 +14,10 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ classes, articles }) => {
-  articles = shuffle(articles).slice(0, 3);
+export default withStyles(styles)(({ classes, slug, articles }) => {
+  articles = shuffle(articles)
+    .filter(article => article.slug != slug)
+    .slice(0, 3);
 
   return (
     <div className={classes.root}>

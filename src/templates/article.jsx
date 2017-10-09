@@ -120,7 +120,7 @@ class Article extends React.Component {
           <Newsletter />
         </PageSection>
         <PageSection>
-          <Related articles={this.related} />
+          <Related slug={article.slug} articles={this.related} />
         </PageSection>
         <PageSection>
           <Thread threadId={this.threadId} />
