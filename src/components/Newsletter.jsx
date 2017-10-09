@@ -2,17 +2,17 @@ import React from 'react';
 import Link from 'gatsby-link';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import withStyles from '../ui/withStyles';
-import TextField from '../ui/TextField';
+import withStyles from './ui/withStyles';
+import TextField from './ui/TextField';
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from '../ui/Dialog';
-import Button from '../ui/Button';
-import backend from '../../utils/backend.js';
+} from './ui/Dialog';
+import Button from './ui/Button';
+import backend from '../utils/backend.js';
 
 const styles = theme => ({
   root: {

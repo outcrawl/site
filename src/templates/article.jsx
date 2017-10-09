@@ -9,7 +9,7 @@ import Grid from '../components/ui/Grid';
 import Hidden from '../components/ui/Hidden';
 import Tags from '../components/article/Tags';
 import Share from '../components/article/Share';
-import Newsletter from '../components/article/Newsletter';
+import Newsletter from '../components/Newsletter';
 import Thread from '../components/thread/Thread';
 import Author from '../components/Author';
 import backend from '../utils/backend.js';
