@@ -108,6 +108,7 @@ export default withStyles(styles)(({ classes, data, pathContext }) => {
         <title>{author.name} - {siteMeta.title}</title>
         <meta name="title" content={`${author.name} - ${siteMeta.title}`} />
         <meta property="og:title" content={`${author.name} - ${siteMeta.title}`} />
+        <link rel="canonical" href={`${siteMeta.siteUrl}/authors/${author.slug}/`} />
 
         <meta name="description" content={siteMeta.description} />
         <meta name="twitter:description" content={siteMeta.description} />

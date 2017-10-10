@@ -1,14 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import featuredImage from '../featured.jpg';
 import unwrap from '../utils/unwrap.js';
 
 const Meta = ({ page, siteMeta }) => {
-  let image = featuredImage;
-  if (!featuredImage.startsWith('http')) {
-    image = siteMeta.siteUrl + '/' + featuredImage;
-  }
+  const image = siteMeta.siteUrl + '/featured.jpg';
 
   return (
     <Helmet>
@@ -51,7 +47,6 @@ const Meta = ({ page, siteMeta }) => {
       ) : ''}
 
       <meta property="fb:app_id" content="863987620425609" />
-      <meta name="keywords" content={siteMeta.keywords.join(',')} />
       <meta property="og:site_name" content={siteMeta.title} />
       <meta property="og:type" content="website" />
       <meta property="og:image" content={image} />
@@ -63,6 +58,36 @@ const Meta = ({ page, siteMeta }) => {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="google" content="notranslate" />
       <meta name="robots" content="index, follow" />
+
+      <script type="application/ld+json">
+        {`{
+          "@context": "http:\/\/schema.org",
+          "@type": "Organization",
+          "@id": "#organization",
+          "url": "https:\/\/outcrawl.com",
+          "logo": "${siteMeta.siteUrl.replace('/', '\\')}\/logo.png",
+          "name": "Outcrawl",
+          "sameAs": [
+            "https:\/\/twitter.com\/tinrab",
+            "https:\/\/github.com\/tinrab",
+            "https:\/\/www.facebook.com\/outcrawl"
+          ]
+        }`}
+      </script>
+      <script type="application/ld+json">
+        {`{
+          "@context": "http:\/\/schema.org",
+          "@type": "WebSite",
+          "@id": "#website",
+          "url": "https:\/\/outcrawl.com",
+          "name": "Outcrawl",
+          "potentialAction": {
+            "@type":"SearchAction",
+            "target":"https:\/\/outcrawl.com\/search\/?q={search_term_string}",
+            "query-input":"required name=search_term_string"
+          }
+        }`}
+      </script>
     </Helmet>
   );
 };

@@ -11,6 +11,10 @@ pre code {
   line-height: 20px;
 }
 
+pre {
+  padding: 16px;
+}
+
 code {
   font-size: 0.875rem;
   background-color: #F5F5F5;
@@ -20,7 +24,6 @@ code {
 .gatsby-highlight {
   background-color: #F5F5F5;
   margin: 0 0 1rem 0;
-  padding: 16px;
   overflow: auto;
 }
 
@@ -37,7 +40,6 @@ code {
 .gatsby-highlight pre[class*="language-"] {
   background-color: transparent;
   margin: 0;
-  padding: 0;
   overflow: initial;
   float: left;
   min-width: 100%;

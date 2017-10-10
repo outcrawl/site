@@ -18,6 +18,7 @@ export default ({ data }) => {
       <Meta page={page} siteMeta={siteMeta} />
       <Helmet>
         <title>{`${page.title} - ${siteMeta.title}`}</title>
+        <link rel="canonical" href={`${siteMeta.siteUrl}${page.slug}`} />
         <meta name="title" content={`${page.title} - ${siteMeta.title}`} />
         <meta property="og:title" content={`${page.title} - ${siteMeta.title}`} />
       </Helmet>

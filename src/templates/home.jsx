@@ -24,6 +24,7 @@ export default ({ data, pathContext }) => {
         <title>{siteMeta.title}</title>
         <meta name="title" content={`${siteMeta.title} - ${siteMeta.description}`} />
         <meta name="description" content={siteMeta.description} />
+        <link rel="canonical" href={`${siteMeta.siteUrl}${page == 1 ? '' : '/page/' + page + '/'}`} />
 
         <meta property="og:title" content={`${siteMeta.title} - ${siteMeta.description}`} />
         <meta property="og:url" content={siteMeta.siteUrl} />

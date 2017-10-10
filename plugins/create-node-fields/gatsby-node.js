@@ -50,6 +50,9 @@ exports.onCreateNode = ({
         }
       });
 
+      // Sort tags
+      node.frontmatter.tags = node.frontmatter.tags.sort();
+
       // Slugify tags
       createNodeField({
         node,

@@ -27,6 +27,7 @@ export default ({ data, pathContext }) => {
       <Helmet>
         <title>{tag} - {siteMeta.title}}</title>
         <meta name="title" content={`${tag} - ${siteMeta.title}`} />
+        <link rel="canonical" href={`${siteMeta.siteUrl}/tags/${tagSlug}${page == 1 ? '' : '/page/' + page + '/'}`} />
 
         <meta name="description" content={siteMeta.description} />
         <meta name="twitter:description" content={siteMeta.description} />

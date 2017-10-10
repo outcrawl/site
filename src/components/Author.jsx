@@ -63,7 +63,7 @@ export default withStyles(styles)(props => {
       />
       <div className={classes.info}>
         <Link
-          to={`authors/${article.author}`}
+          to={`/authors/${article.author}/`}
           className={dark ? classes.nameDark : classes.name}
           title={author.name}>
           {author.name}

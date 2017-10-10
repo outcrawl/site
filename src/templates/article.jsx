@@ -55,8 +55,9 @@ class Article extends React.Component {
         <Helmet>
           <title>{article.title}</title>
           <meta name="title" content={article.title} />
-          <meta property="author" content={article.authorData.name} />
+          <meta name="author" property="author" content={article.authorData.name} />
           <meta property="al:web:url" content={article.permalink} />
+          <link rel="canonical" href={`${siteMeta.siteUrl}${article.slug}`} />
 
           <meta property="og:type" content="article" />
           <meta property="og:image" content={article.cover} />
@@ -66,7 +67,6 @@ class Article extends React.Component {
           <meta property="article:published_time" content={new Date(Date.parse(article.date)).toISOString()} />
           <meta property="article:modified_time" content={new Date(Date.parse(article.date)).toISOString()} />
           <meta property="article:publisher" content={siteMeta.facebookPublisherUrl} />
-          {article.keywords ? <meta name="keywords" content={article.keywords.join(',')} /> : ''}
           {article.tags.map(tag => <meta key={tag} property="article:tag" content={tag.toLowerCase()} />)}
 
           {/* Facebook */}
