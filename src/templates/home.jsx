@@ -21,7 +21,7 @@ export default ({ data, pathContext }) => {
     <Page>
       <Meta siteMeta={siteMeta} />
       <Helmet>
-        <title>{siteMeta.title}</title>
+        <title>{siteMeta.title} - {siteMeta.description}</title>
         <meta name="title" content={`${siteMeta.title} - ${siteMeta.description}`} />
         <meta name="description" content={siteMeta.description} />
         <link rel="canonical" href={`${siteMeta.siteUrl}${page == 1 ? '' : '/page/' + page + '/'}`} />

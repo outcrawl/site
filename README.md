@@ -1,13 +1,9 @@
-# gatsby-starter-default
-The default Gatsby starter
+<p align="center">
+  <img src="./static/featured.jpg"/>
+</p>
 
-For an overview of the project structure please refer to the [Gatsby documentation - Building with Components](https://www.gatsbyjs.org/docs/building-with-components/)
+# Outcrawl
 
-Install this starter (assuming Gatsby is installed) by running from your CLI:
-```
-gatsby new gatsby-example-site
-```
+## Software development tutorials without nonsense
 
-## Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+<https://outcrawl.com>
