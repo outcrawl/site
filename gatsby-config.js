@@ -2,19 +2,19 @@ const remark = {
   resolve: 'gatsby-transformer-remark',
   options: {
     plugins: [{
-        resolve: 'gatsby-remark-images',
-        options: {
-          maxWidth: 1280,
-          linkImagesToOriginal: true,
-          quality: 90
-        }
-      },
-      {
-        resolve: 'gatsby-remark-prismjs',
-        options: {
-          classPrefix: 'language-',
-        }
-      },
+      resolve: 'gatsby-remark-images',
+      options: {
+        maxWidth: 1280,
+        linkImagesToOriginal: true,
+        quality: 90
+      }
+    },
+    {
+      resolve: 'gatsby-remark-prismjs',
+      options: {
+        classPrefix: 'language-',
+      }
+    },
       'copy-linked-files',
       'transform-markdown'
     ]
@@ -61,7 +61,7 @@ const manifest = {
 module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
-    description: 'Software development tutorials without nonsense',
+    description: 'Software development tutorials without nonsense.',
     siteUrl: process.env.NODE_ENV == 'production' ? 'http://outcrawl-test.com.s3-website-us-east-1.amazonaws.com' : 'http://localhost:8001',
     facebookPublisherUrl: 'https://www.facebook.com/outcrawl'
   },
