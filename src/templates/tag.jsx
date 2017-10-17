@@ -5,7 +5,7 @@ import Page from '../components/Page';
 import PageSection from '../components/PageSection';
 import Entry from '../components/Entry';
 import Pagination from '../components/Pagination';
-import Meta from '../components/Meta';
+import { SiteMeta, PageMeta } from '../components/Meta';
 
 export default ({ data, pathContext }) => {
   const page = pathContext.skip / pathContext.limit + 1;
@@ -23,19 +23,14 @@ export default ({ data, pathContext }) => {
 
   return (
     <Page>
-      <Meta siteMeta={siteMeta} />
-      <Helmet>
-        <title>{tag} - {siteMeta.title}}</title>
-        <meta name="title" content={`${tag} - ${siteMeta.title}`} />
-        <link rel="canonical" href={`${siteMeta.siteUrl}/tags/${tagSlug}${page == 1 ? '' : '/page/' + page + '/'}`} />
+      <SiteMeta siteMeta={siteMeta} />
+      <PageMeta
+        siteMeta={siteMeta}
+        title={`${tag} - ${siteMeta.title}`}
+        description={`Articles about ${tag} on ${siteMeta.title}.`}
+        url={`${siteMeta.siteUrl}/tags/${tagSlug}/`}
+      />
 
-        <meta name="description" content={siteMeta.description} />
-        <meta name="twitter:description" content={siteMeta.description} />
-        <meta property="al:web:url" content={`${siteMeta.siteUrl}/tags/${tagSlug}`} />
-        <meta property="og:title" content={`${tag} - ${siteMeta.title}`} />
-        <meta property="og:url" content={`${siteMeta.siteUrl}/tags/${tagSlug}`} />
-        <meta property="og:description" content={siteMeta.description} />
-      </Helmet>
       <PageSection>
         <h1>{tag}</h1>
       </PageSection>
@@ -82,7 +77,6 @@ query TagPageQuery($tag: [String]!, $skip: Int!, $limit: Int!) {
       description
       siteUrl
       facebookPublisherUrl
-      keywords
     }
   }
 }

@@ -13,10 +13,7 @@ const styles = theme => ({
     height: 250,
     boxSizing: 'border-box',
     position: 'relative',
-    padding: 8,
-    [theme.breakpoints.up('xl')]: {
-      height: 350
-    }
+    padding: 8
   },
   paper: {
     position: 'absolute',
@@ -43,10 +40,7 @@ const styles = theme => ({
     margin: 0,
     textDecoration: 'none',
     fontSize: 24,
-    lineHeight: 1.25,
-    [theme.breakpoints.up('xl')]: {
-      fontSize: 34
-    }
+    lineHeight: 1.25
   },
   articleLink: {
     textDecoration: 'none',

@@ -8,12 +8,6 @@ tags:
   - Typescript
   - Google App Engine
 description: The world needs more todo lists. Let us deliver another one.
-keywords: 
-  - Todo List
-  - Angular
-  - Angular 4
-  - Go
-  - Google App Engine
 cover: ./cover.jpg
 ---
 

@@ -3,8 +3,8 @@ import Helmet from 'react-helmet';
 
 import Page from '../components/Page';
 import Pagination from '../components/Pagination';
-import Meta from '../components/Meta';
 import Entry from '../components/Entry';
+import { SiteMeta, PageMeta } from '../components/Meta';
 
 export default ({ data, pathContext }) => {
   const page = pathContext.skip / pathContext.limit + 1;
@@ -19,21 +19,13 @@ export default ({ data, pathContext }) => {
 
   return (
     <Page>
-      <Meta siteMeta={siteMeta} />
-      <Helmet>
-        <title>{siteMeta.title} - {siteMeta.description}</title>
-        <meta name="title" content={`${siteMeta.title} - ${siteMeta.description}`} />
-        <meta name="description" content={siteMeta.description} />
-        <link rel="canonical" href={`${siteMeta.siteUrl}${page == 1 ? '' : '/page/' + page + '/'}`} />
-
-        <meta property="og:title" content={`${siteMeta.title} - ${siteMeta.description}`} />
-        <meta property="og:url" content={siteMeta.siteUrl} />
-        <meta property="og:description" content={siteMeta.description} />
-        <meta property="og:site_name" content={siteMeta.title} />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:description" content={siteMeta.description} />
-        <meta property="al:web:url" content={siteMeta.siteUrl} />
-      </Helmet>
+      <SiteMeta siteMeta={siteMeta} />
+      <PageMeta
+        siteMeta={siteMeta}
+        title={siteMeta.title}
+        description={siteMeta.description}
+        url={siteMeta.siteUrl + (page == 1 ? '' : `/page/${page}/`)}
+      />
 
       {articles.map(article =>
         <Entry key={article.slug} article={article} />
@@ -76,7 +68,6 @@ query HomeQuery($skip: Int!, $limit: Int!) {
       description
       siteUrl
       facebookPublisherUrl
-      keywords
     }
   }
 }

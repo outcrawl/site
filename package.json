@@ -46,8 +46,8 @@
     "build": "npm run clean && gatsby build",
     "dev": "gatsby develop -p 8001",
     "clean": "del-cli .cache public",
-    "deploy": "aws s3 cp public s3://outcrawl.com/ --recursive",
-    "purge": "aws s3 rm s3://outcrawl.com/ --recursive"
+    "deploy": "aws s3 cp public s3://outcrawl-test.com/ --recursive",
+    "purge": "aws s3 rm s3://outcrawl-test.com/ --recursive"
   },
   "devDependencies": {
     "del-cli": "^1.1.0"

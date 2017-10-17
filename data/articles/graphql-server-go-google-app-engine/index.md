@@ -8,10 +8,6 @@ tags:
   - GraphQL
   - Google App Engine
 description: This article describes how to get GraphQL server running on Google App Engine with a "simple social network" data model.
-keywords: 
-  - GraphQL
-  - Go
-  - App Engine
 cover: ./cover.jpg
 ---
 

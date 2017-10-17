@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import withStyles from '../components/ui/withStyles';
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
-import Meta from '../components/Meta';
 import Grid from '../components/ui/Grid';
 import Hidden from '../components/ui/Hidden';
 import Tags from '../components/article/Tags';
@@ -15,6 +14,7 @@ import Related from '../components/article/Related';
 import Author from '../components/Author';
 import backend from '../utils/backend.js';
 import threadBuilder from '../utils/thread-builder.js';
+import { SiteMeta, ArticleMeta } from '../components/Meta';
 
 const styles = theme => ({
   article: {
@@ -28,7 +28,8 @@ class Article extends React.Component {
     this.article = {
       ...data.markdownRemark,
       ...data.markdownRemark.frontmatter,
-      ...data.markdownRemark.fields
+      ...data.markdownRemark.fields,
+      cover: data.markdownRemark.frontmatter.cover.childImageSharp.original
     };
     this.related = data.related.edges.map(({ node: article }) => ({
       ...article.frontmatter,
@@ -36,6 +37,7 @@ class Article extends React.Component {
     }));
 
     this.siteMeta = data.site.siteMetadata;
+    this.article.cover.src = this.siteMeta.siteUrl + this.article.cover.src;
     this.article.permalink = `${this.siteMeta.siteUrl}${this.article.slug}`;
     this.threadId = this.article.slug.replace(/^\/+|\/+$/g, '');
   }
@@ -51,42 +53,11 @@ class Article extends React.Component {
     const siteMeta = this.siteMeta;
     return (
       <Page narrow>
-        <Meta page={article} siteMeta={siteMeta} />
-        <Helmet>
-          <title>{article.title}</title>
-          <meta name="title" content={article.title} />
-          <meta name="author" property="author" content={article.authorData.name} />
-          <meta property="al:web:url" content={article.permalink} />
-          <link rel="canonical" href={`${siteMeta.siteUrl}${article.slug}`} />
-
-          <meta property="og:type" content="article" />
-          <meta property="og:image" content={article.cover} />
-          <meta name="twitter:image:src" content={article.cover} />
-
-          {/* Article */}
-          <meta property="article:published_time" content={new Date(Date.parse(article.date)).toISOString()} />
-          <meta property="article:modified_time" content={new Date(Date.parse(article.date)).toISOString()} />
-          <meta property="article:publisher" content={siteMeta.facebookPublisherUrl} />
-          {article.tags.map(tag => <meta key={tag} property="article:tag" content={tag.toLowerCase()} />)}
-
-          {/* Facebook */}
-          <meta property="og:title" content={article.title} />
-          {article.authorData.social.facebook ? <meta property="article:author" content={article.authorData.social.facebook} /> : ''}
-          <meta property="og:url" content={article.permalink} />
-          <meta property="og:image" content={article.coverSrc} />
-          <meta property="og:image:width" content="1280" />
-          <meta property="og:image:height" content="720" />
-          <meta property="og:description" content={article.description} />
-          <meta property="og:type" content="article" />
-          <meta property="og:site_name" content={siteMeta.title} />
-
-          {/* Twitter */}
-          <meta name="twitter:description" content={article.description} />
-          <meta name="twitter:image:src" content={article.cover} />
-          <meta name="twitter:site" content="@tinrab" />
-          <meta name="twitter:card" content="summary_large_image" />
-          {article.authorData.social.twitter ? <meta name="twitter:creator" content={`@${article.authorData.social.twitter}`} /> : ''}
-        </Helmet>
+        <SiteMeta siteMeta={siteMeta} />
+        <ArticleMeta
+          siteMeta={siteMeta}
+          article={article}
+        />
 
         <PageSection className={classes.article} component="article">
           <h1>
@@ -142,6 +113,15 @@ query ArticleQuery($slug: String!, $tags: [String]!) {
       author
       tags
       date(formatString: "DD MMMM, YYYY")
+      cover {
+        childImageSharp {
+          original {
+            src
+            width
+            height
+          }
+        }
+      }
     }
     fields {
       slug
@@ -179,7 +159,6 @@ query ArticleQuery($slug: String!, $tags: [String]!) {
       description
       siteUrl
       facebookPublisherUrl
-      keywords
     }
   }
 }

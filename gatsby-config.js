@@ -62,8 +62,7 @@ module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
     description: 'Software development tutorials without nonsense',
-    siteUrl: process.env.NODE_ENV == 'production' ? 'https://outcrawl.com' : 'http://localhost:8001',
-    keywords: ['software', 'development', 'tutorial', 'go', 'microservices', 'angular'],
+    siteUrl: process.env.NODE_ENV == 'production' ? 'http://outcrawl-test.com.s3-website-us-east-1.amazonaws.com' : 'http://localhost:8001',
     facebookPublisherUrl: 'https://www.facebook.com/outcrawl'
   },
   plugins: [

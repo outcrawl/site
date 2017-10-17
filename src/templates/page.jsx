@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
-import Meta from '../components/Meta';
+import { SiteMeta, PageMeta } from '../components/Meta';
 
 export default ({ data }) => {
   const page = {
@@ -15,13 +15,13 @@ export default ({ data }) => {
 
   return (
     <Page component="article" narrow>
-      <Meta page={page} siteMeta={siteMeta} />
-      <Helmet>
-        <title>{`${page.title} - ${siteMeta.title}`}</title>
-        <link rel="canonical" href={`${siteMeta.siteUrl}${page.slug}`} />
-        <meta name="title" content={`${page.title} - ${siteMeta.title}`} />
-        <meta property="og:title" content={`${page.title} - ${siteMeta.title}`} />
-      </Helmet>
+      <SiteMeta siteMeta={siteMeta} />
+      <PageMeta
+        siteMeta={siteMeta}
+        title={`${page.title} - ${siteMeta.title}`}
+        description={page.description}
+        url={`${siteMeta.siteUrl}/${page.slug}`}
+      />
 
       <PageSection>
         <h1>{page.title}</h1>
@@ -50,7 +50,6 @@ query PageQuery($slug: String!) {
       description
       siteUrl
       facebookPublisherUrl
-      keywords
     }
   }
 }

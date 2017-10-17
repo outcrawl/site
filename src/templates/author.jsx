@@ -7,13 +7,13 @@ import Divider from '../components/ui/Divider';
 import IconButton from '../components/ui/IconButton';
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
-import Meta from '../components/Meta';
 import {
   TwitterIcon,
   GitHubIcon,
   FacebookIcon,
   GooglePlusIcon
 } from '../components/Icons';
+import { SiteMeta, PageMeta } from '../components/Meta';
 
 const styles = theme => ({
   profile: {
@@ -95,7 +95,7 @@ export default withStyles(styles)(({ classes, data, pathContext }) => {
   if (author.social.googlePlus) {
     socialLinks.push(
       <IconButton key="4"
-        href={`https://www.facebook.com/${author.social.googlePlus}`}>
+        href={`https://plus.google.com/${author.social.googlePlus}`}>
         <GooglePlusIcon className={classes.icon} />
       </IconButton>
     );
@@ -103,20 +103,13 @@ export default withStyles(styles)(({ classes, data, pathContext }) => {
 
   return (
     <Page narrow>
-      <Meta siteMeta={siteMeta} />
-      <Helmet>
-        <title>{author.name} - {siteMeta.title}</title>
-        <meta name="title" content={`${author.name} - ${siteMeta.title}`} />
-        <meta property="og:title" content={`${author.name} - ${siteMeta.title}`} />
-        <link rel="canonical" href={`${siteMeta.siteUrl}/authors/${author.slug}/`} />
-
-        <meta name="description" content={siteMeta.description} />
-        <meta name="twitter:description" content={siteMeta.description} />
-        <meta property="al:web:url" content={`${siteMeta.siteUrl}/authors/${author.slug}`} />
-        <meta property="og:title" content={`${author.name} - ${siteMeta.title}`} />
-        <meta property="og:url" content={`${siteMeta.siteUrl}/authors/${author.slug}`} />
-        <meta property="og:description" content={siteMeta.description} />
-      </Helmet>
+      <SiteMeta siteMeta={siteMeta} />
+      <PageMeta
+        siteMeta={siteMeta}
+        title={`${author.name} - ${siteMeta.title}`}
+        description={author.bio}
+        url={siteMeta.siteUrl + `/authors/${author.slug}/`}
+      />
 
       <PageSection className={classes.profile}>
         <img
@@ -175,7 +168,6 @@ query AuthorPageQuery($author: String!) {
       description
       siteUrl
       facebookPublisherUrl
-      keywords
     }
   }
 }

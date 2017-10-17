@@ -7,13 +7,6 @@ tags:
   - Go
   - Docker
 description: Imagine you're working on a project which includes a PostgreSQL database, Redis cache layer, Elasticsearch engine, Consul for dynamic configuration, and more. The last thing you want is to install all of these services on your local machine during development.
-keywords:
-  - Development
-  - Environment
-  - Docker
-  - Go
-  - Docker Compose
-  - MongoDB
 cover: ./cover.jpg
 ---
 
