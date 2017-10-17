@@ -86,7 +86,7 @@ class Thread extends React.Component {
     backend.signIn()
       .then(_ => {
         this.setState({ user: backend.user });
-        if (ga) {
+        if (typeof ga !== 'undefined') {
           ga('send', 'event', 'Comments', 'signIn');
         }
       })

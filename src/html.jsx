@@ -32,8 +32,7 @@ module.exports = class HTML extends React.Component {
           />
           {this.props.headComponents}
           {css}
-          <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400,500,700" rel="stylesheet" />
-          <script src="https://apis.google.com/js/api.js"></script>
+          <link async href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400,500,700" rel="stylesheet" />
         </head>
         <body>
           {this.props.preBodyComponents}
@@ -42,6 +41,7 @@ module.exports = class HTML extends React.Component {
             id="___gatsby"
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
+          <script src="https://apis.google.com/js/api.js"></script>
           {this.props.postBodyComponents}
         </body>
       </html>
