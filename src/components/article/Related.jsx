@@ -10,7 +10,10 @@ const styles = theme => ({
   },
   link: {
     display: 'block',
-    fontSize: '1.25rem'
+    fontSize: '1.25rem',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem'
+		}
   }
 });
 

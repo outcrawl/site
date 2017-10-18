@@ -57,7 +57,6 @@ export default withStyles(styles)(props => {
   return (
     <div className={classes.root}>
       <img
-        alt={`${author.name} avatar`}
         src={`https://www.gravatar.com/avatar/${author.emailHash}?s=120`}
         className={dark ? classes.avatarDark : classes.avatar}
       />

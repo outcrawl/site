@@ -2,7 +2,7 @@ exports.authors = {
   'tin-rabzelj': {
     name: 'Tin Rabzelj',
     email: 'tin.rabzelj@gmail.com',
-    bio: 'An awesome guy.',
+    bio: 'I love writing code more than sleep.',
     social: {
       twitter: 'tinrab',
       github: 'tinrab',

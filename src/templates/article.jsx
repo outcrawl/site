@@ -39,6 +39,7 @@ class Article extends React.Component {
     this.siteMeta = data.site.siteMetadata;
     this.article.cover.src = this.siteMeta.siteUrl + this.article.cover.src;
     this.article.permalink = `${this.siteMeta.siteUrl}${this.article.slug}`;
+    this.article.authorData.slug = this.article.author;
     this.threadId = this.article.slug.replace(/^\/+|\/+$/g, '');
   }
 
@@ -69,9 +70,7 @@ class Article extends React.Component {
               <Author article={this.article} dark />
             </Grid>
             <Grid item sm={6}>
-              <Hidden xsDown>
-                <Share article={this.article} />
-              </Hidden>
+              <Share article={this.article} />
             </Grid>
           </Grid>
 
