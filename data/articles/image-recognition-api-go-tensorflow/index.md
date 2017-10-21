@@ -12,6 +12,8 @@ cover: ./cover.jpg
 
 This tutorial shows how to build an image recognition service in Go using pre-trained TensorFlow [Inception-V3](https://arxiv.org/abs/1512.00567) model. The service will run inside a Docker container, use TensorFlow Go [package](https://godoc.org/github.com/tensorflow/tensorflow/tensorflow/go) to process images and return labels that best describe them.
 
+Full source code is available on [GitHub](https://github.com/tinrab/go-tensorflow-image-recognition).
+
 # Getting started
 
 Install [Docker](https://docs.docker.com/engine/installation/) and
@@ -167,6 +169,10 @@ func main() {
 	}
 }
 ```
+
+<note>
+Imports are skipped for brevity. You can use [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports) tool to add them. Your code editor most likely has a plugin for it.
+</note>
 
 Write the `loadModel` function.
 
@@ -431,3 +437,5 @@ $ curl localhost:8080/recognize -F 'image=@./cat.jpg'
 # Wrapping up
 
 You now have a fully working image recognition service. If you want it to focus on a more niche domain (use specific labels instead of general ones), look into transfer learning [here](https://www.tensorflow.org/tutorials/image_retraining). You can find more TensorFlow [models](https://github.com/tensorflow/models) and [examples](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples) and try to implement them in Go.
+
+Full source code is available on [GitHub](https://github.com/tinrab/go-tensorflow-image-recognition).

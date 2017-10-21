@@ -35,6 +35,11 @@ const styles = theme => ({
   userName: {
     fontWeight: 500
   },
+  replyToName: {
+    fontWeight: 500,
+    fontSize: 13,
+    color: theme.palette.text.secondary
+  },
   content: {
     fontSize: 16,
     padding: [8, 0]
@@ -82,6 +87,10 @@ class Comment extends React.Component {
             <span className={classes.userName}>{comment.user.displayName}</span>
             <span className={classes.date}>{timeago().format(comment.createdAt)}</span>
           </div>
+          {comment.replyToName ?
+            <span className={classes.replyToName}>to {comment.replyToName}</span>
+            : ''
+          }
           <div
             className={`${classes.content} markdown`}
             dangerouslySetInnerHTML={{ __html: comment.html }}></div>
@@ -168,7 +177,9 @@ class Comment extends React.Component {
   };
 
   handleDelete = () => {
-    this.props.deleteComment(this.commentId);
+    if (confirm('Are you sure?')) {
+      this.props.deleteComment(this.commentId);
+    }
   };
 
   handleCancelReply = () => {

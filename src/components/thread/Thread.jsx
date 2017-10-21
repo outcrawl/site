@@ -123,7 +123,7 @@ class Thread extends React.Component {
 					thread.comments.unshift(comment);
 
 					this.setState({ thread: thread });
-					if (ga) {
+					if (typeof ga !== 'undefined') {
 						ga('send', 'event', 'Newsletter', 'createComment');
 					}
 					resolve();
@@ -174,7 +174,9 @@ class Thread extends React.Component {
 
 					// Update state
 					this.setState({ thread: thread });
-					ga('send', 'event', 'Newsletter', 'createComment');
+          if (typeof ga !== 'undefined') {
+            ga('send', 'event', 'Newsletter', 'createComment');
+          }
 					resolve();
 				})
 				.catch(error => {
