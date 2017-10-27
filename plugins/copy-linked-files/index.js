@@ -21,9 +21,10 @@ module.exports = ({
       getNode(markdownNode.parent).internal.type === 'File'
     ) {
       const linkPath = path.join(getNode(markdownNode.parent).dir, link.url);
+      const linkPathUnix = linkPath.replace(/\\/g, '/');
       const linkNode = _.find(files, file => {
         if (file && file.absolutePath) {
-          return file.absolutePath === linkPath;
+          return file.absolutePath === linkPathUnix;
         }
         return null;
       });
@@ -49,9 +50,10 @@ module.exports = ({
 
   visit(markdownAST, 'image', image => {
     const imagePath = path.join(getNode(markdownNode.parent).dir, image.url);
+    const imagePathUnix = imagePath.replace(/\\/g, '/');
     const imageNode = _.find(files, file => {
       if (file && file.absolutePath) {
-        return file.absolutePath === imagePath;
+        return file.absolutePath === imagePathUnix;
       }
       return false;
     })
@@ -71,9 +73,10 @@ module.exports = ({
       image.position = node.position;
 
       const imagePath = path.join(getNode(markdownNode.parent).dir, image.url);
+      const imagePathUnix = imagePath.replace(/\\/g, '/');
       const imageNode = _.find(files, file => {
         if (file && file.absolutePath) {
-          return file.absolutePath === imagePath;
+          return file.absolutePath === imagePathUnix;
         }
         return false;
       })

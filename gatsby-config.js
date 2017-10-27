@@ -1,20 +1,15 @@
 const remark = {
   resolve: 'gatsby-transformer-remark',
   options: {
-    plugins: [{
-      resolve: 'gatsby-remark-images',
-      options: {
-        maxWidth: 1280,
-        linkImagesToOriginal: true,
-        quality: 90
-      }
-    },
-    {
-      resolve: 'gatsby-remark-prismjs',
-      options: {
-        classPrefix: 'language-',
-      }
-    },
+    plugins: [
+      {
+        resolve: 'gatsby-remark-images',
+        options: {
+          maxWidth: 1280,
+          linkImagesToOriginal: true,
+          quality: 90
+        }
+      },
       'copy-linked-files',
       'transform-markdown'
     ]
