@@ -86,9 +86,6 @@ class Thread extends React.Component {
 		backend.signIn()
 			.then(_ => {
 				this.setState({ user: backend.user });
-				if (typeof ga !== 'undefined') {
-					ga('send', 'event', 'Comments', 'signIn');
-				}
 			})
 			.catch(error => {
 				if (error.error != 'popup_closed_by_user') {
@@ -124,7 +121,7 @@ class Thread extends React.Component {
 
 					this.setState({ thread: thread });
 					if (typeof ga !== 'undefined') {
-						ga('send', 'event', 'Newsletter', 'createComment');
+						ga('send', 'event', 'Comments', 'createComment');
 					}
 					resolve();
 				})
@@ -175,7 +172,7 @@ class Thread extends React.Component {
 					// Update state
 					this.setState({ thread: thread });
           if (typeof ga !== 'undefined') {
-            ga('send', 'event', 'Newsletter', 'createComment');
+            ga('send', 'event', 'Comments', 'createComment');
           }
 					resolve();
 				})
