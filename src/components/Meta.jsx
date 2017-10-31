@@ -78,7 +78,7 @@ const PageMeta = ({ siteMeta, image, title, description, url }) => {
 };
 
 const ArticleMeta = ({ siteMeta, article }) => {
-  const title = article.title.replace(/"/g, '&quot;');
+  const title = article.title.replace(/"/g, '&quot;') + ' - ' + siteMeta.title;
   const description = article.description.replace(/"/g, '&quot;');
   const date = new Date(Date.parse(article.date)).toISOString().replace(/T.*$/, '');
   const cover = article.cover;

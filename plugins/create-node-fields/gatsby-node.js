@@ -22,14 +22,19 @@ exports.onCreateNode = ({
     }
 
     // Slug
+    let filePath = createFilePath({
+      node,
+      getNode,
+      basePath: basePath
+    });
+    if (node.frontmatter.layout === 'article') {
+      // Remove date
+      filePath = filePath.substr(12);
+    }
     createNodeField({
       node,
       name: 'slug',
-      value: createFilePath({
-        node,
-        getNode,
-        basePath: basePath
-      })
+      value: filePath
     });
 
     if (node.frontmatter.layout === 'article') {

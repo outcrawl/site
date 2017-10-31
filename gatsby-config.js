@@ -7,7 +7,7 @@ const remark = {
         options: {
           maxWidth: 1280,
           linkImagesToOriginal: true,
-          quality: 90
+          quality: 100
         }
       },
       'copy-linked-files',
@@ -22,14 +22,14 @@ const custom = [
   {
     resolve: 'create-home',
     options: {
-      articlesPerPage: 6
+      articlesPerPage: 8
     }
   },
   'create-author-pages',
   {
     resolve: 'create-tag-pages',
     options: {
-      articlesPerPage: 6
+      articlesPerPage: 8
     }
   }
 ];
