@@ -27,6 +27,7 @@ export default withStyles(styles)(({ classes, basePath, page, total }) => {
       component={Link}
       to={page === 2 ? basePath : `${basePath}page/${page - 1}/`}
       disabled={page === 1}
+      rel={page === 1 ? "nofollow" : null}
       aria-label="Previous page">
       <ChevronLeftIcon />
     </IconButton>;
@@ -35,6 +36,7 @@ export default withStyles(styles)(({ classes, basePath, page, total }) => {
       component={Link}
       to={`${basePath}page/${page + 1}/`}
       disabled={page === total}
+      rel={page === total ? "nofollow" : null}
       aria-label="Next page">
       <ChevronRightIcon />
     </IconButton>;

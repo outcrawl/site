@@ -22,7 +22,7 @@ const styles = theme => ({
 const Tags = ({ article, classes }) => (
   <div className={classes.root}>
     {article.tags.map((tag, i) =>
-      <Link key={i} className={classes.tag} to={`/tags/${article.slugTags[i]}`}>
+      <Link key={i} className={classes.tag} to={`/tags/${article.slugTags[i]}/`}>
         <Chip label={tag} onClick={() => { }} />
       </Link>
     )}
