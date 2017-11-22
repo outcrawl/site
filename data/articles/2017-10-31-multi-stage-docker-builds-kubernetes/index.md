@@ -43,16 +43,16 @@ Create `first/main.go`, and write a simple HTTP server.
 package main
 
 import (
-	"fmt"
-	"net/http"
+  "fmt"
+  "net/http"
 )
 
 func main() {
-	r := http.NewServeMux()
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "first")
-	})
-	http.ListenAndServe(":3000", r)
+  r := http.NewServeMux()
+  r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintln(w, "first")
+  })
+  http.ListenAndServe(":3000", r)
 }
 ```
 

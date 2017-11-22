@@ -58,18 +58,18 @@ Create `app.go` file.
 package todo
 
 var (
-	clientID string
+  clientID string
 )
 
 func init() {
-	// Read configuration environment variables
-	clientID = os.Getenv("CLIENT_ID")
-	// Register routes
-	r := mux.NewRouter()
-	r.HandleFunc("/api/signin", signInHandler).
-		Methods("POST")
-	// Start HTTP server
-	http.Handle("/", cors.AllowAll().Handler(r))
+  // Read configuration environment variables
+  clientID = os.Getenv("CLIENT_ID")
+  // Register routes
+  r := mux.NewRouter()
+  r.HandleFunc("/api/signin", signInHandler).
+    Methods("POST")
+  // Start HTTP server
+  http.Handle("/", cors.AllowAll().Handler(r))
 }
 ```
 
@@ -84,25 +84,25 @@ Write a couple of utility functions inside `utility.go` file for future use.
 ```go
 package todo
 func responseError(w http.ResponseWriter, message string, code int) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
-	json.NewEncoder(w).Encode(map[string]string{"error": message})
+  w.Header().Set("Content-Type", "application/json")
+  w.WriteHeader(code)
+  json.NewEncoder(w).Encode(map[string]string{"error": message})
 }
 func responseJSON(w http.ResponseWriter, data interface{}) {
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(data)
+  w.Header().Set("Content-Type", "application/json")
+  json.NewEncoder(w).Encode(data)
 }
 func readJSON(rc io.ReadCloser, v interface{}) error {
-	defer rc.Close()
-	data, err := ioutil.ReadAll(rc)
-	if err != nil {
-		return err
-	}
-	err = json.Unmarshal(data, v)
-	if err != nil {
-		return err
-	}
-	return nil
+  defer rc.Close()
+  data, err := ioutil.ReadAll(rc)
+  if err != nil {
+    return err
+  }
+  err = json.Unmarshal(data, v)
+  if err != nil {
+    return err
+  }
+  return nil
 }
 ```
 
@@ -112,33 +112,33 @@ Declare `signInHandler` handler function inside `signin_handler.go` file.
 package todo
 
 type SignInResponse struct {
-	UserID       string `json:"userId"`
-	SessionToken string `json:"sessionToken"`
+  UserID       string `json:"userId"`
+  SessionToken string `json:"sessionToken"`
 }
 
 func signInHandler(w http.ResponseWriter, r *http.Request) {
-	ctx := appengine.NewContext(r)
-	// Verify ID token provided in header
-	token := r.Header.Get("Authorization")
-	userID, err := verifyToken(ctx, token)
-	if err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Invalid ID token", http.StatusBadRequest)
-		return
-	}
-	// Generate a new session token and store it in Memcache
-	sessionToken := generateSessionToken()
-	if err := memcache.Set(ctx, &memcache.Item{
-		Key:        "session:" + sessionToken,
-		Value:      []byte(userID),
-		Expiration: 10 * time.Hour,
-	}); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not start user session", http.StatusInternalServerError)
-		return
-	}
-	// Return session data
-	responseJSON(w, SignInResponse{userID, sessionToken})
+  ctx := appengine.NewContext(r)
+  // Verify ID token provided in header
+  token := r.Header.Get("Authorization")
+  userID, err := verifyToken(ctx, token)
+  if err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Invalid ID token", http.StatusBadRequest)
+    return
+  }
+  // Generate a new session token and store it in Memcache
+  sessionToken := generateSessionToken()
+  if err := memcache.Set(ctx, &memcache.Item{
+    Key:        "session:" + sessionToken,
+    Value:      []byte(userID),
+    Expiration: 10 * time.Hour,
+  }); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not start user session", http.StatusInternalServerError)
+    return
+  }
+  // Return session data
+  responseJSON(w, SignInResponse{userID, sessionToken})
 }
 ```
 
@@ -148,26 +148,26 @@ Declare the `verifyToken` function inside `signin_handler.go`.
 
 ```go
 func verifyToken(ctx context.Context, token string) (string, error) {
-	client := urlfetch.Client(ctx)
-	resp, err := client.Get("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + token)
-	if err != nil {
-		return "", err
-	}
-	var bodyJSON map[string]interface{}
-	if err := readJSON(resp.Body, &bodyJSON); err != nil {
-		return "", err
-	}
-	if aud, ok := bodyJSON["aud"].(string); ok {
-		if clientID != aud {
-			return "", errors.New("Invalid client ID")
-		}
-	} else {
-		return "", errors.New("Invalid ID token")
-	}
-	if sub, ok := bodyJSON["sub"].(string); ok {
-		return sub, nil
-	}
-	return "", errors.New("Invalid ID token")
+  client := urlfetch.Client(ctx)
+  resp, err := client.Get("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + token)
+  if err != nil {
+    return "", err
+  }
+  var bodyJSON map[string]interface{}
+  if err := readJSON(resp.Body, &bodyJSON); err != nil {
+    return "", err
+  }
+  if aud, ok := bodyJSON["aud"].(string); ok {
+    if clientID != aud {
+      return "", errors.New("Invalid client ID")
+    }
+  } else {
+    return "", errors.New("Invalid ID token")
+  }
+  if sub, ok := bodyJSON["sub"].(string); ok {
+    return sub, nil
+  }
+  return "", errors.New("Invalid ID token")
 }
 ```
 
@@ -178,14 +178,14 @@ Also declare the `generateSessionToken` function.
 ```go
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-")
 func generateSessionToken() string {
-	const n = 64
-	data := make([]byte, n)
-	rand.Read(data)
-	token := make([]rune, n)
-	for i := range data {
-		token[i] = letters[int(data[i])%len(letters)]
-	}
-	return string(token)
+  const n = 64
+  data := make([]byte, n)
+  rand.Read(data)
+  token := make([]rune, n)
+  for i := range data {
+    token[i] = letters[int(data[i])%len(letters)]
+  }
+  return string(token)
 }
 ```
 
@@ -207,25 +207,25 @@ Now create a middleware between authenticated handler functions and the old `htt
 
 ```go
 func authenticate(handler AuthenticatedHandler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		ctx := appengine.NewContext(r)
-		// Get session token from header
-		sessionToken := r.Header.Get("Authorization")
-		if len(sessionToken) == 0 {
-			responseError(w, "Invalid session token", http.StatusUnauthorized)
-			return
-		}
-		// Fetch user's ID from Memcache
-		sessionItem, err := memcache.Get(ctx, "session:"+sessionToken)
-		if err != nil {
-			log.Errorf(ctx, "%v", err)
-			responseError(w, "Could not authenticate", http.StatusUnauthorized)
-			return
-		}
-		// Call handler function
-		userID := string(sessionItem.Value)
-		handler(ctx, w, r, userID)
-	}
+  return func(w http.ResponseWriter, r *http.Request) {
+    ctx := appengine.NewContext(r)
+    // Get session token from header
+    sessionToken := r.Header.Get("Authorization")
+    if len(sessionToken) == 0 {
+      responseError(w, "Invalid session token", http.StatusUnauthorized)
+      return
+    }
+    // Fetch user's ID from Memcache
+    sessionItem, err := memcache.Get(ctx, "session:"+sessionToken)
+    if err != nil {
+      log.Errorf(ctx, "%v", err)
+      responseError(w, "Could not authenticate", http.StatusUnauthorized)
+      return
+    }
+    // Call handler function
+    userID := string(sessionItem.Value)
+    handler(ctx, w, r, userID)
+  }
 }
 ```
 
@@ -235,19 +235,19 @@ To see how it works, declare a dummy handler and update the `init` function insi
 
 ```go{8-9,13-15}
 func init() {
-	// Read configuration environment variables
-	clientID = os.Getenv("CLIENT_ID")
-	// Register routes
-	r := mux.NewRouter()
-	r.HandleFunc("/api/signin", signInHandler).
-		Methods("POST")
-	r.HandleFunc("/api/hello", authenticate(helloHandler)).
-		Methods("GET")
-	// Start HTTP server
-	http.Handle("/", cors.AllowAll().Handler(r))
+  // Read configuration environment variables
+  clientID = os.Getenv("CLIENT_ID")
+  // Register routes
+  r := mux.NewRouter()
+  r.HandleFunc("/api/signin", signInHandler).
+    Methods("POST")
+  r.HandleFunc("/api/hello", authenticate(helloHandler)).
+    Methods("GET")
+  // Start HTTP server
+  http.Handle("/", cors.AllowAll().Handler(r))
 }
 func helloHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, userID string) {
-	responseJSON(w, "Hello, "+userID)
+  responseJSON(w, "Hello, "+userID)
 }
 ```
 
@@ -272,10 +272,10 @@ Declare `Todo` struct inside `todo_handlers.go` file.
 package todo
 
 type Todo struct {
-	ID        string    `json:"id" datastore:"-"`
-	UserID    string    `json:"userId"`
-	Title     string    `json:"title"`
-	CreatedAt time.Time `json:"createdAt"`
+  ID        string    `json:"id" datastore:"-"`
+  UserID    string    `json:"userId"`
+  Title     string    `json:"title"`
+  CreatedAt time.Time `json:"createdAt"`
 }
 ```
 
@@ -287,24 +287,24 @@ Write `createTodoHandler` handler function.
 
 ```go
 func createTodoHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, userID string) {
-	// Read todo from request body
-	var todo Todo
-	if err := readJSON(r.Body, &todo); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not read todo", http.StatusBadRequest)
-		return
-	}
-	todo.UserID = userID
-	todo.CreatedAt = time.Now()
-	// Store todo
-	key := datastore.NewIncompleteKey(ctx, "Todo", nil)
-	if key, err := datastore.Put(ctx, key, &todo); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not create todo", http.StatusInternalServerError)
-	} else {
-		todo.ID = strconv.FormatInt(key.IntID(), 10)
-		responseJSON(w, todo)
-	}
+  // Read todo from request body
+  var todo Todo
+  if err := readJSON(r.Body, &todo); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not read todo", http.StatusBadRequest)
+    return
+  }
+  todo.UserID = userID
+  todo.CreatedAt = time.Now()
+  // Store todo
+  key := datastore.NewIncompleteKey(ctx, "Todo", nil)
+  if key, err := datastore.Put(ctx, key, &todo); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not create todo", http.StatusInternalServerError)
+  } else {
+    todo.ID = strconv.FormatInt(key.IntID(), 10)
+    responseJSON(w, todo)
+  }
 }
 ```
 
@@ -329,27 +329,27 @@ Declare `listTodosHandler` handler function which reads todos made by the curren
 
 ```go
 func listTodosHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, userID string) {
-	var todos []Todo
-	// Query todos by user's ID and order them by creation time
-	query := datastore.NewQuery("Todo").
-		Filter("UserID =", userID).
-		Order("-CreatedAt")
-	// Execute query
-	if keys, err := query.GetAll(ctx, &todos); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not read todos", http.StatusInternalServerError)
-	} else {
-		// Return empty array instead of 'null'
-		if len(todos) == 0 {
-			responseJSON(w, []Todo{})
-			return
-		}
-		// Set string IDs
-		for i := range todos {
-			todos[i].ID = strconv.FormatInt(keys[i].IntID(), 10)
-		}
-		responseJSON(w, todos)
-	}
+  var todos []Todo
+  // Query todos by user's ID and order them by creation time
+  query := datastore.NewQuery("Todo").
+    Filter("UserID =", userID).
+    Order("-CreatedAt")
+  // Execute query
+  if keys, err := query.GetAll(ctx, &todos); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not read todos", http.StatusInternalServerError)
+  } else {
+    // Return empty array instead of 'null'
+    if len(todos) == 0 {
+      responseJSON(w, []Todo{})
+      return
+    }
+    // Set string IDs
+    for i := range todos {
+      todos[i].ID = strconv.FormatInt(keys[i].IntID(), 10)
+    }
+    responseJSON(w, todos)
+  }
 }
 ```
 
@@ -384,37 +384,37 @@ Updating is a bit more complex. You need to check if requested todo exists and b
 
 ```go
 func updateTodoHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, userID string) {
-	// Parse ID
-	id := mux.Vars(r)["id"]
-	todoID, err := strconv.ParseInt(id, 10, 64)
-	if err != nil {
-		responseError(w, "Invalid todo ID", http.StatusBadRequest)
-		return
-	}
-	// Get old todo
-	var todo Todo
-	if err := getOwningTodo(ctx, userID, todoID, &todo); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not read old todo", http.StatusBadRequest)
-		return
-	}
-	// Read new todo from request body
-	var newTodo Todo
-	if err := readJSON(r.Body, &newTodo); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not read request body", http.StatusBadRequest)
-		return
-	}
-	// Update todo
-	todo.Title = newTodo.Title
-	key := datastore.NewKey(ctx, "Todo", "", todoID, nil)
-	if _, err := datastore.Put(ctx, key, &todo); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not update todo", http.StatusInternalServerError)
-		return
-	}
-	todo.ID = id
-	responseJSON(w, todo)
+  // Parse ID
+  id := mux.Vars(r)["id"]
+  todoID, err := strconv.ParseInt(id, 10, 64)
+  if err != nil {
+    responseError(w, "Invalid todo ID", http.StatusBadRequest)
+    return
+  }
+  // Get old todo
+  var todo Todo
+  if err := getOwningTodo(ctx, userID, todoID, &todo); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not read old todo", http.StatusBadRequest)
+    return
+  }
+  // Read new todo from request body
+  var newTodo Todo
+  if err := readJSON(r.Body, &newTodo); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not read request body", http.StatusBadRequest)
+    return
+  }
+  // Update todo
+  todo.Title = newTodo.Title
+  key := datastore.NewKey(ctx, "Todo", "", todoID, nil)
+  if _, err := datastore.Put(ctx, key, &todo); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not update todo", http.StatusInternalServerError)
+    return
+  }
+  todo.ID = id
+  responseJSON(w, todo)
 }
 ```
 
@@ -422,16 +422,16 @@ Also declare a utility function which reads a todo by ID and checks if it belong
 
 ```go
 func getOwningTodo(ctx context.Context, userID string, id int64, todo *Todo) error {
-	// Fetch todo
-	key := datastore.NewKey(ctx, "Todo", "", id, nil)
-	if err := datastore.Get(ctx, key, todo); err != nil {
-		return err
-	}
-	// Check if it belongs to the current user
-	if todo.UserID != userID {
-		return errors.New("Not own todo")
-	}
-	return nil
+  // Fetch todo
+  key := datastore.NewKey(ctx, "Todo", "", id, nil)
+  if err := datastore.Get(ctx, key, todo); err != nil {
+    return err
+  }
+  // Check if it belongs to the current user
+  if todo.UserID != userID {
+    return errors.New("Not own todo")
+  }
+  return nil
 }
 ```
 
@@ -455,29 +455,29 @@ Similarly as with updating, deleting requires checking validity before performin
 
 ```go
 func deleteTodoHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, userID string) {
-	// Parse ID
-	id := mux.Vars(r)["id"]
-	todoID, err := strconv.ParseInt(id, 10, 64)
-	if err != nil {
-		responseError(w, "Invalid todo ID", http.StatusBadRequest)
-		return
-	}
-	// Get todo to check if it can be deleted
-	var todo Todo
-	if err := getOwningTodo(ctx, userID, todoID, &todo); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not read todo", http.StatusInternalServerError)
-		return
-	}
-	// Delete todo
-	key := datastore.NewKey(ctx, "Todo", "", todoID, nil)
-	if err := datastore.Delete(ctx, key); err != nil {
-		log.Errorf(ctx, "%v", err)
-		responseError(w, "Could not delete todo", http.StatusInternalServerError)
-		return
-	}
-	todo.ID = id
-	responseJSON(w, todo)
+  // Parse ID
+  id := mux.Vars(r)["id"]
+  todoID, err := strconv.ParseInt(id, 10, 64)
+  if err != nil {
+    responseError(w, "Invalid todo ID", http.StatusBadRequest)
+    return
+  }
+  // Get todo to check if it can be deleted
+  var todo Todo
+  if err := getOwningTodo(ctx, userID, todoID, &todo); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not read todo", http.StatusInternalServerError)
+    return
+  }
+  // Delete todo
+  key := datastore.NewKey(ctx, "Todo", "", todoID, nil)
+  if err := datastore.Delete(ctx, key); err != nil {
+    log.Errorf(ctx, "%v", err)
+    responseError(w, "Could not delete todo", http.StatusInternalServerError)
+    return
+  }
+  todo.ID = id
+  responseJSON(w, todo)
 }
 ```
 

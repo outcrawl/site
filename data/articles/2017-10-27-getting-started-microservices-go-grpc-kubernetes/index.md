@@ -79,13 +79,13 @@ Create `main.go` file inside `gcd` directory. Make sure you import correct packa
 ```go
 package main
 import (
-	"log"
+  "log"
   "net"
   // Change this for your own project
-	"github.com/tinrab/kubernetes-go-grpc-tutorial/pb"
-	context "golang.org/x/net/context"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
+  "github.com/tinrab/kubernetes-go-grpc-tutorial/pb"
+  context "golang.org/x/net/context"
+  "google.golang.org/grpc"
+  "google.golang.org/grpc/reflection"
 )
 ```
 
@@ -95,16 +95,16 @@ In the `main` function, register a server type which will handle requests. Then 
 type server struct{}
 
 func main() {
-	lis, err := net.Listen("tcp", ":3000")
-	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
-	}
-	s := grpc.NewServer()
-	pb.RegisterGCDServiceServer(s, &server{})
-	reflection.Register(s)
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve: %v", err)
-	}
+  lis, err := net.Listen("tcp", ":3000")
+  if err != nil {
+    log.Fatalf("Failed to listen: %v", err)
+  }
+  s := grpc.NewServer()
+  pb.RegisterGCDServiceServer(s, &server{})
+  reflection.Register(s)
+  if err := s.Serve(lis); err != nil {
+    log.Fatalf("Failed to serve: %v", err)
+  }
 }
 ```
 
@@ -112,11 +112,11 @@ Declare the `Compute` handler function. This makes the `server` type conform to 
 
 ```go
 func (s *server) Compute(ctx context.Context, r *pb.GCDRequest) (*pb.GCDResponse, error) {
-	a, b := r.A, r.B
-	for b != 0 {
-		a, b = b, a%b
-	}
-	return &pb.GCDResponse{Result: a}, nil
+  a, b := r.A, r.B
+  for b != 0 {
+    a, b = b, a%b
+  }
+  return &pb.GCDResponse{Result: a}, nil
 }
 ```
 
@@ -128,11 +128,11 @@ Create a client to communicate with the GCD service inside `main` function. Beca
 
 ```go
 func main() {
-	conn, err := grpc.Dial("gcd-service:3000", grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("Dial failed: %v", err)
-	}
-	gcdClient := pb.NewGCDServiceClient(conn)
+  conn, err := grpc.Dial("gcd-service:3000", grpc.WithInsecure())
+  if err != nil {
+    log.Fatalf("Dial failed: %v", err)
+  }
+  gcdClient := pb.NewGCDServiceClient(conn)
 }
 ```
 

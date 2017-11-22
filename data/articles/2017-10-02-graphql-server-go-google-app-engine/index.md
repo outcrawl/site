@@ -52,19 +52,19 @@ Write some utility functions inside `utilities.go` file.
 package app
 
 import (
-	"encoding/json"
-	"net/http"
+  "encoding/json"
+  "net/http"
 )
 
 func responseError(w http.ResponseWriter, message string, code int) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
-	json.NewEncoder(w).Encode(map[string]string{"error": message})
+  w.Header().Set("Content-Type", "application/json")
+  w.WriteHeader(code)
+  json.NewEncoder(w).Encode(map[string]string{"error": message})
 }
 
 func responseJSON(w http.ResponseWriter, data interface{}) {
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(data)
+  w.Header().Set("Content-Type", "application/json")
+  json.NewEncoder(w).Encode(data)
 }
 ```
 
@@ -76,15 +76,15 @@ package app
 import "time"
 
 type User struct {
-	ID   string `json:"id" datastore:"-"`
-	Name string `json:"name"`
+  ID   string `json:"id" datastore:"-"`
+  Name string `json:"name"`
 }
 
 type Post struct {
-	ID        string    `json:"id" datastore:"-"`
-	UserID    string    `json:"userId"`
-	CreatedAt time.Time `json:"createdAt"`
-	Content   string    `json:"content"`
+  ID        string    `json:"id" datastore:"-"`
+  UserID    string    `json:"userId"`
+  CreatedAt time.Time `json:"createdAt"`
+  Content   string    `json:"content"`
 }
 ```
 
@@ -103,23 +103,23 @@ Inside `app.go` declare the user type and root mutation containing `createUser` 
 ```go
 var schema graphql.Schema
 var userType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "User",
-	Fields: graphql.Fields{
-		"id":    &graphql.Field{Type: graphql.String},
-		"name":  &graphql.Field{Type: graphql.String},
-	},
+  Name: "User",
+  Fields: graphql.Fields{
+    "id":    &graphql.Field{Type: graphql.String},
+    "name":  &graphql.Field{Type: graphql.String},
+  },
 })
 var rootMutation = graphql.NewObject(graphql.ObjectConfig{
-	Name: "RootMutation",
-	Fields: graphql.Fields{
-		"createUser": &graphql.Field{
-			Type: userType,
-			Args: graphql.FieldConfigArgument{
-				"name": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
-			},
-			Resolve: createUser,
-		},
-	},
+  Name: "RootMutation",
+  Fields: graphql.Fields{
+    "createUser": &graphql.Field{
+      Type: userType,
+      Args: graphql.FieldConfigArgument{
+        "name": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+      },
+      Resolve: createUser,
+    },
+  },
 })
 ```
 
@@ -127,19 +127,19 @@ All resolver functions will be kept inside `resolvers.go` file. Write the `creat
 
 ```go
 func createUser(params graphql.ResolveParams) (interface{}, error) {
-	ctx := params.Context
+  ctx := params.Context
   // Get the name argument
-	name, _ := params.Args["name"].(string)
-	user := &User{Name: name}
-	key := datastore.NewIncompleteKey(ctx, "User", nil)
-	// Insert user into Datastore
+  name, _ := params.Args["name"].(string)
+  user := &User{Name: name}
+  key := datastore.NewIncompleteKey(ctx, "User", nil)
+  // Insert user into Datastore
   if generatedKey, err := datastore.Put(ctx, key, user); err != nil {
-		return User{}, err
-	} else {
+    return User{}, err
+  } else {
     // Set user's auto-generated ID
-		user.ID = strconv.FormatInt(generatedKey.IntID(), 10)
-	}
-	return user, nil
+    user.ID = strconv.FormatInt(generatedKey.IntID(), 10)
+  }
+  return user, nil
 }
 ```
 
@@ -147,32 +147,32 @@ Inside the `init` function build the schema and hook up a HTTP handler, which re
 
 ```go
 func init() {
-	schema, _ = graphql.NewSchema(graphql.SchemaConfig{
-		Mutation: rootMutation,
-	})
-	http.HandleFunc("/", handler)
+  schema, _ = graphql.NewSchema(graphql.SchemaConfig{
+    Mutation: rootMutation,
+  })
+  http.HandleFunc("/", handler)
 }
 func handler(w http.ResponseWriter, r *http.Request) {
-	ctx := appengine.NewContext(r)
+  ctx := appengine.NewContext(r)
   // Read the query
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		responseError(w, "Invalid request body", http.StatusBadRequest)
-		return
-	}
+  body, err := ioutil.ReadAll(r.Body)
+  if err != nil {
+    responseError(w, "Invalid request body", http.StatusBadRequest)
+    return
+  }
   // Perform GraphQL request
-	resp := graphql.Do(graphql.Params{
-		Schema:        schema,
-		RequestString: string(body),
-		Context:       ctx,
-	})
+  resp := graphql.Do(graphql.Params{
+    Schema:        schema,
+    RequestString: string(body),
+    Context:       ctx,
+  })
   // Check for errors
-	if len(resp.Errors) > 0 {
-		responseError(w, fmt.Sprintf("%+v", resp.Errors), http.StatusBadRequest)
-		return
-	}
+  if len(resp.Errors) > 0 {
+    responseError(w, fmt.Sprintf("%+v", resp.Errors), http.StatusBadRequest)
+    return
+  }
   // Return the result
-	responseJSON(w, resp)
+  responseJSON(w, resp)
 }
 ```
 
@@ -217,13 +217,13 @@ Declare the post type.
 
 ```go
 var postType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Post",
-	Fields: graphql.Fields{
-		"id":        &graphql.Field{Type: graphql.String},
-		"userId":    &graphql.Field{Type: graphql.String},
-		"createdAt": &graphql.Field{Type: graphql.DateTime},
-		"content":   &graphql.Field{Type: graphql.String},
-	},
+  Name: "Post",
+  Fields: graphql.Fields{
+    "id":        &graphql.Field{Type: graphql.String},
+    "userId":    &graphql.Field{Type: graphql.String},
+    "createdAt": &graphql.Field{Type: graphql.DateTime},
+    "content":   &graphql.Field{Type: graphql.String},
+  },
 })
 ```
 
@@ -231,24 +231,24 @@ Update the `rootMutation`.
 
 ```go{11-17}
 var rootMutation = graphql.NewObject(graphql.ObjectConfig{
-	Name: "RootMutation",
-	Fields: graphql.Fields{
-		"createUser": &graphql.Field{
-			Type: userType,
-			Args: graphql.FieldConfigArgument{
-				"name": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
-			},
-			Resolve: createUser,
-		},
-		"createPost": &graphql.Field{
-			Type: postType,
-			Args: graphql.FieldConfigArgument{
-				"userId":  &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
-				"content": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
-			},
-			Resolve: createPost,
-		},
-	},
+  Name: "RootMutation",
+  Fields: graphql.Fields{
+    "createUser": &graphql.Field{
+      Type: userType,
+      Args: graphql.FieldConfigArgument{
+        "name": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+      },
+      Resolve: createUser,
+    },
+    "createPost": &graphql.Field{
+      Type: postType,
+      Args: graphql.FieldConfigArgument{
+        "userId":  &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+        "content": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+      },
+      Resolve: createPost,
+    },
+  },
 })
 ```
 
@@ -256,20 +256,20 @@ Write the `createPost` function. Note that validity of `userId` argument is not 
 
 ```go
 func createPost(params graphql.ResolveParams) (interface{}, error) {
-	ctx := params.Context
+  ctx := params.Context
   // Get arguments
-	content, _ := params.Args["content"].(string)
-	userID, _ := params.Args["userId"].(string)
-	post := &Post{UserID: userID, Content: content, CreatedAt: time.Now().UTC()}
-	key := datastore.NewIncompleteKey(ctx, "Post", nil)
-	// Insert post
+  content, _ := params.Args["content"].(string)
+  userID, _ := params.Args["userId"].(string)
+  post := &Post{UserID: userID, Content: content, CreatedAt: time.Now().UTC()}
+  key := datastore.NewIncompleteKey(ctx, "Post", nil)
+  // Insert post
   if generatedKey, err := datastore.Put(ctx, key, post); err != nil {
-		return Post{}, err
-	} else {
+    return Post{}, err
+  } else {
     // Update post's ID
-		post.ID = strconv.FormatInt(generatedKey.IntID(), 10)
-	}
-	return post, nil
+    post.ID = strconv.FormatInt(generatedKey.IntID(), 10)
+  }
+  return post, nil
 }
 ```
 
@@ -301,24 +301,24 @@ When working with lists, you normally want API to provide a way to paginate resu
 
 ```go
 func makeListField(listType graphql.Output, resolve graphql.FieldResolveFn) *graphql.Field {
-	return &graphql.Field{
-		Type:    listType,
-		Resolve: resolve,
-		Args: graphql.FieldConfigArgument{
-			"limit":  &graphql.ArgumentConfig{Type: graphql.Int},
-			"offset": &graphql.ArgumentConfig{Type: graphql.Int},
-		},
-	}
+  return &graphql.Field{
+    Type:    listType,
+    Resolve: resolve,
+    Args: graphql.FieldConfigArgument{
+      "limit":  &graphql.ArgumentConfig{Type: graphql.Int},
+      "offset": &graphql.ArgumentConfig{Type: graphql.Int},
+    },
+  }
 }
 
 func makeNodeListType(name string, nodeType *graphql.Object) *graphql.Object {
-	return graphql.NewObject(graphql.ObjectConfig{
-		Name: name,
-		Fields: graphql.Fields{
-			"nodes":      &graphql.Field{Type: graphql.NewList(nodeType)},
-			"totalCount": &graphql.Field{Type: graphql.Int},
-		},
-	})
+  return graphql.NewObject(graphql.ObjectConfig{
+    Name: name,
+    Fields: graphql.Fields{
+      "nodes":      &graphql.Field{Type: graphql.NewList(nodeType)},
+      "totalCount": &graphql.Field{Type: graphql.Int},
+    },
+  })
 }
 ```
 
@@ -328,10 +328,10 @@ Define the root query object with a `posts` field.
 
 ```go
 var rootQuery = graphql.NewObject(graphql.ObjectConfig{
-	Name: "RootQuery",
-	Fields: graphql.Fields{
-		"posts": makeListField(makeNodeListType("PostList", postType), queryPosts),
-	},
+  Name: "RootQuery",
+  Fields: graphql.Fields{
+    "posts": makeListField(makeNodeListType("PostList", postType), queryPosts),
+  },
 })
 ```
 
@@ -339,11 +339,11 @@ Update the `init` function.
 
 ```go{4}
 func init() {
-	schema, _ = graphql.NewSchema(graphql.SchemaConfig{
-		Mutation: rootMutation,
-	  Query:    rootQuery,
-	})
-	http.HandleFunc("/", handler)
+  schema, _ = graphql.NewSchema(graphql.SchemaConfig{
+    Mutation: rootMutation,
+    Query:    rootQuery,
+  })
+  http.HandleFunc("/", handler)
 }
 ```
 
@@ -351,26 +351,26 @@ Inside `resolvers.go` write the `queryPostList` function which runs provided que
 
 ```go
 type PostListResult struct {
-	Nodes      []Post `json:"nodes"`
-	TotalCount int    `json:"totalCount"`
+  Nodes      []Post `json:"nodes"`
+  TotalCount int    `json:"totalCount"`
 }
 
 func queryPostList(ctx context.Context, query *datastore.Query) (PostListResult, error) {
   // Order by creation time
   query = query.Order("-CreatedAt")
-	var result PostListResult
+  var result PostListResult
   // Run the query
-	if keys, err := query.GetAll(ctx, &result.Nodes); err != nil {
-		return result, err
-	} else {
+  if keys, err := query.GetAll(ctx, &result.Nodes); err != nil {
+    return result, err
+  } else {
     // Set IDs
-		for i, key := range keys {
-			result.Nodes[i].ID = strconv.FormatInt(key.IntID(), 10)
-		}
+    for i, key := range keys {
+      result.Nodes[i].ID = strconv.FormatInt(key.IntID(), 10)
+    }
     // Set total count
-		result.TotalCount = len(result.Nodes)
-	}
-	return result, nil
+    result.TotalCount = len(result.Nodes)
+  }
+  return result, nil
 }
 ```
 
@@ -378,15 +378,15 @@ Write the `queryPosts` resolve function.
 
 ```go
 func queryPosts(params graphql.ResolveParams) (interface{}, error) {
-	ctx := params.Context
-	query := datastore.NewQuery("Post")
-	if limit, ok := params.Args["limit"].(int); ok {
-		query = query.Limit(limit)
-	}
-	if offset, ok := params.Args["offset"].(int); ok {
-		query = query.Offset(offset)
-	}
-	return queryPostList(ctx, query)
+  ctx := params.Context
+  query := datastore.NewQuery("Post")
+  if limit, ok := params.Args["limit"].(int); ok {
+    query = query.Limit(limit)
+  }
+  if offset, ok := params.Args["offset"].(int); ok {
+    query = query.Offset(offset)
+  }
+  return queryPostList(ctx, query)
 }
 ```
 
@@ -447,12 +447,12 @@ Update the user type.
 
 ```go{6}
 var userType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "User",
-	Fields: graphql.Fields{
-		"id":    &graphql.Field{Type: graphql.String},
-		"name":  &graphql.Field{Type: graphql.String},
-		"posts": makeListField(makeNodeListType("PostList", postType), queryPostsByUser),
-	},
+  Name: "User",
+  Fields: graphql.Fields{
+    "id":    &graphql.Field{Type: graphql.String},
+    "name":  &graphql.Field{Type: graphql.String},
+    "posts": makeListField(makeNodeListType("PostList", postType), queryPostsByUser),
+  },
 })
 ```
 
@@ -460,17 +460,17 @@ Update the root query.
 
 ```go{4-10}
 var rootQuery = graphql.NewObject(graphql.ObjectConfig{
-	Name: "RootQuery",
-	Fields: graphql.Fields{
-		"user": &graphql.Field{
-			Type: userType,
-			Args: graphql.FieldConfigArgument{
-				"id": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
-			},
-			Resolve: queryUser,
-		},
-		"posts": makeListField(makeNodeListType("PostList", postType), queryPosts),
-	},
+  Name: "RootQuery",
+  Fields: graphql.Fields{
+    "user": &graphql.Field{
+      Type: userType,
+      Args: graphql.FieldConfigArgument{
+        "id": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+      },
+      Resolve: queryUser,
+    },
+    "posts": makeListField(makeNodeListType("PostList", postType), queryPosts),
+  },
 })
 ```
 
@@ -478,23 +478,23 @@ Write the `queryUser` resolve function inside `resolvers.go`.
 
 ```go
 func queryUser(params graphql.ResolveParams) (interface{}, error) {
-	ctx := params.Context
-	if strID, ok := params.Args["id"].(string); ok {
-		// Parse ID argument
+  ctx := params.Context
+  if strID, ok := params.Args["id"].(string); ok {
+    // Parse ID argument
     id, err := strconv.ParseInt(strID, 10, 64)
-		if err != nil {
-			return nil, errors.New("Invalid id")
-		}
-		user := &User{ID: strID}
-		key := datastore.NewKey(ctx, "User", "", id, nil)
-		// Fetch user by ID
+    if err != nil {
+      return nil, errors.New("Invalid id")
+    }
+    user := &User{ID: strID}
+    key := datastore.NewKey(ctx, "User", "", id, nil)
+    // Fetch user by ID
     if err := datastore.Get(ctx, key, user); err != nil {
       // Assume not found
-			return nil, errors.New("User not found")
-		}
-		return user, nil
-	}
-	return User{}, nil
+      return nil, errors.New("User not found")
+    }
+    return user, nil
+  }
+  return User{}, nil
 }
 ```
 
@@ -502,19 +502,19 @@ Write the `queryPostsByUser` resolve function. It's similar to `queryPosts`.
 
 ```go
 func queryPostsByUser(params graphql.ResolveParams) (interface{}, error) {
-	ctx := params.Context
-	query := datastore.NewQuery("Post")
-	if limit, ok := params.Args["limit"].(int); ok {
-		query = query.Limit(limit)
-	}
-	if offset, ok := params.Args["offset"].(int); ok {
-		query = query.Offset(offset)
-	}
+  ctx := params.Context
+  query := datastore.NewQuery("Post")
+  if limit, ok := params.Args["limit"].(int); ok {
+    query = query.Limit(limit)
+  }
+  if offset, ok := params.Args["offset"].(int); ok {
+    query = query.Offset(offset)
+  }
   // Check user's ID against post's UserID field
-	if user, ok := params.Source.(*User); ok {
-		query = query.Filter("UserID =", user.ID)
-	}
-	return queryPostList(ctx, query)
+  if user, ok := params.Source.(*User); ok {
+    query = query.Filter("UserID =", user.ID)
+  }
+  return queryPostList(ctx, query)
 }
 ```
 
