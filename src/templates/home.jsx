@@ -26,14 +26,13 @@ export default ({ data, pathContext }) => {
         description={siteMeta.description}
         url={siteMeta.siteUrl + (page == 1 ? '' : `/page/${page}/`)}
       />
-
       {articles.map(article =>
         <Entry key={article.slug} article={article} />
       )}
       <Pagination page={page} total={total} basePath={'/'} />
     </Page>
   );
-};
+}
 
 export const query = graphql`
 query HomeQuery($skip: Int!, $limit: Int!) {

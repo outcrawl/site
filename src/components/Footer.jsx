@@ -1,43 +1,43 @@
 import React from 'react';
 import Link from 'gatsby-link';
+import { withStyles } from 'material-ui/styles';
+import IconButton from 'material-ui/IconButton';
+import Grid from 'material-ui/Grid';
 
-import withStyles from './ui/withStyles';
-import IconButton from './ui/IconButton';
-import Grid from './ui/Grid';
 import {
   LogoIcon,
   TwitterIcon,
   GitHubIcon,
-  FacebookIcon
+  FacebookIcon,
 } from './Icons.jsx';
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: '#f5f5f5',
     color: theme.palette.text.secondary,
     fontSize: 14,
-    padding: [16, 24],
+    padding: '16px 24px',
     [theme.breakpoints.down('sm')]: {
-      padding: [16, 16]
-    }
+      padding: '16px',
+    },
   },
   logo: {
     width: 24,
     height: 24,
-    marginRight: 16,
-    fill: theme.palette.text.primary
+    marginRight: 8,
+    fill: theme.palette.text.secondary,
   },
   link: {
     textDecoration: 'none',
     color: theme.palette.text.secondary,
-    marginRight: 10
+    marginRight: 8,
   },
   content: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   social: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   }
 });
 

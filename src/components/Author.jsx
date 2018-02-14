@@ -1,59 +1,59 @@
 import React from 'react';
 import Link from 'gatsby-link';
 
-import withStyles from './ui/withStyles';
+import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    paddingBottom: 8
+    paddingBottom: 8,
   },
   avatar: {
     width: 40,
     height: 40,
+    borderStyle: 'solid',
     borderRadius: '50%',
-    border: [1, 'solid', theme.palette.shades.dark.text.divider]
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.12)',
   },
   avatarDark: {
     width: 40,
     height: 40,
+    borderStyle: 'solid',
     borderRadius: '50%',
-    border: [1, 'solid', theme.palette.shades.light.text.divider]
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.12)',
   },
   info: {
     flex: '1 1 auto',
-    padding: [0, 16]
+    padding: '0px 16px',
   },
   name: {
     fontSize: 16,
     lineHeight: '24px',
-    color: theme.palette.shades.dark.text.primary,
-    textDecoration: 'none'
+    color: '#fff',
+    textDecoration: 'none',
   },
   nameDark: {
     fontSize: 16,
     lineHeight: '24px',
-    color: theme.palette.shades.light.text.primary,
-    textDecoration: 'none'
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
   },
   date: {
     fontSize: 14,
     lineHeight: '20px',
-    color: theme.palette.shades.dark.text.secondary
+    color: 'rgba(255, 255, 255, 0.7)',
   },
   dateDark: {
     fontSize: 14,
     lineHeight: '20px',
-    color: theme.palette.shades.light.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 });
 
-export default withStyles(styles)(props => {
-  const classes = props.classes;
-  const article = props.article;
+export default withStyles(styles)(({classes, article, dark}) => {
   const author = article.authorData;
-  const dark = props.dark;
-
   return (
     <div className={classes.root}>
       <img

@@ -29,7 +29,7 @@ export default ({ data }) => {
       <PageSection dangerouslySetInnerHTML={{ __html: page.html }} />
     </Page>
   );
-};
+}
 
 export const query = graphql`
 query PageQuery($slug: String!) {

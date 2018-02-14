@@ -1,39 +1,39 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { withStyles } from 'material-ui/styles';
+import TextField from 'material-ui/TextField';
+import Snackbar from 'material-ui/Snackbar';
+import Button from 'material-ui/Button';
 
-import withStyles from './ui/withStyles';
-import TextField from './ui/TextField';
-import Snackbar from './ui/Snackbar';
-import Button from './ui/Button';
 import backend from '../utils/backend.js';
 
 const styles = theme => ({
 	root: {
-		padding: [16, 0],
+		padding: '16px 0px',
 		[theme.breakpoints.up('sm')]: {
-			padding: [48, 0, 24, 0]
-		}
+      padding: '48px 0px 24px 0px',
+		},
 	},
 	content: {
-		textAlign: 'center'
+		textAlign: 'center',
 	},
 	lead: {
 		fontSize: '1.5rem',
 		fontWeight: 300,
-		marginBottom: '1rem'
+		marginBottom: '1rem',
 	},
 	captchaNote: {
 		fontSize: 13,
 		color: theme.palette.text.secondary,
-		padding: [8, 0]
+		padding: '8px 0px',
 	},
 	emailField: {
-		verticalAlign: 'middle'
+		verticalAlign: 'middle',
 	},
 	subscribeButton: {
-		marginLeft: 8
-	}
+		marginLeft: 8,
+	},
 });
 
 class Newsletter extends React.Component {
@@ -76,7 +76,9 @@ class Newsletter extends React.Component {
 							className={classes.subscribeButton}
 							type="submit"
 							color="primary"
-							raised>Subscribe</Button>
+							variant="raised">
+              Subscribe
+            </Button>
 						<ReCAPTCHA
 							style={{ display: 'none' }}
 							ref={e => { this.captcha = e; }}
@@ -94,7 +96,7 @@ class Newsletter extends React.Component {
 				<Snackbar
 					open={this.state.snackbar.open}
 					message={this.state.snackbar.message}
-					onRequestClose={this.handleSnackbarClose}
+					onClose={this.handleSnackbarClose}
 				/>
 
 			</div>
@@ -114,7 +116,7 @@ class Newsletter extends React.Component {
 		this.setState({
 			snackbar: {
 				open: false,
-				message: ''
+				message: '',
 			}
 		});
 	}
@@ -123,7 +125,7 @@ class Newsletter extends React.Component {
 		this.setState({
 			snackbar: {
 				open: true,
-				message: message
+				message: message,
 			}
 		});
 	}

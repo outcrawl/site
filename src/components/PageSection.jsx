@@ -1,6 +1,5 @@
 import React from 'react';
-
-import Grid from './ui/Grid';
+import Grid from 'material-ui/Grid';
 
 export default props => (
   <Grid item xs={12}

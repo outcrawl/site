@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
-
-import withStyles from '../ui/withStyles';
-import Chip from '../ui/Chip';
+import { withStyles } from 'material-ui/styles';
+import Chip from 'material-ui/Chip';
 
 const styles = theme => ({
   root: {
@@ -14,9 +13,9 @@ const styles = theme => ({
     margin: 4,
     textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'none'
-    }
-  }
+      textDecoration: 'none',
+    },
+  },
 });
 
 const Tags = ({ article, classes }) => (

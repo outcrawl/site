@@ -1,13 +1,12 @@
 import React from 'react';
 import Link from 'gatsby-link';
-
-import withStyles from '../ui/withStyles';
-import Button from '../ui/Button';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
 
 import {
   TwitterIcon,
   FacebookIcon,
-  GooglePlusIcon
+  GooglePlusIcon,
 } from '../Icons';
 
 const styles = theme => ({
@@ -15,18 +14,18 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'flex-end',
     flexWrap: 'wrap',
-    paddingBottom: 8
+    paddingBottom: 8,
   },
   button: {
     margin: 4,
     width: 36,
-    height: 36
+    height: 36,
   },
   icon: {
     width: '20px !important',
     height: '20px !important',
-    fill: '#fff'
-  }
+    fill: '#fff',
+  },
 });
 
 class Share extends React.Component {
@@ -34,7 +33,7 @@ class Share extends React.Component {
     const { article, classes } = this.props;
     return (
       <div className={classes.root}>
-        <Button fab dense aria-label="Share on Twitter" className={classes.button}
+        <Button variant="fab" mini aria-label="Share on Twitter" className={classes.button}
           href={`https://twitter.com/intent/tweet?url=${article.permalink}&text=${article.title}`}
           onClick={() => this.handleShareClick('twitter')}
           style={{
@@ -42,7 +41,7 @@ class Share extends React.Component {
           }}>
           <TwitterIcon className={classes.icon} />
         </Button>
-        <Button fab dense aria-label="Share on Facebook" className={classes.button}
+        <Button variant="fab" mini aria-label="Share on Facebook" className={classes.button}
           href={`https://www.facebook.com/sharer/sharer.php?u=${article.permalink}`}
           onClick={() => this.handleShareClick('facebook')}
           style={{
@@ -50,7 +49,7 @@ class Share extends React.Component {
           }}>
           <FacebookIcon className={classes.icon} />
         </Button>
-        <Button fab dense aria-label="Share on Google+" className={classes.button}
+        <Button variant="fab" mini aria-label="Share on Google+" className={classes.button}
           href={`https://plus.google.com/share?url=${article.permalink}`}
           onClick={() => this.handleShareClick('googlePlus')}
           style={{

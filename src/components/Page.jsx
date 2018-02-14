@@ -1,17 +1,16 @@
 import React from 'react';
-
-import withStyles from './ui/withStyles';
-import Grid from './ui/Grid';
+import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
   root: {
     maxWidth: 1024,
-    margin: [0, 'auto'],
-    padding: 16
+    margin: '0px auto',
+    padding: 16,
   },
   narrow: {
     maxWidth: 700,
-    padding: [16, 8]
+    padding: '32px 8px',
   }
 });
 

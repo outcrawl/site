@@ -1,19 +1,18 @@
 import React from 'react';
 import Link from 'gatsby-link';
-
-import withStyles from '../ui/withStyles';
+import { withStyles } from 'material-ui/styles';
 import shuffle from '../../utils/shuffle.js';
 
 const styles = theme => ({
   articles: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   link: {
     display: 'block',
     fontSize: '1.25rem',
     [theme.breakpoints.down('sm')]: {
-      fontSize: '1rem'
-		}
+      fontSize: '1rem',
+		},
   }
 });
 
@@ -27,7 +26,7 @@ export default withStyles(styles)(({ classes, slug, articles }) => {
       <h1>Related</h1>
       <div className={classes.articles}>
         {articles.map(article => (
-          <Link key={article.slug} className={classes.link} to={article.slug}>{article.title}</Link>
+          <Link key={article.slug} className={classes.link} to={`/${article.slug}`}>{article.title}</Link>
         ))}
       </div>
     </div>

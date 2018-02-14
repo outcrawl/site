@@ -1,51 +1,53 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
+import { withStyles } from 'material-ui/styles';
+import IconButton from 'material-ui/IconButton';
+import Divider from 'material-ui/Divider';
 
-import withStyles from '../components/ui/withStyles';
-import Divider from '../components/ui/Divider';
-import IconButton from '../components/ui/IconButton';
 import Page from '../components/Page';
 import PageSection from '../components/PageSection';
 import {
   TwitterIcon,
   GitHubIcon,
   FacebookIcon,
-  GooglePlusIcon
+  GooglePlusIcon,
 } from '../components/Icons';
 import { SiteMeta, PageMeta } from '../components/Meta';
 
 const styles = theme => ({
   profile: {
     textAlign: 'center',
-    paddingBottom: 24
+    paddingBottom: 24,
   },
   name: {
-    margin: [16, 0],
+    margin: '16px 0px',
     color: theme.palette.text.primary,
     fontSize: '2rem',
     fontWeight: 500,
     lineHeight: 1,
-    letterSpacing: 0
+    letterSpacing: 0,
   },
   bio: {
-    margin: [8, 0]
+    margin: '8px 0px',
   },
   divider: {
-    width: '100%'
+    width: '100%',
   },
   avatar: {
     width: 140,
     height: 140,
+    borderStyle: 'solid',
     borderRadius: '50%',
-    border: [1, 'solid', theme.palette.text.divider]
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.12)',
   },
   articles: {
-    paddingTop: 24
+    paddingTop: 24,
   },
   articlesTitle: {
-    margin: 0
-  }
+    margin: 0,
+  },
 });
 
 export default withStyles(styles)(({ classes, data, pathContext }) => {
@@ -132,7 +134,7 @@ export default withStyles(styles)(({ classes, data, pathContext }) => {
             <ul>
               {e.articles.map(article =>
                 <li key={article.slug}>
-                  <Link to={article.slug}>{article.title}</Link>
+                  <Link to={`/${article.slug}`}>{article.title}</Link>
                 </li>
               )}
             </ul>
@@ -143,6 +145,7 @@ export default withStyles(styles)(({ classes, data, pathContext }) => {
     </Page>
   );
 });
+
 
 export const query = graphql`
 query AuthorPageQuery($author: String!) {

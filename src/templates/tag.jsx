@@ -30,7 +30,6 @@ export default ({ data, pathContext }) => {
         description={`Articles about ${tag} on ${siteMeta.title}.`}
         url={`${siteMeta.siteUrl}/tags/${tagSlug}/`}
       />
-
       <PageSection>
         <h1>{tag}</h1>
       </PageSection>
@@ -40,7 +39,7 @@ export default ({ data, pathContext }) => {
       <Pagination page={page} total={total} basePath={basePath} />
     </Page>
   );
-};
+}
 
 export const query = graphql`
 query TagPageQuery($tag: [String]!, $skip: Int!, $limit: Int!) {

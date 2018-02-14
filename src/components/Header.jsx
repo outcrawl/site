@@ -1,29 +1,28 @@
 import React from 'react';
 import Link from 'gatsby-link';
+import { withStyles } from 'material-ui/styles';
+import TextField from 'material-ui/TextField';
+import Hidden from 'material-ui/Hidden';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
 
-import withStyles from './ui/withStyles';
-import ToolBar from './ui/ToolBar';
-import TextField from './ui/TextField';
-import Hidden from './ui/Hidden';
 import { LogoTextIcon, LogoIcon } from './Icons';
 
 const styles = theme => ({
   root: {
-    backgroundColor: '#fff',
-    height: 64
   },
   logo: {
     width: 'auto',
     height: 24,
-    fill: theme.palette.text.primary
+    fill: theme.palette.text.primary,
   },
   searchForm: {
-    marginLeft: 'auto'
+    marginLeft: 'auto',
   },
   searchField: {
-    backgroundColor: theme.palette.primary[100],
-    padding: [0, 8]
-  }
+    backgroundColor: '#fff',
+    paddingLeft: 8,
+  },
 });
 
 class Header extends React.Component {
@@ -35,23 +34,25 @@ class Header extends React.Component {
     this.history = this.props.history;
     const classes = this.props.classes;
     return (
-      <ToolBar className={classes.root}>
-        <Link to={''}>
-          <Hidden only={'xs'}>
-            <LogoTextIcon className={classes.logo} />
-          </Hidden>
-          <Hidden smUp>
-            <LogoIcon className={classes.logo} />
-          </Hidden>
-        </Link>
-        <form noValidate autoComplete="off" onSubmit={this.onSearch} className={classes.searchForm}>
-          <TextField
-            className={classes.searchField}
-            onChange={this.handleChangeQuery}
-            InputProps={{ disableUnderline: true }}
-            placeholder="Search" />
-        </form>
-      </ToolBar>
+      <AppBar position="static" color="default" elevation={0} square={true}>
+        <Toolbar>
+          <Link to={''}>
+            <Hidden only={'xs'}>
+              <LogoTextIcon className={classes.logo} />
+            </Hidden>
+            <Hidden smUp>
+              <LogoIcon className={classes.logo} />
+            </Hidden>
+          </Link>
+          <form noValidate autoComplete="off" onSubmit={this.onSearch} className={classes.searchForm}>
+            <TextField
+              className={classes.searchField}
+              onChange={this.handleChangeQuery}
+              InputProps={{ disableUnderline: true }}
+              placeholder="Search" />
+          </form>
+        </Toolbar>
+      </AppBar>
     );
   }
 

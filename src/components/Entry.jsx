@@ -1,11 +1,10 @@
 import React from 'react';
 import Link from 'gatsby-link';
+import { withStyles } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
 
-import withStyles from './ui/withStyles';
-import Paper from './ui/Paper';
-import Grid from './ui/Grid';
 import Author from './Author';
-
 
 const styles = theme => ({
   root: {
@@ -13,7 +12,7 @@ const styles = theme => ({
     height: 250,
     boxSizing: 'border-box',
     position: 'relative',
-    padding: 8
+    padding: 8,
   },
   paper: {
     position: 'absolute',
@@ -22,7 +21,7 @@ const styles = theme => ({
     bottom: 8,
     left: 8,
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
   },
   content: {
     width: '100%',
@@ -32,15 +31,15 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
   },
   title: {
-    color: theme.palette.shades.dark.text.primary,
+    color: '#fff',
     fontWeight: 400,
     margin: 0,
     textDecoration: 'none',
     fontSize: 24,
-    lineHeight: 1.25
+    lineHeight: 1.25,
   },
   articleLink: {
     textDecoration: 'none',
@@ -50,8 +49,8 @@ const styles = theme => ({
     paddingBottom: 16,
     '&:hover': {
       textDecoration: 'none'
-    }
-  }
+    },
+  },
 });
 
 export default withStyles(styles)(({ classes, article }) => {

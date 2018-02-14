@@ -53,11 +53,30 @@ const manifest = {
   }
 };
 
+const favicons = {
+  resolve: 'gatsby-plugin-favicon',
+  options: {
+    logo: './static/logo.svg',
+    injectHTML: true,
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
+  }
+};
+
 module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
     description: 'Software development tutorials without nonsense.',
-    siteUrl: process.env.NODE_ENV == 'production' ? 'https://outcrawl.com' : 'http://localhost:8001',
+    siteUrl: process.env.NODE_ENV == 'production' ? 'https://outcrawl.com' : 'http://localhost:8081',
     facebookPublisherUrl: 'https://www.facebook.com/outcrawl'
   },
   plugins: [
@@ -76,8 +95,8 @@ module.exports = {
     remark,
     analytics,
     manifest,
+    favicons,
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-favicon',
     ...custom
   ]
 }
