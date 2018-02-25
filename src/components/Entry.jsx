@@ -62,7 +62,7 @@ export default withStyles(styles)(({ classes, article }) => {
         backgroundImage: `url(${cover})`
       }}>
         <div className={classes.content}>
-          <Link to={article.slug} className={classes.articleLink} aria-label={article.title}>
+          <Link to={`/${article.slug}`} className={classes.articleLink} aria-label={article.title}>
             <h2 className={classes.title}>{article.title}</h2>
           </Link>
           <Author article={article} />

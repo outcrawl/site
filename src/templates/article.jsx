@@ -17,6 +17,7 @@ import backend from '../utils/backend.js';
 
 const styles = theme => ({
   article: {
+    paddingBottom: 16,
   }
 });
 
@@ -63,10 +64,10 @@ export default withStyles(styles)(({ data, pathContext, classes }) => {
       </PageSection>
 
       <Grid container spacing={0}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={8}>
           <Tags article={article} />
         </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={4}>
           <Share article={article} />
         </Grid>
       </Grid>
