@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
-import shuffle from '../../utils/shuffle.js';
+import shuffle from '../../utils/shuffle';
 
 const styles = theme => ({
   articles: {

@@ -10,7 +10,7 @@ exports.createPages = (params, options, cb) => {
     createPage
   } = boundActionCreators;
   const articlesPerPage = options.articlesPerPage;
-  const tagTemplate = path.resolve('src/templates/tag.jsx');
+  const tagTemplate = path.resolve('src/templates/tag.js');
 
   return new Promise((resolve, reject) => {
     graphql(`

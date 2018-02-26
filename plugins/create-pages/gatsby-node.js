@@ -25,8 +25,8 @@ exports.createPages = ({
         }
       }
     `).then(result => {
-      const articleTemplate = path.resolve('./src/templates/article.jsx');
-      const pageTemplate = path.resolve('./src/templates/page.jsx');
+      const articleTemplate = path.resolve('./src/templates/article.js');
+      const pageTemplate = path.resolve('./src/templates/page.js');
 
       result.data.allMarkdownRemark.edges.map(({
         node

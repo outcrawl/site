@@ -11,7 +11,7 @@ exports.createPages = params => {
   const {
     createPage
   } = boundActionCreators;
-  const authorTemplate = path.resolve('src/templates/author.jsx');
+  const authorTemplate = path.resolve('src/templates/author.js');
 
   for (const slug in authors) {
     const author = authors[slug];

@@ -2,13 +2,17 @@ html {
   font-size: 16px;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   -webkit-text-size-adjust: 100%;
-
   @media (min-width: 1280px) {
     font-size: 18px;
   }
 }
 
-h1, h2, h3, h4, p, a {
+h1,
+h2,
+h3,
+h4,
+p,
+a {
   padding: 0;
   margin: 0;
   font-weight: 400;
@@ -20,6 +24,10 @@ h1, h2, h3, h4, p, a {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+strong {
+  font-weight: 700;
 }
 
 // Headings
@@ -51,17 +59,32 @@ h4 {
 }
 
 // Text
-h1, h2, h3, h4, p, code, ul, ol {
+h1,
+h2,
+h3,
+h4,
+p,
+code,
+ul,
+ol {
   cursor: text;
 }
 
 a {
-  h1, h2, h3, h4, p {
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
     cursor: pointer;
   }
 }
 
-p, ul, ol, a, code {
+p,
+ul,
+ol,
+a,
+code {
   line-height: 1.6;
 }
 
@@ -69,7 +92,8 @@ p {
   margin-bottom: 1rem;
 }
 
-ul, ol {
+ul,
+ol {
   line-height: 1.5;
 }
 
@@ -107,10 +131,9 @@ blockquote {
 .note {
   display: block;
   padding: 16px;
-  background-color: #212121;
-  color: #fff;
+  background: #e1f5fe;
+  color: #0288d1;
   margin-bottom: 1rem;
-
    :last-child {
     margin: 0;
   }

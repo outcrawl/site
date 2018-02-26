@@ -13,7 +13,7 @@ import Related from '../components/article/Related';
 import Author from '../components/Author';
 import Comments from '../components/article/Comments';
 import { SiteMeta, ArticleMeta } from '../components/Meta';
-import backend from '../utils/backend.js';
+import backend from '../utils/backend';
 
 const styles = theme => ({
   article: {

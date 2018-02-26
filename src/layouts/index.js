@@ -3,7 +3,7 @@ import { MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
 
 import '../styles/main.scss';
-import theme from '../utils/theme.js';
+import theme from '../utils/theme';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 

@@ -10,8 +10,14 @@ const remark = {
           quality: 100
         }
       },
+      {
+        resolve: 'gatsby-remark-prismjs',
+        options: {
+          classPrefix: "gatsby-code-",
+        },
+      },
       'copy-linked-files',
-      'transform-markdown'
+      'transform-markdown',
     ]
   }
 };

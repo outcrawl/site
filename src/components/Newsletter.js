@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar';
 import Button from 'material-ui/Button';
 
-import backend from '../utils/backend.js';
+import backend from '../utils/backend';
 
 const styles = theme => ({
 	root: {

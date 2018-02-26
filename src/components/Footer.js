@@ -9,7 +9,7 @@ import {
   TwitterIcon,
   GitHubIcon,
   FacebookIcon,
-} from './Icons.jsx';
+} from './Icons';
 
 const styles = theme => ({
   root: {

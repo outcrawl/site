@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import unwrap from '../utils/unwrap.js';
+import unwrap from '../utils/unwrap';
 
 const SiteMeta = ({ siteMeta, image }) => {
   return (

@@ -9,7 +9,7 @@ exports.createPages = (params, options, cb) => {
     createPage
   } = boundActionCreators;
   const articlesPerPage = options.articlesPerPage;
-  const homeTemplate = path.resolve('./src/templates/home.jsx');
+  const homeTemplate = path.resolve('./src/templates/home.js');
 
   return new Promise((resolve, reject) => {
     graphql(`
