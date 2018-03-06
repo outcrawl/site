@@ -2,6 +2,7 @@ import React from 'react';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
 
+import 'katex/dist/katex.min.css';
 import '../styles/main.scss';
 import theme from '../utils/theme';
 import Header from '../components/Header';

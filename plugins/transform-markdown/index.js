@@ -2,6 +2,7 @@ const visit = require('unist-util-visit');
 const cheerio = require('cheerio');
 const slug = require('slug');
 const marked = require('marked');
+const katex = require('katex');
 
 module.exports = ({
   files,

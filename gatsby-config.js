@@ -16,6 +16,7 @@ const remark = {
           classPrefix: "gatsby-code-",
         },
       },
+      'gatsby-remark-katex',
       'copy-linked-files',
       'transform-markdown',
     ]
