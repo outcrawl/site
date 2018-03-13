@@ -4,12 +4,15 @@ Software development tutorials without nonsense.
 
 ## Development
 
-`npm run dev` to run development server on port 8081.
+Start with `yarn install`.
 
-`npm run build` to build a release version inside `public` directory.
+`yarn start` to run development server on port 8081.
+
+`yarn build` to build a release version inside `public` directory.
 
 ## Articles
 
+* [Building a URL Shortener with Go and AWS Lambda](https://outcrawl.com/go-url-shortener-lambda/)
 * [How to Build a Self-hosted Leaderboard with Unreal Engine 4](https://outcrawl.com/unreal-engine-selfhosted-leaderboard/)
 * [Building a Real-time Collaborative Drawing App in Go](https://outcrawl.com/realtime-collaborative-drawing-go/)
 * [Generating Unique 64 bit IDs with Go on Kubernetes](https://outcrawl.com/generating-unique-ids-kubernetes/)
