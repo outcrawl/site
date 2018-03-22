@@ -16,11 +16,13 @@ const Comments = ({ article, classes }) => (
     <h1>Comments</h1>
     <div className={classes.content}>
 
-      <ReactDisqusThread
-				shortname="outcrawl"
-				identifier={article.slug}
-				title={article.title}
-				url={article.permalink}/>
+      {!article.permalink.startsWith('http://localhost') ? (
+        <ReactDisqusThread
+          shortname="outcrawl"
+          identifier={article.slug}
+          title={article.title}
+          url={article.permalink} />
+      ) : <div></div>}
 
     </div>
   </div>
