@@ -1,27 +1,20 @@
-<script>
-import Page from '~/components/Page';
-import Article from '~/components/Article';
+<template>
+  <article>
+    <div>
+      <div v-html="page.html"></div>
+    </div>
+  </article>
+</template>
 
+<script>
 export default {
-  validate({ params }) {
-    return [...process.env.pages, ...process.env.articles]
-      .find(page => page.slug === params.slug) != null;
-  },
   asyncData({ params }) {
-    const page = [...process.env.pages, ...process.env.articles]
-      .find(page => page.slug === params.slug);
-    return { page };
-  },
-  render(createElement) {
-    const page = this.page;
-    if (page.type === 'page') {
-      return createElement(Page, {
-        props: { page },
-      });
-    } else {
-      return createElement(Article, {
-        props: { article: page, },
-      });
+    if (process.server) {
+      const buildPage = require('~/tools/build-page').buildPage;
+      const page = buildPage(params.slug);
+      return {
+        page,
+      };
     }
   }
 };

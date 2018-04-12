@@ -1,3 +1,4 @@
+const md5File = require('md5-file');
 const fs = require('fs-extra');
 const moment = require('moment');
 const marked = require('marked');
@@ -5,7 +6,9 @@ const frontMatter = require('front-matter');
 const toSlug = require('slug');
 const md5 = require('md5');
 const cheerio = require('cheerio');
+const pretty = require('pretty');
 
+const copyAssets = require('./copy-assets');
 const authors = require('../data/authors.json');
 
 // Setup marked
@@ -16,14 +19,22 @@ renderer.code = (code, language) => {
 renderer.heading = (text, level, raw) => {
   return `<h${level + 1}>${text}</h${level + 1}>`;
 };
+renderer.image = (href, title, text) => {
+  return `<img src="${href}" alt="${text}" />`;
+};
 marked.setOptions({
   renderer,
 });
 
+const assetMap = copyAssets.linkAssets();
+
 function parseMarkdown(md, slug) {
   const params = frontMatter(md).attributes;
+  params.type = params.author ? 'article' : 'page';
   let html = marked(md.substr(md.indexOf('---', 3) + 3));
 
+  // Insert cover image
+  html = `<img src="${assetMap[slug + '/cover.jpg']}" alt="${params.title}" title="a"/>` + html;
   // Insert title
   html = '<h1>' + params.title + '</h1>' + html;
 
@@ -32,10 +43,12 @@ function parseMarkdown(md, slug) {
   $('img').each((_, img) => {
     const src = img.attribs.src;
     if (src && src.startsWith('./')) {
-      img.attribs.src = `~/assets/.tmp/${slug}${src.substr(2)}`;
+      img.attribs.src = assetMap[`${slug}/${src.substr(2)}`];
     }
   });
-  html = $.html();
+  html = pretty($.html(), {
+    ocd: true
+  });
 
   return {
     params,
@@ -43,32 +56,36 @@ function parseMarkdown(md, slug) {
   };
 }
 
-function copyAssets(path, slug) {
-  for (const asset of fs.readdirSync(path)) {
-    if (asset.endsWith('jpg')) {
-      const src = path + '/' + asset;
-      const dest = './assets/.tmp/' + slug + '/' + asset;
-      fs.copySync(src, dest);
+export function buildPage(slug) {
+  let md = '';
+  let dir = `./data/pages/${slug}/index.md`;
+
+  if (fs.existsSync(`./data/pages/${slug}/index.md`)) {
+    md = fs.readFileSync(dir, 'utf8');
+  } else {
+    for (const d of fs.readdirSync('./data/articles')) {
+      if (d.endsWith(slug)) {
+        dir = d;
+        md = fs.readFileSync(`./data/articles/${dir}/index.md`, 'utf8');
+        break;
+      }
     }
   }
-}
 
-function readArticles() {
-  const articles = [];
+  const {
+    params,
+    html
+  } = parseMarkdown(md, slug);
 
-  for (const dir of fs.readdirSync('./data/articles')) {
-    const path = './data/articles/' + dir;
-    const slug = dir.substr(11);
-
-    copyAssets(path, slug);
-
-    // Parse markdown
-    const {
-      params,
-      html
-    } = parseMarkdown(fs.readFileSync(path + '/index.md', 'utf8'), slug);
-
-    // Create params
+  if (params.type === 'page') {
+    return {
+      type: 'page',
+      slug,
+      title: params.title,
+      description: params.description,
+      html,
+    };
+  } else {
     const date = moment.utc(dir.substr(0, 12), 'YYYY-MM-DD');
     const tags = params.tags.sort().map(tag => ({
       name: tag,
@@ -82,8 +99,7 @@ function readArticles() {
       emailHash: md5(authorData.email.toLowerCase())
     };
 
-    // Create article
-    articles.push({
+    return {
       type: 'article',
       slug,
       title: params.title,
@@ -93,37 +109,6 @@ function readArticles() {
       date: date.format('DD MMMM, YYYY'),
       realDate: date.toDate(),
       html,
-    });
+    }
   }
-
-  return articles.sort((a, b) => b.realDate - a.realDate);
 }
-
-function readPages() {
-  const pages = [];
-  for (const slug of fs.readdirSync('./data/pages')) {
-    const md = fs.readFileSync('./data/pages/' + slug + '/index.md', 'utf8');
-    const {
-      params,
-      html
-    } = parseMarkdown(md);
-
-    pages.push({
-      type: 'page',
-      slug,
-      title: params.title,
-      description: params.description,
-      html,
-    });
-  }
-  return pages;
-}
-
-function generateData() {
-  return {
-    pages: readPages(),
-    articles: readArticles(),
-  };
-}
-
-module.exports = generateData;

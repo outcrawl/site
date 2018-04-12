@@ -1,29 +1,11 @@
 <template>
-  <Home :articles="articles"
-        :page="page"
-        :perPage="perPage"
-        :total="total" />
+  <div>
+    home
+  </div>
 </template>
 
 <script>
-import Home from '~/components/Home';
-
 export default {
-  asyncData() {
-    // Paginate articles
-    const page = 0;
-    const perPage = process.env.articlesPerPage;
-    const articles = process.env.articles
-      .splice(page * perPage, perPage);
-    return {
-      page,
-      articles,
-      total: process.env.articles.length,
-      perPage: process.env.articlesPerPage,
-    };
-  },
-  components: {
-    Home,
-  },
+
 };
 </script>

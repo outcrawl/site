@@ -1,6 +1,7 @@
-const generateData = require('./plugins/generate-data');
+const generateRoutes = require('./tools/generate-routes').generateRoutes;
+const copyAssets = require('./tools/copy-assets');
 
-const { pages, articles } = generateData();
+copyAssets.copyAssets();
 
 module.exports = {
   // Headers of the page
@@ -17,9 +18,8 @@ module.exports = {
   },
   env: {
     baseUrl: process.env.NODE_ENV === 'production' ? 'https://outcrawl.com' : 'http://localhost:3000',
-    articlesPerPage: 4,
-    pages: pages,
-    articles: articles
+    dataUrl: 'http://localhost:3001',
+    articlesPerPage: 4
   },
   modules: [
     '@nuxtjs/pwa'
@@ -32,7 +32,7 @@ module.exports = {
     '@/assets/main.scss'
   ],
   generate: {
-   routes: [...pages, ...articles].map(page => '/' + page.slug)
+   routes: generateRoutes()
   },
   build: {
     // Run ESLint on save
@@ -46,6 +46,6 @@ module.exports = {
         })
       }
     },
-    vendor: ['axios']
+    watch: ['data']
   },
 }
