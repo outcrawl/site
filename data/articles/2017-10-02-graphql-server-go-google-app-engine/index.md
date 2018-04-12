@@ -1,14 +1,11 @@
 ---
 title: Create a GraphQL Server with Go and Google App Engine
-layout: article
-date: "2017-10-02"
 author: tin-rabzelj
 tags:
   - Go
   - GraphQL
   - Google App Engine
 description: This article describes how to get GraphQL server running on Google App Engine with a "simple social network" data model.
-cover: ./cover.jpg
 ---
 
 [GraphQL](http://graphql.org/) is better than REST for developing and consuming APIs. It lets you query the exact data you need without having to create many overspecific API endpoints. This article describes how to get GraphQL server running on Google App Engine with a "simple social network" data model.

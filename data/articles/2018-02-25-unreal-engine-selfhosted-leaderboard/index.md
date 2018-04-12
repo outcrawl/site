@@ -1,7 +1,5 @@
 ---
 title: How to Build a Self-hosted Leaderboard with Unreal Engine 4
-layout: article
-date: "2018-02-25"
 author: tin-rabzelj
 tags:
   - Google App Engine
@@ -9,7 +7,6 @@ tags:
   - Game Development
   - Go
 description: This article shows how to deploy a self-hosted online leaderboard and use it with Unreal Engine 4.
-cover: ./cover.jpg
 ---
 
 If you want your game to have an online leaderboards and you're developing a mobile game, then you'd probably want to use Play Games Services (Android) or Game Center (iOS). For desktop games, you might use Steam's leaderboards with Steamworks SDK. But if you want more control, you have to create your own system. This article shows one of the ways of achieving that.

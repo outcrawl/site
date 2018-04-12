@@ -1,13 +1,10 @@
 ---
 title: Multi-Stage Docker Builds for Kubernetes
-layout: article
-date: "2017-10-31"
 author: tin-rabzelj
 tags:
   - Docker
   - Kubernetes
 description: Building and compiling apps inside a Docker image can produce very large images. To reduce the size, build pipeline can be split into multiple stages, where the final image only contains built binaries. This article shows how to set up a Docker image with services developed in Go, maintain multiple services inside a single image and how to use the image with Kubernetes.
-cover: ./cover.jpg
 ---
 
 Building and compiling apps inside a Docker image can produce very large images. To reduce the size, build pipeline can be split into multiple stages, where the final image only contains built binaries. This article shows how to set up a Docker image with services developed in Go, maintain multiple services inside a single image and how to use the image with Kubernetes.

@@ -1,7 +1,5 @@
 ---
 title: Getting Started with Microservices using Go, gRPC and Kubernetes
-layout: article
-date: "2017-10-27"
 author: tin-rabzelj
 tags:
   - Go
@@ -9,7 +7,6 @@ tags:
   - Docker
   - gRPC
 description: This article aims to provide a simple introduction to building microservices in Go, using gRPC, and deploying them to a Kubernetes cluster. It shows how to set up two containerized, scalable services, talking to each other using request/response mechanism.
-cover: ./cover.jpg
 ---
 
 This article aims to provide a simple introduction to building microservices in Go, using gRPC, and deploying them to a Kubernetes cluster. It shows how to set up two containerized, scalable services, talking to each other using request/response mechanism.

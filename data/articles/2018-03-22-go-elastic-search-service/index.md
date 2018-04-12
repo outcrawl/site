@@ -1,14 +1,11 @@
 ---
 title: How to Build a Search Service with Go and Elasticsearch
-layout: article
-date: "2018-03-22"
 author: tin-rabzelj
 tags:
   - Go
   - Elasticsearch
   - Docker
 description: This article shows how to build a simple search service in Go by using Elasticsearch.
-cover: ./cover.jpg
 ---
 
 This article shows how to build a simple search service in Go using [Elasticsearch](https://www.elastic.co/). The service will run inside a local Docker machine along side Elasticsearch instance. If you're only interested in the source code, you can find it on [GitHub](https://github.com/tinrab/go-elasticsearch-example).

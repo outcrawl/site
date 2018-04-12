@@ -1,14 +1,11 @@
 ---
 title: Building a URL Shortener with Go and AWS Lambda
-layout: article
-date: "2018-03-13"
 author: tin-rabzelj
 tags:
   - Go
   - AWS Lambda
   - Amazon DynamoDB
 description: This article shows how to build a URL shortener in Go and deploy it to AWS Lambda.
-cover: ./cover.jpg
 ---
 
 This article shows how to build a URL shortener in Go and deploy it to AWS Lambda. If you're only interested in the source code, you can find it on [GitHub](https://github.com/tinrab/url-shortener-lambda).

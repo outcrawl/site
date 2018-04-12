@@ -1,13 +1,10 @@
 ---
 title: Generating Unique 64 bit IDs with Go on Kubernetes
-layout: article
-date: "2017-11-06"
 author: tin-rabzelj
 tags:
   - Go
   - Kubernetes
 description: This article shows how to develop a service for generating globally unique IDs on a Kubernetes cluster. IDs will be generated similarly as with Twitter's Snowflake service, making them suitable for distributed systems where auto-incremental IDs fail and 128 bits for UUIDs is too inefficient. These IDs can also be "roughly" sorted by creation time, simply by sorting them lexicographically.
-cover: ./cover.jpg
 ---
 
 This article shows how to develop a service for generating globally unique IDs on a Kubernetes cluster. IDs will be generated similarly as with Twitter's [Snowflake](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html) service, making them suitable for distributed systems where auto-incremental IDs fail and 128 bits for [UUIDs](https://tools.ietf.org/html/rfc4122.html) is too inefficient. These IDs can also be "roughly" sorted by creation time, simply by sorting them lexicographically.

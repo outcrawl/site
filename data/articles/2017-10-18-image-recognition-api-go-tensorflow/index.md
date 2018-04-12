@@ -1,13 +1,10 @@
 ---
 title: Build an Image Recognition API with Go and TensorFlow
-layout: article
-date: "2017-10-18"
 author: tin-rabzelj
 tags:
   - Go
   - TensorFlow
 description: This tutorial shows how to build an image recognition service in Go using pre-trained TensorFlow Inception-V3 model. The service will run inside a Docker container, use TensorFlow Go package to process images and return labels that best describe them.
-cover: ./cover.jpg
 ---
 
 This tutorial shows how to build an image recognition service in Go using pre-trained TensorFlow [Inception-V3](https://arxiv.org/abs/1512.00567) model. The service will run inside a Docker container, use TensorFlow Go [package](https://godoc.org/github.com/tensorflow/tensorflow/tensorflow/go) to process images and return labels that best describe them.

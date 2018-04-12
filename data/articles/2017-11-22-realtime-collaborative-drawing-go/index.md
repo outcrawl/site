@@ -1,13 +1,10 @@
 ---
 title: Building a Real-time Collaborative Drawing App in Go
-layout: article
-date: "2017-11-22"
 author: tin-rabzelj
 tags:
   - Go
   - WebSockets
 description: This article shows how to build a simple drawing app using Go for the back-end. All communication will be established with WebSockets, so users will be able to see each others' drawings in real-time.
-cover: ./cover.jpg
 ---
 
 This article shows how to build a simple drawing app using Go for the back-end. All communication will be established with WebSockets, so users will be able to see each others' drawings in real-time.
