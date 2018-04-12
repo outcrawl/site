@@ -9,9 +9,9 @@
 import Home from '~/components/Home';
 
 export default {
-  asyncData() {
+  asyncData({ route }) {
     // Paginate articles
-    const page = 0;
+    const page = parseInt(route.params.page);
     const perPage = process.env.articlesPerPage;
     const articles = process.env.articles
       .splice(page * perPage, perPage);

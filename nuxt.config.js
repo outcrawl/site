@@ -1,6 +1,6 @@
 const generateData = require('./plugins/generate-data');
 
-const { pages } = generateData();
+const { pages, articles } = generateData();
 
 module.exports = {
   // Headers of the page
@@ -17,8 +17,9 @@ module.exports = {
   },
   env: {
     baseUrl: process.env.NODE_ENV === 'production' ? 'https://outcrawl.com' : 'http://localhost:3000',
+    articlesPerPage: 4,
     pages: pages,
-    articles: pages.filter(page => page.layout === 'article')
+    articles: articles
   },
   modules: [
     '@nuxtjs/pwa'

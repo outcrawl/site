@@ -20,7 +20,7 @@ function readArticles() {
   const articles = [];
   for (const dir of fs.readdirSync('./data/articles')) {
     const slug = dir.substr(11);
-    const date = moment(dir.substr(0, 11), 'YYYY-MM-DD').toDate();
+    const date = moment.utc(dir.substr(0, 12), 'YYYY-MM-DD');
     const md = fs.readFileSync('./data/articles/' + dir + '/index.md', 'utf8');
     const html = marked(md);
     const fm = frontMatter(md).attributes;
@@ -37,17 +37,18 @@ function readArticles() {
     };
 
     articles.push({
-      layout: 'article',
-      slug: slug,
+      type: 'article',
+      slug,
       title: fm.title,
-      author: author,
+      author,
       description: fm.description,
-      tags: tags,
-      date: date,
-      html: html,
+      tags,
+      date: date.format('DD MMMM, YYYY'),
+      realDate: date.toDate(),
+      html,
     });
   }
-  return articles;
+  return articles.sort((a, b) => b.realDate - a.realDate);
 }
 
 function readPages() {
@@ -58,7 +59,7 @@ function readPages() {
     const fm = frontMatter(md).attributes;
 
     pages.push({
-      layout: 'page',
+      type: 'page',
       slug: slug,
       title: fm.title,
       description: fm.description,
@@ -70,10 +71,8 @@ function readPages() {
 
 function generateData() {
   return {
-    pages: [
-      ...readArticles(),
-      ...readPages(),
-    ],
+    pages: readPages(),
+    articles: readArticles(),
   };
 }
 
