@@ -4,10 +4,14 @@
     <ol>
       <li v-for="article of articles"
           :key="article.slug">
-        {{article.date}} - {{article.title}}
+        <nuxt-link :to="`/${article.slug}/`">
+          {{article.title}}
+        </nuxt-link>
       </li>
     </ol>
-    <Pagination :page="page" :perPage="perPage" :total="total" />
+    <Pagination :page="page"
+                :perPage="perPage"
+                :total="total" />
   </div>
 </template>
 

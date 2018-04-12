@@ -5,11 +5,13 @@
       Prev
     </nuxt-link>
 
-    <nuxt-link v-for="i in total / perPage"
+<!--
+    <nuxt-link v-for="i in (total / perPage)"
                :to="i == 1 ? '/' : '/page/' + (i - 1)"
                :key="i">
       {{i}}
     </nuxt-link>
+    -->
 
     <nuxt-link v-if="page < (total / perPage - 1)"
                :to="`/page/${page + 1}`">

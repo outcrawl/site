@@ -32,7 +32,7 @@ module.exports = {
     '@/assets/main.scss'
   ],
   generate: {
-   routes: pages.map(page => '/' + page.slug)
+   routes: [...pages, ...articles].map(page => '/' + page.slug)
   },
   build: {
     // Run ESLint on save
