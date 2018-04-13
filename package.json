@@ -12,7 +12,8 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "nuxt": "^1.4.0"
+    "nuxt": "^1.4.0",
+    "vuetify": "^1.0.14"
   },
   "devDependencies": {
     "@nuxtjs/pwa": "^2.0.8",
@@ -35,6 +36,8 @@
     "nuxt-rfg-icon": "^0.4.2",
     "pretty": "^2.0.0",
     "sass-loader": "^6.0.7",
-    "slug": "^0.9.1"
+    "slug": "^0.9.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
   }
 }

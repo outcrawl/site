@@ -56,7 +56,7 @@ function parseMarkdown(md, slug) {
   };
 }
 
-export function buildPage(slug) {
+function buildPage(slug) {
   let md = '';
   let dir = `./data/pages/${slug}/index.md`;
 
@@ -103,6 +103,7 @@ export function buildPage(slug) {
       type: 'article',
       slug,
       title: params.title,
+      coverUrl: assetMap[slug + '/cover.jpg'],
       author,
       description: params.description,
       tags,
@@ -111,4 +112,8 @@ export function buildPage(slug) {
       html,
     }
   }
+}
+
+export {
+  buildPage,
 }

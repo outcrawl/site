@@ -13,12 +13,11 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
   env: {
     baseUrl: process.env.NODE_ENV === 'production' ? 'https://outcrawl.com' : 'http://localhost:3000',
-    dataUrl: 'http://localhost:3001',
     articlesPerPage: 4
   },
   modules: [
@@ -29,14 +28,18 @@ module.exports = {
   },
   loading: false,
   css: [
-    '@/assets/main.scss'
+    '~/assets/main.scss',
+    'vuetify/src/stylus/main.styl'
   ],
   generate: {
    routes: generateRoutes()
   },
+  plugins: [
+    '~/plugins/vuetify.js',
+    '~/plugins/global.js'
+  ],
   build: {
-    // Run ESLint on save
-    extend(config, { isDev, isClient }) {
+    extend(config, { isDev, isClient, isServer }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -46,6 +49,8 @@ module.exports = {
         })
       }
     },
-    watch: ['data']
+    extractCSS: true,
+    watch: ['data'],
+    vendor: ['~/plugins/vuetify.js']
   },
 }

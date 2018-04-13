@@ -9,10 +9,10 @@
 import Home from '~/components/Home';
 
 export default {
-  asyncData() {
+  asyncData({ route }) {
     if (process.server) {
       // Paginate articles
-      const page = 1;
+      const page = parseInt(route.params.page);
       const perPage = process.env.articlesPerPage;
       const articles = require('~/tools/fetch-pages').fetchArticles();
       return {
