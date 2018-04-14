@@ -8,13 +8,14 @@ const md5 = require('md5');
 const cheerio = require('cheerio');
 const pretty = require('pretty');
 
+const highlight = require('./highlight');
 const copyAssets = require('./copy-assets');
 const authors = require('../data/authors.json');
 
 // Setup marked
 const renderer = new marked.Renderer();
 renderer.code = (code, language) => {
-  return `<pre><code>${code}</code></pre>`;
+  return highlight.highlight(code, language);
 };
 renderer.heading = (text, level, raw) => {
   return `<h${level + 1}>${text}</h${level + 1}>`;
@@ -34,7 +35,9 @@ function parseMarkdown(md, slug) {
   let html = marked(md.substr(md.indexOf('---', 3) + 3));
 
   // Insert cover image
-  html = `<img src="${assetMap[slug + '/cover.jpg']}" alt="${params.title}" title="a"/>` + html;
+  if (assetMap[slug + '/cover.jpg']) {
+    html = `<img src="${assetMap[slug + '/cover.jpg']}" alt="${params.title}" title="a"/>` + html;
+  }
   // Insert title
   html = '<h1>' + params.title + '</h1>' + html;
 
@@ -47,7 +50,7 @@ function parseMarkdown(md, slug) {
     }
   });
   html = pretty($.html(), {
-    ocd: true
+    ocd: true,
   });
 
   return {
@@ -72,10 +75,7 @@ function buildPage(slug) {
     }
   }
 
-  const {
-    params,
-    html
-  } = parseMarkdown(md, slug);
+  const { params, html } = parseMarkdown(md, slug);
 
   if (params.type === 'page') {
     return {
@@ -90,13 +90,13 @@ function buildPage(slug) {
     const tags = params.tags.sort().map(tag => ({
       name: tag,
       slug: toSlug(tag, {
-        lower: true
-      })
+        lower: true,
+      }),
     }));
     const authorData = authors[params.author];
     const author = {
       ...authorData,
-      emailHash: md5(authorData.email.toLowerCase())
+      emailHash: md5(authorData.email.toLowerCase()),
     };
 
     return {
@@ -110,10 +110,8 @@ function buildPage(slug) {
       date: date.format('DD MMMM, YYYY'),
       realDate: date.toDate(),
       html,
-    }
+    };
   }
 }
 
-export {
-  buildPage,
-}
+export { buildPage };

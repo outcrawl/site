@@ -12,6 +12,4 @@ function fetchArticles() {
   return articles.sort((a, b) => b.realDate - a.realDate);
 }
 
-export {
-  fetchArticles,
-};
+export { fetchArticles };

@@ -23,8 +23,6 @@ export default {
       };
     }
   },
-  components: {
-    Home,
-  },
+  components: { Home },
 };
 </script>

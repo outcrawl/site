@@ -1,18 +1,22 @@
 <template>
-  <v-app light>
-    <Toolbar />
-    <nuxt />
+  <div class="page-content">
+    <Header />
+    <Main>
+      <nuxt />
+    </Main>
     <Footer />
-  </v-app>
+  </div>
 </template>
 
 <script>
-import Toolbar from '@/components/Toolbar';
+import Main from '@/components/Main';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export default {
   components: {
-    Toolbar,
+    Main,
+    Header,
     Footer,
   },
 };

@@ -6,10 +6,7 @@ function getPaths(path, asset) {
   const hash = md5File.sync(src).substr(0, 5);
   const name = asset.substring(0, asset.lastIndexOf('.'));
   const dest = `./static/assets/${name}-${hash}.jpg`;
-  return {
-    src,
-    dest
-  };
+  return { src, dest };
 }
 
 function linkAssets() {
@@ -22,10 +19,7 @@ function linkAssets() {
     for (const asset of fs.readdirSync(path)) {
       if (/.*.(jpg|png|gif)$/.test(asset)) {
         const name = asset.substring(0, asset.lastIndexOf('.'));
-        const {
-          src,
-          dest
-        } = getPaths(path, asset);
+        const { src, dest } = getPaths(path, asset);
         map[`${slug}/${asset}`] = dest.substr('./static'.length);
       }
     }
@@ -41,10 +35,7 @@ function copyAssets() {
 
     for (const asset of fs.readdirSync(path)) {
       if (/.*.(jpg|png|gif)$/.test(asset)) {
-        const {
-          src,
-          dest
-        } = getPaths(path, asset);
+        const { src, dest } = getPaths(path, asset);
         fs.copySync(src, dest);
       }
     }

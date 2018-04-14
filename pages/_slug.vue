@@ -1,12 +1,7 @@
-<template>
-  <article>
-    <div>
-      <div v-html="page.html"></div>
-    </div>
-  </article>
-</template>
-
 <script>
+import Article from '~/components/Article';
+import Page from '~/components/Page';
+
 export default {
   asyncData({ params }) {
     if (process.server) {
@@ -15,6 +10,18 @@ export default {
       return {
         page,
       };
+    }
+  },
+  render(createElement) {
+    const page = this.page;
+    if (page.type == 'page') {
+      return createElement(Page, {
+        props: { page: page },
+      });
+    } else {
+      return createElement(Article, {
+        props: { page: page },
+      });
     }
   },
 };
