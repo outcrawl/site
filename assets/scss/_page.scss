@@ -1,28 +1,22 @@
-* {
-  box-sizing: border-box;
-}
+.page {
+  @extend .container;
+  @extend .py-sm-3;
+  @extend .py-md-5;
 
-html {
-  overflow-x: hidden;
-  height: 100%;
-}
+  max-width: 720px;
 
-body,
-#__nuxt,
-#__layout,
-.page-content {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-}
+  h1 {
+    @extend .display-4;
+  }
 
-#__nuxt,
-#__layout,
-main,
-.page-content {
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
+  &__image {
+    @extend .img-fluid;
+    margin: 0 auto $paragraph-margin-bottom auto;
+    display: block;
+  }
+
+  &__note {
+    @extend .alert;
+    @extend .alert-success;
+  }
 }

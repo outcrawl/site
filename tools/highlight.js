@@ -3,8 +3,13 @@ const loadLanguages = require('prismjs/components/index.js');
 const rangeParser = require('parse-numeric-range');
 
 function highlight(code, language) {
+  code = code.trim();
   if (!language) {
-    return `<pre><code>${code}</code></pre>`;
+    return `
+      <div class="code">
+        <pre><code>${code}</code></pre>
+      </div>
+    `;
   }
 
   // Check highlighted lines
@@ -29,13 +34,16 @@ function highlight(code, language) {
     const sourceLines = code.split('\n');
     code = '';
     for (let i = 0; i < sourceLines.length; i++) {
-      if (lines.indexOf(i - 1) != -1) {
+      if (lines.indexOf(i + 1) != -1) {
         code += `<span class="code__line">${sourceLines[i]}</span>`;
       } else {
         code += sourceLines[i] + '\n';
       }
     }
   }
+
+  language = language == 'markup' ? 'html' : language;
+  language = language == 'docker' ? 'dockerfile' : language;
 
   return `
     <div class="code">

@@ -1,6 +1,6 @@
 <script>
-import Article from '~/components/Article';
-import Page from '~/components/Page';
+import ArticlePage from '~/components/ArticlePage';
+import GeneralPage from '~/components/GeneralPage';
 
 export default {
   asyncData({ params }) {
@@ -15,11 +15,11 @@ export default {
   render(createElement) {
     const page = this.page;
     if (page.type == 'page') {
-      return createElement(Page, {
+      return createElement(GeneralPage, {
         props: { page: page },
       });
     } else {
-      return createElement(Article, {
+      return createElement(ArticlePage, {
         props: { page: page },
       });
     }

@@ -4,4 +4,11 @@
   &--primary {
     @extend .btn-primary;
   }
+
+  svg {
+    height: 1rem;
+    line-height: 1.5;
+    fill: $white;
+    vertical-align: middle;
+  }
 }

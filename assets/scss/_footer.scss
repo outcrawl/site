@@ -1,6 +1,50 @@
 .footer {
-  li {
-    float: left;
-    line-height: 1;
+  @extend .footer;
+  @extend .text-muted;
+  @extend .bg-light;
+
+  text-align: left;
+  font-size: 0.875rem;
+
+  &__content {
+    @extend .row;
+
+    margin: 0;
+    padding: 0.5rem 1rem;
+    @include media-breakpoint-up(sm) {
+      padding: 1.5rem 2rem;
+    }
+  }
+
+  &__links {
+    @extend .col-md-6;
+
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+    }
+
+    li + li {
+      margin-left: 1rem;
+    }
+
+    a {
+      color: $gray-800;
+    }
+  }
+
+  &__body {
+    @extend .col-md-6;
+
+    margin: 0;
+    padding: 0;
+    text-align: right;
+
+    @include media-breakpoint-down(sm) {
+      text-align: left;
+      padding-top: 0.5rem;
+    }
   }
 }

@@ -1,12 +1,12 @@
 <template>
-  <Home :articles="articles"
-        :page="page"
-        :perPage="perPage"
-        :total="total" />
+  <HomePage :articles="articles"
+            :page="page"
+            :perPage="perPage"
+            :total="total" />
 </template>
 
 <script>
-import Home from '~/components/Home';
+import HomePage from '~/components/HomePage';
 
 export default {
   asyncData({ route }) {
@@ -23,6 +23,6 @@ export default {
       };
     }
   },
-  components: { Home },
+  components: { HomePage },
 };
 </script>

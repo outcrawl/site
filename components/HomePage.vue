@@ -9,6 +9,7 @@
                 :page="page"
                 :perPage="perPage"
                 :total="total" />
+
   </div>
 </template>
 

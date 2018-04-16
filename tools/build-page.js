@@ -21,7 +21,20 @@ renderer.heading = (text, level, raw) => {
   return `<h${level + 1}>${text}</h${level + 1}>`;
 };
 renderer.image = (href, title, text) => {
-  return `<img src="${href}" alt="${text}" />`;
+  return `<img class="page__image" src="${href}" alt="${text}" />`;
+};
+renderer.html = html => {
+  html = html.trim();
+  if (html.startsWith('<note>')) {
+    const note = html.substring(6, html.length - 7);
+    return `
+      <div class="page__note">
+        ${note}
+      </div>
+    `;
+  } else {
+    throw new Error('Invalid shortcode: ' + html);
+  }
 };
 marked.setOptions({
   renderer,
@@ -36,7 +49,7 @@ function parseMarkdown(md, slug) {
 
   // Insert cover image
   if (assetMap[slug + '/cover.jpg']) {
-    html = `<img src="${assetMap[slug + '/cover.jpg']}" alt="${params.title}" title="a"/>` + html;
+    html = `<img class="page__image" src="${assetMap[slug + '/cover.jpg']}" alt="${params.title}" title="a"/>` + html;
   }
   // Insert title
   html = '<h1>' + params.title + '</h1>' + html;
@@ -97,6 +110,7 @@ function buildPage(slug) {
     const author = {
       ...authorData,
       emailHash: md5(authorData.email.toLowerCase()),
+      slug: params.author,
     };
 
     return {

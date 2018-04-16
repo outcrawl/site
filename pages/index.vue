@@ -1,12 +1,12 @@
 <template>
-  <Home :articles="articles"
-        :page="page"
-        :perPage="perPage"
-        :total="total" />
+  <HomePage :articles="articles"
+            :page="page"
+            :perPage="perPage"
+            :total="total" />
 </template>
 
 <script>
-import Home from '~/components/Home';
+import HomePage from '~/components/HomePage';
 
 export default {
   asyncData() {
@@ -24,7 +24,7 @@ export default {
     }
   },
   components: {
-    Home,
+    HomePage,
   },
 };
 </script>

@@ -1,3 +1,11 @@
+// Fonts
+
+$font-family-sans-serif: "Source Sans Pro", sans-serif;
+$font-family-monospace: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console",
+  "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L",
+  "Courier New", Courier, monospace;
+$code-font-size: 0.875rem;
+
 // Border
 
 $border-radius: 2px;
@@ -18,6 +26,46 @@ $gray-800: #424242;
 $gray-900: #212121;
 $black: #000;
 
+$blue: #1e88e5;
+$indigo: #3949ab;
+$purple: #8e24aa;
+$pink: #d81b60;
+$red: #e53935;
+$orange: #fb8c00;
+$yellow: #fdd835;
+$green: #43a047;
+$teal: #00897b;
+$cyan: #00acc1;
+
+$primary: $gray-700;
+$secondary: $gray-600;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-800;
+
 $code-bg: #f7f7f7;
-$code-color: $gray-900;
-$code-line-color: $gray-400;
+
+// Links
+
+$link-color: #039be5;
+$link-decoration: none;
+$link-hover-color: #039be5;
+$link-hover-decoration: underline;
+
+// Buttons
+$btn-box-shadow: none;
+$btn-focus-box-shadow: none;
+$btn-focus-width: 0;
+$btn-active-box-shadow: none;
+$btn-active-width: 0;
+$input-btn-focus-box-shadow: none;
+$btn-active-box-shadow: none;
+
+// Pagination
+$pagination-color: $gray-800;
+$pagination-hover-color: $pagination-color;
+$pagination-active-color: $white;
+$pagination-disabled-color: $gray-600;

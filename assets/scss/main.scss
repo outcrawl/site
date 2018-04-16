@@ -1,12 +1,14 @@
-@import "page";
 @import "variables";
-@import "fonts";
-@import "code";
 
 @import "~bootstrap/scss/bootstrap";
 
+@import "reset";
+@import "code";
+
 // Components
 @import "home";
+@import "page";
+@import "author";
 @import "pagination";
 @import "header";
 @import "footer";

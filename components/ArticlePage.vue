@@ -1,5 +1,5 @@
 <template>
-  <article class="container"
+  <article class="page"
            v-html="page.html"></article>
 </template>
 
