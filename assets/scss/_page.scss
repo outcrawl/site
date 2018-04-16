@@ -3,10 +3,21 @@
   @extend .py-sm-3;
   @extend .py-md-5;
 
-  max-width: 720px;
+  &--narrow {
+    max-width: 720px;
+  }
+
+  &__entries {
+    @extend .row;
+  }
+
+  &__pagination {
+    @extend .pt-3;
+  }
 
   h1 {
     @extend .display-4;
+    margin-top: 0;
   }
 
   &__image {
@@ -82,9 +93,7 @@
   &__tags {
     display: flex;
     flex-direction: row;
-
-    @extend .d-flex;
-    @extend .flex-wrap;
+    align-items: center;
   }
 
   &__tag {

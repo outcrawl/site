@@ -1,18 +1,11 @@
-<template>
-  <HomePage :articles="articles"
-            :page="page"
-            :perPage="perPage"
-            :total="total" />
-</template>
-
 <script>
 import HomePage from '~/components/HomePage';
 
 export default {
-  asyncData({ route }) {
+  asyncData({ params }) {
     if (process.server) {
       // Paginate articles
-      const page = parseInt(route.params.page);
+      const page = parseInt(params.page);
       const perPage = process.env.articlesPerPage;
       const articles = require('~/tools/fetch-pages').fetchArticles();
       return {
@@ -23,6 +16,15 @@ export default {
       };
     }
   },
-  components: { HomePage },
+  render(createElement) {
+    return createElement(HomePage, {
+      props: {
+        articles: this.articles,
+        page: this.page,
+        perPage: this.perPage,
+        total: this.total,
+      },
+    });
+  },
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <h1>{{tag.name}}</h1>
     <div class="page__entries">
       <Entry v-for="article of articles"
              :key="article.slug"
@@ -8,13 +9,13 @@
     <Pagination class="page__pagination"
                 :page="page"
                 :perPage="perPage"
-                :total="total" />
-
+                :total="total"
+                :basePath="`/tags/${tag}`" />
   </div>
 </template>
 
 <script>
-import Entry from '@/components/Entry';
+import Entry from '~/components/Entry';
 import Pagination from '~/components/Pagination';
 
 export default {
@@ -22,6 +23,6 @@ export default {
     Entry,
     Pagination,
   },
-  props: ['articles', 'page', 'perPage', 'total'],
+  props: ['tag', 'articles', 'page', 'perPage', 'total'],
 };
 </script>

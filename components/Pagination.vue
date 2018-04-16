@@ -5,7 +5,7 @@
           :class="page == 1 ? 'disabled' : ''">
         <nuxt-link class="pagination__link"
                    v-if="page != 1"
-                   :to="page == 2 ? '/' : `/page/${page - 1}/`">
+                   :to="page == 2 ? baseUrl : `${baseUrl}page/${page - 1}/`">
           Previous
         </nuxt-link>
         <span class="pagination__link"
@@ -18,13 +18,13 @@
           :class="i == page ? 'active' : ''"
           :key="i">
         <nuxt-link class="pagination__link"
-                   :to="i == 1 ? '/' : `/page/${i}/`">{{i}}</nuxt-link>
+                   :to="i == 1 ? baseUrl : `${baseUrl}page/${i}/`">{{i}}</nuxt-link>
       </li>
       <li class="pagination__item"
           :class="page == pageCount ? 'disabled' : ''">
         <nuxt-link class="pagination__link"
                    v-if="page != pageCount"
-                   :to="`/page/${page + 1}/`">
+                   :to="`${baseUrl}page/${page + 1}/`">
           Next
         </nuxt-link>
         <span class="pagination__link"
@@ -41,7 +41,7 @@ import ChevronLeft from '~/assets/svg/chevron-left.svg';
 import ChevronRight from '~/assets/svg/chevron-right.svg';
 
 export default {
-  props: ['page', 'perPage', 'total'],
+  props: ['page', 'perPage', 'total', 'basePath'],
   components: {
     ChevronLeft,
     ChevronRight,
@@ -49,6 +49,9 @@ export default {
   computed: {
     pageCount() {
       return Math.ceil(this.total / this.perPage + 1);
+    },
+    baseUrl() {
+      return this.basePath ? this.basePath + '/' : '/';
     },
   },
 };

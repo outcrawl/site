@@ -1,5 +1,5 @@
 <template>
-  <article class="page">
+  <article class="page page--narrow">
 
     <h1>{{page.title}}</h1>
 
