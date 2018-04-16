@@ -1,8 +1,8 @@
 const fs = require('fs-extra');
 
-const buildPage = require('./build-page').buildPage;
+const buildPage = require('./build-page');
 
-function fetchArticles() {
+module.exports = function fetchArticles() {
   const articles = [];
   // Build articles
   for (const dir of fs.readdirSync('./data/articles')) {
@@ -10,6 +10,4 @@ function fetchArticles() {
     articles.push(buildPage(slug));
   }
   return articles.sort((a, b) => b.realDate - a.realDate);
-}
-
-export { fetchArticles };
+};

@@ -7,7 +7,7 @@ export default {
       // Paginate articles
       const page = parseInt(params.page);
       const perPage = process.env.articlesPerPage;
-      const articles = require('~/tools/fetch-pages').fetchArticles();
+      const articles = require('~/tools/fetch-articles')();
       return {
         page,
         articles: articles.splice((page - 1) * perPage, perPage),

@@ -2,16 +2,16 @@ const fs = require('fs-extra');
 const moment = require('moment');
 const md5 = require('md5');
 
-const authors = require('~/data/authors.json');
-const fetchPages = require('./fetch-pages');
+const authors = require('../data/authors.json');
+const fetchArticles = require('./fetch-articles');
 
-function fetchAuthor(slug) {
+module.exports = function fetchAuthor(slug) {
   const author = authors[slug];
   author.emailHash = md5(author.email.toLowerCase());
   author.slug = slug;
 
   // Get articles by author
-  const articles = fetchPages.fetchArticles();
+  const articles = fetchArticles();
   author.articles = articles.filter(a => a.author.slug === slug);
 
   // Group articles by month
@@ -22,6 +22,4 @@ function fetchAuthor(slug) {
   }, {});
 
   return author;
-}
-
-export { fetchAuthor };
+};

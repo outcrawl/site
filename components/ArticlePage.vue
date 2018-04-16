@@ -10,7 +10,7 @@
              :alt="`${page.author.name} avatar`">
         <div class="page__author">
           <nuxt-link class="page__author-name"
-                     :to="`/authors/${page.author.slug}/`">{{page.author.name}}</nuxt-link>
+                     :to="`/authors/${page.author.slug}`">{{page.author.name}}</nuxt-link>
           <span class="page__date">{{page.date}}</span>
         </div>
       </div>
@@ -41,7 +41,7 @@
         <nuxt-link v-for="tag of page.tags"
                    :key="tag.slug"
                    class="page__tag"
-                   :to="`/tags/${tag.slug}/`">{{tag.name}}</nuxt-link>
+                   :to="`/tags/${tag.slug}`">{{tag.name}}</nuxt-link>
       </div>
       <div class="page__share">
         <a class="button button--icon button--twitter"

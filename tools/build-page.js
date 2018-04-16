@@ -15,7 +15,7 @@ const authors = require('../data/authors.json');
 // Setup marked
 const renderer = new marked.Renderer();
 renderer.code = (code, language) => {
-  return highlight.highlight(code, language);
+  return highlight(code, language);
 };
 renderer.heading = (text, level, raw) => {
   return `<h${level + 1}>${text}</h${level + 1}>`;
@@ -65,7 +65,7 @@ function parseMarkdown(md, slug) {
   };
 }
 
-function buildPage(slug) {
+module.exports = function buildPage(slug) {
   let md = '';
   let dir = `./data/pages/${slug}/index.md`;
 
@@ -87,7 +87,7 @@ function buildPage(slug) {
     return {
       type: 'page',
       slug,
-      permalink: `${process.env.baseUrl}/${slug}/`,
+      permalink: `${process.env.baseUrl}/${slug}`,
       title: params.title,
       description: params.description,
       html,
@@ -111,7 +111,7 @@ function buildPage(slug) {
       type: 'article',
       slug,
       title: params.title,
-      permalink: `${process.env.baseUrl}/${slug}/`,
+      permalink: `${process.env.baseUrl}/${slug}`,
       coverUrl: assetMap[slug + '/cover.jpg'],
       author,
       description: params.description,
@@ -121,6 +121,4 @@ function buildPage(slug) {
       html,
     };
   }
-}
-
-export { buildPage };
+};

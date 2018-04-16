@@ -41,7 +41,7 @@
           <li v-for="article of author.articlesByMonth[month]"
               :key="article.slug">
             <nuxt-link class="author__article-title"
-                       :to="`/${article.slug}/`">
+                       :to="`/${article.slug}`">
               {{article.title}}
             </nuxt-link>
           </li>

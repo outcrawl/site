@@ -14,12 +14,12 @@
           </a>
         </li>
         <li>
-          <nuxt-link to="/about/">
+          <nuxt-link to="/about">
             About
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/privacy/">
+          <nuxt-link to="/privacy">
             Privacy
           </nuxt-link>
         </li>

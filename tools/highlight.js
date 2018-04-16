@@ -2,7 +2,7 @@ const Prism = require('prismjs');
 const loadLanguages = require('prismjs/components/index.js');
 const rangeParser = require('parse-numeric-range');
 
-function highlight(code, language) {
+module.exports = function highlight(code, language) {
   code = code.trim();
   if (!language) {
     return `
@@ -50,6 +50,4 @@ function highlight(code, language) {
       <pre><code class="code-language-${language}">${code}</code></pre>
     </div>
   `;
-}
-
-export { highlight };
+};

@@ -1,7 +1,11 @@
-const generateRoutes = require('./tools/generate-routes').generateRoutes;
+const fs = require('fs-extra');
+
+const generateRoutes = require('./tools/generate-routes');
 const copyAssets = require('./tools/copy-assets');
 
 copyAssets.copyAssets();
+
+const articlesPerPage = 6;
 
 module.exports = {
   head: {
@@ -15,7 +19,7 @@ module.exports = {
   },
   env: {
     baseUrl: process.env.NODE_ENV === 'production' ? 'https://outcrawl.com' : 'http://localhost:3000',
-    articlesPerPage: 6,
+    articlesPerPage,
   },
   modules: ['@nuxtjs/pwa'],
   icon: {
@@ -24,7 +28,7 @@ module.exports = {
   loading: false,
   css: ['~/assets/scss/main.scss'],
   generate: {
-    routes: generateRoutes(),
+    routes: generateRoutes(articlesPerPage),
   },
   render: {
     bundleRenderer: {

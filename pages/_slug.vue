@@ -5,7 +5,7 @@ import GeneralPage from '~/components/GeneralPage';
 export default {
   asyncData({ params }) {
     if (process.server) {
-      const page = require('~/tools/build-page').buildPage(params.slug);
+      const page = require('~/tools/build-page')(params.slug);
       page.assetMap = require('~/tools/copy-assets').linkAssets();
       return {
         page,

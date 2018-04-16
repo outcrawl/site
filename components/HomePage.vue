@@ -8,7 +8,8 @@
     <Pagination class="page__pagination"
                 :page="page"
                 :perPage="perPage"
-                :total="total" />
+                :total="total"
+                basePath="" />
 
   </div>
 </template>

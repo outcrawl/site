@@ -10,7 +10,7 @@
                 :page="page"
                 :perPage="perPage"
                 :total="total"
-                :basePath="`/tags/${tag}`" />
+                :basePath="`/tags/${tag.slug}`" />
   </div>
 </template>
 
