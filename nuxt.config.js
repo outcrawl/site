@@ -15,7 +15,7 @@ module.exports = {
   },
   env: {
     baseUrl: process.env.NODE_ENV === 'production' ? 'https://outcrawl.com' : 'http://localhost:3000',
-    articlesPerPage: 4,
+    articlesPerPage: 6,
   },
   modules: ['@nuxtjs/pwa'],
   icon: {

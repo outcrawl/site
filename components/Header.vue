@@ -1,10 +1,9 @@
 <template>
   <header>
-    <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand"
+    <nav class="header">
+      <a class="header__brand"
          href="/">
-        <LogoText height="30"
-                  class="d-inline-block align-top" />
+        <LogoText class="header__logo" />
       </a>
     </nav>
   </header>

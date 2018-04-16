@@ -1,14 +1,15 @@
 <template>
-  <div class="card bg-dark text-white"
-       style="width:18rem">
-    <img class="card-img"
-         :src="article.coverUrl"
-         alt="Card image">
-    <div class="card-img-overlay">
-      <nuxt-link :to="`/${article.slug}/`">
-        <h5 class="card-title">{{article.title}}</h5>
-      </nuxt-link>
-      <p class="card-text">{{article.date}}</p>
+  <div class="entry">
+    <div class="entry__content">
+      <img class="entry__image"
+           :src="article.coverUrl"
+           alt="Card image">
+      <div class="entry__body">
+        <nuxt-link :to="`/${article.slug}/`">
+          <h3 class="entry__title">{{article.title}}</h3>
+        </nuxt-link>
+        <p class="entry__date">{{article.date}}</p>
+      </div>
     </div>
   </div>
 </template>

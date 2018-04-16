@@ -20,6 +20,7 @@ function highlight(code, language) {
   language = language == 'js' ? 'javascript' : language;
   language = language == 'ts' ? 'typescript' : language;
   language = language == 'html' ? 'markup' : language;
+  language = language == 'dockerfile' ? 'docker' : language;
   loadLanguages([language]);
   code = Prism.highlight(code, Prism.languages[language], language);
 

@@ -1,15 +1,14 @@
-html,
-body,
-main,
-#__nuxt,
-#__layout,
-.page-content {
-  height: 100%;
-}
-
-@import "colors";
+@import "page";
+@import "variables";
 @import "fonts";
 @import "code";
-@import "footer";
 
 @import "~bootstrap/scss/bootstrap";
+
+// Components
+@import "home";
+@import "pagination";
+@import "header";
+@import "footer";
+@import "entry";
+@import "button";

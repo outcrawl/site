@@ -1,0 +1,13 @@
+.home {
+  @extend .container;
+  @extend .py-sm-3;
+  @extend .py-md-5;
+
+  &__entries {
+    @extend .row;
+  }
+
+  &__pagination {
+    @extend .pt-3;
+  }
+}

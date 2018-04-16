@@ -1,52 +1,39 @@
 <template>
-  <!--
-  <div>
-    <nuxt-link :to="page <= 1 ? '' : (page == 2 ? '' : `page/${page - 1}`)">
-      <ChevronLeft width="16"
-                   height="16" />
-    </nuxt-link>
-    <nuxt-link :to="i == 1 ? '' : `page/${i}`"
-               v-for="i in Math.ceil(total / perPage)"
-               :key="i">
-      <span>{{i}}</span>
-    </nuxt-link>
-    <nuxt-link :to="page == Math.ceil(total / perPage) ? '' : `page/${page + 1}`">
-      <ChevronRight width="16"
-                    height="16" />
-    </nuxt-link>
-  </div>
-  -->
-
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link"
-         href="#"
-         aria-label="Previous">
-        <span aria-hidden="true">
-          <ChevronLeft width="16"
-                       height="16" />
+  <nav>
+    <ul class="pagination">
+      <li class="pagination__item"
+          :class="page == 1 ? 'disabled' : ''">
+        <nuxt-link class="pagination__link"
+                   v-if="page != 1"
+                   :to="page == 2 ? '/' : `/page/${page - 1}/`">
+          Previous
+        </nuxt-link>
+        <span class="pagination__link"
+              v-if="page == 1">
+          Previous
         </span>
-        <span class="sr-only">Previous</span>
-      </a>
-    </li>
-
-    <li class="page-item"
-        v-for="i in Math.ceil(total / perPage)"
-        :key="i">
-      <nuxt-link class="page-link"
-                 :to="i == 1 ? '' : `page/${i}`">{{i}}</nuxt-link>
-    </li>
-
-    <li class="page-item">
-      <a class="page-link"
-         href="#"
-         aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Next</span>
-      </a>
-    </li>
-  </ul>
-
+      </li>
+      <li class="pagination__item"
+          v-for="i in pageCount"
+          :class="i == page ? 'active' : ''"
+          :key="i">
+        <nuxt-link class="pagination__link"
+                   :to="i == 1 ? '/' : `/page/${i}/`">{{i}}</nuxt-link>
+      </li>
+      <li class="pagination__item"
+          :class="page == pageCount ? 'disabled' : ''">
+        <nuxt-link class="pagination__link"
+                   v-if="page != pageCount"
+                   :to="`/page/${page + 1}/`">
+          Next
+        </nuxt-link>
+        <span class="pagination__link"
+              v-if="page == pageCount">
+          Next
+        </span>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -58,6 +45,11 @@ export default {
   components: {
     ChevronLeft,
     ChevronRight,
+  },
+  computed: {
+    pageCount() {
+      return Math.ceil(this.total / this.perPage + 1);
+    },
   },
 };
 </script>
