@@ -5,10 +5,31 @@
     @extend .btn-primary;
   }
 
-  svg {
-    height: 1rem;
-    line-height: 1.5;
-    fill: $white;
-    vertical-align: middle;
+  &--icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 2.25rem;
+    width: 2.25rem;
+    padding: 0;
+
+    svg {
+      height: 1rem;
+      width: auto;
+      fill: $white;
+    }
+  }
+
+  &--twitter {
+    @include button-variant(#00aced, #00aced);
+  }
+
+  &--google-plus {
+    @include button-variant(#d34836, #d34836);
+  }
+
+  &--facebook {
+    @include button-variant(#3b5998, #3b5998);
   }
 }

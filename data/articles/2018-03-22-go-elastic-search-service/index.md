@@ -5,6 +5,12 @@ tags:
   - Go
   - Elasticsearch
   - Docker
+  - Abdawd
+  - O9fjfe
+  - Ojff3
+  - OJWdoff
+  - 3f0gsdg
+  - Jwdod JOdjw LLDwlkdoegodpkfawp fawpf
 description: This article shows how to build a simple search service in Go by using Elasticsearch.
 ---
 

@@ -47,13 +47,6 @@ function parseMarkdown(md, slug) {
   params.type = params.author ? 'article' : 'page';
   let html = marked(md.substr(md.indexOf('---', 3) + 3));
 
-  // Insert cover image
-  if (assetMap[slug + '/cover.jpg']) {
-    html = `<img class="page__image" src="${assetMap[slug + '/cover.jpg']}" alt="${params.title}" title="a"/>` + html;
-  }
-  // Insert title
-  html = '<h1>' + params.title + '</h1>' + html;
-
   // Change assets urls
   const $ = cheerio.load(html);
   $('img').each((_, img) => {
@@ -94,6 +87,7 @@ function buildPage(slug) {
     return {
       type: 'page',
       slug,
+      permalink: `${process.env.baseUrl}/${slug}/`,
       title: params.title,
       description: params.description,
       html,
@@ -117,6 +111,7 @@ function buildPage(slug) {
       type: 'article',
       slug,
       title: params.title,
+      permalink: `${process.env.baseUrl}/${slug}/`,
       coverUrl: assetMap[slug + '/cover.jpg'],
       author,
       description: params.description,

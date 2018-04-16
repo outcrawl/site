@@ -11,7 +11,7 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Nuxt.js project' },
     ],
-    link: [{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' }],
+    link: [{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,700' }],
   },
   env: {
     baseUrl: process.env.NODE_ENV === 'production' ? 'https://outcrawl.com' : 'http://localhost:3000',

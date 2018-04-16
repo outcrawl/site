@@ -19,4 +19,81 @@
     @extend .alert;
     @extend .alert-success;
   }
+
+  &__meta {
+    display: flex;
+    margin-bottom: $paragraph-margin-bottom / 2;
+
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__author-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: auto 0;
+    border-radius: 50%;
+    border: 1px solid $gray-400;
+  }
+
+  &__author {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.5rem;
+  }
+
+  &__author-name {
+    color: $body-color;
+
+    &:hover {
+      color: $body-color;
+    }
+  }
+
+  &__date {
+    @extend .text-muted;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  &__share {
+    display: flex;
+    margin-left: auto;
+
+    .button {
+      margin-left: 0.5rem;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-left: 0;
+
+      .button {
+        margin: 0.5rem 0.5rem 0 0;
+      }
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-direction: row;
+
+    @extend .d-flex;
+    @extend .flex-wrap;
+  }
+
+  &__tag {
+    @extend .badge;
+    @extend .badge-dark;
+
+    font-weight: 400;
+    font-size: 1rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
 }
