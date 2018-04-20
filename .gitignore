@@ -1,6 +1,6 @@
-node_modules/
-*.log
-.nuxt/
-dist/
-sw.*
-*.tmp
+.cache
+node_modules
+yarn-error.log
+public
+.DS_Store
+webpack-stats.json
