@@ -4,16 +4,28 @@ import {
   MuiThemeProvider,
   withStyles,
 } from 'material-ui/styles';
-import grey from 'material-ui/colors/grey';
-import lightBlue from 'material-ui/colors/lightBlue';
 import Grid from 'material-ui/Grid';
+import grey from 'material-ui/colors/grey';
+import blue from 'material-ui/colors/blue';
 import 'normalize.css';
 
 import { getMeta } from '../utils/query';
 import Header from '../components/header';
 import Footer from '../components/footer';
 
-const theme = createMuiTheme({});
+const theme = createMuiTheme({
+  typography: {
+    htmlFontSize: 16,
+  },
+  palette: {
+    primary: {
+      main: grey[900],
+    },
+    secondary: {
+      main: blue[500],
+    },
+  },
+});
 
 const styles = (theme) => ({
   '@global': {
@@ -21,6 +33,10 @@ const styles = (theme) => ({
       WebkitFontSmoothing: 'antialiased',
       MozOsxFontSmoothing: 'grayscale',
       boxSizing: 'border-box',
+      fontSize: 16,
+      [theme.breakpoints.up('xl')]: {
+        fontSize: 18,
+      },
     },
     body: {
       backgroundColor: theme.palette.background.default,

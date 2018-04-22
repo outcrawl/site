@@ -48,13 +48,13 @@ const Entry = ({ article, classes }) => (
       <ButtonBase
         alt={article.title}
         component={ArticleLink}
-        to={article.slug}
+        to={`/${article.slug}`}
         focusRipple
         className={classes.cover}
         style={{ backgroundImage: `url(${article.coverUrl})` }}
       />
       <CardContent>
-        <Link to={article.slug} className={classes.titleLink}>
+        <Link to={`/${article.slug}`} className={classes.titleLink}>
           <Typography variant="headline" component="h2">
             {article.title}
           </Typography>

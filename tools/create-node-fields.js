@@ -2,12 +2,12 @@ const toSlug = require('slug');
 const md5 = require('md5');
 const marked = require('marked');
 
+const highlight = require('./highlight');
 const authors = require('../data/authors.json');
 
 const renderer = new marked.Renderer();
-renderer.code = (code, language) => {
-  // return highlight(code, language);
-};
+renderer.code = (code, language) => highlight(code, language);
+//renderer.codespan = (code) => ``;
 renderer.heading = (text, level, raw) => {
   return `<h${level + 1}>${text}</h${level + 1}>`;
 };
@@ -19,9 +19,9 @@ renderer.html = (html) => {
   if (html.startsWith('<note>')) {
     const note = html.substring(6, html.length - 7);
     return `
-      <div class="page__note">
+      <aside class="page__note">
         ${note}
-      </div>
+      </aside>
     `;
   } else {
     throw new Error('Invalid shortcode: ' + html);

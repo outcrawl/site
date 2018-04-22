@@ -11,21 +11,22 @@ const styles = (theme) => ({
     marginLeft: theme.spacing.unit,
   },
   twitter: {
-    color: theme.palette.common.white,
+    color: [theme.palette.common.white, '!important'],
     backgroundColor: '#00aced',
     '&:hover': {
       backgroundColor: '#1AC6FF',
     },
   },
   facebook: {
-    color: theme.palette.common.white,
+    color: [theme.palette.common.white, '!important'],
     backgroundColor: '#3b5998',
     '&:hover': {
+      color: theme.palette.common.white,
       backgroundColor: '#5573B2',
     },
   },
   googlePlus: {
-    color: theme.palette.common.white,
+    color: [theme.palette.common.white, '!important'],
     backgroundColor: '#d34836',
     '&:hover': {
       backgroundColor: '#ED6250',

@@ -1,22 +1,14 @@
 import React from 'react';
 import { withStyles } from 'material-ui';
 
+import markdownStyles from '../../utils/markdown-styles';
 import { Page, PageSection } from '../page';
 import ArticleHeader from './header';
 import ArticleFooter from './footer';
 import ArticleRelated from './related';
 
 const styles = (theme) => ({
-  article: {
-    '& h1': { ...theme.typography.display4, fontSize: '4rem' },
-    '& h2': { ...theme.typography.display3, fontSize: '3rem' },
-    '& h3': { ...theme.typography.display2, fontSize: '2.5rem' },
-    '& h4': { ...theme.typography.display1, fontSize: '2rem' },
-    '& img': {
-      maxWidth: '100%',
-    },
-    '& p': { ...theme.typography.body1 },
-  },
+  article: markdownStyles(theme),
 });
 
 const ArticlePage = ({ article, classes }) => {

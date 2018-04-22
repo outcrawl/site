@@ -51,7 +51,7 @@ $ dep init
 
 Write the Dockerfile for `search_api` service inside `search-api` directory.
 
-```go
+```docker
 FROM golang:1.10.0
 
 RUN adduser --disabled-password --gecos '' api

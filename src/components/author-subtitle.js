@@ -24,7 +24,7 @@ const styles = (theme) => ({
   author: {
     margin: 0,
     display: 'block',
-    color: 'inherit',
+    color: [theme.palette.text.primary, '!important'],
     textDecoration: 'none',
   },
   subtitle: {
