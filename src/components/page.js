@@ -27,9 +27,9 @@ const Page = withStyles(styles)(({ classes, children, narrow }) => {
   );
 });
 
-const PageSection = withStyles(styles)(({ component, children }) => {
+const PageSection = withStyles(styles)(({ className, component, children }) => {
   return (
-    <Grid item xs={12} component={component}>
+    <Grid className={className} item xs={12} component={component}>
       {children}
     </Grid>
   );

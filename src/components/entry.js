@@ -1,18 +1,14 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui/styles';
-import Card, {
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions,
-} from 'material-ui/Card';
+import Card, { CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import ButtonBase from 'material-ui/ButtonBase';
 import Typography from 'material-ui/Typography';
-import Avatar from 'material-ui/Avatar';
 import List, { ListItem, ListItemText } from 'material-ui/List';
+
+import AuthorSubtitle from './author-subtitle';
 
 const styles = (theme) => ({
   root: {
@@ -35,15 +31,12 @@ const styles = (theme) => ({
   header: {
     paddingTop: 0,
   },
-  avatar: {
-    border: [[1, 'solid', theme.palette.divider]],
-  },
   titleLink: {
     textDecoration: 'none',
   },
-  authorLink: {
-    textDecoration: 'none',
-    color: 'inherit',
+  author: {
+    padding: theme.spacing.unit * 3,
+    paddingTop: 0,
   },
 });
 
@@ -67,26 +60,10 @@ const Entry = ({ article, classes }) => (
           </Typography>
         </Link>
       </CardContent>
-      <CardHeader
-        className={classes.header}
-        avatar={
-          <Avatar
-            className={classes.avatar}
-            alt={article.author.name}
-            src={`https://www.gravatar.com/avatar/${
-              article.author.emailHash
-            }?s=120`}
-          />
-        }
-        title={
-          <Link
-            to={`/authors/${article.author.slug}`}
-            className={classes.authorLink}
-          >
-            {article.author.name}
-          </Link>
-        }
-        subheader={article.date}
+      <AuthorSubtitle
+        className={classes.author}
+        author={article.author}
+        subtitle={article.date}
       />
     </Card>
   </Grid>

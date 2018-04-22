@@ -23,6 +23,7 @@ const getRelated = (data) =>
 export const getArticle = (data) => {
   const meta = getMeta(data);
   const article = {
+    html: data.markdownRemark.html,
     ...data.markdownRemark.frontmatter,
     ...data.markdownRemark.fields,
     permalink: `${meta.site.siteUrl}/${data.markdownRemark.fields.slug}`,
@@ -46,11 +47,13 @@ export const getArticle = (data) => {
 
 export const getGeneralPage = (data) => {
   const meta = getMeta(data);
-  return {
+  const page = {
+    html: data.markdownRemark.html,
     ...data.markdownRemark.frontmatter,
     ...data.markdownRemark.fields,
     permalink: `${meta.site.siteUrl}/${data.markdownRemark.fields.slug}`,
   };
+  return page;
 };
 
 export const getArticles = (data) => {

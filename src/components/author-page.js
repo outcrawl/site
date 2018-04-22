@@ -1,10 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 
-import Twitter from '../assets/svg/twitter.svg';
-import GitHub from '../assets/svg/github.svg';
-import Facebook from '../assets/svg/facebook.svg';
-import GooglePlus from '../assets/svg/google-plus.svg';
+import { Twitter, GitHub, Facebook, GooglePlus } from './icons';
 
 const Info = ({ author }) => (
   <section className="author__info">

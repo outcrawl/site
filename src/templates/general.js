@@ -16,8 +16,8 @@ export const query = graphql`
         description
       }
       fields {
+        html
         slug
-        markdown
       }
     }
     site {

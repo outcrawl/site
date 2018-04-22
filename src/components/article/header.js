@@ -1,0 +1,42 @@
+import React from 'react';
+import Link from 'gatsby-link';
+import { withStyles } from 'material-ui';
+
+import AuthorSubtitle from '../author-subtitle';
+import ArticleShare from './share';
+
+const styles = (theme) => ({
+  root: {
+    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+    },
+  },
+  author: {
+    marginBottom: theme.spacing.unit * 2,
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing.unit,
+    },
+  },
+  share: {
+    display: 'flex',
+    marginLeft: 'auto',
+    marginBottom: theme.spacing.unit * 2,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: 0,
+    },
+  },
+});
+
+const ArticleHeader = ({ article, classes }) => (
+  <section className={classes.root}>
+    <AuthorSubtitle
+      className={classes.author}
+      author={article.author}
+      subtitle={article.date}
+    />
+    <ArticleShare className={classes.share} article={article} />
+  </section>
+);
+
+export default withStyles(styles)(ArticleHeader);

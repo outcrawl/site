@@ -1,7 +1,33 @@
 const toSlug = require('slug');
 const md5 = require('md5');
+const marked = require('marked');
 
 const authors = require('../data/authors.json');
+
+const renderer = new marked.Renderer();
+renderer.code = (code, language) => {
+  // return highlight(code, language);
+};
+renderer.heading = (text, level, raw) => {
+  return `<h${level + 1}>${text}</h${level + 1}>`;
+};
+renderer.image = (href, title, text) => {
+  return `<img src="${href}" alt="${text}" />`;
+};
+renderer.html = (html) => {
+  html = html.trim();
+  if (html.startsWith('<note>')) {
+    const note = html.substring(6, html.length - 7);
+    return `
+      <div class="page__note">
+        ${note}
+      </div>
+    `;
+  } else {
+    throw new Error('Invalid shortcode: ' + html);
+  }
+};
+marked.setOptions({ renderer });
 
 module.exports = (boundActionCreators, node, getNode) => {
   const { createNodeField } = boundActionCreators;
@@ -11,14 +37,6 @@ module.exports = (boundActionCreators, node, getNode) => {
 
   if (path.startsWith('articles')) {
     createNodeField({ node, name: 'type', value: 'article' });
-
-    // Insert cover image
-    /*
-    const md = node.internal.content;
-    const fm = md.indexOf('---', 3) + 3;
-    node.internal.content =
-      md.substr(0, fm) + '![](./cover.jpg)' + md.substr(fm);
-    */
 
     // Date
     const date = path.substr('articles/'.length, '0000-00-00'.length);
@@ -38,18 +56,17 @@ module.exports = (boundActionCreators, node, getNode) => {
       .sort()
       .map((tag) => ({ slug: toSlug(tag, { lower: true }), name: tag }));
     createNodeField({ node, name: 'tags', value: tags });
-
-    // Markdown
-    createNodeField({ node, name: 'markdown', value: node.internal.content });
   } else {
     createNodeField({ node, name: 'type', value: 'page' });
 
     // Slug
     slug = path.substring('pages/'.length, path.lastIndexOf('/'));
-
-    // Markdown
-    createNodeField({ node, name: 'markdown', value: node.internal.content });
   }
 
+  let markdown = node.internal.content;
+  markdown = markdown.substr(markdown.indexOf('---', 3) + 3).trim();
+  const html = marked(markdown);
+
   createNodeField({ node, name: 'slug', value: slug });
+  createNodeField({ node, name: 'html', value: html });
 };

@@ -1,11 +1,13 @@
 import React from 'react';
 
-import {Page} from './page';
-import renderHtml from '../utils/render-html';
+import { Page, PageSection } from './page';
 
 const GeneralPage = ({ page }) => (
-  <Page narrow component="article">
-    {renderHtml(page.ast)}
+  <Page narrow>
+    <PageSection
+      component="article"
+      dangerouslySetInnerHTML={{ __html: page.html }}
+    />
   </Page>
 );
 

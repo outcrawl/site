@@ -29,7 +29,7 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
       exclude: [/node_modules[\\\/]react/],
       profile: true,
     },
-	]);
+  ]);
 
   return config;
 };

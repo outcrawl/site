@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getArticle } from '../utils/query';
-import ArticlePage from '../components/article-page';
+import { ArticlePage } from '../components/article';
 
 export default ({ data }) => {
   const article = getArticle(data);
@@ -23,6 +23,7 @@ export const query = graphql`
         }
       }
       fields {
+        html
         slug
         date(formatString: "DD MMMM, YYYY")
         author {
@@ -34,7 +35,6 @@ export const query = graphql`
           slug
           name
         }
-        markdown
       }
     }
     related: allMarkdownRemark(
