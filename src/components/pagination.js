@@ -13,6 +13,11 @@ const styles = (theme) => ({
     textAlign: 'center',
     padding: [[theme.spacing.unit * 3, 0]],
   },
+  textButton: {
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
 });
 
 const Pagination = ({
@@ -40,6 +45,7 @@ const Pagination = ({
       {/* Page number buttons */}
       {_.forRange(1, pageCount + 1, (i) => (
         <IconButton
+          className={classes.textButton}
           key={i}
           disabled={page == i}
           component={page == i ? 'span' : Link}

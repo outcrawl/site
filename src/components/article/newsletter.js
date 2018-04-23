@@ -1,19 +1,32 @@
 import React from 'react';
-import Link from 'gatsby-link';
+import axios from 'axios';
 import ReCAPTCHA from 'react-google-recaptcha';
+import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar';
 import Button from 'material-ui/Button';
 
-import backend from '../utils/backend';
+const backend = {
+  apiUrl: 'https://outcrawl-backend.appspot.com/api/v1',
+
+  subscribe: (email, reCaptcha) =>
+    new Promise((resolve, reject) => {
+      axios
+        .post(`${backend.apiUrl}/mail/subscribe`, null, {
+          params: {
+            email: email,
+            recaptcha: reCaptcha,
+          },
+        })
+        .then((_) => resolve())
+        .catch(reject);
+    }),
+};
 
 const styles = (theme) => ({
   root: {
-    padding: '16px 0px',
-    [theme.breakpoints.up('sm')]: {
-      padding: '48px 0px 24px 0px',
-    },
+    padding: [[theme.spacing.unit * 3, 0]],
   },
   content: {
     textAlign: 'center',
@@ -21,7 +34,7 @@ const styles = (theme) => ({
   lead: {
     fontSize: '1.5rem',
     fontWeight: 300,
-    marginBottom: '1rem',
+    margin: [['1.5rem', 0]],
   },
   captchaNote: {
     fontSize: 13,
@@ -49,8 +62,9 @@ class Newsletter extends React.Component {
   render() {
     const classes = this.props.classes;
     return (
-      <div className={classes.root}>
-        <h1>Newsletter</h1>
+      <Grid className={classes.root} item xs={12} component="section">
+        <h2>Newsletter</h2>
+
         <div className={classes.content}>
           <p className={classes.lead}>
             Get awesome articles delivered right to your doorstep
@@ -109,7 +123,7 @@ class Newsletter extends React.Component {
           message={this.state.snackbar.message}
           onClose={this.handleSnackbarClose}
         />
-      </div>
+      </Grid>
     );
   }
 
@@ -153,6 +167,7 @@ class Newsletter extends React.Component {
         ga('send', 'event', 'Newsletter', 'subscribe');
       })
       .catch((error) => {
+        console.error(error);
         this.showSnackbar('Something bad happened.');
         this.captcha.reset();
       });

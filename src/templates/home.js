@@ -1,15 +1,17 @@
 import React from 'react';
 
 import HomePage from '../components/home-page';
-import { getArticles } from '../utils/query';
+import { getArticles, getMeta } from '../utils/query';
 
 export default ({
   data,
   pathContext: { page, articlesPerPage, totalArticles },
 }) => {
+  const meta = getMeta(data);
   const articles = getArticles(data);
   return (
     <HomePage
+      meta={meta}
       articles={articles}
       page={page}
       articlesPerPage={articlesPerPage}
@@ -28,7 +30,6 @@ export const query = graphql`
     ) {
       edges {
         node {
-          html
           frontmatter {
             title
             description

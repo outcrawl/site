@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui';
 
 const styles = (theme) => ({
@@ -14,11 +13,14 @@ const styles = (theme) => ({
     padding: 0,
   },
   link: {
-    fontSize: '1.25rem',
-    marginBottom: '1rem',
     '&:hover': {
       color: theme.palette.text.primary,
     },
+  },
+  articleTitle: {
+    fontSize: '1.25rem',
+    color: theme.palette.text.primary,
+    marginBottom: '1rem',
   },
 });
 
@@ -29,9 +31,7 @@ const ArticleRelated = ({ related, classes }) => (
       {related.map((a) => (
         <li key={a.slug}>
           <Link to={`/${a.slug}`} className={classes.link}>
-            <Typography variant="headline" component="h3">
-              {a.title}
-            </Typography>
+            <h3 className={classes.articleTitle}>{a.title}</h3>
           </Link>
         </li>
       ))}

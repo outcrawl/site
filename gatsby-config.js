@@ -55,13 +55,48 @@ const plugins = [
     },
   },
   'gatsby-transformer-sharp',
+  {
+    resolve: 'gatsby-plugin-google-analytics',
+    options: {
+      trackingId: 'UA-103565863-1',
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      name: 'Outcrawl',
+      short_name: 'Outcrawl',
+      start_url: '/',
+      background_color: '#ffffff',
+      theme_color: '#ffffff',
+      display: 'minimal-ui',
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-favicon',
+    options: {
+      logo: './static/logo.svg',
+      injectHTML: true,
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        twitter: false,
+        yandex: false,
+        windows: false,
+      },
+    },
+  },
   remark,
 ];
 
 module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
-    description: '',
+    description: 'Software development tutorials without nonsense',
     siteUrl:
       process.env.NODE_ENV == 'production'
         ? 'https://outcrawl.com'

@@ -2,9 +2,10 @@ import React from 'react';
 import moment from 'moment';
 
 import { AuthorPage } from '../components/author';
-import { getArticles } from '../utils/query';
+import { getArticles, getMeta } from '../utils/query';
 
 export default ({ data, pathContext: { author } }) => {
+  const meta = getMeta(data);
   const articles = getArticles(data);
   // Group articles by month
   author.articlesByMonth = articles.reduce((g, a) => {
@@ -13,7 +14,7 @@ export default ({ data, pathContext: { author } }) => {
     return g;
   }, {});
 
-  return <AuthorPage author={author} articles={articles} />;
+  return <AuthorPage meta={meta} author={author} articles={articles} />;
 };
 
 export const query = graphql`

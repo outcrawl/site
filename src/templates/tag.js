@@ -1,15 +1,17 @@
 import React from 'react';
 
 import TagPage from '../components/tag-page';
-import { getArticles } from '../utils/query';
+import { getArticles, getMeta } from '../utils/query';
 
 export default ({
   data,
   pathContext: { tag, page, articlesPerPage, totalArticles },
 }) => {
+  const meta = getMeta(data);
   const articles = getArticles(data);
   return (
     <TagPage
+      meta={meta}
       tag={tag}
       articles={articles}
       page={page}
@@ -40,21 +42,12 @@ export const query = graphql`
               }
             }
           }
-          tableOfContents
-          html
           fields {
             slug
             date(formatString: "DD MMMM, YYYY")
             author {
               name
               email
-              bio
-              social {
-                twitter
-                github
-                facebook
-                googlePlus
-              }
               emailHash
             }
             tags {

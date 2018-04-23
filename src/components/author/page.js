@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui';
 
+import { SiteMeta, PageMeta } from '../meta';
 import AuthorInfo from './info';
 import { Page, PageSection } from '../page';
 
@@ -27,8 +28,16 @@ const Articles = ({ articlesByMonth }) => (
   </section>
 );
 
-const AuthorPage = ({ author, articles, classes }) => (
+const AuthorPage = ({ meta, author, articles, classes }) => (
   <Page narrow>
+    <SiteMeta meta={meta} />
+    <PageMeta
+      meta={meta}
+      title={`${author.name} - ${meta.site.title}`}
+      description={author.bio}
+      url={meta.site.siteUrl + `/authors/${author.slug}/`}
+    />
+
     <PageSection>
       <AuthorInfo author={author} classes={classes} />
     </PageSection>

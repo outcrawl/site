@@ -60,7 +60,6 @@ const styles = (theme) => ({
       fontWeight: 300,
       letterSpacing: '-.04em',
       lineHeight: '1.14286em',
-      marginLeft: '-.04em',
       color: 'rgba(0, 0, 0, 0.54)',
     },
     h2: {
@@ -69,7 +68,6 @@ const styles = (theme) => ({
       fontWeight: 400,
       letterSpacing: '-.02em',
       lineHeight: '1.30357em',
-      marginLeft: '-.02em',
       color: 'rgba(0, 0, 0, 0.54)',
     },
     h3: {
@@ -77,7 +75,6 @@ const styles = (theme) => ({
       margin: '0.7em 0 0.4em',
       fontWeight: 400,
       lineHeight: '1.06667em',
-      marginLeft: '-.02em',
       color: 'rgba(0, 0, 0, 0.54)',
     },
     h4: {

@@ -1,26 +1,38 @@
 import React from 'react';
 
-import Entry from '../components/entry';
+import { SiteMeta, PageMeta } from './meta';
+import { Page, PageSection } from './page';
+import Entry from './entry';
 import Pagination from './pagination';
 
-const TagPage = ({ tag, articles, page, articlesPerPage, totalArticles }) => (
-  <div className="page">
-    <h1 className="page__title">{tag.name}</h1>
+const TagPage = ({
+  meta,
+  tag,
+  articles,
+  page,
+  articlesPerPage,
+  totalArticles,
+}) => (
+  <Page>
+    <SiteMeta meta={meta} />
+    <PageMeta
+      meta={meta}
+      title={`${tag.name} - ${meta.site.title}`}
+      description={`Articles about ${tag.name} on ${meta.site.title}.`}
+      url={`${meta.site.siteUrl}/tags/${tag.slug}/`}
+    />
 
-    <div className="page__entries">
-      {articles.map((article) => (
-        <Entry article={article} key={article.slug} />
-      ))}
-    </div>
-
+    <PageSection>
+      <h1>{tag.name}</h1>
+    </PageSection>
+    {articles.map((article) => <Entry article={article} key={article.slug} />)}
     <Pagination
-      className="page__pagination"
       page={page}
       articlesPerPage={articlesPerPage}
       totalArticles={totalArticles}
       basePath={`/tags/${tag.slug}`}
     />
-  </div>
+  </Page>
 );
 
 export default TagPage;

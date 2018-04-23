@@ -1,9 +1,35 @@
 import _ from './helpers';
 
 export const getMeta = (data) => {
-  return {
+  const meta = {
     site: data.site.siteMetadata,
   };
+  if (data.markdownRemark) {
+    const page = data.markdownRemark;
+    meta.page = {
+      title:
+        page.frontmatter.title.replace(/"/g, '&quot;') +
+        ' - ' +
+        meta.site.title,
+      permalink: `${meta.site.siteUrl}/${page.fields.slug}`,
+    };
+    if (page.frontmatter.description) {
+      meta.page.description = page.frontmatter.description.replace(
+        /"/g,
+        '&quot;',
+      );
+    }
+    if (page.frontmatter.date) {
+      meta.page.date = new Date(Date.parse(page.frontmatter.date))
+        .toISOString()
+        .replace(/T.*$/, '');
+    }
+    if (page.frontmatter.cover) {
+      meta.page.coverUrl =
+        meta.site.siteUrl + page.frontmatter.cover.childImageSharp.original.src;
+    }
+  }
+  return meta;
 };
 
 const getRelated = (data) =>

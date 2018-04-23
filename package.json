@@ -11,6 +11,7 @@
     "purge": "aws s3 rm s3://outcrawl-test.com/ --recursive --exclude \"static/*\""
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "classnames": "^2.2.5",
     "gatsby": "^1.9.253",
@@ -38,6 +39,7 @@
     "normalize.css": "^8.0.0",
     "parse-numeric-range": "^0.0.2",
     "prismjs": "^1.14.0",
+    "react-async-script": "^0.9.1",
     "react-google-recaptcha": "^0.11.0",
     "react-helmet": "^5.2.0",
     "slug": "^0.9.1",

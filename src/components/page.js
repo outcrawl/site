@@ -8,17 +8,18 @@ const styles = (theme) => ({
     maxWidth: 1024,
     margin: [[0, 'auto']],
     padding: theme.spacing.unit,
+
+    // Shortcodes
+    '& .page__note': {
+      lineHeight: 1.6,
+      padding: 16,
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.secondary.contrastText,
+    },
   },
   narrow: {
     maxWidth: 720,
     padding: [[theme.spacing.unit * 4, theme.spacing.unit]],
-  },
-  // Shortcodes
-  '.page__note': {
-    lineHeight: 1.6,
-    padding: 16,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.secondary.contrastText,
   },
 });
 

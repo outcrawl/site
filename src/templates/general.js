@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { getGeneralPage } from '../utils/query';
+import { getGeneralPage, getMeta } from '../utils/query';
 import GeneralPage from '../components/general-page';
 
 export default ({ data }) => {
+  const meta = getMeta(data);
   const page = getGeneralPage(data);
-  return <GeneralPage page={page} />;
+  return <GeneralPage meta={meta} page={page} />;
 };
 
 export const query = graphql`

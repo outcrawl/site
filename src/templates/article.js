@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { getArticle } from '../utils/query';
+import { getArticle, getMeta } from '../utils/query';
 import { ArticlePage } from '../components/article';
 
 export default ({ data }) => {
+  const meta = getMeta(data);
   const article = getArticle(data);
-  return <ArticlePage article={article} />;
+  return <ArticlePage article={article} meta={meta} />;
 };
 
 export const query = graphql`
