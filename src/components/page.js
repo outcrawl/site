@@ -13,6 +13,13 @@ const styles = (theme) => ({
     maxWidth: 720,
     padding: [[theme.spacing.unit * 4, theme.spacing.unit]],
   },
+  // Shortcodes
+  '.page__note': {
+    lineHeight: 1.6,
+    padding: 16,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.contrastText,
+  },
 });
 
 const Page = withStyles(styles)(({ classes, children, narrow }) => {

@@ -2,16 +2,11 @@ import React from 'react';
 import { withStyles } from 'material-ui';
 import Button from 'material-ui/Button';
 
-import markdownStyles from '../utils/markdown-styles';
 import { Page, PageSection } from '../components/page';
 
-const styles = (theme) => ({
-  article: markdownStyles(theme),
-});
-
-const ElementsPage = ({ classes }) => (
+const ElementsPage = () => (
   <Page narrow>
-    <PageSection component="article" className={classes.article}>
+    <PageSection component="article">
       <h2>Buttons</h2>
       <Button variant="raised">Default</Button>
       <Button variant="raised" color="primary">
@@ -27,4 +22,4 @@ const ElementsPage = ({ classes }) => (
   </Page>
 );
 
-export default withStyles(styles)(ElementsPage);
+export default ElementsPage;

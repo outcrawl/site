@@ -2,28 +2,29 @@ import React from 'react';
 import Link from 'gatsby-link';
 import { withStyles } from 'material-ui';
 
-import AuthorSubtitle from '../author-subtitle';
+import { AuthorPlate } from '../author';
 import ArticleShare from './share';
 
 const styles = (theme) => ({
   root: {
     display: 'flex',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
     },
   },
   share: {
     display: 'flex',
     marginLeft: 'auto',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       marginLeft: 0,
+      marginTop: theme.spacing.unit,
     },
   },
 });
 
 const ArticleHeader = ({ article, classes }) => (
   <section className={classes.root}>
-    <AuthorSubtitle author={article.author} subtitle={article.date} />
+    <AuthorPlate author={article.author} subtitle={article.date} />
     <ArticleShare className={classes.share} article={article} />
   </section>
 );

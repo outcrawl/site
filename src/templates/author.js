@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import AuthorPage from '../components/author-page';
+import { AuthorPage } from '../components/author';
 import { getArticles } from '../utils/query';
 
 export default ({ data, pathContext: { author } }) => {
@@ -13,12 +13,7 @@ export default ({ data, pathContext: { author } }) => {
     return g;
   }, {});
 
-  return (
-    <AuthorPage
-      author={author}
-      articles={articles}
-    />
-  );
+  return <AuthorPage author={author} articles={articles} />;
 };
 
 export const query = graphql`

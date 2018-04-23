@@ -1,15 +1,12 @@
 import React from 'react';
 
-import markdownStyles from '../utils/markdown-styles';
 import { Page, PageSection } from '../components/page';
 
 const NotFoundPage = () => (
   <Page narrow>
     <PageSection component="article">
       <h1>Page Not Found</h1>
-      <p>
-        Maybe "crawl" somewhere else.
-      </p>
+      <p>Maybe "crawl" somewhere else.</p>
     </PageSection>
   </Page>
 );

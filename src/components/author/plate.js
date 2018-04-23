@@ -33,7 +33,7 @@ const styles = (theme) => ({
   },
 });
 
-const AuthorSubtitle = ({ author, subtitle, classes, className }) => (
+const AuthorPlate = ({ author, subtitle, classes, className }) => (
   <div className={classNames(classes.root, className)}>
     <img
       className={classes.avatar}
@@ -49,4 +49,4 @@ const AuthorSubtitle = ({ author, subtitle, classes, className }) => (
   </div>
 );
 
-export default withStyles(styles)(AuthorSubtitle);
+export default withStyles(styles)(AuthorPlate);

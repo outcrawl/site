@@ -38,6 +38,7 @@
     "normalize.css": "^8.0.0",
     "parse-numeric-range": "^0.0.2",
     "prismjs": "^1.14.0",
+    "react-google-recaptcha": "^0.11.0",
     "react-helmet": "^5.2.0",
     "slug": "^0.9.1",
     "stats-webpack-plugin": "^0.6.2"

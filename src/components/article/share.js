@@ -4,40 +4,21 @@ import IconButton from 'material-ui/IconButton';
 import { withStyles } from 'material-ui';
 import classNames from 'classnames';
 
-import { Twitter, Facebook, GooglePlus } from '../icons';
+import {
+  TwitterButton,
+  FacebookButton,
+  GooglePlusButton,
+} from '../social-buttons';
 
 const styles = (theme) => ({
-  buttonLeftMargin: {
+  socialButton: {
     marginLeft: theme.spacing.unit,
-  },
-  twitter: {
-    color: [theme.palette.common.white, '!important'],
-    backgroundColor: '#00aced',
-    '&:hover': {
-      backgroundColor: '#1AC6FF',
-    },
-  },
-  facebook: {
-    color: [theme.palette.common.white, '!important'],
-    backgroundColor: '#3b5998',
-    '&:hover': {
-      color: theme.palette.common.white,
-      backgroundColor: '#5573B2',
-    },
-  },
-  googlePlus: {
-    color: [theme.palette.common.white, '!important'],
-    backgroundColor: '#d34836',
-    '&:hover': {
-      backgroundColor: '#ED6250',
-    },
   },
 });
 
 const ArticleShare = ({ article, classes, className }) => (
   <div className={classNames(classes.root, className)}>
-    <Button
-      className={classes.twitter}
+    <TwitterButton
       component="a"
       variant="fab"
       mini
@@ -45,29 +26,23 @@ const ArticleShare = ({ article, classes, className }) => (
         article.title
       }`}
       aria-label="Share on Twitter"
-    >
-      <Twitter />
-    </Button>
-    <Button
-      className={classNames(classes.facebook, classes.buttonLeftMargin)}
+    />
+    <FacebookButton
+      className={classes.socialButton}
       component="a"
       variant="fab"
       mini
       href={`https://www.facebook.com/sharer/sharer.php?u=${article.permalink}`}
       aria-label="Share on Facebook"
-    >
-      <Facebook />
-    </Button>
-    <Button
-      className={classNames(classes.googlePlus, classes.buttonLeftMargin)}
+    />
+    <GooglePlusButton
+      className={classes.socialButton}
       component="a"
       variant="fab"
       mini
       href={`https://plus.google.com/share?url=${article.permalink}`}
       aria-label="Share on Google+"
-    >
-      <GooglePlus />
-    </Button>
+    />
   </div>
 );
 

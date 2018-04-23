@@ -9,7 +9,7 @@ import ArticleShare from './share';
 const styles = (theme) => ({
   root: {
     display: 'flex',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
     },
   },
@@ -21,7 +21,7 @@ const styles = (theme) => ({
   share: {
     display: 'flex',
     marginLeft: 'auto',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       marginLeft: 0,
     },
   },

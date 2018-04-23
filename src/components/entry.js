@@ -8,7 +8,7 @@ import ButtonBase from 'material-ui/ButtonBase';
 import Typography from 'material-ui/Typography';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 
-import AuthorSubtitle from './author-subtitle';
+import { AuthorPlate } from './author';
 
 const styles = (theme) => ({
   root: {
@@ -33,6 +33,9 @@ const styles = (theme) => ({
   },
   titleLink: {
     textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.text.primary,
+    },
   },
   author: {
     padding: theme.spacing.unit * 3,
@@ -60,7 +63,7 @@ const Entry = ({ article, classes }) => (
           </Typography>
         </Link>
       </CardContent>
-      <AuthorSubtitle
+      <AuthorPlate
         className={classes.author}
         author={article.author}
         subtitle={article.date}
