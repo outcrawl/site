@@ -11,6 +11,7 @@ export default ({ data }) => {
 export const query = graphql`
   query ArticleQuery($slug: String!, $tags: [String]!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
+      html
       frontmatter {
         title
         description
@@ -23,7 +24,6 @@ export const query = graphql`
         }
       }
       fields {
-        html
         slug
         date(formatString: "DD MMMM, YYYY")
         author {

@@ -12,16 +12,9 @@ const styles = (theme) => ({
       flexDirection: 'column',
     },
   },
-  author: {
-    marginBottom: theme.spacing.unit * 2,
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing.unit,
-    },
-  },
   share: {
     display: 'flex',
     marginLeft: 'auto',
-    marginBottom: theme.spacing.unit * 2,
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
     },
@@ -30,11 +23,7 @@ const styles = (theme) => ({
 
 const ArticleHeader = ({ article, classes }) => (
   <section className={classes.root}>
-    <AuthorSubtitle
-      className={classes.author}
-      author={article.author}
-      subtitle={article.date}
-    />
+    <AuthorSubtitle author={article.author} subtitle={article.date} />
     <ArticleShare className={classes.share} article={article} />
   </section>
 );

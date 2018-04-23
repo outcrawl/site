@@ -11,7 +11,7 @@ const styles = (theme) => ({
   },
   avatar: {
     flex: '0 0 auto',
-    marginRight: 16,
+    marginRight: theme.spacing.unit * 2,
     borderRadius: '50%',
     border: [[1, 'solid', theme.palette.divider]],
     width: 40,

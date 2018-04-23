@@ -1,10 +1,17 @@
 import React from 'react';
 
+import markdownStyles from '../utils/markdown-styles';
+import { Page, PageSection } from '../components/page';
+
 const NotFoundPage = () => (
-  <div>
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </div>
+  <Page narrow>
+    <PageSection component="article">
+      <h1>Page Not Found</h1>
+      <p>
+        Maybe "crawl" somewhere else.
+      </p>
+    </PageSection>
+  </Page>
 );
 
 export default NotFoundPage;

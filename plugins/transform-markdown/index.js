@@ -1,6 +1,10 @@
+const visit = require('unist-util-visit');
+const $ = require('cheerio');
+const slug = require('slug');
+const marked = require('marked');
 const rangeParser = require('parse-numeric-range');
 
-module.exports = (code, lang) => {
+function highlight(code, lang) {
   code = code.trim();
 
   if (!lang) {
@@ -54,7 +58,7 @@ module.exports = (code, lang) => {
       <pre><code>${html}</code></pre>
     </div>
   `;
-};
+}
 
 function findHighlights(lang) {
   if (!/(\+|-|){/.test(lang)) {
@@ -81,3 +85,51 @@ function findHighlights(lang) {
 
   return [lang, lines];
 }
+
+module.exports = ({ files, markdownNode, markdownAST, getNode }) => {
+  // Lower heading level
+  visit(markdownAST, 'heading', (node) => {
+    const id = slug(node.children[0].value, {
+      lower: true,
+    });
+    node.type = 'html';
+    node.value = `
+      <h${node.depth + 1} id="${id}">
+        ${node.children[0].value}
+      </h${node.depth + 1}>
+    `;
+  });
+
+  visit(markdownAST, 'code', (node) => {
+    node.type = 'html';
+    node.value = highlight(node.value, node.lang);
+  });
+
+  visit(markdownAST, 'html', (node) => {
+    // Change image
+    const wrapper = $('.gatsby-resp-image-wrapper', node.value);
+    if (wrapper.length > 0) {
+      const img = $(wrapper).find('.gatsby-resp-image-image');
+      node.value = `
+        <img
+          src="${img.attr('src')}"
+          alt="${img.attr('alt')}"
+          sizes="${img.attr('sizes')}"
+          srcset="${img.attr('srcset')}"
+        />
+      `;
+      return;
+    }
+
+    // Note
+    const note = $('note', node.value);
+    if (note.length > 0) {
+      let html = marked(note.text());
+      html = html.substring(3, html.length - 5);
+      node.value = `<aside class="page__note">${html}</aside>`;
+      return;
+    }
+  });
+
+  return markdownAST;
+};

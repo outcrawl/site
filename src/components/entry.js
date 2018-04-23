@@ -46,10 +46,10 @@ const Entry = ({ article, classes }) => (
   <Grid item xs={12} sm={6} className={classes.root}>
     <Card>
       <ButtonBase
+        focusRipple
         alt={article.title}
         component={ArticleLink}
         to={`/${article.slug}`}
-        focusRipple
         className={classes.cover}
         style={{ backgroundImage: `url(${article.coverUrl})` }}
       />

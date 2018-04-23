@@ -1,33 +1,7 @@
 const toSlug = require('slug');
 const md5 = require('md5');
-const marked = require('marked');
 
-const highlight = require('./highlight');
 const authors = require('../data/authors.json');
-
-const renderer = new marked.Renderer();
-renderer.code = (code, language) => highlight(code, language);
-//renderer.codespan = (code) => ``;
-renderer.heading = (text, level, raw) => {
-  return `<h${level + 1}>${text}</h${level + 1}>`;
-};
-renderer.image = (href, title, text) => {
-  return `<img src="${href}" alt="${text}" />`;
-};
-renderer.html = (html) => {
-  html = html.trim();
-  if (html.startsWith('<note>')) {
-    const note = html.substring(6, html.length - 7);
-    return `
-      <aside class="page__note">
-        ${note}
-      </aside>
-    `;
-  } else {
-    throw new Error('Invalid shortcode: ' + html);
-  }
-};
-marked.setOptions({ renderer });
 
 module.exports = (boundActionCreators, node, getNode) => {
   const { createNodeField } = boundActionCreators;
@@ -37,6 +11,14 @@ module.exports = (boundActionCreators, node, getNode) => {
 
   if (path.startsWith('articles')) {
     createNodeField({ node, name: 'type', value: 'article' });
+
+    // Insert cover image
+    const content = node.internal.content;
+    const front = content.indexOf('---', 3) + 3;
+    node.internal.content =
+      content.substr(0, front) +
+      `![${node.frontmatter.title}](./cover.jpg)` +
+      content.substr(front);
 
     // Date
     const date = path.substr('articles/'.length, '0000-00-00'.length);
@@ -63,10 +45,5 @@ module.exports = (boundActionCreators, node, getNode) => {
     slug = path.substring('pages/'.length, path.lastIndexOf('/'));
   }
 
-  let markdown = node.internal.content;
-  markdown = markdown.substr(markdown.indexOf('---', 3) + 3).trim();
-  const html = marked(markdown);
-
   createNodeField({ node, name: 'slug', value: slug });
-  createNodeField({ node, name: 'html', value: html });
 };

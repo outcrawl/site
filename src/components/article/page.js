@@ -8,23 +8,26 @@ import ArticleFooter from './footer';
 import ArticleRelated from './related';
 
 const styles = (theme) => ({
-  article: markdownStyles(theme),
+  markdown: markdownStyles(theme),
 });
 
 const ArticlePage = ({ article, classes }) => {
   return (
     <Page narrow>
-      <PageSection component="article" className={classes.article}>
-        <h1>{article.title}</h1>
+      <PageSection component="article">
+        <span className={classes.markdown}>
+          <h1>{article.title}</h1>
+        </span>
         <ArticleHeader article={article} />
-        <img src={article.coverUrl} alt={article.title} />
-        <div dangerouslySetInnerHTML={{ __html: article.html }} />
-        <ArticleFooter cla article={article} />
+        <span
+          className={classes.markdown}
+          dangerouslySetInnerHTML={{ __html: article.html }}
+        />
       </PageSection>
 
-      <PageSection>
-        <ArticleRelated related={article.related} />
-      </PageSection>
+      <ArticleFooter cla article={article} />
+
+      <ArticleRelated related={article.related} />
     </Page>
   );
 };

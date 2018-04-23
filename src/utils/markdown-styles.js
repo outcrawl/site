@@ -26,6 +26,9 @@ export default (theme) => ({
   },
   '& img': {
     maxWidth: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
   },
 
   // Code

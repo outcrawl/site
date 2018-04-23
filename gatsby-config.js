@@ -4,21 +4,21 @@ const remark = {
   resolve: 'gatsby-transformer-remark',
   options: {
     plugins: [
-      /*
       {
         resolve: 'gatsby-remark-copy-linked-files',
         options: {
-          destinationDir: './',
+          destinationDir: './static',
         },
-      },*/
+      },
       {
         resolve: 'gatsby-remark-images',
         options: {
           maxWidth: 1280,
           linkImagesToOriginal: false,
-          quality: 100,
+          quality: 70,
         },
       },
+      'transform-markdown',
     ],
   },
 };
@@ -40,10 +40,9 @@ const plugins = [
   'gatsby-plugin-sass',
   'gatsby-plugin-react-svg',
   'gatsby-plugin-react-helmet',
-  'gatsby-transformer-sharp',
+  'gatsby-plugin-sharp',
   'gatsby-plugin-catch-links',
   'gatsby-plugin-jss',
-  remark,
   'gatsby-plugin-sitemap',
   {
     resolve: 'gatsby-plugin-purify-css',
@@ -55,6 +54,8 @@ const plugins = [
       },
     },
   },
+  'gatsby-transformer-sharp',
+  remark,
 ];
 
 module.exports = {
