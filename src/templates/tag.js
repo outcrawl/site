@@ -46,6 +46,7 @@ export const query = graphql`
             slug
             date(formatString: "DD MMMM, YYYY")
             author {
+              slug
               name
               email
               emailHash

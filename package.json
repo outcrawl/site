@@ -7,8 +7,8 @@
     "build": "yarn clean && gatsby build",
     "format": "prettier --write 'src/**/*.{js,scss}'",
     "clean": "del-cli .cache public",
-    "deploy": "aws s3 cp public s3://outcrawl-test.com/ --recursive",
-    "purge": "aws s3 rm s3://outcrawl-test.com/ --recursive --exclude \"static/*\""
+    "deploy": "aws s3 cp public s3://outcrawl.com/ --recursive",
+    "purge": "aws s3 rm s3://outcrawl.com/ --recursive --exclude \"static/*\""
   },
   "dependencies": {
     "axios": "^0.18.0",
