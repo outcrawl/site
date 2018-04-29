@@ -1,18 +1,12 @@
 import React from 'react';
 import { withStyles } from 'material-ui';
 
-import { SiteMeta, PageMeta } from './meta';
+import { PageMeta } from './meta';
 import { Page, PageSection } from './page';
 
-const GeneralPage = ({ meta, page }) => (
+const GeneralPage = ({ page }) => (
   <Page narrow>
-    <SiteMeta meta={meta} />
-    <PageMeta
-      meta={meta}
-      title={`${page.title} - ${meta.site.title}`}
-      description={page.description}
-      url={`${meta.site.siteUrl}/${page.slug}`}
-    />
+    <PageMeta page={page} />
 
     <PageSection component="article">
       <h1>{page.title}</h1>
@@ -22,3 +16,9 @@ const GeneralPage = ({ meta, page }) => (
 );
 
 export default GeneralPage;
+/*
+title={`${page.title} - ${meta.site.title}`}
+      description={page.description}
+      url={`${meta.site.siteUrl}/${page.slug}`}
+
+*/

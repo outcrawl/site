@@ -1,20 +1,12 @@
 import React from 'react';
-import moment from 'moment';
 
 import { AuthorPage } from '../components/author';
-import { getArticles, getMeta } from '../utils/query';
+import { getAuthorPage } from '../utils/query';
 
 export default ({ data, pathContext: { author } }) => {
-  const meta = getMeta(data);
-  const articles = getArticles(data);
-  // Group articles by month
-  author.articlesByMonth = articles.reduce((g, a) => {
-    const key = moment(a.date).format('MMMM YYYY');
-    (g[key] = g[key] || []).push(a);
-    return g;
-  }, {});
-
-  return <AuthorPage meta={meta} author={author} articles={articles} />;
+  const authorPage = getAuthorPage(data);
+  authorPage.author = author;
+  return <AuthorPage authorPage={authorPage} />;
 };
 
 export const query = graphql`
@@ -30,7 +22,7 @@ export const query = graphql`
           }
           fields {
             slug
-            date(formatString: "DD MMMM, YYYY")
+            date
             tags {
               slug
               name

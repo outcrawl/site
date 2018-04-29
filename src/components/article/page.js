@@ -3,17 +3,16 @@ import Helmet from 'react-helmet';
 import { withStyles } from 'material-ui';
 
 import { Page, PageSection } from '../page';
-import { SiteMeta, ArticleMeta } from '../meta';
+import { ArticleMeta } from '../meta';
 import ArticleHeader from './header';
 import ArticleFooter from './footer';
 import ArticleRelated from './related';
 import Newsletter from './newsletter';
 
-const ArticlePage = ({ article, meta }) => {
+const ArticlePage = ({ article }) => {
   return (
     <Page narrow>
-      <SiteMeta meta={meta} />
-      <ArticleMeta meta={meta} />
+      <ArticleMeta article={article} />
 
       <PageSection component="article">
         <h1>{article.title}</h1>

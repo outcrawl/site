@@ -4,9 +4,8 @@ import { getArticle, getMeta } from '../utils/query';
 import { ArticlePage } from '../components/article';
 
 export default ({ data }) => {
-  const meta = getMeta(data);
   const article = getArticle(data);
-  return <ArticlePage article={article} meta={meta} />;
+  return <ArticlePage article={article} />;
 };
 
 export const query = graphql`

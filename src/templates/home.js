@@ -1,19 +1,17 @@
 import React from 'react';
 
 import HomePage from '../components/home-page';
-import { getArticles, getMeta } from '../utils/query';
+import { getHomePage } from '../utils/query';
 
 export default ({
   data,
   pathContext: { page, articlesPerPage, totalArticles },
 }) => {
-  const meta = getMeta(data);
-  const articles = getArticles(data);
+  const homePage = getHomePage(data);
   return (
     <HomePage
-      meta={meta}
-      articles={articles}
-      page={page}
+      page={homePage}
+      pageNumber={page}
       articlesPerPage={articlesPerPage}
       totalArticles={totalArticles}
     />
@@ -32,7 +30,6 @@ export const query = graphql`
         node {
           frontmatter {
             title
-            description
             cover {
               childImageSharp {
                 original {
@@ -48,10 +45,6 @@ export const query = graphql`
               name
               slug
               emailHash
-            }
-            tags {
-              slug
-              name
             }
           }
         }

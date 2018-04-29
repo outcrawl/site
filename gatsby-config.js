@@ -44,16 +44,6 @@ const plugins = [
   'gatsby-plugin-catch-links',
   'gatsby-plugin-jss',
   'gatsby-plugin-sitemap',
-  {
-    resolve: 'gatsby-plugin-purify-css',
-    options: {
-      styleId: 'gatsby-inlined-css',
-      purifyOptions: {
-        info: true,
-        minify: true,
-      },
-    },
-  },
   'gatsby-transformer-sharp',
   {
     resolve: 'gatsby-plugin-google-analytics',
@@ -75,7 +65,7 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-favicon',
     options: {
-      logo: './static/logo.svg',
+      logo: './static/static/logo.svg',
       injectHTML: true,
       icons: {
         android: true,

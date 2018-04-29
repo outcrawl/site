@@ -1,27 +1,29 @@
 import React from 'react';
 
-import { SiteMeta, PageMeta } from './meta';
+import { HomeMeta } from './meta';
 import { Page } from './page';
 import Entry from './entry';
 import Pagination from './pagination';
 
-const HomePage = ({ meta, articles, page, articlesPerPage, totalArticles }) => (
-  <Page>
-    <SiteMeta meta={meta} />
-    <PageMeta
-      meta={meta}
-      title={`${meta.site.title} - ${meta.site.description}`}
-      description={meta.site.description}
-      url={meta.site.siteUrl + (page == 1 ? '' : `/page/${page}/`)}
-    />
+const HomePage = ({ page, pageNumber, articlesPerPage, totalArticles }) => {
+  page.url =
+    page.meta.site.siteUrl + (pageNumber == 1 ? '' : `/page/${pageNumber}`);
+  const articles = page.articles;
 
-    {articles.map((article) => <Entry article={article} key={article.slug} />)}
-    <Pagination
-      page={page}
-      articlesPerPage={articlesPerPage}
-      totalArticles={totalArticles}
-    />
-  </Page>
-);
+  return (
+    <Page>
+      <HomeMeta page={page} />
+
+      {articles.map((article) => (
+        <Entry article={article} key={article.slug} />
+      ))}
+      <Pagination
+        page={pageNumber}
+        articlesPerPage={articlesPerPage}
+        totalArticles={totalArticles}
+      />
+    </Page>
+  );
+};
 
 export default HomePage;

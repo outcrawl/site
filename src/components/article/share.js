@@ -22,7 +22,7 @@ const ArticleShare = ({ article, classes, className }) => (
       component="a"
       variant="fab"
       mini
-      href={`https://twitter.com/intent/tweet?url=${article.permalink}&text=${
+      href={`https://twitter.com/intent/tweet?url=${article.url}&text=${
         article.title
       }`}
       aria-label="Share on Twitter"
@@ -32,7 +32,7 @@ const ArticleShare = ({ article, classes, className }) => (
       component="a"
       variant="fab"
       mini
-      href={`https://www.facebook.com/sharer/sharer.php?u=${article.permalink}`}
+      href={`https://www.facebook.com/sharer/sharer.php?u=${article.url}`}
       aria-label="Share on Facebook"
     />
     <GooglePlusButton
@@ -40,7 +40,7 @@ const ArticleShare = ({ article, classes, className }) => (
       component="a"
       variant="fab"
       mini
-      href={`https://plus.google.com/share?url=${article.permalink}`}
+      href={`https://plus.google.com/share?url=${article.url}`}
       aria-label="Share on Google+"
     />
   </div>
