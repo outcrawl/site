@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
 
 const styles = (theme) => ({
@@ -15,6 +15,10 @@ const styles = (theme) => ({
       padding: 16,
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.secondary.contrastText,
+
+      '& code': {
+        backgroundColor: '#424242',
+      },
     },
   },
   narrow: {

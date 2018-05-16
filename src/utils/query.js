@@ -147,3 +147,11 @@ export const getTagPage = (data) => {
 
   return page;
 };
+
+export const getTagsPage = (data) => {
+  const page = {
+    meta: getMeta(data),
+  };
+
+  return page;
+};

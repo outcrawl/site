@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui';
-import Chip from 'material-ui/Chip';
+import { withStyles } from '@material-ui/core/styles';
+import Chip from '@material-ui/core/Chip';
 import classNames from 'classnames';
 
 const styles = (theme) => ({

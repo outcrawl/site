@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import Grid from 'material-ui/Grid';
-import { withStyles } from 'material-ui';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
   root: {

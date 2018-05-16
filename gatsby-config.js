@@ -15,7 +15,7 @@ const remark = {
         options: {
           maxWidth: 1280,
           linkImagesToOriginal: false,
-          quality: 70,
+          quality: 80,
         },
       },
       'transform-markdown',
@@ -34,7 +34,7 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-google-fonts',
     options: {
-      fonts: ['Roboto:300,400,500,700'],
+      fonts: ['Roboto+Mono|Roboto:300,400,500,700'],
     },
   },
   'gatsby-plugin-sass',

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core/styles';
 
 import { AuthorPlate } from '../author';
 import ArticleShare from './share';

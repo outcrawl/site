@@ -5,6 +5,7 @@ const createPages = require('./tools/create-pages');
 const createHome = require('./tools/create-home');
 const createTags = require('./tools/create-tags');
 const createAuthorPages = require('./tools/create-author-pages');
+const createTagsPage = require('./tools/create-tags-page');
 
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   if (node.internal.type === 'MarkdownRemark') {
@@ -18,6 +19,7 @@ exports.createPages = (params) => {
     createHome(params),
     createTags(params),
     createAuthorPages(params),
+    createTagsPage(params),
   ]);
 };
 

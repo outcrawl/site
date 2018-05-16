@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import { withStyles } from 'material-ui';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 import { Twitter, Facebook, GooglePlus, GitHub } from './icons';

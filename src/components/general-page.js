@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core/styles';
 
 import { PageMeta } from './meta';
 import { Page, PageSection } from './page';
@@ -16,9 +16,3 @@ const GeneralPage = ({ page }) => (
 );
 
 export default GeneralPage;
-/*
-title={`${page.title} - ${meta.site.title}`}
-      description={page.description}
-      url={`${meta.site.siteUrl}/${page.slug}`}
-
-*/

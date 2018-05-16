@@ -1,11 +1,15 @@
 import React from 'react';
+import Link from 'gatsby-link';
 import axios from 'axios';
 import ReCAPTCHA from 'react-google-recaptcha';
-import Grid from 'material-ui/Grid';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Snackbar from 'material-ui/Snackbar';
-import Button from 'material-ui/Button';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const backend = {
   apiUrl: 'https://outcrawl-backend.appspot.com/api/v1',
@@ -31,6 +35,9 @@ const styles = (theme) => ({
   content: {
     textAlign: 'center',
   },
+  form: {
+    display: 'inline-block',
+  },
   lead: {
     fontSize: '1.5rem',
     fontWeight: 300,
@@ -40,6 +47,9 @@ const styles = (theme) => ({
     fontSize: 13,
     color: theme.palette.text.secondary,
     padding: '8px 0px',
+  },
+  privacyNote: {
+    fontSize: 16,
   },
   emailField: {
     verticalAlign: 'middle',
@@ -56,6 +66,7 @@ class Newsletter extends React.Component {
       message: '',
     },
     email: '',
+    agree: false,
   };
   captcha = null;
 
@@ -70,51 +81,72 @@ class Newsletter extends React.Component {
             Get awesome articles delivered right to your doorstep
           </p>
 
-          <form
-            className={classes.container}
-            autoComplete="on"
-            onSubmit={this.handleSubscribe}
-          >
-            <TextField
-              className={classes.emailField}
-              required
-              type="email"
-              name="email"
-              value={this.state.value}
-              onChange={this.handleChangeEmail}
-              placeholder="Email"
-              autoComplete="email"
-              margin="none"
-              InputProps={{
-                disableUnderline: false,
-              }}
-            />
-            <Button
-              className={classes.subscribeButton}
-              type="submit"
-              color="primary"
-              variant="raised"
-            >
-              Subscribe
-            </Button>
-            <ReCAPTCHA
-              style={{ display: 'none' }}
-              ref={(e) => {
-                this.captcha = e;
-              }}
-              size="invisible"
-              sitekey="6LcCEDEUAAAAAKvjiu87ZjZn7FZOX4LI-7tKyOLW"
-              badge="inline"
-              onChange={this.handleReCaptchaChange}
-            />
-            <div className={classes.captchaNote}>
-              Protected by reCAPTCHA -{' '}
-              <a href="https://www.google.com/intl/en/policies/privacy/">
-                Privacy
-              </a>{' '}
-              -{' '}
-              <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
-            </div>
+          <form autoComplete="on" onSubmit={this.handleSubscribe}>
+            <FormGroup className={classes.form}>
+              <FormGroup row>
+                <TextField
+                  className={classes.emailField}
+                  required
+                  type="email"
+                  name="email"
+                  value={this.state.value}
+                  onChange={this.handleChangeEmail}
+                  placeholder="Email"
+                  autoComplete="email"
+                  margin="none"
+                  InputProps={{
+                    disableUnderline: false,
+                  }}
+                />
+                <Button
+                  className={classes.subscribeButton}
+                  type="submit"
+                  color="primary"
+                  variant="raised"
+                  disabled={!this.state.agree}
+                >
+                  Subscribe
+                </Button>
+              </FormGroup>
+
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.agree}
+                    onChange={this.handleChangeAgree}
+                    color="primary"
+                  />
+                }
+                label={
+                  <span>
+                    I agree to Outcrawl's{' '}
+                    <Link to="/privacy">Privacy Policy</Link>.
+                  </span>
+                }
+              />
+
+              <ReCAPTCHA
+                style={{ display: 'none' }}
+                ref={(e) => {
+                  this.captcha = e;
+                }}
+                size="invisible"
+                sitekey="6LcCEDEUAAAAAKvjiu87ZjZn7FZOX4LI-7tKyOLW"
+                badge="inline"
+                onChange={this.handleReCaptchaChange}
+              />
+
+              <div className={classes.captchaNote}>
+                Protected by reCAPTCHA -{' '}
+                <a href="https://www.google.com/intl/en/policies/privacy/">
+                  Privacy
+                </a>{' '}
+                -{' '}
+                <a href="https://www.google.com/intl/en/policies/terms/">
+                  Terms
+                </a>
+              </div>
+            </FormGroup>
           </form>
         </div>
 
@@ -129,6 +161,10 @@ class Newsletter extends React.Component {
 
   handleChangeEmail = (event) => {
     this.setState({ email: event.target.value });
+  };
+
+  handleChangeAgree = (event) => {
+    this.setState({ agree: event.target.checked });
   };
 
   handleSubscribe = (event) => {

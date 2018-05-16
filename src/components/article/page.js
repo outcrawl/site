@@ -1,6 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
-import { withStyles } from 'material-ui';
 
 import { Page, PageSection } from '../page';
 import { ArticleMeta } from '../meta';
@@ -22,9 +20,9 @@ const ArticlePage = ({ article }) => {
 
       <ArticleFooter cla article={article} />
 
-      <ArticleRelated related={article.related} />
-
       <Newsletter />
+
+      <ArticleRelated related={article.related} />
     </Page>
   );
 };

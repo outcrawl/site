@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 
 import _ from '../utils/helpers';
 import { ChevronLeft, ChevronRight } from './icons';
@@ -16,6 +16,9 @@ const styles = (theme) => ({
   textButton: {
     '&:hover': {
       textDecoration: 'none',
+    },
+    '& span': {
+      color: 'inherit',
     },
   },
 });

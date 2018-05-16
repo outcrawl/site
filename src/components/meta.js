@@ -4,16 +4,17 @@ import escapeHtml from 'escape-html';
 
 import _ from '../utils/helpers';
 
+const makeSiteMeta = (meta) =>
+  [
+    <meta property="fb:app_id" content="863987620425609" />,
+    <meta property="og:type" content="website" />,
+    <meta property="og:site_name" content={meta.site.title} />,
+    <meta name="twitter:card" content="summary_large_image" />,
+    <meta name="twitter:site" content="@tinrab" />,
+  ].map((e, i) => React.cloneElement(e, { key: i }));
+
 const SiteMeta = ({ meta }) => {
-  return (
-    <Helmet>
-      <meta property="fb:app_id" content="863987620425609" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content={meta.site.title} />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@tinrab" />
-    </Helmet>
-  );
+  return <Helmet>{makeSiteMeta(meta)}</Helmet>;
 };
 
 const PageMeta = ({ page, image }) => {
@@ -29,7 +30,7 @@ const PageMeta = ({ page, image }) => {
 
   return (
     <Helmet>
-      <SiteMeta meta={meta} />
+      {makeSiteMeta(meta)}
 
       <title>{title}</title>
       <link rel="canonical" href={url} />
@@ -56,7 +57,7 @@ const ArticleMeta = ({ article }) => {
 
   return (
     <Helmet>
-      <SiteMeta meta={article.meta} />
+      {makeSiteMeta(article.meta)}
 
       <title>{title}</title>
       <link rel="canonical" href={url} />
@@ -124,7 +125,7 @@ const AuthorMeta = ({ page }) => {
 
   return (
     <Helmet>
-      <SiteMeta meta={meta} />
+      {makeSiteMeta(meta)}
 
       <title>{meta.title}</title>
       <link rel="canonical" href={url} />
@@ -161,7 +162,17 @@ const HomeMeta = ({ page }) => {
 const TagMeta = ({ page }) => {
   const meta = page.meta;
   page.meta.title = `${page.tag.name} - ${meta.site.title}`;
-  page.meta.description = `Articles about ${page.tag.name} on ${meta.site.title}.`;
+  page.meta.description = `Articles about ${page.tag.name} on ${
+    meta.site.title
+  }.`;
+
+  return <PageMeta page={page} />;
+};
+
+const TagsPageMeta = ({ page }) => {
+  const meta = page.meta;
+  page.meta.title = `Tags - ${meta.site.title}`;
+  page.meta.description = `All tags found on ${meta.site.title}.`;
 
   return <PageMeta page={page} />;
 };
@@ -173,6 +184,7 @@ export default {
   AuthorMeta,
   HomeMeta,
   TagMeta,
+  TagsPageMeta,
 };
 
 function unwrap(element) {

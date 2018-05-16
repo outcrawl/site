@@ -3,10 +3,10 @@ import {
   createMuiTheme,
   MuiThemeProvider,
   withStyles,
-} from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import grey from 'material-ui/colors/grey';
-import blue from 'material-ui/colors/blue';
+} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import grey from '@material-ui/core/colors/grey';
+import blue from '@material-ui/core/colors/blue';
 import 'normalize.css';
 
 import { getMeta } from '../utils/query';
@@ -107,7 +107,7 @@ const styles = (theme) => ({
 
     // Code
     code: {
-      fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
+      fontFamily: '"Roboto Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace',
       lineHeight: 1.6,
       fontSize: '0.875rem',
       display: 'inline-block',
@@ -117,6 +117,9 @@ const styles = (theme) => ({
 
     pre: {
       padding: 16,
+      [theme.breakpoints.down('md')]: {
+        padding: 10,
+      },
     },
 
     '.code': {
@@ -136,6 +139,8 @@ const styles = (theme) => ({
         backgroundColor: 'transparent',
         padding: 0,
         width: '100%',
+        lineHeight: 1.5,
+        fontSize: 14,
       },
 
       // Highlights

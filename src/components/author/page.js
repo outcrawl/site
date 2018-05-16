@@ -1,14 +1,9 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import { withStyles } from 'material-ui';
 
 import { AuthorMeta } from '../meta';
 import AuthorInfo from './info';
 import { Page, PageSection } from '../page';
-
-const styles = (theme) => ({
-  info: {},
-});
 
 const Articles = ({ articlesByMonth }) => (
   <section>
@@ -28,7 +23,7 @@ const Articles = ({ articlesByMonth }) => (
   </section>
 );
 
-const AuthorPage = ({ authorPage, classes }) => {
+const AuthorPage = ({ authorPage }) => {
   const author = authorPage.author;
 
   return (
@@ -36,7 +31,7 @@ const AuthorPage = ({ authorPage, classes }) => {
       <AuthorMeta page={authorPage} />
 
       <PageSection>
-        <AuthorInfo author={author} classes={classes} />
+        <AuthorInfo author={author} />
       </PageSection>
       <PageSection>
         <Articles articlesByMonth={authorPage.articlesByMonth} />
@@ -45,4 +40,4 @@ const AuthorPage = ({ authorPage, classes }) => {
   );
 };
 
-export default withStyles(styles)(AuthorPage);
+export default AuthorPage;
