@@ -22,7 +22,7 @@ const styles = (theme) => ({
     },
   },
   narrow: {
-    maxWidth: 720,
+    maxWidth: 768,
     padding: [[theme.spacing.unit * 4, theme.spacing.unit]],
   },
 });
