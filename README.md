@@ -12,6 +12,7 @@ Start with `yarn install`.
 
 ## Articles
 
+* [Real-time Chat with GraphQL Subscriptions in Go](https://outcrawl.com/go-graphql-realtime-chat)
 * [Using GraphQL with Microservices in Go](https://outcrawl.com/go-graphql-gateway-microservices)
 * [Building a Microservices Application in Go Following the CQRS Pattern](https://outcrawl.com/go-microservices-cqrs-docker)
 * [How to Build a Search Service with Go and Elasticsearch](https://outcrawl.com/go-elastic-search-service)

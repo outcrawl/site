@@ -8,7 +8,7 @@ tags:
   - Microservices
   - PostgreSQL
   - Elasticsearch
-description: This article shows how to build a scalable app with CQRS pattern.
+description: This article describes how GraphQL is implemented in "Spidey", an exemplary microservices based online store.
 cover: ./cover.jpg
 ---
 
