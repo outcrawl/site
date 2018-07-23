@@ -107,7 +107,8 @@ const styles = (theme) => ({
 
     // Code
     code: {
-      fontFamily: '"Roboto Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace',
+      fontFamily:
+        '"Roboto Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace',
       lineHeight: 1.6,
       fontSize: '0.875rem',
       display: 'inline-block',
@@ -119,6 +120,26 @@ const styles = (theme) => ({
       padding: 16,
       [theme.breakpoints.down('md')]: {
         padding: 10,
+      },
+    },
+
+    table: {
+      fontSize: 14,
+      textAlign: 'left',
+      borderSpacing: 0,
+      borderCollapse: 'collapse',
+
+      '& tr': {
+        verticalAlign: 'middle',
+      },
+      '& th': {
+        color: theme.palette.text.secondary,
+        borderBottom: [[1, 'solid', theme.palette.divider]],
+        padding: 8,
+      },
+      '& td': {
+        borderBottom: [[1, 'solid', theme.palette.divider]],
+        padding: 8,
       },
     },
 

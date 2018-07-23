@@ -12,6 +12,8 @@ Start with `yarn install`.
 
 ## Articles
 
+* [N+1 Queries in GraphQL Using PostgreSQL Window Functions](https://outcrawl.com/graphql-postgresql-window-functions)
+* [Dependency Injection in Go](https://outcrawl.com/go-dependency-injection)
 * [Real-time Chat with GraphQL Subscriptions in Go](https://outcrawl.com/go-graphql-realtime-chat)
 * [Using GraphQL with Microservices in Go](https://outcrawl.com/go-graphql-gateway-microservices)
 * [Building a Microservices Application in Go Following the CQRS Pattern](https://outcrawl.com/go-microservices-cqrs-docker)
