@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
 
-import { Article } from '../components/article';
+import { Article, ArticlePage } from '../components/article';
 import { Author } from '../components/author';
 
 interface ArticleTemplateProps {
@@ -15,14 +15,10 @@ class ArticleTemplate extends React.PureComponent<ArticleTemplateProps, {}> {
       ...data.markdownRemark.fields,
       html: data.markdownRemark.html,
       author: data.author.authors[0] as Author,
+      cover: data.markdownRemark.fields.cover.childImageSharp.fluid,
     };
 
-    return (
-      <div>
-        <h1>Article</h1>
-        <pre>{JSON.stringify(article, null, ' ')}</pre>
-      </div>
-    );
+    return <ArticlePage article={article}/>;
   }
 }
 
@@ -40,6 +36,13 @@ export const pageQuery = graphql`
         tags {
           name
           slug          
+        }
+        cover {
+          childImageSharp {
+            fluid(quality: 90) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
         }
       }
     }

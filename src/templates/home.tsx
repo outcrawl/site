@@ -27,7 +27,7 @@ class HomeTemplate extends React.PureComponent<HomeTemplateProps, {}> {
     const articles: Article[] = data.articles.edges.map(({ node: { fields: article } }: any) => ({
       ...article,
       date: new Date(article.date),
-      cover: article.cover.publicURL,
+      cover: article.cover.childImageSharp.fluid,
       author: authors.find((author) => author.slug === article.author),
     }));
 
@@ -72,7 +72,11 @@ export const pageQuery = graphql`
             date
             author
             cover {
-              publicURL
+              childImageSharp {
+                fluid(quality: 90) {
+                  ...GatsbyImageSharpFluid_noBase64
+                }
+              }
             }
           }
         }

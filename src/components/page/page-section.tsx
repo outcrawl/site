@@ -7,7 +7,7 @@ interface PageSectionProps {
   className?: string;
 }
 
-export class PageSection extends React.PureComponent<PageSectionProps, {}> {
+class PageSection extends React.PureComponent<PageSectionProps> {
   public render() {
     const {
       children,
@@ -22,3 +22,5 @@ export class PageSection extends React.PureComponent<PageSectionProps, {}> {
     );
   }
 }
+
+export default PageSection;

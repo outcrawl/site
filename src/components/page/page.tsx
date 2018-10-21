@@ -1,18 +1,45 @@
 import * as React from 'react';
-import { Grid } from '@material-ui/core';
+import classNames from 'classnames';
+import { createStyles, Grid, Theme, withStyles } from '@material-ui/core';
+
+import Layout from './layout';
+
+const styles = (theme: Theme) => createStyles({
+  root: {
+    maxWidth: 1024,
+    margin: '0px auto',
+    padding: theme.spacing.unit,
+  },
+  narrow: {
+    maxWidth: 768,
+    padding: theme.spacing.unit * 4,
+  },
+});
 
 interface PageProps {
-  children: any;
+  classes?: {
+    root: string;
+    narrow: string;
+  };
+  children?: any;
+  narrow?: boolean;
 }
 
-export class Page extends React.PureComponent<PageProps, {}> {
+class Page extends React.PureComponent<PageProps> {
   public render() {
-    const { children } = this.props;
+    const { classes, children, narrow } = this.props;
 
     return (
-      <Grid container spacing={0}>
-        {children}
-      </Grid>
+      <Layout>
+        <Grid
+          container
+          spacing={0}
+          className={classNames(classes.root, { [classes.narrow]: narrow })}>
+          {children}
+        </Grid>
+      </Layout>
     );
   }
 }
+
+export default withStyles(styles)(Page);

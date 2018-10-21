@@ -1,11 +1,11 @@
 import { Author } from '../author';
 
-export interface Article {
+export default interface Article {
   title: string;
   slug: string;
   description: string;
   date: Date;
-  cover: string;
+  cover?: any;
   html?: string;
   author?: Author;
 }

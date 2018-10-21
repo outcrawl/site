@@ -5,11 +5,10 @@ const remark = {
       {
         resolve: 'gatsby-remark-images',
         options: {
-          maxWidth: 1280,
           linkImagesToOriginal: false,
-          quality: 80,
         },
       },
+      'transform-markdown',
     ],
   },
 };
@@ -30,6 +29,7 @@ const plugins = [
       },
     },
   },
+  'gatsby-plugin-react-svg',
   'gatsby-transformer-yaml',
   'gatsby-plugin-react-helmet',
   'gatsby-plugin-offline',

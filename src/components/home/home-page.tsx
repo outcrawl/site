@@ -8,7 +8,7 @@ interface HomePageProps {
   articlesPerPage: number;
 }
 
-export class HomePage extends React.PureComponent<HomePageProps, {}> {
+class HomePage extends React.PureComponent<HomePageProps, {}> {
   public render() {
     const articles = this.props.articles;
 
@@ -19,3 +19,5 @@ export class HomePage extends React.PureComponent<HomePageProps, {}> {
     );
   }
 }
+
+export default HomePage;
