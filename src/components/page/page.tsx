@@ -9,10 +9,16 @@ const styles = (theme: Theme) => createStyles({
     maxWidth: 1024,
     margin: '0px auto',
     padding: theme.spacing.unit,
+    [theme.breakpoints.up('md')]: {
+      paddingTop: theme.spacing.unit * 2,
+    },
   },
   narrow: {
     maxWidth: 768,
-    padding: theme.spacing.unit * 4,
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
   },
 });
 

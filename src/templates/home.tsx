@@ -31,9 +31,11 @@ class HomeTemplate extends React.PureComponent<HomeTemplateProps, {}> {
       author: authors.find((author) => author.slug === article.author),
     }));
 
-    return <HomePage articles={articles}
-                     totalArticles={totalArticles}
-                     articlesPerPage={this.props.pathContext.articlesPerPage}/>;
+    return <HomePage
+      page={this.props.pathContext.page}
+      articlesPerPage={this.props.pathContext.articlesPerPage}
+      totalArticles={totalArticles}
+      articles={articles}/>;
   }
 }
 
@@ -48,6 +50,7 @@ export const pageQuery = graphql`
             name
             slug
             bio
+            avatar
             social {
               twitter
               github

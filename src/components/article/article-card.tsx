@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import { ButtonBase, Card, CardContent, createStyles, Grid, Theme, Typography, withStyles } from '@material-ui/core';
+import { format as dateFormat } from 'date-fns';
 
 import Article from './article';
+import AuthorCard from '../author/author-card';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -72,6 +74,8 @@ class ArticleCard extends React.PureComponent<ArticleCardProps> {
               </Typography>
             </Link>
           </CardContent>
+          <AuthorCard author={article.author} className={classes.author}
+                      subtitle={dateFormat(article.date, 'DD MMMM, YYYY')}/>
         </Card>
       </Grid>
     );
