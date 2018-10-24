@@ -16,9 +16,9 @@ class AuthorTemplate extends React.PureComponent<AuthorTemplateProps, {}> {
     const data = this.props.data;
     const author: Author = data.author.authors[0];
     const articles: Article[] = data.articles.edges
-      .map((edge: any) => ({
-        ...edge.node.fields,
-        date: new Date(edge.node.fields.date),
+      .map(({ node: { fields: article } }: any) => ({
+        ...article,
+        date: new Date(article.date),
       }));
 
     return <AuthorPage author={author} articles={articles}/>;
@@ -34,6 +34,7 @@ export const pageQuery = graphql`
         name
         slug
         bio
+        avatar
         social {
           twitter
           github

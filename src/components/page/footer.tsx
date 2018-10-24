@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createStyles, Grid, Theme, Typography, withStyles } from '@material-ui/core';
 import { StaticQuery, graphql, Link } from 'gatsby';
+import { FacebookButton } from '../social-buttons';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -66,10 +67,16 @@ class Footer extends React.PureComponent<FooterProps> {
               <Grid item xs={12} sm={6}>
                 <ul className={classes.list}>
                   <li className={classes.listItem}>
-                    <a href="#">GitHub</a>
+                    <Link
+                      to="https://github.com/tinrab"
+                      target="_blank"
+                      rel="noopener noreferrer">GitHub</Link>
                   </li>
                   <li className={classes.listItem}>
-                    <a href="#">Twitter</a>
+                    <Link
+                      to="https://twitter.com/tinrab"
+                      target="_blank"
+                      rel="noopener noreferrer">Twitter</Link>
                   </li>
                 </ul>
               </Grid>

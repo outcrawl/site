@@ -5,8 +5,8 @@ export default interface Author {
   email: string;
   avatar: string;
   social: {
-    github: string;
-    twitter: string;
-    facebook: string;
+    github?: string;
+    twitter?: string;
+    facebook?: string;
   };
 }
