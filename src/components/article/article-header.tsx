@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
+import { format as dateFormat } from 'date-fns';
+import classNames from 'classnames';
 
 import Article from './article';
+import AuthorCard from '../author/author-card';
+import ArticleShare from './article-share';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -21,20 +25,22 @@ const styles = (theme: Theme) => createStyles({
 });
 
 interface ArticleHeaderProps {
+  article: Article;
+  className?: string;
   classes?: {
     root: string;
     share: string;
   };
-  article: Article;
 }
 
 class ArticleHeader extends React.PureComponent<ArticleHeaderProps> {
   public render() {
-    const { classes, article } = this.props;
+    const { article, className, classes } = this.props;
 
     return (
-      <section className={classes.root}>
-        awdadw
+      <section className={classNames(classes.root, className)}>
+        <AuthorCard author={article.author} subtitle={dateFormat(article.date, 'DD MMMM, YYYY')}/>
+        <ArticleShare article={article} className={classes.share}/>
       </section>
     );
   }

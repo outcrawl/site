@@ -18,6 +18,9 @@ module.exports = (params) => {
                 slug
                 type
                 author
+                tags {
+                  slug
+                }
               }
             }
           }
@@ -35,12 +38,18 @@ module.exports = (params) => {
       for (let i = 0; i < pages.length; i++) {
         const fields = pages[i].node.fields;
 
+        let tags = [];
+        if (fields.tags) {
+          tags = fields.tags.map((tag) => tag.slug);
+        }
+
         createPage({
           path: fields.slug,
           component: fields.type === 'article' ? articleTemplate : pageTemplate,
           context: {
             slug: fields.slug,
             author: fields.author,
+            tags: tags,
           },
         });
       }

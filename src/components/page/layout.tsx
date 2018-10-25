@@ -23,21 +23,31 @@ const theme = createMuiTheme({
 
 const styles = (theme: Theme) => createStyles({
   '@global': globalStyles(theme),
+  main: {
+    backgroundColor: theme.palette.background.paper,
+  },
 });
 
 interface LayoutProps {
   children: any;
+  classes?: {
+    main: string;
+  };
 }
 
 class Layout extends React.PureComponent<LayoutProps> {
   public render() {
-    const { children } = this.props;
+    const { children, classes } = this.props;
 
     return (
       <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
-        <Header/>
-        {children}
-        <Footer/>
+        <main>
+          <Header/>
+          <main className={classes.main}>
+            {children}
+          </main>
+          <Footer/>
+        </main>
       </MuiThemeProvider>
     );
   }

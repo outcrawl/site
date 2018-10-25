@@ -29,7 +29,7 @@ function markdownFields(node, getNode, createNodeField) {
     // Tags
     const tags = node.frontmatter.tags
       .sort()
-      .map((tag) => ({ slug: toSlug(tag, { lower: true }), name: tag }));
+      .map((tag) => ({ slug: toSlug(tag, { lower: true }), title: tag }));
     createNodeField({ node, name: 'tags', value: tags });
   } else {
     createNodeField({ node, name: 'type', value: 'page' });

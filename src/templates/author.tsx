@@ -54,7 +54,7 @@ export const pageQuery = graphql`
             date
             tags {
               slug
-              name
+              title
             }
           }
         }
