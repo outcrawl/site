@@ -7,6 +7,7 @@ import ArticleHeader from './article-header';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 import ArticleFooter from './article-footer';
 import RelatedArticles from './related-articles';
+import Newsletter from '../newsletter/newsletter';
 
 const styles = (theme: Theme) => createStyles({
   header: {
@@ -35,6 +36,8 @@ class ArticlePage extends React.PureComponent<ArticlePageProps> {
         </PageSection>
 
         <ArticleFooter article={article}/>
+
+        <Newsletter/>
 
         <RelatedArticles related={article.related}/>
       </Page>
