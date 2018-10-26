@@ -3,7 +3,7 @@ import { createStyles, Theme, withStyles } from '@material-ui/core';
 import { format as dateFormat } from 'date-fns';
 import classNames from 'classnames';
 
-import Article from './article';
+import { Article } from './types';
 import AuthorCard from '../author/author-card';
 import ArticleShare from './article-share';
 

@@ -3,7 +3,7 @@ import Link from 'gatsby-link';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 import classNames from 'classnames';
 
-import Author from './author';
+import { Author } from './types';
 
 const styles = (theme: Theme) => createStyles({
   root: {

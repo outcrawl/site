@@ -11,7 +11,7 @@ interface AuthorTemplateProps {
   };
 }
 
-class AuthorTemplate extends React.PureComponent<AuthorTemplateProps, {}> {
+class AuthorTemplate extends React.PureComponent<AuthorTemplateProps> {
   public render() {
     const data = this.props.data;
     const author: Author = data.author.authors[0];

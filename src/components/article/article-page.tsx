@@ -2,7 +2,7 @@ import * as React from 'react';
 import Img from 'gatsby-image';
 
 import { Page, PageSection } from '../page';
-import Article from './article';
+import { Article } from './types';
 import ArticleHeader from './article-header';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 import ArticleFooter from './article-footer';

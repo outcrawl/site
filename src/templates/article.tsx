@@ -14,7 +14,7 @@ interface ArticleTemplateProps {
   };
 }
 
-class ArticleTemplate extends React.PureComponent<ArticleTemplateProps, {}> {
+class ArticleTemplate extends React.PureComponent<ArticleTemplateProps> {
   public render() {
     const data = this.props.data;
 

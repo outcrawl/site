@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 import { FacebookButton, TwitterButton } from '../social-buttons';
-import Article from './article';
+import { Article } from './types';
 
 const styles = (theme: Theme) => createStyles({
   socialButton: {

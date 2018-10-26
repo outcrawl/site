@@ -11,14 +11,6 @@ function markdownFields(node, getNode, createNodeField) {
     createNodeField({ node, name: 'author', value: node.frontmatter.author });
     createNodeField({ node, name: 'cover', value: node.frontmatter.cover });
 
-    // Insert cover image
-    // const content = node.internal.content;
-    // const front = content.indexOf('---', 3) + 3;
-    // node.internal.content =
-    //   content.substr(0, front) +
-    //   `![${node.frontmatter.title}](./cover.jpg)` +
-    //   content.substr(front);
-
     // Date
     const date = path.substr('articles/'.length, '0000-00-00'.length);
     createNodeField({ node, name: 'date', value: date });

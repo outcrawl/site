@@ -4,7 +4,7 @@ import Img from 'gatsby-image';
 import { ButtonBase, Card, CardContent, createStyles, Grid, Theme, Typography, withStyles } from '@material-ui/core';
 import { format as dateFormat } from 'date-fns';
 
-import Article from './article';
+import { Article } from './types';
 import AuthorCard from '../author/author-card';
 
 const styles = (theme: Theme) => createStyles({

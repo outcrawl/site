@@ -18,7 +18,7 @@ interface HomeTemplateProps {
   };
 }
 
-class HomeTemplate extends React.PureComponent<HomeTemplateProps, {}> {
+class HomeTemplate extends React.PureComponent<HomeTemplateProps> {
   public render() {
     const data = this.props.data;
     const authors: Author[] = data.authors.edges[0].node.authors;

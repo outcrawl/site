@@ -7,7 +7,7 @@ interface GeneralTemplateProps {
   data: any;
 }
 
-class GeneralTemplate extends React.PureComponent<GeneralTemplateProps, {}> {
+class GeneralTemplate extends React.PureComponent<GeneralTemplateProps> {
   public render() {
     const page = this.props.data.markdownRemark;
 

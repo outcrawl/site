@@ -1,11 +1,11 @@
 import { Author } from '../author';
 
-interface ArticleTag {
+export interface ArticleTag {
   slug: string;
   title: string;
 }
 
-export default interface Article {
+export interface Article {
   title: string;
   slug: string;
   url: string;

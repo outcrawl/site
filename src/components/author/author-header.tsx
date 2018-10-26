@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Author from './author';
+import { Author } from './types';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 
 import { FacebookButton, GitHubButton, TwitterButton } from '../social-buttons';

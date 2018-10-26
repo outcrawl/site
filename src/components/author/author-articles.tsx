@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { format as dateFormat } from 'date-fns';
 
-import Article from '../article/article';
+import { Article } from '../article';
 import { Link } from 'gatsby';
 
 interface AuthorArticlesProps {

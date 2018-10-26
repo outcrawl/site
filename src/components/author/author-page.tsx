@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Article } from '../article';
-import Author from './author';
+import { Author } from './types';
 import Page from '../page/page';
 import PageSection from '../page/page-section';
 import AuthorHeader from './author-header';

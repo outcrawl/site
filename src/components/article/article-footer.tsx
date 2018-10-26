@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createStyles, Grid, Theme, withStyles } from '@material-ui/core';
-import Article from './article';
+import { Article } from './types';
 import Tag from './tag';
 import ArticleShare from './article-share';
 

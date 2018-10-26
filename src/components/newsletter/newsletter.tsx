@@ -216,7 +216,7 @@ class Newsletter extends React.Component<NewsletterProps, NewsletterState> {
 
               <ReCaptcha
                 style={{ display: 'none' }}
-                ref={(e) => {
+                ref={(e: any) => {
                   this.captcha = e;
                 }}
                 onChange={this.handleReCaptchaChange}
