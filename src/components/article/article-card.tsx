@@ -41,6 +41,7 @@ const styles = (theme: Theme) => createStyles({
 });
 
 interface ArticleCardProps {
+  article: Article;
   classes?: {
     root: string;
     cover: string;
@@ -49,7 +50,7 @@ interface ArticleCardProps {
     titleLink: string;
     author: string;
   };
-  article: Article;
+  key: any;
 }
 
 class ArticleCard extends React.PureComponent<ArticleCardProps> {

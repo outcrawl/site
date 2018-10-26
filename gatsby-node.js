@@ -3,6 +3,7 @@ const createHome = require('./scripts/home');
 const createPages = require('./scripts/pages');
 const createAuthorPages = require('./scripts/authors');
 const createTagListPage = require('./scripts/tag-list');
+const createTagPages = require('./scripts/tag-pages');
 
 exports.onCreateNode = (params) => {
   createNodeFields(params);
@@ -14,5 +15,6 @@ exports.createPages = (params) => {
     createPages(params),
     createAuthorPages(params),
     createTagListPage(params),
+    createTagPages(params),
   ]);
 };

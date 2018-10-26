@@ -9,8 +9,6 @@ interface HomeTemplateProps {
   pathContext: {
     articlesPerPage: number;
     page: number;
-    skip: number;
-    take: number;
   };
   data: {
     authors: any;

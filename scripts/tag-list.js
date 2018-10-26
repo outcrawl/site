@@ -5,7 +5,7 @@ module.exports = (params) => {
     graphql,
     actions: { createPage },
   } = params;
-  const tagsTemplate = path.resolve('./src/templates/tag-list.tsx');
+  const tagListTemplate = path.resolve('./src/templates/tag-list.tsx');
 
   return new Promise((resolve, reject) => {
     graphql(`
@@ -47,7 +47,7 @@ module.exports = (params) => {
 
         createPage({
           path: '/tags',
-          component: tagsTemplate,
+          component: tagListTemplate,
           context: {
             tagGroups: allTags,
           },

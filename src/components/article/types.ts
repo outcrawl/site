@@ -1,9 +1,5 @@
 import { Author } from '../author';
-
-export interface ArticleTag {
-  slug: string;
-  title: string;
-}
+import { Tag } from '../tag';
 
 export interface Article {
   title: string;
@@ -14,6 +10,6 @@ export interface Article {
   cover?: any;
   html?: string;
   author?: Author;
-  tags: ArticleTag[];
+  tags: Tag[];
   related: Article[];
 }
