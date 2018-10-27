@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import { Article } from '../components/article';
 import { Author } from '../components/author';
 import { HomePage } from '../components/home';
+import { HomeInfo } from '../components/home/types';
 
 interface HomeTemplateProps {
   pathContext: {
@@ -13,6 +14,7 @@ interface HomeTemplateProps {
   data: {
     authors: any;
     articles: any;
+    site: any;
   };
 }
 
@@ -21,6 +23,7 @@ class HomeTemplate extends React.PureComponent<HomeTemplateProps> {
     const data = this.props.data;
     const authors: Author[] = data.authors.edges[0].node.authors;
     const totalArticles: number = data.articles.totalCount;
+    const pageNumber: number = this.props.pathContext.page;
 
     const articles: Article[] = data.articles.edges.map(({ node: { fields: article } }: any) => ({
       ...article,
@@ -29,8 +32,28 @@ class HomeTemplate extends React.PureComponent<HomeTemplateProps> {
       author: authors.find((author) => author.slug === article.author),
     }));
 
+    const meta = data.site.siteMetadata;
+
+    const info: HomeInfo = {
+      site: {
+        title: meta.title,
+        description: `${meta.description}.`,
+        twitterId: meta.twitterId,
+        facebookId: meta.facebookId,
+      },
+      title: `${meta.title} - ${meta.description}`,
+      description: `${meta.description}.`,
+      url: meta.siteUrl + (pageNumber === 1 ? '' : `/page/${pageNumber}`),
+      image: {
+        url: `${meta.siteUrl}/static/featured.jpg`,
+        width: 1280,
+        height: 1280,
+      },
+    };
+
     return <HomePage
-      page={this.props.pathContext.page}
+      info={info}
+      pageNumber={pageNumber}
       articlesPerPage={this.props.pathContext.articlesPerPage}
       totalArticles={totalArticles}
       articles={articles}/>;
@@ -81,6 +104,15 @@ export const pageQuery = graphql`
             }
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        siteUrl
+        twitterId
+        facebookId
       }
     }
   }

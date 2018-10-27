@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Article, ArticleCard } from '../article';
-import { Page } from '../page';
 import Pagination from './pagination';
+import { Page } from '../page';
+import HomeMeta from './home-meta';
+import { HomeInfo } from './types';
 
 interface HomePageProps {
-  page: number;
+  info: HomeInfo;
+  pageNumber: number;
   articlesPerPage: number;
   totalArticles: number;
   articles: Article[];
@@ -12,12 +15,14 @@ interface HomePageProps {
 
 class HomePage extends React.PureComponent<HomePageProps, {}> {
   public render() {
-    const { page, articlesPerPage, totalArticles, articles } = this.props;
+    const { info, pageNumber, articlesPerPage, totalArticles, articles } = this.props;
 
     return (
       <Page>
+        <HomeMeta info={info}/>
+
         {articles.map((article) => <ArticleCard article={article} key={article.slug}/>)}
-        <Pagination page={page} articlesPerPage={articlesPerPage} totalArticles={totalArticles}/>
+        <Pagination pageNumber={pageNumber} articlesPerPage={articlesPerPage} totalArticles={totalArticles}/>
       </Page>
     );
   }

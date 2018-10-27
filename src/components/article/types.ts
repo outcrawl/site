@@ -13,3 +13,18 @@ export interface Article {
   tags: Tag[];
   related: Article[];
 }
+
+export interface ArticleInfo {
+  site: {
+    title: string;
+    description: string;
+    twitterId: string;
+    facebookId: string;
+    url: string;
+  };
+  image: {
+    url: string;
+    width: number;
+    height: number;
+  };
+}

@@ -1,28 +1,29 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
 
-import { Article, ArticlePage } from '../components/article';
+import { Article, ArticleInfo, ArticlePage } from '../components/article';
 import { Author } from '../components/author';
 import { shuffle } from '../utils/helpers';
 
 interface ArticleTemplateProps {
   data: {
-    site: any;
     article: any;
     author: any;
     related: any;
+    site: any;
   };
 }
 
 class ArticleTemplate extends React.PureComponent<ArticleTemplateProps> {
   public render() {
     const data = this.props.data;
+    const meta = data.site.siteMetadata;
 
     const related = shuffle(data.related.edges
       .map(({ node: { fields: a } }: any) => ({
         title: a.title,
         slug: a.slug,
-        url: `${data.site.siteMetadata.siteUrl}/${a.slug}`,
+        url: `${meta.siteUrl}/${a.slug}`,
       })))
       .filter((a: any) => a.slug !== data.article.fields.slug)
       .slice(0, 3);
@@ -32,11 +33,26 @@ class ArticleTemplate extends React.PureComponent<ArticleTemplateProps> {
       html: data.article.html,
       author: data.author.authors[0] as Author,
       cover: data.article.fields.cover.childImageSharp.fluid,
-      url: `${data.site.siteMetadata.siteUrl}/${data.article.fields.slug}`,
+      url: `${meta.siteUrl}/${data.article.fields.slug}`,
       related,
     };
 
-    return <ArticlePage article={article}/>;
+    const info: ArticleInfo = {
+      site: {
+        title: meta.title,
+        description: `${meta.description}.`,
+        twitterId: meta.twitterId,
+        facebookId: meta.facebookId,
+        url: meta.siteUrl,
+      },
+      image: {
+        url: data.article.fields.cover.publicURL,
+        width: 1280,
+        height: 1280,
+      },
+    };
+
+    return <ArticlePage info={info} article={article}/>;
   }
 }
 
@@ -44,13 +60,6 @@ export default ArticleTemplate;
 
 export const pageQuery = graphql`
   query($slug: String!, $author: String!, $tags: [String]!) {
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-      }
-    }
     article: markdownRemark(fields: {slug: {eq: $slug}}) {
       html
       fields {
@@ -63,6 +72,7 @@ export const pageQuery = graphql`
           slug
         }
         cover {
+          publicURL
           childImageSharp {
             fluid(quality: 90) {
               ...GatsbyImageSharpFluid_noBase64
@@ -99,6 +109,15 @@ export const pageQuery = graphql`
             slug
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        siteUrl
+        twitterId
+        facebookId
       }
     }
   }

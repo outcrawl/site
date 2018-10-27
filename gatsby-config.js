@@ -32,10 +32,46 @@ const plugins = [
   'gatsby-plugin-react-svg',
   'gatsby-transformer-yaml',
   'gatsby-plugin-react-helmet',
-  'gatsby-plugin-offline',
   'gatsby-plugin-typescript',
   'gatsby-plugin-sharp',
+  'gatsby-plugin-sitemap',
   'gatsby-transformer-sharp',
+  {
+    resolve: 'gatsby-plugin-google-analytics',
+    options: {
+      trackingId: 'UA-103565863-1',
+    },
+  },
+  {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      name: 'Outcrawl',
+      short_name: 'Outcrawl',
+      start_url: '/',
+      background_color: '#ffffff',
+      theme_color: '#ffffff',
+      display: 'minimal-ui',
+      icon: 'static/static/logo.png',
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-favicon',
+    options: {
+      logo: './static/static/logo.svg',
+      injectHTML: true,
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        twitter: false,
+        yandex: false,
+        windows: false,
+      },
+    },
+  },
   remark,
 ];
 
@@ -48,6 +84,9 @@ module.exports = {
         ? 'https://outcrawl.com'
         : 'http://localhost:8000',
     articlesPerPage: 6,
+    copyright: '2018 © Outcrawl. All rights reserved.',
+    twitterId: '@tinrab',
+    facebookId: '863987620425609'
   },
   plugins,
 };

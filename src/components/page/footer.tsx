@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createStyles, Grid, Theme, Typography, withStyles } from '@material-ui/core';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import { FacebookButton } from '../social-buttons';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -53,6 +52,7 @@ class Footer extends React.PureComponent<FooterProps> {
           site {
             siteMetadata {
               title
+              copyright
             }
           }
         }
@@ -93,7 +93,7 @@ class Footer extends React.PureComponent<FooterProps> {
             </Grid>
           </Typography>
           <Typography variant="body1" className={classes.copyright}>
-            2018 &copy; {meta.title}. All rights reserved.
+            {meta.copyright}
           </Typography>
         </footer>
       )}/>;

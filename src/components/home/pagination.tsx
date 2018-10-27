@@ -24,7 +24,7 @@ const styles = (theme: Theme) => createStyles({
 });
 
 interface PaginationProps {
-  page: number;
+  pageNumber: number;
   articlesPerPage: number;
   totalArticles: number;
   basePath?: string;
@@ -43,27 +43,27 @@ interface PaginationButton {
 
 class Pagination extends React.PureComponent<PaginationProps> {
   public render() {
-    const { page, articlesPerPage, totalArticles, classes } = this.props;
+    const { pageNumber, articlesPerPage, totalArticles, classes } = this.props;
     let { basePath } = this.props;
     basePath = basePath || '';
 
     const pageCount = Math.ceil(totalArticles / articlesPerPage);
 
     const previousPageLink = ({ children, ...rest }: any) => (
-      <Link to={page === 2 ? basePath || '/' : `${basePath}/page/${page - 1}`} {...rest}>
+      <Link to={pageNumber === 2 ? basePath || '/' : `${basePath}/page/${pageNumber - 1}`} {...rest}>
         {children}
       </Link>
     );
 
     const nextPageLink = ({ children, ...rest }: any) => (
-      <Link to={`${basePath}/page/${page + 1}`} {...rest}>
+      <Link to={`${basePath}/page/${pageNumber + 1}`} {...rest}>
         {children}
       </Link>
     );
 
     let buttons: PaginationButton[] = [];
 
-    if (page === 1) {
+    if (pageNumber === 1) {
       buttons.push({
         disabled: true,
         component: 'span',
@@ -80,7 +80,7 @@ class Pagination extends React.PureComponent<PaginationProps> {
     }
 
     for (let i = 1; i <= pageCount; i++) {
-      if (page === i) {
+      if (pageNumber === i) {
         buttons.push({
           disabled: true,
           component: 'span',
@@ -101,7 +101,7 @@ class Pagination extends React.PureComponent<PaginationProps> {
       }
     }
 
-    if (page === pageCount) {
+    if (pageNumber === pageCount) {
       buttons.push({
         disabled: true,
         component: 'span',
