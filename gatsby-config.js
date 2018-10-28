@@ -3,6 +3,12 @@ const remark = {
   options: {
     plugins: [
       {
+        resolve: 'gatsby-remark-copy-linked-files',
+        options: {
+          destinationDir: './static',
+        },
+      },
+      {
         resolve: 'gatsby-remark-images',
         options: {
           linkImagesToOriginal: false,
@@ -86,7 +92,7 @@ module.exports = {
     articlesPerPage: 6,
     copyright: '2018 © Outcrawl. All rights reserved.',
     twitterId: '@tinrab',
-    facebookId: '863987620425609'
+    facebookId: '863987620425609',
   },
   plugins,
 };
