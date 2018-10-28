@@ -1,25 +1,12 @@
 import * as React from 'react';
-import { createMuiTheme, createStyles, MuiThemeProvider, Theme, withStyles } from '@material-ui/core';
-import { blue, grey } from '@material-ui/core/colors';
+import { createStyles, MuiThemeProvider, Theme, withStyles } from '@material-ui/core';
+import JssProvider from 'react-jss/lib/JssProvider';
 
 import globalStyles from './global-styles';
 import Header from './header';
 import Footer from './footer';
 
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-    htmlFontSize: 16,
-  },
-  palette: {
-    primary: {
-      main: grey[900],
-    },
-    secondary: {
-      main: blue[500],
-    },
-  },
-});
+import { theme, getPageContext } from '../../utils/page-context';
 
 const styles = (theme: Theme) => createStyles({
   '@global': globalStyles(theme),
@@ -36,19 +23,35 @@ interface LayoutProps {
 }
 
 class Layout extends React.PureComponent<LayoutProps> {
+  private muiPageContext: any;
+
+  constructor(props: LayoutProps) {
+    super(props);
+
+    this.muiPageContext = getPageContext();
+  }
+
+  componentDidMount() {
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }
+
   public render() {
     const { children, classes } = this.props;
 
     return (
-      <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
-        <main>
+      <JssProvider generateClassName={this.muiPageContext.generateClassName}>
+        <MuiThemeProvider theme={theme}
+                          sheetsManager={this.muiPageContext.sheetsManager}>
           <Header/>
           <main className={classes.main}>
             {children}
           </main>
           <Footer/>
-        </main>
-      </MuiThemeProvider>
+        </MuiThemeProvider>
+      </JssProvider>
     );
   }
 }
