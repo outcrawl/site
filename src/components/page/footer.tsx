@@ -67,16 +67,16 @@ class Footer extends React.PureComponent<FooterProps> {
               <Grid item xs={12} sm={6}>
                 <ul className={classes.list}>
                   <li className={classes.listItem}>
-                    <Link
-                      to="https://github.com/tinrab"
+                    <a
+                      href="https://github.com/tinrab"
                       target="_blank"
-                      rel="noopener noreferrer">GitHub</Link>
+                      rel="noopener noreferrer">GitHub</a>
                   </li>
                   <li className={classes.listItem}>
-                    <Link
-                      to="https://twitter.com/tinrab"
+                    <a
+                      href="https://twitter.com/tinrab"
                       target="_blank"
-                      rel="noopener noreferrer">Twitter</Link>
+                      rel="noopener noreferrer">Twitter</a>
                   </li>
                 </ul>
               </Grid>
