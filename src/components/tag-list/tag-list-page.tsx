@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { createStyles, Theme, withStyles } from '@material-ui/core';
+import { createStyles, withStyles } from '@material-ui/core';
 import Page from '../page/page';
 import PageSection from '../page/page-section';
 import { Link } from 'gatsby';
-import { TagGroup } from './types';
+import { TagGroup, TagListInfo } from './types';
+import TagListMeta from './tag-list-meta';
 
 const styles = () => createStyles({
   tag: {
@@ -13,6 +14,7 @@ const styles = () => createStyles({
 });
 
 interface TagListPageProps {
+  info: TagListInfo;
   tags: TagGroup[];
   classes?: {
     tag: string;
@@ -25,7 +27,7 @@ interface DisplayedTagGroup extends TagGroup {
 
 class TagListPage extends React.PureComponent<TagListPageProps> {
   public render() {
-    const { tags, classes } = this.props;
+    const { info, tags, classes } = this.props;
 
     const dt: DisplayedTagGroup[] = tags.map((tag) => ({
       ...tag,
@@ -34,6 +36,8 @@ class TagListPage extends React.PureComponent<TagListPageProps> {
 
     return (
       <Page narrow>
+        <TagListMeta info={info}/>
+
         <PageSection component="section">
           <h1>Tags</h1>
           <p>

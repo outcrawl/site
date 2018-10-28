@@ -4,6 +4,7 @@ import { TagPage } from '../components/tag';
 import { Author } from '../components/author';
 import { Article } from '../components/article';
 import { Tag } from '../components/tag';
+import { TagInfo } from '../components/tag/types';
 
 interface TagTemplateProps {
   pathContext: {
@@ -23,10 +24,11 @@ class TagTemplate extends React.PureComponent<TagTemplateProps> {
       pathContext: { page, tag },
     } = this.props;
     const data = this.props.data;
+    const meta = data.site.siteMetadata;
 
     const authors: Author[] = data.authors.edges[0].node.authors;
     const totalArticles: number = data.articles.totalCount;
-    const articlesPerPage = data.site.siteMetadata.articlesPerPage;
+    const articlesPerPage = meta.articlesPerPage;
 
     const articles: Article[] = data.articles.edges.map(({ node: { fields: article } }: any) => ({
       ...article,
@@ -35,11 +37,29 @@ class TagTemplate extends React.PureComponent<TagTemplateProps> {
       author: authors.find((author) => author.slug === article.author),
     }));
 
+    const info: TagInfo = {
+      site: {
+        title: meta.title,
+        description: `${meta.description}.`,
+        twitterId: meta.twitterId,
+        facebookId: meta.facebookId,
+      },
+      title: `${tag.title} - ${meta.title}`,
+      description: `Articles about ${tag.title} on ${meta.title}.`,
+      url: `${meta.siteUrl}/tags/${tag.slug}` + (page === 1 ? '' : `/page/${page}`),
+      image: {
+        url: `${meta.siteUrl}/static/featured.jpg`,
+        width: 1280,
+        height: 1280,
+      },
+    };
+
     return <TagPage
+      info={info}
       tag={tag}
       articles={articles}
       articlesPerPage={articlesPerPage}
-      page={page}
+      pageNumber={page}
       totalArticles={totalArticles}/>;
   }
 }
@@ -101,6 +121,8 @@ export const pageQuery = graphql`
         description
         articlesPerPage
         siteUrl
+        twitterId
+        facebookId
       }
     }
   }

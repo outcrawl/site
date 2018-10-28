@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
-import { HomeInfo } from './types';
+import { TagInfo } from './types';
+import Helmet from 'react-helmet';
 import * as escapeHtml from 'escape-html';
 
-interface HomeMetaProps {
-  info: HomeInfo;
+interface TagMetaProps {
+  info: TagInfo;
 }
 
-class HomeMeta extends React.PureComponent<HomeMetaProps> {
+class TagMeta extends React.PureComponent<TagMetaProps> {
   public render() {
     const { info } = this.props;
 
@@ -37,4 +37,4 @@ class HomeMeta extends React.PureComponent<HomeMetaProps> {
   }
 }
 
-export default HomeMeta;
+export default TagMeta;
