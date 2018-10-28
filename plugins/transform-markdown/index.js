@@ -46,7 +46,7 @@ function highlight(code, lang) {
       if (mark) {
         html += `<span class="code__line-${mark.type}">${
           sourceLines[i]
-        }</span>`;
+          }</span>`;
       } else {
         html += sourceLines[i] + '\n';
       }
@@ -107,19 +107,19 @@ module.exports = ({ files, markdownNode, markdownAST, getNode }) => {
 
   visit(markdownAST, 'html', (node) => {
     // Change image
-    const wrapper = $('.gatsby-resp-image-wrapper', node.value);
-    if (wrapper.length > 0) {
-      const img = $(wrapper).find('.gatsby-resp-image-image');
-      node.value = `
-        <img
-          src="${img.attr('src')}"
-          alt="${img.attr('alt')}"
-          sizes="${img.attr('sizes')}"
-          srcset="${img.attr('srcset')}"
-        />
-      `;
-      return;
-    }
+    // const wrapper = $('.gatsby-resp-image-wrapper', node.value);
+    // if (wrapper.length > 0) {
+    //   const img = $(wrapper).find('.gatsby-resp-image-image');
+    //   node.value = `
+    //     <img
+    //       src="${img.attr('src')}"
+    //       alt="${img.attr('alt')}"
+    //       sizes="${img.attr('sizes')}"
+    //       srcset="${img.attr('srcset')}"
+    //     />
+    //   `;
+    //   return;
+    // }
 
     // Note
     const note = $('note', node.value);

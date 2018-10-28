@@ -1,37 +1,20 @@
-const StatsPlugin = require('stats-webpack-plugin');
+const createNodeFields = require('./scripts/node-fields');
+const createHome = require('./scripts/home');
+const createPages = require('./scripts/pages');
+const createAuthorPages = require('./scripts/authors');
+const createTagListPage = require('./scripts/tag-list');
+const createTagPages = require('./scripts/tag-pages');
 
-const createNodeFields = require('./tools/create-node-fields');
-const createPages = require('./tools/create-pages');
-const createHome = require('./tools/create-home');
-const createTags = require('./tools/create-tags');
-const createAuthorPages = require('./tools/create-author-pages');
-const createTagsPage = require('./tools/create-tags-page');
-
-exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
-  if (node.internal.type === 'MarkdownRemark') {
-    createNodeFields(boundActionCreators, node, getNode);
-  }
+exports.onCreateNode = (params) => {
+  createNodeFields(params);
 };
 
 exports.createPages = (params) => {
   return Promise.all([
-    createPages(params),
     createHome(params),
-    createTags(params),
+    createPages(params),
     createAuthorPages(params),
-    createTagsPage(params),
+    createTagListPage(params),
+    createTagPages(params),
   ]);
-};
-
-exports.modifyWebpackConfig = ({ config, stage }) => {
-  config.plugin('stats', StatsPlugin, [
-    '../webpack-stats.json',
-    {
-      chunkModules: true,
-      exclude: [/node_modules[\\\/]react/],
-      profile: true,
-    },
-  ]);
-
-  return config;
 };

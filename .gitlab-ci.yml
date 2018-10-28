@@ -1,0 +1,31 @@
+stages:
+  - build
+  - deploy
+
+build:
+  image: node:latest
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - node_modules/
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME"
+    paths:
+      - public/
+  only:
+    - master
+
+deploy:
+  image: "python:latest"
+  stage: deploy
+  before_script:
+    - pip install awscli
+  script:
+    - aws s3 cp public s3://outcrawl.com/ --recursive
+  environment:
+    name: production
+  only:
+    - master

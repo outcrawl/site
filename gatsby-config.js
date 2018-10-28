@@ -1,21 +1,11 @@
-const path = require('path');
-
 const remark = {
   resolve: 'gatsby-transformer-remark',
   options: {
     plugins: [
       {
-        resolve: 'gatsby-remark-copy-linked-files',
-        options: {
-          destinationDir: './static',
-        },
-      },
-      {
         resolve: 'gatsby-remark-images',
         options: {
-          maxWidth: 1280,
           linkImagesToOriginal: false,
-          quality: 80,
         },
       },
       'transform-markdown',
@@ -28,21 +18,22 @@ const plugins = [
     resolve: 'gatsby-source-filesystem',
     options: {
       name: 'data',
-      path: path.resolve('./data/'),
+      path: `${__dirname}/data/`,
     },
   },
   {
-    resolve: 'gatsby-plugin-google-fonts',
+    resolve: 'gatsby-plugin-web-font-loader',
     options: {
-      fonts: ['Roboto+Mono|Roboto:300,400,500,700'],
+      google: {
+        families: ['Roboto+Mono|Roboto:300,400,500,700'],
+      },
     },
   },
-  'gatsby-plugin-sass',
   'gatsby-plugin-react-svg',
+  'gatsby-transformer-yaml',
   'gatsby-plugin-react-helmet',
+  'gatsby-plugin-typescript',
   'gatsby-plugin-sharp',
-  'gatsby-plugin-catch-links',
-  'gatsby-plugin-jss',
   'gatsby-plugin-sitemap',
   'gatsby-transformer-sharp',
   {
@@ -52,7 +43,7 @@ const plugins = [
     },
   },
   {
-    resolve: 'gatsby-plugin-manifest',
+    resolve: `gatsby-plugin-manifest`,
     options: {
       name: 'Outcrawl',
       short_name: 'Outcrawl',
@@ -60,6 +51,7 @@ const plugins = [
       background_color: '#ffffff',
       theme_color: '#ffffff',
       display: 'minimal-ui',
+      icon: 'static/static/logo.png',
     },
   },
   {
@@ -88,10 +80,13 @@ module.exports = {
     title: 'Outcrawl',
     description: 'Software development tutorials without nonsense',
     siteUrl:
-      process.env.NODE_ENV == 'production'
+      process.env.NODE_ENV === 'production'
         ? 'https://outcrawl.com'
-        : 'http://localhost:3000',
+        : 'http://localhost:8000',
     articlesPerPage: 6,
+    copyright: '2018 © Outcrawl. All rights reserved.',
+    twitterId: '@tinrab',
+    facebookId: '863987620425609'
   },
   plugins,
 };
