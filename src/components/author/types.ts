@@ -10,3 +10,18 @@ export interface Author {
     facebook?: string;
   };
 }
+
+export interface AuthorInfo {
+  site: {
+    title: string;
+    description: string;
+    twitterId: string;
+    facebookId: string;
+    url: string;
+  };
+  image: {
+    url: string;
+    width: number;
+    height: number;
+  };
+}

@@ -5,7 +5,7 @@ import { ButtonBase, Card, CardContent, createStyles, Grid, Theme, Typography, w
 import { format as dateFormat } from 'date-fns';
 
 import { Article } from './types';
-import AuthorCard from '../author/author-card';
+import { AuthorCard } from '../author';
 
 const styles = (theme: Theme) => createStyles({
   root: {
