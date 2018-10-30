@@ -3,14 +3,24 @@ import { format as dateFormat } from 'date-fns';
 
 import { Article } from '../article';
 import { Link } from 'gatsby';
+import { createStyles, withStyles } from '@material-ui/core';
+
+const styles = () => createStyles({
+  date: {
+    marginBottom: '1rem',
+  },
+});
 
 interface AuthorArticlesProps {
   articles: Article[];
+  classes?: {
+    date: string;
+  }
 }
 
 class AuthorArticles extends React.PureComponent<AuthorArticlesProps> {
   public render() {
-    const { articles } = this.props;
+    const { articles, classes } = this.props;
 
     const articlesByMonth = articles.reduce((g: any, a: Article) => {
       const key = dateFormat(a.date, 'MMMM, YYYY');
@@ -23,7 +33,7 @@ class AuthorArticles extends React.PureComponent<AuthorArticlesProps> {
         <h2>Articles</h2>
         {Object.keys(articlesByMonth).map((month) => (
           <div key={month}>
-            <h4>{month}</h4>
+            <h4 className={classes.date}>{month}</h4>
             <ul>
               {articlesByMonth[month].map((a: Article) => (
                 <li key={a.slug}>
@@ -38,4 +48,4 @@ class AuthorArticles extends React.PureComponent<AuthorArticlesProps> {
   }
 }
 
-export default AuthorArticles;
+export default withStyles(styles)(AuthorArticles);

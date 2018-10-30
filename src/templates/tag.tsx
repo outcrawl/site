@@ -5,6 +5,7 @@ import { Author } from '../components/author';
 import { Article } from '../components/article';
 import { Tag } from '../components/tag';
 import { TagInfo } from '../components/tag/types';
+import withRoot from '../components/with-root';
 
 interface TagTemplateProps {
   pathContext: {
@@ -64,7 +65,7 @@ class TagTemplate extends React.PureComponent<TagTemplateProps> {
   }
 }
 
-export default TagTemplate;
+export default withRoot(TagTemplate);
 
 export const pageQuery = graphql`
   query($tagSlug: String!, $skip: Int!, $take: Int!) {
