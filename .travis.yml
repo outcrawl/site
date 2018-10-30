@@ -10,9 +10,13 @@ branches:
 
 install:
   - npm install
+  - npm install -g cloudflare-cli
 
 script:
   - npm run build
+
+before_deploy:
+  - npm install -g cloudflare-cli
 
 deploy:
   -
@@ -25,3 +29,6 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
+
+after_deploy:
+  - cfcli -d outcrawl.com purge
