@@ -15,7 +15,7 @@ const styles = (theme: Theme) => createStyles({
   },
   narrow: {
     maxWidth: 768,
-    paddingTop: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 4,
     paddingBottom: theme.spacing.unit * 4,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,

@@ -40,7 +40,6 @@
     "jss": "^9.8.7",
     "marked": "^0.5.1",
     "md5": "^2.2.1",
-    "normalize.css": "^8.0.0",
     "parse-numeric-range": "0.0.2",
     "prismjs": "^1.15.0",
     "react": "^16.5.1",

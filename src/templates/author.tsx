@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 
 import { Author, AuthorInfo, AuthorPage } from '../components/author';
 import { Article } from '../components/article';
+import withRoot from '../components/with-root';
 
 interface AuthorTemplateProps {
   data: {
@@ -43,7 +44,7 @@ class AuthorTemplate extends React.PureComponent<AuthorTemplateProps> {
   }
 }
 
-export default AuthorTemplate;
+export default withRoot(AuthorTemplate);
 
 export const pageQuery = graphql`
   query($author: String!) {

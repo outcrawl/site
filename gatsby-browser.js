@@ -1,5 +1,3 @@
-require('normalize.css');
-
 // It's not ready yet: https://github.com/gatsbyjs/gatsby/issues/8237.
 //
 // import React from 'react';

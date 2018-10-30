@@ -5,6 +5,7 @@ import { Article } from '../components/article';
 import { Author } from '../components/author';
 import { HomePage } from '../components/home';
 import { HomeInfo } from '../components/home/types';
+import withRoot from '../components/with-root';
 
 interface HomeTemplateProps {
   pathContext: {
@@ -60,7 +61,7 @@ class HomeTemplate extends React.PureComponent<HomeTemplateProps> {
   }
 }
 
-export default HomeTemplate;
+export default withRoot(HomeTemplate);
 
 export const pageQuery = graphql`
   query($skip: Int!, $take: Int!) {

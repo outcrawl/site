@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import { Article, ArticleInfo, ArticlePage } from '../components/article';
 import { Author } from '../components/author';
 import { shuffle } from '../utils/helpers';
+import withRoot from '../components/with-root';
 
 interface ArticleTemplateProps {
   data: {
@@ -56,7 +57,7 @@ class ArticleTemplate extends React.PureComponent<ArticleTemplateProps> {
   }
 }
 
-export default ArticleTemplate;
+export default withRoot(ArticleTemplate);
 
 export const pageQuery = graphql`
   query($slug: String!, $author: String!, $tags: [String]!) {

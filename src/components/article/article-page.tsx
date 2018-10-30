@@ -14,6 +14,10 @@ const styles = () => createStyles({
   header: {
     marginBottom: '1rem',
   },
+  title: {
+    marginTop: '1rem',
+    marginBottom: '1.5rem',
+  },
 });
 
 interface ArticlePageProps {
@@ -21,6 +25,7 @@ interface ArticlePageProps {
   article: Article;
   classes?: {
     header: string;
+    title: string;
   };
 }
 
@@ -33,7 +38,7 @@ class ArticlePage extends React.PureComponent<ArticlePageProps> {
         <ArticleMeta info={info} article={article}/>
 
         <PageSection component="article">
-          <h1>{article.title}</h1>
+          <h1 className={classes.title}>{article.title}</h1>
           <ArticleHeader article={article} className={classes.header}/>
           <Img fluid={article.cover}/>
           <div dangerouslySetInnerHTML={{ __html: article.html }}/>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { graphql } from 'gatsby';
 
 import { GeneralInfo, GeneralPage } from '../components/general';
+import withRoot from '../components/with-root';
 
 interface GeneralTemplateProps {
   data: {
@@ -36,7 +37,7 @@ class GeneralTemplate extends React.PureComponent<GeneralTemplateProps> {
   }
 }
 
-export default GeneralTemplate;
+export default withRoot(GeneralTemplate);
 
 export const pageQuery = graphql`
   query($slug: String!) {

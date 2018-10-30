@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TagGroup, TagListInfo, TagListPage } from '../components/tag-list';
 import { graphql } from 'gatsby';
+import withRoot from '../components/with-root';
 
 interface TagListTemplateProps {
   pathContext: {
@@ -37,7 +38,7 @@ class TagListTemplate extends React.PureComponent<TagListTemplateProps> {
   }
 }
 
-export default TagListTemplate;
+export default withRoot(TagListTemplate);
 
 export const pageQuery = graphql`
   {
