@@ -74,17 +74,8 @@ interface NewsletterState {
   agree: boolean;
 }
 
-const ReCaptcha = (props: any) => (
-  <ReCAPTCHA
-    {...props}
-    size="invisible"
-    sitekey="6LcCEDEUAAAAAKvjiu87ZjZn7FZOX4LI-7tKyOLW"
-    badge="inline"
-  />
-);
-
 class Newsletter extends React.Component<NewsletterProps, NewsletterState> {
-  private captcha: any;
+  private captcha = React.createRef<any>();
 
   constructor(props: NewsletterProps) {
     super(props);
@@ -117,7 +108,7 @@ class Newsletter extends React.Component<NewsletterProps, NewsletterState> {
 
   private handleSubscribe = (event: any) => {
     event.preventDefault();
-    this.captcha.execute();
+    this.captcha.current.execute();
   };
 
   private handleSnackbarClose = () => {
@@ -149,12 +140,12 @@ class Newsletter extends React.Component<NewsletterProps, NewsletterState> {
       .subscribe(email, value)
       .then(() => {
         this.showSnackbar('You have subscribed!');
-        this.captcha.reset();
+        this.captcha.current.reset();
       })
       .catch((error) => {
         console.error(error);
         this.showSnackbar('Something bad happened.');
-        this.captcha.reset();
+        this.captcha.current.reset();
       });
   };
 
@@ -192,7 +183,7 @@ class Newsletter extends React.Component<NewsletterProps, NewsletterState> {
                   type="submit"
                   color="primary"
                   variant="contained"
-                  disabled={!this.state.agree}
+                  disabled={!this.state.agree || this.state.email.trim() === ''}
                 >
                   Subscribe
                 </Button>
@@ -214,13 +205,16 @@ class Newsletter extends React.Component<NewsletterProps, NewsletterState> {
                 }
               />
 
-              <ReCaptcha
+              <ReCAPTCHA
                 style={{ display: 'none' }}
-                ref={(e: any) => {
-                  this.captcha = e;
-                }}
+                ref={this.captcha}
                 onChange={this.handleReCaptchaChange}
+
+                size="invisible"
+                sitekey="6LcCEDEUAAAAAKvjiu87ZjZn7FZOX4LI-7tKyOLW"
+                badge="inline"
               />
+
               <div className={classes.captchaNote}>
                 Protected by reCAPTCHA -{' '}
                 <a href="https://www.google.com/intl/en/policies/privacy/">
