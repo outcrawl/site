@@ -12,6 +12,7 @@ const remark = {
         resolve: 'gatsby-remark-images',
         options: {
           linkImagesToOriginal: false,
+          quality: 90,
         },
       },
       'transform-markdown',

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Button, createStyles, Theme, withStyles } from '@material-ui/core';
+import { createStyles, Fab, Theme, withStyles } from '@material-ui/core';
 import classNames from 'classnames';
 
-import { Facebook, GitHub, GooglePlus, Twitter } from './icons';
+import { Facebook, GitHub, Twitter } from './icons';
 
 const styles = (theme: Theme) => createStyles({
   twitter: {
@@ -20,13 +20,6 @@ const styles = (theme: Theme) => createStyles({
       backgroundColor: '#5573B2',
     },
   },
-  googlePlus: {
-    color: theme.palette.common.white,
-    backgroundColor: '#d34836',
-    '&:hover': {
-      backgroundColor: '#ED6250',
-    },
-  },
   github: {
     color: theme.palette.common.white,
     backgroundColor: '#212121',
@@ -37,34 +30,25 @@ const styles = (theme: Theme) => createStyles({
 });
 
 const TwitterButton = withStyles(styles)(({ classes, className, ...rest }: any) => (
-  <Button className={classNames(classes.twitter, className)} {...rest}>
+  <Fab className={classNames(classes.twitter, className)} {...rest}>
     <Twitter/>
-  </Button>
+  </Fab>
 ));
 
 const FacebookButton = withStyles(styles)(({ classes, className, ...rest }: any) => (
-  <Button className={classNames(classes.facebook, className)} {...rest}>
+  <Fab className={classNames(classes.facebook, className)} {...rest}>
     <Facebook/>
-  </Button>
+  </Fab>
 ));
 
-const GooglePlusButton = withStyles(styles)(
-  ({ classes, className, ...rest }: any) => (
-    <Button className={classNames(classes.googlePlus, className)} {...rest}>
-      <GooglePlus/>
-    </Button>
-  ),
-);
-
 const GitHubButton = withStyles(styles)(({ classes, className, ...rest }: any) => (
-  <Button className={classNames(classes.github, className)} {...rest}>
+  <Fab className={classNames(classes.github, className)} {...rest}>
     <GitHub/>
-  </Button>
+  </Fab>
 ));
 
 export {
   TwitterButton,
   FacebookButton,
-  GooglePlusButton,
   GitHubButton,
 };

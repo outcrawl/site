@@ -36,7 +36,7 @@ module.exports = (params) => {
         },
       } = result.data;
 
-      for (let i = 0, page = 1; i < articles.length; i += articlesPerPage, page++) {
+      for (let i = 0, page = 1; i < articles.length - 1; i += articlesPerPage, page++) {
         createPage({
           path: page === 1 ? '/' : `/page/${page}`,
           component: homeTemplate,
