@@ -25,8 +25,7 @@ class ArticleShare extends React.PureComponent<ArticleShareProps> {
       <div className={className}>
         <TwitterButton
           component="a"
-          variant="fab"
-          mini
+          size="small"
           href={`https://twitter.com/intent/tweet?url=${article.url}&text=${
             article.title
             }`}
@@ -35,8 +34,7 @@ class ArticleShare extends React.PureComponent<ArticleShareProps> {
         <FacebookButton
           className={classes.socialButton}
           component="a"
-          variant="fab"
-          mini
+          size="small"
           href={`https://www.facebook.com/sharer/sharer.php?u=${article.url}`}
           aria-label="Share on Facebook"
         />

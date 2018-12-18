@@ -89,7 +89,7 @@ const globalStyles = (theme: Theme): any => ({
     fontSize: '0.875rem',
     display: 'inline-block',
     padding: '0 4px',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#f2f2f2',
   },
 
   pre: {
@@ -102,7 +102,7 @@ const globalStyles = (theme: Theme): any => ({
   '.code': {
     overflow: 'auto',
     margin: '1rem 0',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#f2f2f2',
 
     '& pre': {
       backgroundColor: 'transparent',

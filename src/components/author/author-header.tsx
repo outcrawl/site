@@ -59,8 +59,7 @@ class AuthorHeader extends React.PureComponent<AuthorHeaderProps> {
               component="a"
               target="_blank"
               rel="noopener noreferrer"
-              variant="fab"
-              mini
+              size="small"
               href={`https://twitter.com/${author.social.twitter}`}
               aria-label={`Find ${author.name} on Twitter`}/>
           )}
@@ -70,8 +69,7 @@ class AuthorHeader extends React.PureComponent<AuthorHeaderProps> {
               component="a"
               target="_blank"
               rel="noopener noreferrer"
-              variant="fab"
-              mini
+              size="small"
               href={`https://github.com/${author.social.github}`}
               aria-label={`Find ${author.name} on GitHub`}/>
           )}
@@ -81,8 +79,7 @@ class AuthorHeader extends React.PureComponent<AuthorHeaderProps> {
               component="a"
               target="_blank"
               rel="noopener noreferrer"
-              variant="fab"
-              mini
+              size="small"
               href={`https://facebook.com/${author.social.facebook}`}
               aria-label={`Find ${author.name} on Facebook`}/>
           )}
