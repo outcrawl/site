@@ -206,11 +206,10 @@ Here's a convenience function for creating a user.
 
 ```go
 func (s *graphQLServer) createUser(user string) error {
-  err := s.createUser(user)
-  if err != nil {
-    return nil, err
+  // Upsert user
+  if err := s.redisClient.SAdd("users", user).Err(); err != nil {
+    return err
   }
-
   // Notify new user joined
   s.mutex.Lock()
   for _, ch := range s.userChannels {
