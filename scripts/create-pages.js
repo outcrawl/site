@@ -5,8 +5,8 @@ module.exports = (params) => {
     graphql,
     actions: { createPage },
   } = params;
-  const articleTemplate = path.resolve(`./src/templates/article.tsx`);
-  const pageTemplate = path.resolve(`./src/templates/general.tsx`);
+  const articleTemplate = path.resolve(`./src/templates/ArticleTemplate.tsx`);
+  const pageTemplate = path.resolve(`./src/templates/GeneralTemplate.tsx`);
 
   return new Promise((resolve, reject) => {
     return graphql(`

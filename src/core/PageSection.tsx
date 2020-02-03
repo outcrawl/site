@@ -11,3 +11,5 @@ const PageSection: React.FC<PageSectionProps> = (props: PageSectionProps) => (
     {props.children}
   </Container>
 );
+
+export default PageSection;

@@ -1,6 +1,6 @@
 # Outcrawl
 
-Software development tutorials without nonsense.
+Software development without nonsense.
 
 ## Development
 

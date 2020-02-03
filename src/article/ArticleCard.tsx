@@ -1,17 +1,17 @@
 import React from 'react';
-import { ArticleData } from './types';
+import { ArticleInfo } from './types';
 import { Card } from '@material-ui/core';
 
 type ArticleCardProps = {
-  article: ArticleData;
+  info: ArticleInfo;
 }
 
 const ArticleCard: React.FC<ArticleCardProps> = (props: ArticleCardProps) => {
-  const {article} = props;
+  const { info } = props;
 
   return (
     <Card>
-      {article.title}
+      {info.title}
     </Card>
   );
 };

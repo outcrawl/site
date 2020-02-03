@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = (params) => {
   const {
     graphql,
-    actions: {createPage},
+    actions: { createPage },
   } = params;
 
   const homeTemplate = path.resolve('./src/templates/HomeTemplate.tsx');
@@ -30,9 +30,9 @@ module.exports = (params) => {
       }
 
       const {
-        allMarkdownRemark: {edges: articles},
+        allMarkdownRemark: { edges: articles },
         site: {
-          siteMetadata: {articlesPerPage},
+          siteMetadata: { articlesPerPage },
         },
       } = result.data;
 

@@ -1,27 +1,27 @@
 import React from 'react';
-import { HomePageData } from './types';
-import { ArticleData } from '../article/types';
+import { HomeData } from './types';
+import { ArticleInfo } from '../article/types';
 import Page from '../core/Page';
 import ArticleCard from '../article/ArticleCard';
 import HomeMeta from './HomeMeta';
 import Pagination from './Pagination';
 
 type HomePageProps = {
-  data: HomePageData;
+  data: HomeData;
   pageNumber: number;
   articlesPerPage: number;
   totalArticles: number;
-  articles: ArticleData[];
+  articles: ArticleInfo[];
 };
 
 const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
-  const { data, pageNumber, articlesPerPage, totalArticles, articles } = props;
+  const { data: { meta }, pageNumber, articlesPerPage, totalArticles, articles } = props;
 
   return (
     <Page>
-      <HomeMeta data={data}/>
+      <HomeMeta data={meta}/>
 
-      {articles.map((article) => <ArticleCard article={article} key={article.slug}/>)}
+      {articles.map((article) => <ArticleCard info={article} key={article.slug}/>)}
 
       <Pagination pageNumber={pageNumber} articlesPerPage={articlesPerPage} totalArticles={totalArticles}/>
     </Page>

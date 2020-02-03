@@ -6,6 +6,7 @@ export interface AuthorData {
   avatar: string;
   social: {
     github?: string;
+    linkedin?: string;
     twitter?: string;
     facebook?: string;
   };

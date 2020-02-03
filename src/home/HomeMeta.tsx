@@ -1,14 +1,13 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { HomePageData } from './types';
+import { MetaData } from '../common/types';
 import escapeHTML from 'escape-html';
 
 type HomeMetaProps = {
-  data: HomePageData;
+  data: MetaData;
 };
 
-const HomeMeta: React.FC<HomeMetaProps> = (props: HomeMetaProps) => {
-  const { data } = props;
+const HomeMeta: React.FC<HomeMetaProps> = ({ data }: HomeMetaProps) => {
   const title = escapeHTML(data.title);
   const description = escapeHTML(data.description);
 
@@ -27,8 +26,8 @@ const HomeMeta: React.FC<HomeMetaProps> = (props: HomeMetaProps) => {
       <meta name="twitter:site" content={data.site.twitterId}/>
 
       <meta property="og:image" content={data.image.url}/>
-      <meta property='og:image:width' content={data.image.width + ''}/>
-      <meta property='og:image:height' content={data.image.height + ''}/>
+      <meta property='og:image:width' content={data.image.width.toString()}/>
+      <meta property='og:image:height' content={data.image.height.toString()}/>
       <meta name="twitter:image" content={data.image.url}/>
     </Helmet>
   );

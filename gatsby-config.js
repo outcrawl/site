@@ -18,9 +18,9 @@ const remark = {
       {
         resolve: 'gatsby-remark-prismjs',
         options: {
-          classPrefix: "code-",
+          classPrefix: 'code-',
         },
-      }
+      },
     ],
   },
 };
@@ -57,6 +57,10 @@ const plugins = [
 
 module.exports = {
   siteMetadata: {
+    title: 'Outcrawl',
+    description: `Software development without nonsense.`,
+    twitterId: '@tinrab',
+    facebookId: '863987620425609',
     siteUrl: process.env.NODE_ENV === 'production'
       ? 'https://outcrawl.com'
       : 'http://localhost:8000',

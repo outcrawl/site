@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { ArticleData } from '../article/types';
+import { ArticleInfo } from '../article/types';
 import { AuthorData } from '../author/types';
-import { HomePageData } from '../home/types';
+import { HomeData } from '../home/types';
 import HomePage from '../home/HomePage';
 
 type HomeTemplateProps = {
@@ -13,34 +13,37 @@ type HomeTemplateProps = {
   data: any;
 };
 
-const HomeTemplate: React.FC<HomeTemplateProps> = ({pathContext, data}: HomeTemplateProps) => {
+const HomeTemplate: React.FC<HomeTemplateProps> = ({ pathContext, data }: HomeTemplateProps) => {
   const authors: AuthorData[] = data.authors.edges[0].node.authors;
   const totalArticles: number = data.articles.totalCount;
   const pageNumber = pathContext.page;
 
-  const articles: ArticleData[] = data.articles.edges.map(({node: {fields: article}}: any) => ({
+  const articles: ArticleInfo[] = data.articles.edges.map(({ node: { fields: article } }: any) => ({
     ...article,
     date: new Date(article.date),
     cover: article.cover.childImageSharp.fluid,
     author: authors.find((author) => author.slug === article.author),
   }));
 
-  const meta = data.site.siteMetadata;
+  const siteMeta = data.site.siteMetadata;
 
-  const homePageData: HomePageData = {
-    site: {
-      title: meta.title,
-      description: `${meta.description}.`,
-      twitterId: meta.twitterId,
-      facebookId: meta.facebookId,
-    },
-    title: `${meta.title} - ${meta.description}`,
-    description: `${meta.description}.`,
-    url: meta.siteUrl + (pageNumber === 1 ? '' : `/page/${pageNumber}`),
-    image: {
-      url: `${meta.siteUrl}/static/featured.jpg`,
-      width: 1280,
-      height: 1280,
+  const homePageData: HomeData = {
+    meta: {
+      site: {
+        title: siteMeta.title,
+        url: siteMeta.siteUrl,
+        description: siteMeta.description,
+        twitterId: siteMeta.twitterId,
+        facebookId: siteMeta.facebookId,
+      },
+      url: siteMeta.siteUrl + (pageNumber === 1 ? '' : `/page/${pageNumber}`),
+      title: `${siteMeta.title} - ${siteMeta.description}`,
+      description: siteMeta.description,
+      image: {
+        url: `${siteMeta.siteUrl}/static/featured.jpg`,
+        width: 1280,
+        height: 1280,
+      },
     },
   };
 
@@ -92,7 +95,7 @@ export const pageQuery = graphql`
             author
             cover {
               childImageSharp {
-                fluid {
+                fluid(quality: 90) {
                   aspectRatio
                   src
                   srcSet
@@ -107,6 +110,11 @@ export const pageQuery = graphql`
     }
     site {
       siteMetadata {
+        title
+        siteUrl
+        description
+        twitterId
+        facebookId
         siteUrl
       }
     }
