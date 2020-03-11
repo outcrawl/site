@@ -20,7 +20,6 @@ const HomeTemplate: React.FC<HomeTemplateProps> = ({ pathContext, data }: HomeTe
 
   const articles: ArticleInfo[] = data.articles.edges.map(({ node: { fields: article } }: any) => ({
     ...article,
-    date: new Date(article.date),
     cover: article.cover.childImageSharp.fluid,
     author: authors.find((author) => author.slug === article.author),
   }));
@@ -91,7 +90,7 @@ export const pageQuery = graphql`
           fields {
             title
             slug
-            date
+            date(formatString:"DD MMMM, YYYY")
             author
             cover {
               childImageSharp {

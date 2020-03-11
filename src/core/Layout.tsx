@@ -2,17 +2,42 @@ import React from 'react';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import theme from './theme';
 import Header from './Header';
+import Footer from './Footer';
+import { makeStyles } from '@material-ui/core/styles';
+import './code-theme.scss';
+
+const useStyles = makeStyles({
+  '@global': {
+    a: {
+      color: theme.palette.secondary.main,
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+    },
+  },
+  content: {
+    backgroundColor: theme.palette.common.white,
+  },
+});
 
 type LayoutProps = {
-  children: React.ReactNode,
+  children: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({children}: LayoutProps) => (
-  <ThemeProvider theme={theme}>
-    <CssBaseline/>
-    <Header/>
-    {children}
-  </ThemeProvider>
-);
+const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
+  const classes = useStyles();
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
+      <Header/>
+      <main className={classes.content}>
+        {children}
+      </main>
+      <Footer/>
+    </ThemeProvider>
+  );
+};
 
 export default Layout;

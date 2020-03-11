@@ -32,7 +32,7 @@ const Page: React.FC<PageProps> = (props: PageProps) => {
 
   return (
     <Layout>
-      <Container className={classNames(classes.root, {[classes.narrow]: props.narrow})}>
+      <Container className={classNames(classes.root, { [classes.narrow]: props.narrow })}>
         {props.children}
       </Container>
     </Layout>

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import { Box, IconButton, Typography } from '@material-ui/core';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -27,16 +28,16 @@ type PaginationProps = {
   articlesPerPage: number;
   totalArticles: number;
   basePath?: string;
-}
+} & HTMLAttributes<HTMLDivElement>;
 
 const Pagination: React.FC<PaginationProps> = (props: PaginationProps) => {
   const classes = useStyles();
-  const { pageNumber, articlesPerPage, totalArticles } = props;
+  const { className, pageNumber, articlesPerPage, totalArticles } = props;
   const basePath = props.basePath || '';
 
   const pageCount = Math.ceil(totalArticles / articlesPerPage);
 
-  let buttons: React.ReactNode[] = [];
+  const buttons: React.ReactNode[] = [];
 
   buttons.push(
     <IconButton
@@ -92,7 +93,7 @@ const Pagination: React.FC<PaginationProps> = (props: PaginationProps) => {
   );
 
   return (
-    <Box className={classes.root}>
+    <Box className={classNames(className, classes.root)}>
       {buttons}
     </Box>
   );

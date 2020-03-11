@@ -2,8 +2,8 @@ export interface AuthorData {
   name: string;
   slug: string;
   bio: string;
-  email: string;
   avatar: string;
+  email?: string;
   social: {
     github?: string;
     linkedin?: string;

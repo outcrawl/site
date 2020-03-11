@@ -6,8 +6,9 @@ export interface ArticleInfo {
   title: string;
   slug: string;
   url: string;
+  cover?: ArticleCover;
   author?: AuthorData;
-  date?: Date;
+  date?: string;
 }
 
 export interface ArticleCover {
@@ -25,7 +26,6 @@ export interface ArticlePageData {
   meta: MetaData;
   description?: string;
   html: string;
-  cover?: ArticleCover;
   tags: TagData[];
   related: ArticleInfo[];
 }

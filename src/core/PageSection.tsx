@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 type PageSectionProps = {
   children: React.ReactNode;
@@ -7,9 +7,9 @@ type PageSectionProps = {
 }
 
 const PageSection: React.FC<PageSectionProps> = (props: PageSectionProps) => (
-  <Container component={props.component}>
+  <Box component={props.component}>
     {props.children}
-  </Container>
+  </Box>
 );
 
 export default PageSection;

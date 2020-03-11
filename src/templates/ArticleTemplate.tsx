@@ -37,6 +37,12 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
       url: `${siteMeta.siteUrl}/${article.slug}`,
       author,
       date: article.date,
+      cover: {
+        ...article.cover.childImageSharp.fluid,
+        url: article.cover.publicURL,
+        width: 1280,
+        height: 720,
+      },
     },
     meta: {
       site: {
@@ -56,12 +62,6 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
       },
     },
     description: article.description,
-    cover: {
-      ...article.cover.childImageSharp.fluid,
-      url: article.cover.publicURL,
-      width: 1280,
-      height: 720,
-    },
     html: article.html,
     tags: article.tags as TagData[],
     related,
@@ -80,7 +80,7 @@ export const pageQuery = graphql`
         title
         slug
         description
-        date
+        date(formatString:"DD MMMM, YYYY")
         tags {
           title
           slug

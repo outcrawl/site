@@ -7,8 +7,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "airbnb"
+    "plugin:@typescript-eslint/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -30,15 +29,15 @@
     "object-curly-spacing": [
       "error",
       "always"
-    ],
-    "object-curly-newline": "off",
-    "react/jsx-filename-extension": "off",
-    "react/jsx-tag-spacing": 0,
-    "react/jsx-props-no-spreading": 0,
-    "react/jsx-one-expression-per-line": "off",
-    "import/prefer-default-export": "off",
-    "react/sort-comp": "off",
-    "import/extensions": "off"
+    ]
+//    "object-curly-newline": "off",
+//    "react/jsx-filename-extension": "off",
+//    "react/jsx-tag-spacing": 0,
+//    "react/jsx-props-no-spreading": 0,
+//    "react/jsx-one-expression-per-line": "off",
+//    "import/prefer-default-export": "off",
+//    "react/sort-comp": "off",
+//    "import/extensions": "off"
   },
   "settings": {
     "import/resolver": {

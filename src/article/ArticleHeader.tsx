@@ -32,8 +32,8 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = (props: ArticleHeaderProps) 
 
   return (
     <section className={classNames(classes.root, className)}>
-      {info.author && <AuthorCard author={info.author}/>}
-      <ArticleShare info={info}/>
+      {info.author && <AuthorCard author={info.author} subtitle={info.date}/>}
+      <ArticleShare info={info} className={classes.share}/>
     </section>
   );
 };
