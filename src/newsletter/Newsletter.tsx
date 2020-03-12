@@ -118,21 +118,17 @@ const Newsletter: React.FC = () => {
       return;
     }
     newsletterApi.subscribe(state.email, value)
-      .then((response) => {
-        console.log('SUCCESS');
-        console.log(response);
-        // if (response.error) {
-        //   showSnackbar('Something bad happened.', true);
-        // } else {
-        //   showSnackbar('You have subscribed!');
-        // }
-        // captchaRef.current?.reset();
+      .then((response: Response) => {
+        if (response.ok) {
+          showSnackbar('You have subscribed!');
+        } else {
+          showSnackbar('Something bad happened.', true);
+        }
+        captchaRef.current?.reset();
       })
-      .catch((error) => {
-        console.log('ERROR');
-        console.log(error);
-        // showSnackbar('Something bad happened.', true);
-        // captchaRef.current?.reset();
+      .catch(() => {
+        showSnackbar('Something bad happened.', true);
+        captchaRef.current?.reset();
       });
   };
 
