@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArticleInfo } from './types';
+import { ArticleData } from './types';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TwitterButton from '../assets/TwitterButton';
 import FacebookButton from '../assets/FacebookButton';
@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 type ArticleShareProps = {
-  info: ArticleInfo;
+  article: ArticleData;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const ArticleShare: React.FC<ArticleShareProps> = (props: ArticleShareProps) => {
-  const { info, className } = props;
+  const { article, className } = props;
   const classes = useStyles();
 
   return (
@@ -23,8 +23,8 @@ const ArticleShare: React.FC<ArticleShareProps> = (props: ArticleShareProps) => 
       <TwitterButton
         component="a"
         size="small"
-        href={`https://twitter.com/intent/tweet?url=${info.url}&text=${
-          info.title
+        href={`https://twitter.com/intent/tweet?url=${article.url}&text=${
+          article.title
         }`}
         aria-label="Share on Twitter"
       />
@@ -32,7 +32,7 @@ const ArticleShare: React.FC<ArticleShareProps> = (props: ArticleShareProps) => 
         className={classes.socialButton}
         component="a"
         size="small"
-        href={`https://www.facebook.com/sharer/sharer.php?u=${info.url}`}
+        href={`https://www.facebook.com/sharer/sharer.php?u=${article.url}`}
         aria-label="Share on Facebook"
       />
     </div>

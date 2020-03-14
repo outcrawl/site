@@ -1,35 +1,51 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { MetaData } from '../common/types';
 import escapeHTML from 'escape-html';
+import { graphql, StaticQuery } from 'gatsby';
 
-type HomeMetaProps = {
-  data: MetaData;
-};
-
-const HomeMeta: React.FC<HomeMetaProps> = ({ data }: HomeMetaProps) => {
-  const title = escapeHTML(data.title);
-  const description = escapeHTML(data.description);
-
+const HomeMeta: React.FC = () => {
   return (
-    <Helmet>
-      <title>{title}</title>
-      <link rel="canonical" href={data.url}/>
+    <StaticQuery
+      query={graphql`
+        query HomeMetaQuery {
+          site {
+            siteMetadata {
+              title
+              description
+              siteUrl
+              twitterId
+              facebookId
+            }
+          }
+        }
+      `}
+      render={(data: { site: { siteMetadata: any } }): React.ReactNode => {
+        const siteMetadata = data.site.siteMetadata;
+        const title = escapeHTML(siteMetadata.title);
+        const description = escapeHTML(siteMetadata.description);
 
-      <meta property="og:title" content={title}/>
-      <meta property="og:description" content={description}/>
+        return (
+          <Helmet>
+            <title>{title}</title>
+            <link rel="canonical" href={siteMetadata.url}/>
 
-      <meta property="fb:app_id" content={data.site.facebookId}/>
-      <meta property="og:type" content="website"/>
-      <meta property="og:site_name" content={data.site.title}/>
-      <meta name="twitter:card" content="summary_large_image"/>
-      <meta name="twitter:site" content={data.site.twitterId}/>
+            <meta property="og:title" content={title}/>
+            <meta property="og:description" content={description}/>
 
-      <meta property="og:image" content={data.image.url}/>
-      <meta property='og:image:width' content={data.image.width.toString()}/>
-      <meta property='og:image:height' content={data.image.height.toString()}/>
-      <meta name="twitter:image" content={data.image.url}/>
-    </Helmet>
+            <meta property="fb:app_id" content={siteMetadata.facebookId}/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:site_name" content={siteMetadata.title}/>
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:site" content={siteMetadata.twitterId}/>
+
+            <meta property="og:image" content={`${siteMetadata.siteUrl}/static/featured.jpg`}/>
+            <meta property='og:image:width' content="1280"/>
+            <meta property='og:image:height' content="1280"/>
+            <meta name="twitter:image" content={`${siteMetadata.siteUrl}/static/featured.jpg`}/>
+          </Helmet>
+        );
+      }}
+    />
   );
 };
 

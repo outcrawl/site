@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { ArticleInfo } from '../article/types';
+import { ArticleData } from '../article/types';
 import { AuthorData } from '../author/types';
 import { HomeData } from '../home/types';
 import HomePage from '../home/HomePage';
@@ -18,7 +18,7 @@ const HomeTemplate: React.FC<HomeTemplateProps> = ({ pathContext, data }: HomeTe
   const totalArticles: number = data.articles.totalCount;
   const pageNumber = pathContext.page;
 
-  const articles: ArticleInfo[] = data.articles.edges.map(({ node: { fields: article } }: any) => ({
+  const articles: ArticleData[] = data.articles.edges.map(({ node: { fields: article } }: any) => ({
     ...article,
     cover: article.cover.childImageSharp.fluid,
     author: authors.find((author) => author.slug === article.author),

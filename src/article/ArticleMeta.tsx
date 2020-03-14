@@ -2,84 +2,105 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { ArticlePageData } from './types';
 import escapeHTML from 'escape-html';
+import { graphql, StaticQuery } from 'gatsby';
 
 type ArticleMetaProps = {
-  data: ArticlePageData;
+  articlePage: ArticlePageData;
 };
 
 const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
-  const { data, data: { info } } = props;
-
-  const title = escapeHTML(`${info.title} - ${data.meta.site.title}`);
-  const description = data.description && escapeHTML(data.description);
-  const date = info.date && new Date(info.date).toISOString().replace(/T.*$/, '');
-  const author = info.author;
+  const { articlePage, articlePage: { info } } = props;
 
   return (
-    <Helmet>
-      <title>{title}</title>
-      <link rel="canonical" href={info.url}/>
-
-      <meta property="og:title" content={title}/>
-      <meta property="og:description" content={description}/>
-
-      <meta property="fb:app_id" content={data.meta.site.facebookId}/>
-      <meta property="og:type" content="website"/>
-      <meta property="og:site_name" content={data.meta.site.title}/>
-      <meta name="twitter:card" content="summary_large_image"/>
-      <meta name="twitter:site" content={data.meta.site.twitterId}/>
-
-      {data.cover && <meta property="og:image" content={data.cover.url}/>}
-      {data.cover && <meta property='og:image:width' content={data.cover.width + ''}/>}
-      {data.cover && <meta property='og:image:height' content={data.cover.height + ''}/>}
-      {data.cover && <meta name="twitter:image" content={data.cover.url}/>}
-
-      <script type="application/ld+json">
-        {`{
-          "@context":"https://schema.org",
-          "@type":"Article",
-          "publisher":{
-            "@type":"Organization",
-            "name":"${data.meta.site.title} - ${data.meta.site.description}",
-            "logo":{
-              "@type":"ImageObject",
-              "url":"${data.meta.site.url}/static/logo.png",
-              "width":60,
-              "height":60
+    <StaticQuery
+      query={graphql`
+        query ArticleMetaQuery {
+          site {
+            siteMetadata {
+              title
+              description
+              siteUrl
+              twitterId
+              facebookId
             }
-          },
-          ${author && `
-            "author":{
-              "@type":"Person",
-              "name":"${author.name}",
-              "image":{
-                "@type":"ImageObject",
-                "url":"${author.avatar}",
-                "width":50,
-                "height":50
-              },
-              "url":"${data.meta.site.url}/authors/${author.slug}"
-            },
-          `}
-          "headline":"${title}",
-          "url":"${info.url}",
-          "datePublished":"${date}",
-          ${data.cover && `
-            "image":{
-              "@type":"ImageObject",
-              "url":"${data.cover.url}",
-              "width":${data.cover.width},
-              "height":${data.cover.height}
-            },
-          `}
-          "description":"${description}",
-          "mainEntityOfPage":{
-            "@type":"WebPage",
-            "@id":"${data.meta.site.url}"
           }
-        }`}
-      </script>
-    </Helmet>
+        }
+      `}
+      render={(data: { site: { siteMetadata: any } }): React.ReactNode => {
+        const siteMetadata = data.site.siteMetadata;
+        const title = escapeHTML(`${info.title} - ${siteMetadata.title}`);
+        const description = articlePage.description && escapeHTML(articlePage.description);
+        const date = info.date && new Date(info.date).toISOString().replace(/T.*$/, '');
+        const author = info.author;
+
+        return (
+          <Helmet>
+            <title>{title}</title>
+            <link rel="canonical" href={info.url}/>
+
+            <meta property="og:title" content={title}/>
+            <meta property="og:description" content={description}/>
+
+            <meta property="fb:app_id" content={siteMetadata.facebookId}/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:site_name" content={siteMetadata.title}/>
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:site" content={siteMetadata.twitterId}/>
+
+            {info.cover && <meta property="og:image" content={info.cover.url}/>}
+            {info.cover && <meta property='og:image:width' content={info.cover.width + ''}/>}
+            {info.cover && <meta property='og:image:height' content={info.cover.height + ''}/>}
+            {info.cover && <meta name="twitter:image" content={info.cover.url}/>}
+
+            <script type="application/ld+json">
+              {`{
+                "@context":"https://schema.org",
+                "@type":"Article",
+                "publisher":{
+                  "@type":"Organization",
+                  "name":"${siteMetadata.title} - ${siteMetadata.description}",
+                  "logo":{
+                    "@type":"ImageObject",
+                    "url":"${siteMetadata.url}/static/logo.png",
+                    "width":60,
+                    "height":60
+                  }
+                },
+                ${author && `
+                  "author":{
+                    "@type":"Person",
+                    "name":"${author.name}",
+                    "image":{
+                      "@type":"ImageObject",
+                      "url":"${author.avatar}",
+                      "width":50,
+                      "height":50
+                    },
+                    "url":"${siteMetadata.url}/authors/${author.slug}"
+                  },
+                `}
+                "headline":"${title}",
+                "url":"${info.url}",
+                "datePublished":"${date}",
+                ${info.cover && `
+                  "image":{
+                    "@type":"ImageObject",
+                    "url":"${info.cover.url}",
+                    "width":${info.cover.width},
+                    "height":${info.cover.height}
+                  },
+                `}
+                "description":"${description}",
+                "mainEntityOfPage":{
+                  "@type":"WebPage",
+                  "@id":"${siteMetadata.url}"
+                }
+              }`}
+            </script>
+          </Helmet>
+        );
+      }}
+    />
   );
 };
 

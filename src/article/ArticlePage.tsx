@@ -10,6 +10,7 @@ import ArticleFooter from './ArticleFooter';
 import { makeStyles } from '@material-ui/core/styles';
 import PageContent from '../core/PageContent';
 import Newsletter from '../newsletter/Newsletter';
+import RelatedArticleList from './RelatedArticleList';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   header: {
@@ -21,27 +22,34 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   footer: {
     marginTop: theme.spacing(4),
   },
+  newsletter: {
+    marginTop: theme.spacing(3),
+  },
+  related: {
+    marginTop: theme.spacing(3),
+  },
 }));
 
 type ArticlePageProps = {
-  data: ArticlePageData;
+  articlePage: ArticlePageData;
 };
 
 const ArticlePage: React.FC<ArticlePageProps> = (props: ArticlePageProps) => {
-  const { data, data: { info } } = props;
+  const { articlePage, articlePage: { info } } = props;
   const classes = useStyles();
 
   return (
     <Page narrow>
-      <ArticleMeta data={data}/>
+      <ArticleMeta articlePage={articlePage}/>
       <PageSection component="article">
-        <Typography variant="h2" variantMapping={{ h3: 'h1' }} className={classes.title}>{info.title}</Typography>
-        <ArticleHeader data={data} className={classes.header}/>
-        {data.info.cover && <Img fluid={data.info.cover}/>}
-        <PageContent html={data.html}/>
+        <Typography variant="h2" variantMapping={{ h2: 'h1' }} className={classes.title}>{info.title}</Typography>
+        <ArticleHeader articlePage={articlePage} className={classes.header}/>
+        {articlePage.info.cover && <Img fluid={articlePage.info.cover}/>}
+        <PageContent html={articlePage.html}/>
       </PageSection>
-      <ArticleFooter className={classes.footer} data={data}/>
-      <Newsletter/>
+      <ArticleFooter className={classes.footer} articlePage={articlePage}/>
+      <Newsletter className={classes.newsletter}/>
+      <RelatedArticleList className={classes.related} articles={articlePage.related}/>
     </Page>
   );
 };

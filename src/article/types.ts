@@ -1,8 +1,7 @@
 import { AuthorData } from '../author/types';
 import { TagData } from '../tag/types';
-import { MetaData } from '../common/types';
 
-export interface ArticleInfo {
+export interface ArticleData {
   title: string;
   slug: string;
   url: string;
@@ -22,10 +21,9 @@ export interface ArticleCover {
 }
 
 export interface ArticlePageData {
-  info: ArticleInfo;
-  meta: MetaData;
+  info: ArticleData;
   description?: string;
   html: string;
   tags: TagData[];
-  related: ArticleInfo[];
+  related: ArticleData[];
 }

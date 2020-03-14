@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         padding: theme.spacing(0.5),
       },
     },
+    '& .heading-link': {},
   },
 }));
 

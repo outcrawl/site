@@ -5,7 +5,7 @@ module.exports = (params) => {
     graphql,
     actions: { createPage },
   } = params;
-  const authorTemplate = path.resolve('src/templates/author.tsx');
+  const authorTemplate = path.resolve('src/templates/AuthorTemplate.tsx');
 
   return new Promise((resolve, reject) => {
     return graphql(`
@@ -27,7 +27,7 @@ module.exports = (params) => {
           }
         }
       }
-    `).then(result => {
+    `).then((result) => {
       if (result.errors) {
         return reject(result.errors);
       }
@@ -39,7 +39,6 @@ module.exports = (params) => {
 
       for (let i = 0; i < authors.length; i++) {
         const author = authors[i];
-
         createPage({
           path: `authors/${author.slug}`,
           component: authorTemplate,

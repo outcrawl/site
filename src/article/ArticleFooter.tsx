@@ -28,19 +28,19 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 type ArticleFooterProps = {
-  data: ArticlePageData;
+  articlePage: ArticlePageData;
 } & HTMLAttributes<HTMLDivElement>;
 
 const ArticleFooter: React.FC<ArticleFooterProps> = (props: ArticleFooterProps) => {
-  const { data, className } = props;
+  const { articlePage, className } = props;
   const classes = useStyles();
 
   return (
     <Box component="section" className={classNames(className, classes.root)}>
       <div className={classes.tags}>
-        {data.tags.map((tag, i) => <Tag key={i} title={tag.title} to={`/tags/${tag.slug}`}/>)}
+        {articlePage.tags.map((tag, i) => <Tag key={i} title={tag.title} to={`/tags/${tag.slug}`}/>)}
       </div>
-      <ArticleShare info={data.info} className={classes.share}/>
+      <ArticleShare articleInfo={articlePage.info} className={classes.share}/>
     </Box>
   );
 };

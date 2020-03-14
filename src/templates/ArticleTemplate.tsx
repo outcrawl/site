@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { ArticleInfo, ArticlePageData } from '../article/types';
+import { ArticleData, ArticlePageData } from '../article/types';
 import { AuthorData } from '../author/types';
 import ArticlePage from '../article/ArticlePage';
 import { TagData } from '../tag/types';
@@ -12,7 +12,6 @@ type ArticleTemplateProps = {
 
 const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTemplateProps) => {
   const siteMeta = data.site.siteMetadata;
-
   const article = {
     ...data.article.fields,
     html: data.article.html,
@@ -20,14 +19,14 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
 
   const author = data.author.authors.length > 0 ? data.author.authors[0] as AuthorData : undefined;
 
-  const relatedArticles: ArticleInfo[] = data.related.edges
-    .map(({ node: { fields: article } }: { node: { fields: ArticleInfo } }) => ({
+  const relatedArticles: ArticleData[] = data.related.edges
+    .map(({ node: { fields: article } }: { node: { fields: ArticleData } }) => ({
       title: article.title,
       slug: article.slug,
       url: `${siteMeta.siteUrl}/${article.slug}`,
-    } as ArticleInfo));
-  const related: ArticleInfo[] = shuffle(relatedArticles)
-    .filter((value: ArticleInfo) => value.slug !== data.article.fields.slug)
+    } as ArticleData));
+  const related: ArticleData[] = shuffle(relatedArticles)
+    .filter((value: ArticleData) => value.slug !== data.article.fields.slug)
     .slice(0, 3);
 
   const articlePageData: ArticlePageData = {
@@ -44,30 +43,13 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
         height: 720,
       },
     },
-    meta: {
-      site: {
-        title: siteMeta.title,
-        url: siteMeta.siteUrl,
-        description: siteMeta.description,
-        twitterId: siteMeta.twitterId,
-        facebookId: siteMeta.facebookId,
-      },
-      url: `${siteMeta.siteUrl}/${article.slug}`,
-      title: `${siteMeta.title} - ${siteMeta.description}`,
-      description: siteMeta.description,
-      image: {
-        url: article.cover.publicURL,
-        width: 1280,
-        height: 720,
-      },
-    },
     description: article.description,
     html: article.html,
     tags: article.tags as TagData[],
     related,
   };
 
-  return <ArticlePage data={articlePageData}/>;
+  return <ArticlePage articlePage={articlePageData}/>;
 };
 
 export default ArticleTemplate;
@@ -128,11 +110,7 @@ export const pageQuery = graphql`
     }
     site {
       siteMetadata {
-        title
-        description
         siteUrl
-        twitterId
-        facebookId
       }
     }
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { HomeData } from './types';
-import { ArticleInfo } from '../article/types';
+import { ArticleData } from '../article/types';
 import Page from '../core/Page';
 import ArticleCard from '../article/ArticleCard';
 import HomeMeta from './HomeMeta';
@@ -20,7 +20,7 @@ type HomePageProps = {
   pageNumber: number;
   articlesPerPage: number;
   totalArticles: number;
-  articles: ArticleInfo[];
+  articles: ArticleData[];
 };
 
 const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {

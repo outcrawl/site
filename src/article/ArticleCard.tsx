@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArticleInfo } from './types';
+import { ArticleData } from './types';
 import { Card, CardContent, createStyles, Theme, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
@@ -20,29 +20,29 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 type ArticleCardProps = {
-  info: ArticleInfo;
+  article: ArticleData;
 }
 
 const ArticleCard: React.FC<ArticleCardProps> = (props: ArticleCardProps) => {
-  const { info } = props;
+  const { article } = props;
   const classes = useStyles();
 
   return (
     <Card>
-      {info.cover && (
-        <Link to={info.slug}>
-          <Img className={classes.coverImage} fluid={info.cover}/>
+      {article.cover && (
+        <Link to={article.slug}>
+          <Img className={classes.coverImage} fluid={article.cover}/>
         </Link>
       )}
       <CardContent>
-        <Link to={info.slug} className={classes.titleLink}>
+        <Link to={article.slug} className={classes.titleLink}>
           <Typography variant="h5">
-            {info.title}
+            {article.title}
           </Typography>
         </Link>
       </CardContent>
       <div className={classes.footer}>
-        {info.author && <AuthorCard author={info.author} subtitle={info.date}/>}
+        {article.author && <AuthorCard author={article.author} subtitle={article.date}/>}
       </div>
     </Card>
   );

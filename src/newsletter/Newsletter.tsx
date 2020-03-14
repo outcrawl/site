@@ -17,46 +17,37 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { makeStyles } from '@material-ui/core/styles';
 import { useRef, useState } from 'react';
 import newsletterApi from './newsletter-api';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    paddingLeft: 0,
-    paddingRight: 0,
-  },
-  content: {
-    textAlign: 'center',
     '& .grecaptcha-badge': {
       display: 'none',
     },
   },
-  form: {
-    display: 'inline-block',
-  },
   lead: {
-    fontSize: '1.5rem',
+    textAlign: 'center',
+    marginBottom: '2rem',
     fontWeight: 300,
-    marginTop: '1.5rem',
-    marginBottom: '1.5rem',
-    marginLeft: 0,
-    marginRight: 0,
   },
-  captchaNote: {
-    fontSize: 13,
-    color: theme.palette.text.secondary,
-    padding: '8px 0px',
-  },
-  privacyNote: {
-    fontSize: 16,
-  },
-  emailField: {
-    verticalAlign: 'middle',
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   subscribeButton: {
-    marginLeft: 8,
+    marginLeft: theme.spacing(1),
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: 0,
+    },
+  },
+  captchaNote: {
+    color: theme.palette.text.secondary,
+    textAlign: 'center',
   },
 }));
+
+type NewsletterProps = React.HTMLAttributes<HTMLDivElement>;
 
 type NewsletterState = {
   snackbar: {
@@ -68,7 +59,8 @@ type NewsletterState = {
   agree: boolean;
 };
 
-const Newsletter: React.FC = () => {
+const Newsletter: React.FC<NewsletterProps> = (props: NewsletterProps) => {
+  const { className } = props;
   const classes = useStyles();
 
   const [state, setState] = useState<NewsletterState>({
@@ -151,57 +143,54 @@ const Newsletter: React.FC = () => {
   };
 
   return (
-    <Box component="section">
-      <Typography variant="h2">Newsletter</Typography>
-      <div className={classes.content}>
-        <p className={classes.lead}>
-          Get awesome articles delivered right to your doorstep
-        </p>
-        <form autoComplete="on" onSubmit={handleSubscribe}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.agree}
-                onChange={handleAgreeChange}
-                color="primary"
-              />
-            }
-            label={<span>I agree to Outcrawl&apos;s <Link to="/privacy">Privacy Policy</Link>.</span>}
+    <Box className={classNames(classes.root, className)} component="section">
+      <Typography variant="h2" gutterBottom>Newsletter</Typography>
+      <Typography className={classes.lead} variant="h5">
+        Get awesome articles delivered right to your doorstep
+      </Typography>
+      <form className={classes.form} autoComplete="on" onSubmit={handleSubscribe}>
+        <FormGroup row>
+          <TextField
+            required
+            type="email"
+            value={state.email}
+            onChange={handleEmailChange}
+            placeholder="Email"
+            autoComplete="email"
+            margin="none"
           />
-          <FormGroup row>
-            <TextField
-              className={classes.emailField}
-              required
-              type="email"
-              value={state.email}
-              onChange={handleEmailChange}
-              placeholder="Email"
-              autoComplete="email"
-              margin="none"
-            />
-            <Button
-              className={classes.subscribeButton}
+          <Button
+            className={classes.subscribeButton}
+            color="primary"
+            variant="contained"
+            disabled={!state.agree || state.email === ''}
+            type="submit"
+          >
+            Subscribe
+          </Button>
+        </FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={state.agree}
+              onChange={handleAgreeChange}
               color="primary"
-              variant="contained"
-              disabled={!state.agree || state.email === ''}
-              type="submit"
-            >
-              Subscribe
-            </Button>
-          </FormGroup>
-        </form>
-        <ReCAPTCHA
-          ref={captchaRef}
-          onChange={handleCaptchaChange}
-          size="invisible"
-          sitekey="6LcCEDEUAAAAAKvjiu87ZjZn7FZOX4LI-7tKyOLW"
-          badge="inline"
+            />
+          }
+          label={<span>I agree to Outcrawl&apos;s <Link to="/privacy">Privacy Policy</Link>.</span>}
         />
-        <div className={classes.captchaNote}>
-          Protected by reCAPTCHA - <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> - <a
-          href="https://www.google.com/intl/en/policies/terms/">Terms</a>
-        </div>
-      </div>
+      </form>
+      <ReCAPTCHA
+        ref={captchaRef}
+        onChange={handleCaptchaChange}
+        size="invisible"
+        sitekey="6LcCEDEUAAAAAKvjiu87ZjZn7FZOX4LI-7tKyOLW"
+        badge="inline"
+      />
+      <Typography className={classes.captchaNote} variant="body2">
+        Protected by reCAPTCHA - <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> - <a
+        href="https://www.google.com/intl/en/policies/terms/">Terms</a>
+      </Typography>
       <Snackbar autoHideDuration={3000} open={state.snackbar.open} onClose={handleSnackbarClose}>
         <Alert variant="filled" severity={state.snackbar.error ? 'error' : 'success'}>
           {state.snackbar.message}

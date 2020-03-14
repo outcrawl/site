@@ -23,17 +23,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 type ArticleHeaderProps = {
-  data: ArticlePageData;
+  articlePage: ArticlePageData;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const ArticleHeader: React.FC<ArticleHeaderProps> = (props: ArticleHeaderProps) => {
-  const { data: { info }, className } = props;
+  const { articlePage: { info }, className } = props;
   const classes = useStyles();
 
   return (
     <section className={classNames(classes.root, className)}>
       {info.author && <AuthorCard author={info.author} subtitle={info.date}/>}
-      <ArticleShare info={info} className={classes.share}/>
+      <ArticleShare articleInfo={info} className={classes.share}/>
     </section>
   );
 };
