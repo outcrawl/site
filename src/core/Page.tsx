@@ -28,12 +28,13 @@ type PageProps = {
 };
 
 const Page: React.FC<PageProps> = (props: PageProps) => {
+  const { children, narrow } = props;
   const classes = useStyles();
 
   return (
     <Layout>
-      <Container className={classNames(classes.root, { [classes.narrow]: props.narrow })}>
-        {props.children}
+      <Container className={classNames(classes.root, { [classes.narrow]: narrow })}>
+        {children}
       </Container>
     </Layout>
   );

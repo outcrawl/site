@@ -2,19 +2,39 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import AuthorPage from '../author/AuthorPage';
 import { AuthorArticleData, AuthorData } from '../author/types';
+import { SiteMetadata } from '../core/types';
 
 type AuthorTemplateProps = {
-  data: any;
+  data: {
+    author: {
+      authors: AuthorData[];
+    };
+    articles: {
+      edges: {
+        node: {
+          fields: {
+            title: string;
+            slug: string;
+            date: string;
+          };
+        };
+      }[];
+    };
+    site: {
+      siteMetadata: SiteMetadata;
+    };
+  };
 };
 
 const ArticleTemplate: React.FC<AuthorTemplateProps> = (props: AuthorTemplateProps) => {
   const { data } = props;
   const siteMetadata = data.site.siteMetadata;
-  const author: AuthorData = data.author;
-  const articles: AuthorArticleData[] = data.articles.edges.map(({ node: { fields } }: any) => ({
+  const author = data.author.authors[0];
+  const articles = data.articles.edges.map(({ node: { fields } }) => ({
     ...fields,
+    groupDate: fields.date,
     url: `${siteMetadata.siteUrl}/${fields.slug}`,
-  }));
+  } as AuthorArticleData));
 
   return <AuthorPage author={author} articles={articles}/>;
 };
@@ -47,7 +67,7 @@ export const pageQuery = graphql`
           fields {
             title
             slug
-            date
+            date(formatString:"MMMM, YYYY")
           }
         }
       }

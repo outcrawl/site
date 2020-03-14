@@ -8,18 +8,19 @@ import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
-    display: 'flex',
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
     },
   },
-  tags: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+  tag: {
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    // alignItems: 'center',
+    // marginBottom: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   share: {
-    display: 'flex',
     marginLeft: 'auto',
     [theme.breakpoints.down('xs')]: {
       marginLeft: 0,
@@ -36,11 +37,13 @@ const ArticleFooter: React.FC<ArticleFooterProps> = (props: ArticleFooterProps) 
   const classes = useStyles();
 
   return (
-    <Box component="section" className={classNames(className, classes.root)}>
-      <div className={classes.tags}>
-        {articlePage.tags.map((tag, i) => <Tag key={i} title={tag.title} to={`/tags/${tag.slug}`}/>)}
-      </div>
-      <ArticleShare articleInfo={articlePage.info} className={classes.share}/>
+    <Box component="section" display="flex" className={classNames(className, classes.root)}>
+      <Box>
+        {articlePage.tags.map((tag, i) => (
+          <Tag key={i} className={classes.tag} title={tag.title} to={`/tags/${tag.slug}`}/>
+        ))}
+      </Box>
+      <ArticleShare article={articlePage.article} className={classes.share}/>
     </Box>
   );
 };

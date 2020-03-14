@@ -16,5 +16,5 @@ export interface AuthorArticleData {
   title: string;
   slug: string;
   url: string;
-  date?: string;
+  groupDate: string;
 }

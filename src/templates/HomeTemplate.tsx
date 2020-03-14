@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { ArticleData } from '../article/types';
 import { AuthorData } from '../author/types';
-import { HomeData } from '../home/types';
 import HomePage from '../home/HomePage';
 
 type HomeTemplateProps = {
@@ -10,48 +9,55 @@ type HomeTemplateProps = {
     articlesPerPage: number;
     page: number;
   };
-  data: any;
+  data: {
+    authors: {
+      edges: {
+        node: {
+          authors: AuthorData[];
+        };
+      }[];
+    };
+    articles: {
+      totalCount: number;
+      edges: {
+        node: {
+          fields: {
+            title: string;
+            slug: string;
+            date: string;
+            author: string;
+            cover: {
+              childImageSharp: {
+                fluid: {
+                  aspectRatio: number;
+                  src: string;
+                  srcSet: string;
+                  sizes: string;
+                };
+              };
+            };
+          };
+        };
+      }[];
+    };
+  };
 };
 
 const HomeTemplate: React.FC<HomeTemplateProps> = ({ pathContext, data }: HomeTemplateProps) => {
-  const authors: AuthorData[] = data.authors.edges[0].node.authors;
-  const totalArticles: number = data.articles.totalCount;
-  const pageNumber = pathContext.page;
+  const authors = data.authors.edges[0].node.authors;
+  const page = pathContext.page;
+  const pageCount = Math.ceil(data.articles.totalCount / pathContext.articlesPerPage);
 
-  const articles: ArticleData[] = data.articles.edges.map(({ node: { fields: article } }: any) => ({
-    ...article,
-    cover: article.cover.childImageSharp.fluid,
-    author: authors.find((author) => author.slug === article.author),
-  }));
-
-  const siteMeta = data.site.siteMetadata;
-
-  const homePageData: HomeData = {
-    meta: {
-      site: {
-        title: siteMeta.title,
-        url: siteMeta.siteUrl,
-        description: siteMeta.description,
-        twitterId: siteMeta.twitterId,
-        facebookId: siteMeta.facebookId,
-      },
-      url: siteMeta.siteUrl + (pageNumber === 1 ? '' : `/page/${pageNumber}`),
-      title: `${siteMeta.title} - ${siteMeta.description}`,
-      description: siteMeta.description,
-      image: {
-        url: `${siteMeta.siteUrl}/static/featured.jpg`,
-        width: 1280,
-        height: 1280,
-      },
-    },
-  };
+  const articles = data.articles.edges.map(({ node: { fields } }) => ({
+    ...fields,
+    cover: fields.cover.childImageSharp.fluid,
+    author: authors.find((author) => author.slug === fields.author),
+  } as ArticleData));
 
   return (
     <HomePage
-      data={homePageData}
-      pageNumber={pageNumber}
-      articlesPerPage={pathContext.articlesPerPage}
-      totalArticles={totalArticles}
+      page={page}
+      pageCount={pageCount}
       articles={articles}
     />
   );
@@ -95,26 +101,12 @@ export const pageQuery = graphql`
             cover {
               childImageSharp {
                 fluid(quality: 90) {
-                  aspectRatio
-                  src
-                  srcSet
-                  sizes
-                  originalImg
+                  ...GatsbyImageSharpFluid_noBase64
                 }
               }
             }
           }
         }
-      }
-    }
-    site {
-      siteMetadata {
-        title
-        siteUrl
-        description
-        twitterId
-        facebookId
-        siteUrl
       }
     }
   }

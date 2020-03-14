@@ -3,8 +3,7 @@ import Img from 'gatsby-image';
 import { ArticlePageData } from './types';
 import Page from '../core/Page';
 import ArticleMeta from './ArticleMeta';
-import PageSection from '../core/PageSection';
-import { createStyles, Theme, Typography } from '@material-ui/core';
+import { Box, createStyles, Theme, Typography } from '@material-ui/core';
 import ArticleHeader from './ArticleHeader';
 import ArticleFooter from './ArticleFooter';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,10 +13,11 @@ import RelatedArticleList from './RelatedArticleList';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   header: {
-    marginBottom: '1rem',
+    marginBottom: theme.spacing(1),
   },
   title: {
-    marginBottom: '1rem',
+    fontSize: theme.typography.h2.fontSize,
+    marginBottom: theme.spacing(2),
   },
   footer: {
     marginTop: theme.spacing(4),
@@ -35,18 +35,18 @@ type ArticlePageProps = {
 };
 
 const ArticlePage: React.FC<ArticlePageProps> = (props: ArticlePageProps) => {
-  const { articlePage, articlePage: { info } } = props;
+  const { articlePage, articlePage: { article } } = props;
   const classes = useStyles();
 
   return (
     <Page narrow>
       <ArticleMeta articlePage={articlePage}/>
-      <PageSection component="article">
-        <Typography variant="h2" variantMapping={{ h2: 'h1' }} className={classes.title}>{info.title}</Typography>
+      <Box component="article">
+        <Typography variant="h1" className={classes.title}>{article.title}</Typography>
         <ArticleHeader articlePage={articlePage} className={classes.header}/>
-        {articlePage.info.cover && <Img fluid={articlePage.info.cover}/>}
+        {articlePage.article.cover && <Img fluid={articlePage.article.cover}/>}
         <PageContent html={articlePage.html}/>
-      </PageSection>
+      </Box>
       <ArticleFooter className={classes.footer} articlePage={articlePage}/>
       <Newsletter className={classes.newsletter}/>
       <RelatedArticleList className={classes.related} articles={articlePage.related}/>

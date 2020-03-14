@@ -3,13 +3,14 @@ import Helmet from 'react-helmet';
 import { ArticlePageData } from './types';
 import escapeHTML from 'escape-html';
 import { graphql, StaticQuery } from 'gatsby';
+import { SiteMetadata } from '../core/types';
 
 type ArticleMetaProps = {
   articlePage: ArticlePageData;
 };
 
 const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
-  const { articlePage, articlePage: { info } } = props;
+  const { articlePage, articlePage: { article } } = props;
 
   return (
     <StaticQuery
@@ -26,17 +27,17 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
           }
         }
       `}
-      render={(data: { site: { siteMetadata: any } }): React.ReactNode => {
+      render={(data: { site: { siteMetadata: SiteMetadata } }): React.ReactNode => {
         const siteMetadata = data.site.siteMetadata;
-        const title = escapeHTML(`${info.title} - ${siteMetadata.title}`);
+        const title = escapeHTML(`${article.title} - ${siteMetadata.title}`);
         const description = articlePage.description && escapeHTML(articlePage.description);
-        const date = info.date && new Date(info.date).toISOString().replace(/T.*$/, '');
-        const author = info.author;
+        const date = article.date && new Date(article.date).toISOString().replace(/T.*$/, '');
+        const author = article.author;
 
         return (
           <Helmet>
             <title>{title}</title>
-            <link rel="canonical" href={info.url}/>
+            <link rel="canonical" href={article.url}/>
 
             <meta property="og:title" content={title}/>
             <meta property="og:description" content={description}/>
@@ -47,10 +48,10 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:site" content={siteMetadata.twitterId}/>
 
-            {info.cover && <meta property="og:image" content={info.cover.url}/>}
-            {info.cover && <meta property='og:image:width' content={info.cover.width + ''}/>}
-            {info.cover && <meta property='og:image:height' content={info.cover.height + ''}/>}
-            {info.cover && <meta name="twitter:image" content={info.cover.url}/>}
+            {article.cover && <meta property="og:image" content={article.cover.url}/>}
+            {article.cover && <meta property='og:image:width' content={article.cover.width + ''}/>}
+            {article.cover && <meta property='og:image:height' content={article.cover.height + ''}/>}
+            {article.cover && <meta name="twitter:image" content={article.cover.url}/>}
 
             <script type="application/ld+json">
               {`{
@@ -61,7 +62,7 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
                   "name":"${siteMetadata.title} - ${siteMetadata.description}",
                   "logo":{
                     "@type":"ImageObject",
-                    "url":"${siteMetadata.url}/static/logo.png",
+                    "url":"${siteMetadata.siteUrl}/static/logo.png",
                     "width":60,
                     "height":60
                   }
@@ -76,24 +77,24 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
                       "width":50,
                       "height":50
                     },
-                    "url":"${siteMetadata.url}/authors/${author.slug}"
+                    "url":"${siteMetadata.siteUrl}/authors/${author.slug}"
                   },
                 `}
                 "headline":"${title}",
-                "url":"${info.url}",
+                "url":"${article.url}",
                 "datePublished":"${date}",
-                ${info.cover && `
+                ${article.cover && `
                   "image":{
                     "@type":"ImageObject",
-                    "url":"${info.cover.url}",
-                    "width":${info.cover.width},
-                    "height":${info.cover.height}
+                    "url":"${article.cover.url}",
+                    "width":${article.cover.width},
+                    "height":${article.cover.height}
                   },
                 `}
                 "description":"${description}",
                 "mainEntityOfPage":{
                   "@type":"WebPage",
-                  "@id":"${siteMetadata.url}"
+                  "@id":"${siteMetadata.siteUrl}"
                 }
               }`}
             </script>

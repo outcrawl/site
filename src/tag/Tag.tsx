@@ -10,8 +10,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     paddingBottom: theme.spacing(0.5),
     paddingLeft: 0,
     paddingRight: 0,
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
     alignSelf: 'last baseline',
     textDecoration: 'none',
     '&:hover': {

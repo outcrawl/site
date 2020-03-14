@@ -1,12 +1,12 @@
 import React from 'react';
-import { HomeData } from './types';
 import { ArticleData } from '../article/types';
 import Page from '../core/Page';
 import ArticleCard from '../article/ArticleCard';
 import HomeMeta from './HomeMeta';
-import Pagination from './Pagination';
 import { createStyles, Grid, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Pagination, PaginationItem } from '@material-ui/lab';
+import { Link } from 'gatsby';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   pagination: {
@@ -16,29 +16,40 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 type HomePageProps = {
-  data: HomeData;
-  pageNumber: number;
-  articlesPerPage: number;
-  totalArticles: number;
+  page: number;
+  pageCount: number;
   articles: ArticleData[];
 };
 
 const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
-  const { data: { meta }, pageNumber, articlesPerPage, totalArticles, articles } = props;
+  const { page, pageCount, articles } = props;
   const classes = useStyles();
 
   return (
     <Page>
-      <HomeMeta data={meta}/>
+      <HomeMeta/>
       <Grid container>
         {articles.map((article) => (
           <Grid key={article.slug} item xs={12} sm={6}>
-            <ArticleCard info={article} key={article.slug}/>
+            <ArticleCard article={article} key={article.slug}/>
           </Grid>
         ))}
       </Grid>
-      <Pagination className={classes.pagination} pageNumber={pageNumber} articlesPerPage={articlesPerPage}
-                  totalArticles={totalArticles}/>
+
+      <Pagination
+        className={classes.pagination}
+        page={page}
+        count={pageCount}
+        color="primary"
+        renderItem={(item: { page: number }): React.ReactNode => (
+          <PaginationItem
+            component={Link}
+            to={item.page === 1 ? '/' : `/page/${item.page}`}
+            page={item.page}
+            color="primary"
+          />
+        )}
+      />
     </Page>
   );
 };

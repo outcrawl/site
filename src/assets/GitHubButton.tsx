@@ -1,24 +1,25 @@
 import React from 'react';
 import { createStyles, Fab, Theme } from '@material-ui/core';
-import { Twitter } from './icons';
+import { GitHub } from './icons';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     color: theme.palette.common.white,
-    backgroundColor: '#00aced',
+    backgroundColor: '#000000',
     '&:hover': {
-      backgroundColor: '#1FC3FF',
+      color: theme.palette.common.white,
+      backgroundColor: '#1A1A1A',
     },
   },
 }));
 
-type TwitterButtonProps = {
+type GitHubButtonProps = {
   href: string;
 } & React.HTMLAttributes<HTMLAnchorElement>;
 
-const TwitterButton: React.FC<TwitterButtonProps> = (props: TwitterButtonProps) => {
+const GitHubButton: React.FC<GitHubButtonProps> = (props: GitHubButtonProps) => {
   const { className, href } = props;
   const classes = useStyles();
 
@@ -29,9 +30,9 @@ const TwitterButton: React.FC<TwitterButtonProps> = (props: TwitterButtonProps) 
       size="small"
       rel="noopener noreferrer"
     >
-      <Twitter/>
+      <GitHub/>
     </Fab>
   );
 };
 
-export default TwitterButton;
+export default GitHubButton;

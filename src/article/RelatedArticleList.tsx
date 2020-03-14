@@ -21,7 +21,7 @@ const RelatedArticleList: React.FC<RelatedArticleListProps> = (props: RelatedArt
     <Box className={classNames(classes.root, className)}>
       <Typography variant="h2">Related</Typography>
       {articles.map((article) => (
-        <Link key={article.slug} to={article.slug}>
+        <Link key={article.slug} to={'/' + article.slug}>
           <Typography variant="h4">{article.title}</Typography>
         </Link>
       ))}

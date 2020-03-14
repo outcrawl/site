@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import escapeHTML from 'escape-html';
 import { graphql, StaticQuery } from 'gatsby';
+import { SiteMetadata } from '../core/types';
 
 const HomeMeta: React.FC = () => {
   return (
@@ -19,7 +20,7 @@ const HomeMeta: React.FC = () => {
           }
         }
       `}
-      render={(data: { site: { siteMetadata: any } }): React.ReactNode => {
+      render={(data: { site: { siteMetadata: SiteMetadata } }): React.ReactNode => {
         const siteMetadata = data.site.siteMetadata;
         const title = escapeHTML(siteMetadata.title);
         const description = escapeHTML(siteMetadata.description);
@@ -27,7 +28,7 @@ const HomeMeta: React.FC = () => {
         return (
           <Helmet>
             <title>{title}</title>
-            <link rel="canonical" href={siteMetadata.url}/>
+            <link rel="canonical" href={siteMetadata.siteUrl}/>
 
             <meta property="og:title" content={title}/>
             <meta property="og:description" content={description}/>

@@ -1,24 +1,24 @@
 import React from 'react';
 import { createStyles, Fab, Theme } from '@material-ui/core';
-import { Twitter } from './icons';
+import { Linkedin } from './icons';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     color: theme.palette.common.white,
-    backgroundColor: '#00aced',
+    backgroundColor: '#2867B2',
     '&:hover': {
-      backgroundColor: '#1FC3FF',
+      backgroundColor: '#3C80D3',
     },
   },
 }));
 
-type TwitterButtonProps = {
+type LinkedinButtonProps = {
   href: string;
 } & React.HTMLAttributes<HTMLAnchorElement>;
 
-const TwitterButton: React.FC<TwitterButtonProps> = (props: TwitterButtonProps) => {
+const LinkedinButton: React.FC<LinkedinButtonProps> = (props: LinkedinButtonProps) => {
   const { className, href } = props;
   const classes = useStyles();
 
@@ -29,9 +29,9 @@ const TwitterButton: React.FC<TwitterButtonProps> = (props: TwitterButtonProps) 
       size="small"
       rel="noopener noreferrer"
     >
-      <Twitter/>
+      <Linkedin/>
     </Fab>
   );
 };
 
-export default TwitterButton;
+export default LinkedinButton;

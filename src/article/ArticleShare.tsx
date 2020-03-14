@@ -5,7 +5,7 @@ import TwitterButton from '../assets/TwitterButton';
 import FacebookButton from '../assets/FacebookButton';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-  socialButton: {
+  facebookButton: {
     marginLeft: theme.spacing(1),
   },
 }));
@@ -21,17 +21,13 @@ const ArticleShare: React.FC<ArticleShareProps> = (props: ArticleShareProps) => 
   return (
     <div className={className}>
       <TwitterButton
-        component="a"
-        size="small"
         href={`https://twitter.com/intent/tweet?url=${article.url}&text=${
           article.title
         }`}
         aria-label="Share on Twitter"
       />
       <FacebookButton
-        className={classes.socialButton}
-        component="a"
-        size="small"
+        className={classes.facebookButton}
         href={`https://www.facebook.com/sharer/sharer.php?u=${article.url}`}
         aria-label="Share on Facebook"
       />

@@ -5,35 +5,78 @@ import { AuthorData } from '../author/types';
 import ArticlePage from '../article/ArticlePage';
 import { TagData } from '../tag/types';
 import { shuffle } from '../common/arrays';
+import { SiteMetadata } from '../core/types';
 
 type ArticleTemplateProps = {
-  data: any;
+  data: {
+    article: {
+      html: string;
+      fields: {
+        title: string;
+        slug: string;
+        description: string;
+        date: string;
+        tags: {
+          title: string;
+          slug: string;
+        }[];
+        cover: {
+          publicURL: string;
+          childImageSharp: {
+            fluid: {
+              aspectRatio: number;
+              src: string;
+              srcSet: string;
+              sizes: string;
+            };
+          };
+        };
+      };
+    };
+    author: {
+      authors: AuthorData[];
+    };
+    related: {
+      edges: {
+        node: {
+          fields: {
+            title: string;
+            slug: string;
+          };
+        };
+      }[];
+    };
+    site: {
+      siteMetadata: SiteMetadata;
+    };
+  };
 };
 
 const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTemplateProps) => {
-  const siteMeta = data.site.siteMetadata;
+  const siteMetadata = data.site.siteMetadata;
   const article = {
     ...data.article.fields,
     html: data.article.html,
   };
 
-  const author = data.author.authors.length > 0 ? data.author.authors[0] as AuthorData : undefined;
+  const author = data.author.authors.length > 0 ? data.author.authors[0] : undefined;
 
   const relatedArticles: ArticleData[] = data.related.edges
-    .map(({ node: { fields: article } }: { node: { fields: ArticleData } }) => ({
+    .map(({ node: { fields: article } }) => ({
       title: article.title,
       slug: article.slug,
-      url: `${siteMeta.siteUrl}/${article.slug}`,
+      url: `${siteMetadata.siteUrl}/${article.slug}`,
     } as ArticleData));
-  const related: ArticleData[] = shuffle(relatedArticles)
+
+  const related = shuffle(relatedArticles)
     .filter((value: ArticleData) => value.slug !== data.article.fields.slug)
     .slice(0, 3);
 
   const articlePageData: ArticlePageData = {
-    info: {
+    article: {
       title: article.title,
       slug: article.slug,
-      url: `${siteMeta.siteUrl}/${article.slug}`,
+      url: `${siteMetadata.siteUrl}/${article.slug}`,
       author,
       date: article.date,
       cover: {

@@ -21,7 +21,7 @@ export interface ArticleCover {
 }
 
 export interface ArticlePageData {
-  info: ArticleData;
+  article: ArticleData;
   description?: string;
   html: string;
   tags: TagData[];
