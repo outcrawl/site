@@ -33,11 +33,7 @@ const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
 
   return (
     <Page>
-      <BasicPageMeta
-        title={homePage.title}
-        description={homePage.description}
-        url={homePage.url}
-      />
+      <BasicPageMeta {...homePage}/>
       <Grid container spacing={2}>
         {homePage.articles.map((article) => (
           <Grid key={article.slug} item xs={12} sm={6}>
@@ -47,10 +43,10 @@ const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
       </Grid>
       <Pagination
         className={classes.pagination}
-        page={homePage.page}
+        page={homePage.pageNumber}
         count={pageCount}
         color="primary"
-        size="large"
+        size="medium"
         renderItem={(item: { page: number }): React.ReactNode => (
           <PaginationItem
             className={classes.paginationLink}

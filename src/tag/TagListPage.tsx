@@ -13,35 +13,34 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     marginBottom: theme.spacing(2),
   },
   tag: {
-    // TODO: same link as related article
+    verticalAlign: 'middle',
+    display: 'inline-block',
+    lineHeight: 1,
+    margin: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
   },
 }));
 
 type TagListPageProps = {
-  tagListPage: PageData;
+  page: PageData;
   tagGroups: TagGroup[];
 };
 
 const TagListPage: React.FC<TagListPageProps> = (props: TagListPageProps) => {
-  const { tagListPage, tagGroups } = props;
+  const { page, tagGroups } = props;
   const classes = useStyles();
 
   return (
     <Page narrow>
-      <BasicPageMeta
-        title={tagListPage.title}
-        description={tagListPage.description}
-        url={tagListPage.url}
-      />
+      <BasicPageMeta {...page}/>
       <Box component="article">
         <Typography className={classes.title} variant="h1">Tags</Typography>
-        <Box>
+        <Box textAlign="center">
           {tagGroups.map(({ tag, size }) => (
             <Link
               key={tag.slug}
               className={classes.tag}
               to={'/tags/' + tag.slug}
-              style={{ fontSize: size + 'rem' }}
+              style={{ fontSize: Math.max(size * 10 / tagGroups[0].size, 1) + 'rem' }}
             >
               {tag.title}
             </Link>

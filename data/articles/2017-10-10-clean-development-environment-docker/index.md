@@ -23,28 +23,28 @@ Install [Docker](https://docs.docker.com/engine/installation/) and
 
 Lets say you need a MySQL database. Simply run the following command.
 
-```
-$ docker run --name database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql
+```bash
+docker run --name database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql
 ```
 
 This creates a container named `database` running a MySQL instance on port 3306. Environment variable `MYSQL_ROOT_PASSWORD` holds the root user's password.
 
 To get container's IP address, run the following command.
 
-```
-$ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' database
+```bash
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' database
 ```
 
 You can use MySQL CLI tool like this.
 
-```
-$ docker exec -it database mysql -u root -p
+```bash
+docker exec -it database mysql -u root -p
 ```
 
 You could then run another container, with a different version of MySQL server, on port 3307 by specifying a tag.
 
-```
-$ docker run --name database2 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql:5.6
+```bash
+docker run --name database2 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql:5.6
 ```
 
 To find all available Docker images visit [Docker Hub](https://hub.docker.com/).
@@ -71,20 +71,20 @@ This defines a MongoDB service called `mongo`.
 
 In the same directory run this command to build it.
 
-```
-$ docker-compose up -d --build
+```bash
+docker-compose up -d --build
 ```
 
 Or by specifying the location of `docker-compose.yaml` file.
 
-```
-$ docker-compose up -d --build -f ./docker-compose.yaml
+```bash
+docker-compose up -d --build -f ./docker-compose.yaml
 ```
 
 List currently running containers.
 
-```
-$ docker-compose ps
+```bash{outputLines:2-4}
+docker-compose ps
 Name              Command             State            Ports
 ----------------------------------------------------------------------
 mongo   docker-entrypoint.sh mongod   Up      0.0.0.0:27100->27017/tcp
@@ -94,9 +94,10 @@ mongo   docker-entrypoint.sh mongod   Up      0.0.0.0:27100->27017/tcp
 
 Define another service inside `docker-compose.yaml`, which depends on `mongo`.
 
-```yaml{3-11}
+```yaml
 version: '3.3'
 services:
+# highlight-start
   api:
     container_name: 'api'
     build: './api'
@@ -106,6 +107,7 @@ services:
       - './api:/go/src/app'
     depends_on:
       - 'mongo'
+# highlight-end
   mongo:
     image: 'mongo:latest'
     container_name: 'mongo'
@@ -213,14 +215,14 @@ func responseJSON(w http.ResponseWriter, data interface{}) {
 
 Rebuild containers.
 
-```
-$ docker-compose up -d --build
+```bash
+docker-compose up -d --build
 ```
 
 Try calling the `/posts` endpoint.
 
-```
-$ curl localhost:8080/posts -d '{"text":"hello"}' 
+```bash
+curl localhost:8080/posts -d '{"text":"hello"}' 
 ```
 
 Declare a new handler which reads all posts.
@@ -245,8 +247,8 @@ r.HandleFunc("/posts", readPosts).
 
 Without rebuilding containers, you should be able to call this endpoint.
 
-```
-$ curl localhost:8080/posts
+```bash
+curl localhost:8080/posts
 ```
 
 ## Serving a static site with NGINX
@@ -311,8 +313,8 @@ Create the `index.html` file.
 
 Now build it.
 
-```
-$ docker-compose up -d --build
+```bash
+docker-compose up -d --build
 ```
 
 Navigate to <http://localhost:8081/> with your browser and try creating a few posts.
@@ -335,8 +337,8 @@ func TestSanity(t *testing.T) {
 
 Then run `go test -v` inside `api` container.
 
-```
-$ docker-compose run api go test -v
+```bash{outputLines:2-6}
+docker-compose run api go test -v
 === RUN   TestSanity
 --- PASS: TestSanity (0.00s)
         sanity_test.go:6: Has sanity

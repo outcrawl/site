@@ -1,10 +1,12 @@
+import { blue } from '@material-ui/core/colors';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React, { HTMLAttributes } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
+    ...theme.typography.body1,
     '& p': {
-      ...theme.typography.body1,
+      margin: '1em 0',
     },
     '& h1': {
       ...theme.typography.h3,
@@ -36,7 +38,21 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         padding: theme.spacing(0.5),
       },
     },
-    '& .heading-link': {},
+    '& .heading-link': {
+      '& svg': {
+        verticalAlign: 'middle',
+      },
+    },
+    '& blockquote': {
+      padding: '1em',
+      borderRadius: theme.shape.borderRadius,
+      margin: 0,
+      backgroundColor: blue[50],
+      color: blue[900],
+      '& p': {
+        margin: 0,
+      },
+    },
   },
 }));
 

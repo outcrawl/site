@@ -1,47 +1,88 @@
-code[class*="code-"],
-pre[class*="code-"] {
-  color: #393A34;
+code, pre {
   font-family: "Roboto Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  direction: ltr;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  font-size: 0.875rem;
   line-height: 1.6em;
-
+  font-size: 0.875rem;
+  display: inline-block;
+  background-color: #f2f2f2;
   -moz-tab-size: 4;
-  -o-tab-size: 4;
   tab-size: 4;
-
   -webkit-hyphens: none;
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
 }
 
-pre > code[class*="code-"] {
-  font-size: 1em;
+/* Inline code */
+:not(pre) > code[class*="code-"] {
+  padding: 1px .2em;
+  border-radius: 4px;
 }
 
 /* Code blocks */
 pre[class*="code-"] {
   padding: 1em;
-  margin: .5em 0;
+}
+
+.gatsby-highlight {
   overflow: auto;
+  margin: 1em 0;
   background-color: #f2f2f2;
-  border-radius: 2px;
+
+  code {
+    background-color: transparent;
+    padding: 0;
+    width: 100%;
+  }
+
+  pre {
+    background-color: transparent;
+    margin: 0;
+    overflow: initial;
+    float: left;
+    min-width: 100%;
+  }
 }
 
-/* Inline code */
-:not(pre) > code[class*="code-"] {
-  padding: .2em;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  background-color: #f2f2f2;
-  border-radius: 2px;
+.gatsby-highlight-code-line {
+  display: block;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 0 -1em;
+  padding: 0 1em;
 }
 
+.line-numbers .line-numbers-rows {
+  border-right-color: #a5a5a5;
+}
+
+.line-numbers-rows > span:before {
+  color: #2B91AF;
+}
+
+/* Command-line */
+.command-line-prompt {
+  display: block;
+  float: left;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.command-line-prompt > span:before {
+  color: #999;
+  content: " ";
+  display: block;
+  padding-right: 1em;
+}
+
+.command-line-prompt > span[data-user="root"]:before {
+  content: "$";
+}
+
+/* Tokens */
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -97,11 +138,6 @@ code[class*="code-css"] {
   color: #00009f;
 }
 
-.token.important,
-.token.bold {
-  font-weight: bold;
-}
-
 .token.italic {
   font-style: italic;
 }
@@ -126,36 +162,4 @@ code[class*="code-css"] {
 .token.directive.tag .tag {
   background: #ffff00;
   color: #393A34;
-}
-
-/* overrides color-values for the Line Numbers plugin
- * http://prismjs.com/plugins/line-numbers/
- */
-.line-numbers .line-numbers-rows {
-  border-right-color: #a5a5a5;
-}
-
-.line-numbers-rows > span:before {
-  color: #2B91AF;
-}
-
-.line-highlight {
-  background: rgba(193, 222, 241, 0.2);
-  background: -webkit-linear-gradient(left, rgba(193, 222, 241, 0.2) 70%, rgba(221, 222, 241, 0));
-  background: linear-gradient(to right, rgba(193, 222, 241, 0.2) 70%, rgba(221, 222, 241, 0));
-}
-
-.command-line-prompt {
-  display: block;
-  float: left;
-  pointer-events: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.command-line-prompt > span:before {
-  color: #9E9E9E;
-  content: '$ ';
 }

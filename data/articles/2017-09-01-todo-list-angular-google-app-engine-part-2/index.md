@@ -15,14 +15,14 @@ In the first part ([Build a Todo List with Angular and Google App Engine - Part 
 
 Create a new Angular project.
 
-```
-$ ng new $PROJECT_NAME --style=scss --routing=true --skip-commit=true
+```bash
+ng new $PROJECT_NAME --style=scss --routing=true --skip-commit=true
 ```
 
 Run development server, preferably in the background.
 
-```
-$ ng serve &
+```bash
+ng serve &
 ```
 
 Navigate to <http://localhost:4200> with your browser. Also keep the App Engine server running.
@@ -53,8 +53,8 @@ export const environment = {
 
 Create the user model class.
 
-```
-$ ng g class user.model
+```bash
+ng g class user.model
 ```
 
 Locate `user.model.ts` file and write a constructor with some parameter properties.
@@ -77,8 +77,8 @@ Import Google API library in the head section inside `index.html`.
 
 Create the authentication service.
 
-```
-$ ng g service auth
+```bash
+ng g service auth
 ```
 
 Add some imports inside `auth.service.ts` and declare the `gapi` variable. This is necessary for making compilation succeed, because the actual `gapi` variable wont be set until browser fetches the Google API library.
@@ -97,12 +97,14 @@ export class AuthService { }
 
 Add an import for `HttpClientModule` and a provider for your authentication service inside `app.module.ts` file.
 
-```typescript{3,6,13,16}
+```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+// highlight-next-line
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// highlight-next-line
 import { AuthService } from './auth.service';
 @NgModule({
   declarations: [
@@ -110,9 +112,11 @@ import { AuthService } from './auth.service';
   ],
   imports: [
     BrowserModule,
+// highlight-next-line
     HttpClientModule,
     AppRoutingModule
   ],
+// highlight-next-line
   providers: [AuthService],
   bootstrap: [AppComponent]
 })
@@ -211,17 +215,17 @@ If user refreshes the page, he'll remain signed-in, because the old instance of 
 
 Create two new components.
 
-```
-$ ng g component sign-in
-$ ng g component list
+```bash
+ng g component sign-in
+ng g component list
 ```
 
 The sign-in component will act as a sign-in page, and list component is where the todo list is displayed. You can navigate to the list component only if you're signed-in, therefore it must be protected.
 
 Create a guard for preventing unauthenticated access.
 
-```
-$ ng g guard auth
+```bash
+ng g guard auth
 ```
 
 Check the sign-in state inside `canActivate` function in the `auth.guard.ts` file. If the user is not signed in, redirect him to the sign-in page.
@@ -357,8 +361,8 @@ You need another service to handle operations with todos.
 
 Create the todo model class.
 
-```
-$ ng g class todo.model
+```bash
+ng g class todo.model
 ```
 
 Define some properties.
@@ -375,8 +379,8 @@ export class Todo {
 
 Create the todo service.
 
-```
-$ ng g service todo
+```bash
+ng g service todo
 ```
 
 Locate `todo.service.ts` file and add some imports.
@@ -397,7 +401,8 @@ export class TodoService { }
 
 Add `TodoService` to the providers array inside `app.module.ts`.
 
-```typescript{1,13}
+```typescript
+// highlight-next-line
 import { TodoService } from './todo.service';
 @NgModule({
   declarations: [
@@ -410,6 +415,7 @@ import { TodoService } from './todo.service';
     HttpClientModule,
     AppRoutingModule
   ],
+// highlight-next-line
   providers: [AuthService, TodoService],
   bootstrap: [AppComponent]
 })
@@ -477,13 +483,14 @@ Time to display the todo list.
 
 Create the todo component.
 
-```
-$ ng g component todo
+```bash
+ng g component todo
 ```
 
 Add an input property inside `todo.component.ts` to hold the todo model.
 
-```typescript{1,10-11}
+```typescript
+// highlight-next-line
 import { Component, Input } from '@angular/core';
 import { Todo } from '../todo.model';
 
@@ -493,8 +500,10 @@ import { Todo } from '../todo.model';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent {
+// highlight-start
   @Input()
   item: Todo;
+// highlight-end
   constructor() { }
 }
 ```
@@ -509,33 +518,41 @@ Display todo's title in the template.
 
 To display todos in a list, call the service inside a `ngAfterViewInit` lifecycle hook and set resulting data to a `todos` property.
 
-```typescript{1,5-6,13,15,19,23-26}
+```typescript
+// highlight-next-line
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { User } from '../user.model';
+// highlight-start
 import { TodoService } from '../todo.service';
 import { Todo } from '../todo.model';
+// highlight-end
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
+// highlight-next-line
 export class ListComponent implements AfterViewInit {
   user: User;
+// highlight-next-line
   todos: Todo[];
   constructor(
     private router: Router,
     private authService: AuthService,
+// highlight-next-line
     private todoService: TodoService
   ) {
     this.user = this.authService.currentUser;
   }
+// highlight-start
   ngAfterViewInit(): void {
     this.todoService.listTodos()
     .then(todos => this.todos = todos);
   }
+// highlight-end
   signOut(): void {
     this.authService.signOut();
     this.router.navigateByUrl('signin');
@@ -564,7 +581,8 @@ Sign in and observe your list of todos.
 
 First off, import `FormsModule` inside your root module.
 
-```typescript{1,11}
+```typescript
+// highlight-next-line
 import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
@@ -575,6 +593,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+// highlight-next-line
     FormsModule,
     HttpClientModule,
     AppRoutingModule
@@ -634,12 +653,14 @@ Update the todo component's template file.
 
 Add some properties and write a couple of functions in `todo.component.ts`.
 
-```typescript{4-5,16-19,21,23-35}
+```typescript
 import {
   Component,
   Input,
+// highlight-start
   Output,
   EventEmitter
+// highlight-end
 } from '@angular/core';
 import { Todo } from '../todo.model';
 @Component({
@@ -650,13 +671,17 @@ import { Todo } from '../todo.model';
 export class TodoComponent {
   @Input()
   item: Todo;
+// highlight-start
   @Output()
   updateRequest: EventEmitter<string>;
   editMode: boolean;
   editableTitle: string;
+// highlight-end
   constructor() {
+// highlight-next-line
     this.updateRequest = new EventEmitter<string>();
   }
+// highlight-start
   update(): void {
     if (this.editMode) {
       this.editMode = false;
@@ -670,6 +695,7 @@ export class TodoComponent {
   onTitleInputBlur(): void {
     this.editMode = false;
   }
+// highlight-end
 }
 ```
 
@@ -704,27 +730,33 @@ Add a delete button to todo's template.
 
 Update `todo.component.ts` to handle the deletion. This is similar as updating.
 
-```typescript{3-4,7,10-12}
+```typescript
 export class TodoComponent {
   // ...
+// highlight-start
   @Output()
   deleteRequest: EventEmitter<void>;
+// highlight-end
   constructor() {
     // ...
+// highlight-next-line
     this.deleteRequest = new EventEmitter<void>();
   }
   // ...
+// highlight-start
   delete(): void {
     this.deleteRequest.emit();
   }
+// highlight-end
 }
 ```
 
 Bind delete request to the delete handler inside list component's template.
 
-```html{3}
+```html
 <app-todo [item]="todo"
           (updateRequest)="updateTodo(todo, $event)"
+<!-- highlight-next-line
           (deleteRequest)="deleteTodo(todo)">
 </app-todo>
 ```
@@ -760,8 +792,8 @@ At this point, your To-Do app should look as awesome as this.
 
 You can make it look even better with [Angular Material](https://material.angular.io/). First off, install some dependencies.
 
-```
-$ npm install --save @angular/material @angular/cdk @angular/animations normalize.css
+```bash
+npm install --save @angular/material @angular/cdk @angular/animations normalize.css
 ```
 
 Import necessary modules inside `app.module.ts`.
@@ -945,11 +977,13 @@ env_variables:
 
 Modify the `build` script and add a `deploy` script inside `package.json`.
 
-```json{3-4}
+```json
 {
   "scripts": {
+// highlight-start
     "build": "ng build --target=production --output-path=./server/static",
     "deploy": "gcloud app deploy --project=${PROJECT_ID} server/app.yaml server/index.yaml",
+// highlight-end
   }
 }
 ```
@@ -958,9 +992,9 @@ Above setup assumes your Google App Engine project is located inside `server` di
 
 Now build the app and deploy it.
 
-```
-$ export PROJECT_ID=[PROJECT_ID]
-$ npm run build && npm run deploy
+```bash
+export PROJECT_ID=[PROJECT_ID]
+npm run build && npm run deploy
 ```
 
 Replace `[PROJECT_ID]` with your Google API Console project ID. If this is your first deployment, you'll be asked a few question.

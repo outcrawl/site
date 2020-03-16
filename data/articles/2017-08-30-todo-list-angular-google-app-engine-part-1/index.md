@@ -45,9 +45,8 @@ To begin, you'll create an endpoint for signing in Google users. ID tokens will 
 
 Install necessary Go packages.
 
-```
-$ go get github.com/rs/cors \
-  github.com/gorilla/mux
+```bash
+go get github.com/rs/cors github.com/gorilla/mux
 ```
 
 Create `app.go` file.
@@ -71,9 +70,7 @@ func init() {
 }
 ```
 
-<note>
-Imports are skipped for brevity. Use [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports) tool to add them. Code editors, such as [Visual Studio Code](https://code.visualstudio.com/) have plugins for it.
-</note>
+> Imports are skipped for brevity. Use [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports) tool to add them. Code editors, such as [Visual Studio Code](https://code.visualstudio.com/) have plugins for it.
 
 ## Sign-in handler
 
@@ -81,15 +78,18 @@ Write a couple of utility functions inside `utility.go` file for future use.
 
 ```go
 package todo
+
 func responseError(w http.ResponseWriter, message string, code int) {
   w.Header().Set("Content-Type", "application/json")
   w.WriteHeader(code)
   json.NewEncoder(w).Encode(map[string]string{"error": message})
 }
+
 func responseJSON(w http.ResponseWriter, data interface{}) {
   w.Header().Set("Content-Type", "application/json")
   json.NewEncoder(w).Encode(data)
 }
+
 func readJSON(rc io.ReadCloser, v interface{}) error {
   defer rc.Close()
   data, err := ioutil.ReadAll(rc)
@@ -231,7 +231,7 @@ The code above checks Memcache for existing session and fetches the ID of user m
 
 To see how it works, declare a dummy handler and update the `init` function inside `app.go` file.
 
-```go{8-9,13-15}
+```go
 func init() {
   // Read configuration environment variables
   clientID = os.Getenv("CLIENT_ID")
@@ -239,23 +239,25 @@ func init() {
   r := mux.NewRouter()
   r.HandleFunc("/api/signin", signInHandler).
     Methods("POST")
+// highlight-start
   r.HandleFunc("/api/hello", authenticate(helloHandler)).
     Methods("GET")
+// highlight-end
   // Start HTTP server
   http.Handle("/", cors.AllowAll().Handler(r))
 }
+// highlight-start
 func helloHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, userID string) {
   responseJSON(w, "Hello, "+userID)
 }
+// highlight-end
 ```
 
 Test it using cURL. You can obtain the ID token using [OAuth 2.0 Playground](https://developers.google.com/oauthplayground).
 
-```
-$ curl localhost:8080/api/signin -X POST \
-  -H 'Authorization:[ID_TOKEN]'
-$ curl localhost:8080/api/hello \
-  -H 'Authorization:[SESSION_TOKEN]'
+```bash
+curl localhost:8080/api/signin -X POST -H 'Authorization:[ID_TOKEN]'
+curl localhost:8080/api/hello -H 'Authorization:[SESSION_TOKEN]'
 ```
 
 You should be getting your own Google ID in the response body.
@@ -315,8 +317,8 @@ r.HandleFunc("/api/todos", authenticate(createTodoHandler)).
 
 See if it works.
 
-```
-$ curl localhost:8080/api/todos \
+```bash{outputLines:2-3}
+curl localhost:8080/api/todos \
   -H 'Authorization:[SESSION_TOKEN]' \
   -d '{"title":"write more code"}'
 ```
@@ -371,8 +373,8 @@ r.HandleFunc("/api/todos", authenticate(listTodosHandler)).
 
 Try it out.
 
-```
-$ curl localhost:8080/api/todos \
+```bash{outputLines:2}
+curl localhost:8080/api/todos \
   -H 'Authorization:[SESSION_TOKEN]'
 ```
 
@@ -442,8 +444,8 @@ r.HandleFunc("/api/todos/{id}", authenticate(updateTodoHandler)).
 
 Make sure it works.
 
-```
-$ curl localhost:8080/api/todos/[TODO_ID] -H 'Authorization:[SESSION_TOKEN]' \
+```bash{outputLines:2}
+curl localhost:8080/api/todos/[TODO_ID] -H 'Authorization:[SESSION_TOKEN]' \
   -d '{"title":"new title"}'
 ```
 
@@ -488,8 +490,8 @@ r.HandleFunc("/api/todos/{id}", authenticate(deleteTodoHandler)).
 
 Try deleting an existing todo.
 
-```
-$ curl localhost:8080/api/todos/[TODO_ID] -X DELETE \
+```bash{outputLines:2}
+curl localhost:8080/api/todos/[TODO_ID] -X DELETE \
   -H 'Authorization:[SESSION_TOKEN]'
 ```
 

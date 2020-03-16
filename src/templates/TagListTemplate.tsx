@@ -43,7 +43,7 @@ const TagListTemplate: React.FC<TagListTemplateProps> = (props: TagListTemplateP
     url: siteMetadata.siteUrl + '/tags',
   };
 
-  return <TagListPage tagListPage={tagListPage} tagGroups={tagGroups}/>;
+  return <TagListPage page={tagListPage} tagGroups={tagGroups}/>;
 };
 
 export default TagListTemplate;

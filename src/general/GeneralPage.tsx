@@ -23,11 +23,7 @@ const GeneralPage: React.FC<GeneralPageProps> = (props: GeneralPageProps) => {
 
   return (
     <Page narrow>
-      <BasicPageMeta
-        title={generalPage.title}
-        description={generalPage.description}
-        url={generalPage.url}
-      />
+      <BasicPageMeta {...generalPage}/>
       <Box component="article">
         <Typography className={classes.title} variant="h1">{generalPage.title}</Typography>
         <PageContent html={generalPage.html}/>

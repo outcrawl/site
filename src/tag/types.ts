@@ -11,7 +11,7 @@ export interface TagGroup {
 }
 
 export interface TagPageData extends PageData {
-  page: number;
+  pageNumber: number;
   pageCount: number;
   tag: TagData;
 }

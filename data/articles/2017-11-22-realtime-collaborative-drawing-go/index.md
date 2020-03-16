@@ -16,7 +16,7 @@ Source code is available on [GitHub](https://github.com/tinrab/go-realtime-colla
 
 Install necessary Go packages.
 
-```
+```bash{outputLines:2-4}
 go get -u github.com/gorilla/websocket \
   github.com/lucasb-eyer/go-colorful \
   github.com/tidwall/gjson \
@@ -550,7 +550,7 @@ The `otherColors` object will hold other clients' colors, where keys will be the
 
 Update `addPoint` function to send a message. For this example, `points` array has only one point. Ideally, points would be sent in batches based on some criteria.
 
-```js{8}
+```js
 function addPoint(x, y, newStroke) {
   var p = { x: x, y: y };
   if (newStroke) {
@@ -558,6 +558,7 @@ function addPoint(x, y, newStroke) {
   } else {
     strokes[strokes.length - 1].push(p);
   }
+// highlight-next-line
   socket.send(JSON.stringify({ kind: MESSAGE_STROKE, points: [p], finish: newStroke }));
   update();
 }
@@ -565,9 +566,10 @@ function addPoint(x, y, newStroke) {
 
 Send a "clear" message in the clear handler.
 
-```js{3}
+```js
 document.getElementById('clearButton').onclick = function () {
   strokes = [];
+// highlight-next-line
   socket.send(JSON.stringify({ kind: MESSAGE_CLEAR }));
   update();
 };
@@ -669,8 +671,8 @@ function update() {
 
 To run your app, buld and run the server.
 
-```
-$ go build -o server && ./server
+```bash
+go build -o server && ./server
 ```
 
 Then open `client/index.html` file in your browser.

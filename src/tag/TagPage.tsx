@@ -34,7 +34,7 @@ type TagPageProps = {
 
 const TagPage: React.FC<TagPageProps> = (props: TagPageProps) => {
   const {
-    tagPage: { title, description, url, page, pageCount, tag },
+    tagPage: { title, description, url, pageNumber, pageCount, tag },
     articles,
   } = props;
   const classes = useStyles();
@@ -52,10 +52,10 @@ const TagPage: React.FC<TagPageProps> = (props: TagPageProps) => {
       </Grid>
       <Pagination
         className={classes.pagination}
-        page={page}
+        page={pageNumber}
         count={pageCount}
         color="primary"
-        size="large"
+        size="medium"
         renderItem={(item: { page: number }): React.ReactNode => (
           <PaginationItem
             className={classes.paginationLink}

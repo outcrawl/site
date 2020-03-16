@@ -64,11 +64,11 @@ const TagTemplate: React.FC<TagTemplateProps> = (props: TagTemplateProps) => {
   } as ArticleData));
 
   const tagPage: TagPageData = {
-    title: tag.title + ' - ' + siteMetadata.description,
+    title: tag.title + ' - ' + siteMetadata.title,
     description: siteMetadata.description + '.',
     url: siteMetadata.siteUrl + '/tags/' + tag.slug + (page === 1 ? '' : `/page/${page}`),
     tag,
-    page,
+    pageNumber: page,
     pageCount,
   };
 

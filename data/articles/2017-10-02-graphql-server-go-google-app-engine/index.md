@@ -40,8 +40,8 @@ func init() {
 
 Run the development server and keep it running in the background.
 
-```
-$ dev_appserver.py .
+```bash
+dev_appserver.py .
 ```
 
 Write some utility functions inside `utilities.go` file.
@@ -90,8 +90,8 @@ type Post struct {
 
 First off, install [graphql-go/graphql](https://github.com/graphql-go/graphql) package to work with GraphQL.
 
-```
-$ go get github.com/graphql-go/graphql
+```bash
+go get github.com/graphql-go/graphql
 ```
 
 ## Creating users
@@ -192,8 +192,8 @@ mutation {
 
 Run it using cURL.
 
-```
-$ curl localhost:8080 -d 'mutation{john:createUser(name:"John"){id},bob:createUser(name:"Bob"){id},mark:createUser(name:"Mark"){id}}'
+```bash{outputLines:2-14}
+curl localhost:8080 -d 'mutation{john:createUser(name:"John"){id},bob:createUser(name:"Bob"){id},mark:createUser(name:"Mark"){id}}'
 {
   "data": {
     "bob": {
@@ -227,7 +227,7 @@ var postType = graphql.NewObject(graphql.ObjectConfig{
 
 Update the `rootMutation`.
 
-```go{11-17}
+```go
 var rootMutation = graphql.NewObject(graphql.ObjectConfig{
   Name: "RootMutation",
   Fields: graphql.Fields{
@@ -238,6 +238,7 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
       },
       Resolve: createUser,
     },
+// highlight-start
     "createPost": &graphql.Field{
       Type: postType,
       Args: graphql.FieldConfigArgument{
@@ -246,6 +247,7 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
       },
       Resolve: createPost,
     },
+// highlight-end
   },
 })
 ```
@@ -273,8 +275,8 @@ func createPost(params graphql.ResolveParams) (interface{}, error) {
 
 Create a few posts for one of the existing users.
 
-```
-$ curl localhost:8080 -d 'mutation{a:createPost(userId:"5768037999312896",content:"Hi!"){id,content},b:createPost(userId:"5768037999312896",content:"lol"){id,content},c:createPost(userId:"5768037999312896",content:"GraphQL is pretty cool!"){id,content}}'
+```bash{outputLines:2-17}
+curl localhost:8080 -d 'mutation{a:createPost(userId:"5768037999312896",content:"Hi!"){id,content},b:createPost(userId:"5768037999312896",content:"lol"){id,content},c:createPost(userId:"5768037999312896",content:"GraphQL is pretty cool!"){id,content}}'
 {
   "data": {
     "a": {
@@ -335,10 +337,11 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 
 Update the `init` function.
 
-```go{4}
+```go
 func init() {
   schema, _ = graphql.NewSchema(graphql.SchemaConfig{
     Mutation: rootMutation,
+// highlight-next-line
     Query:    rootQuery,
   })
   http.HandleFunc("/", handler)
@@ -392,8 +395,8 @@ You could pass in more arguments alongside `limit` and `offset`. For example, a 
 
 Test it out.
 
-```
-$ curl localhost:8080 -d '{posts{totalCount,nodes{id,content,createdAt}}}'
+```bash{outputLines:2-24}
+curl localhost:8080 -d '{posts{totalCount,nodes{id,content,createdAt}}}'
 {
   "data": {
     "posts": {
@@ -421,8 +424,8 @@ $ curl localhost:8080 -d '{posts{totalCount,nodes{id,content,createdAt}}}'
 
 Try with limit and offset.
 
-```
-$ curl localhost:8080 -d '{posts(limit:1,offset:1){totalCount,nodes{id,content,createdAt}}}'
+```bash{outputLines:2-13}
+curl localhost:8080 -d '{posts(limit:1,offset:1){totalCount,nodes{id,content,createdAt}}}'
 {
   "data": {
     "posts": {
@@ -443,12 +446,13 @@ To fetch a user, you must perform a user query (`queryUser`) and then a nested q
 
 Update the user type.
 
-```go{6}
+```go
 var userType = graphql.NewObject(graphql.ObjectConfig{
   Name: "User",
   Fields: graphql.Fields{
     "id":    &graphql.Field{Type: graphql.String},
     "name":  &graphql.Field{Type: graphql.String},
+// highlight-next-line
     "posts": makeListField(makeNodeListType("PostList", postType), queryPostsByUser),
   },
 })
@@ -456,10 +460,11 @@ var userType = graphql.NewObject(graphql.ObjectConfig{
 
 Update the root query.
 
-```go{4-10}
+```go
 var rootQuery = graphql.NewObject(graphql.ObjectConfig{
   Name: "RootQuery",
   Fields: graphql.Fields{
+// highlight-start
     "user": &graphql.Field{
       Type: userType,
       Args: graphql.FieldConfigArgument{
@@ -467,6 +472,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
       },
       Resolve: queryUser,
     },
+// highlight-end
     "posts": makeListField(makeNodeListType("PostList", postType), queryPosts),
   },
 })
@@ -518,8 +524,8 @@ func queryPostsByUser(params graphql.ResolveParams) (interface{}, error) {
 
 Fetch posts of one of the users.
 
-```
-$ curl localhost:8080 -d '{user(id:"5768037999312896"){name,posts{totalCount,nodes{content}}}}'
+```bash{outputLines:2-21}
+curl localhost:8080 -d '{user(id:"5768037999312896"){name,posts{totalCount,nodes{content}}}}'
 {
   "data": {
     "user": {

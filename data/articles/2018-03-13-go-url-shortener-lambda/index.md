@@ -43,8 +43,8 @@ Create `urlshortenerlinks_table.json` file, which describes the table.
 
 Run the following command to create the table on AWS.
 
-```
-$ aws dynamodb create-table --region us-east-1 --cli-input-json file://urlshortenerlinks_table.json
+```bash
+aws dynamodb create-table --region us-east-1 --cli-input-json file://urlshortenerlinks_table.json
 ```
 
 # Shorten function
@@ -256,31 +256,31 @@ Note the **Role ARN** value.
 
 Build both Go apps on Linux and macOS with the following commands.
 
-```
-$ GOOS=linux GOARCH=amd64 go build -o shorten main.go
-$ zip deployment.zip shorten
+```bash
+GOOS=linux GOARCH=amd64 go build -o shorten main.go
+zip deployment.zip shorten
 ```
 
 And if you're on Windows, you'll need to use `build-lambda-zip` tool.
 
-```
-$ go get -u github.com/aws/aws-lambda-go/cmd/build-lambda-zip
-$ set GOOS=linux
-$ set GOARCH=amd64
-$ go build -o shorten main.go
-$ build-lambda-zip -o deployment.zip shorten
+```bash
+go get -u github.com/aws/aws-lambda-go/cmd/build-lambda-zip
+set GOOS=linux
+set GOARCH=amd64
+go build -o shorten main.go
+build-lambda-zip -o deployment.zip shorten
 ```
 
 Replace `$ROLE` with your Role ARN, and deploy both functions.
 
-```
-$ aws lambda create-function --region us-east-1 --function-name ShortenFunction --zip-file fileb://./deployment.zip --runtime go1.x --tracing-config Mode=Active --role $ROLE --handler shorten
+```bash
+aws lambda create-function --region us-east-1 --function-name ShortenFunction --zip-file fileb://./deployment.zip --runtime go1.x --tracing-config Mode=Active --role $ROLE --handler shorten
 ```
 
 If the function already exist, use `update-function-code` command instead.
 
-```
-$ aws lambda update-function-code --function-name ShortenFunction --region us-east-1 --zip-file fileb://./deployment.zip
+```bash
+aws lambda update-function-code --function-name ShortenFunction --region us-east-1 --zip-file fileb://./deployment.zip
 ```
 
 Similarly, deploy the redirect function by changing the name from `ShortenFunction` to `RedirectFunction` and executable file from `shorten` to `redirect`.
@@ -301,8 +301,8 @@ To make your URL shortener API public, click **Actions/Deploy API**. Select "[Ne
 
 Test your URL shortener API.
 
-```
-$ curl $INVOKE_URL/shorten -X POST -d '{"url":"https://outcrawl.com/getting-started-microservices-go-grpc-kubernetes/"}'
+```bash{outputLines:2}
+curl $INVOKE_URL/shorten -X POST -d '{"url":"https://outcrawl.com/getting-started-microservices-go-grpc-kubernetes/"}'
 {"short_url":"SHORT_URL"}
 ```
 

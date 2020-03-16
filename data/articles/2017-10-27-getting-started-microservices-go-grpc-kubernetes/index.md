@@ -22,15 +22,15 @@ Install [Minikube](https://github.com/kubernetes/minikube), [kubectl](https://ku
 
 Run Minikube. Certain commands will require root privileges.
 
-```
-$ minikube start [--vm-driver=&lt;driver&gt;]
-$ kubectl cluster-info
+```bash
+minikube start [--vm-driver=&lt;driver&gt;]
+kubectl cluster-info
 ```
 
 To speed up the development, set docker to reuse Docker daemon running inside the Minikube virtual machine.
 
-```
-$ eval $(minikube docker-env)
+```bash
+eval $(minikube docker-env)
 ```
 
 This way, you don't have to push images to a Docker registry. For running your apps on [Google Container Engine](https://cloud.google.com/container-engine/) you'd use [Container Registry](https://cloud.google.com/container-registry/) or set up a [private container registry](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/registry) inside the cluster.
@@ -62,8 +62,8 @@ service GCDService {
 
 Navigate to the `pb` directory and run the following command.
 
-```
-$ protoc -I . --go_out=plugins=grpc:. ./*.proto
+```bash
+protoc -I . --go_out=plugins=grpc:. ./*.proto
 ```
 
 Compilation should produce `gcd.pb.go` file.
@@ -211,9 +211,9 @@ CMD [ "gcd" ]
 
 Build both images. If you switched to Minikube's Docker daemon, they will become available inside the VM.
 
-```
-$ docker build -t local/gcd -f Dockerfile.gcd .
-$ docker build -t local/api -f Dockerfile.api .
+```bash
+docker build -t local/gcd -f Dockerfile.gcd .
+docker build -t local/api -f Dockerfile.api .
 ```
 
 # Deploying to Kubernetes cluster
@@ -305,15 +305,15 @@ spec:
 
 To create these resources inside the cluster, run the following commands.
 
-```
-$ kubectl create -f api.yaml
-$ kubectl create -f gcd.yaml
+```bash
+kubectl create -f api.yaml
+kubectl create -f gcd.yaml
 ```
 
 Check if all pods are running. By specifying `-w` flag, you can watch for changes.
 
-```
-$ kubectl get pods -w
+```bash{outputLines:2-6}
+kubectl get pods -w
 NAME                             READY     STATUS    RESTARTS   AGE
 api-deployment-778049682-3vd0z   1/1       Running   0          3s
 gcd-deployment-544390878-0zgc8   1/1       Running   0          2s
@@ -325,14 +325,14 @@ As set in the configuration files, API service runs on a single pod and the GCD 
 
 Get the URL of the API service.
 
-```
-$ minikube service api-service --url
+```bash
+minikube service api-service --url
 ```
 
 Finally, try it out.
 
-```
-$ curl http://192.168.99.100:32602/gcd/294/462
+```bash
+curl http://192.168.99.100:32602/gcd/294/462
 ```
 
 # Conclusion
