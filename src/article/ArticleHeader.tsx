@@ -1,9 +1,9 @@
-import React from 'react';
-import { ArticlePageData } from './types';
-import classNames from 'classnames';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import React from 'react';
 import AuthorCard from '../author/AuthorCard';
 import ArticleShare from './ArticleShare';
+import { ArticlePageData } from './types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 type ArticleHeaderProps = {
   articlePage: ArticlePageData;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLElement>;
 
 const ArticleHeader: React.FC<ArticleHeaderProps> = (props: ArticleHeaderProps) => {
   const { articlePage: { article }, className } = props;

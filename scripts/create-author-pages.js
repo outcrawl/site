@@ -14,14 +14,7 @@ module.exports = (params) => {
           edges {
             node {
               authors {
-                name
                 slug
-                bio
-                social {
-                  github
-                  twitter
-                  facebook
-                }
               }
             }
           }

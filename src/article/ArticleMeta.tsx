@@ -1,9 +1,9 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import { ArticlePageData } from './types';
 import escapeHTML from 'escape-html';
 import { graphql, StaticQuery } from 'gatsby';
+import React from 'react';
+import Helmet from 'react-helmet';
 import { SiteMetadata } from '../core/types';
+import { ArticlePageData } from './types';
 
 type ArticleMetaProps = {
   articlePage: ArticlePageData;

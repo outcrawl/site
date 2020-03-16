@@ -1,8 +1,10 @@
-import React from 'react';
 import { graphql } from 'gatsby';
+import React from 'react';
 import { ArticleData } from '../article/types';
 import { AuthorData } from '../author/types';
+import { SiteMetadata } from '../core/types';
 import HomePage from '../home/HomePage';
+import { HomePageData } from '../home/types';
 
 type HomeTemplateProps = {
   pathContext: {
@@ -40,10 +42,14 @@ type HomeTemplateProps = {
         };
       }[];
     };
+    site: {
+      siteMetadata: SiteMetadata;
+    };
   };
 };
 
-const HomeTemplate: React.FC<HomeTemplateProps> = ({ pathContext, data }: HomeTemplateProps) => {
+const HomeTemplate: React.FC<HomeTemplateProps> = (props: HomeTemplateProps) => {
+  const { pathContext, data, data: { site: { siteMetadata } } } = props;
   const authors = data.authors.edges[0].node.authors;
   const page = pathContext.page;
   const pageCount = Math.ceil(data.articles.totalCount / pathContext.articlesPerPage);
@@ -54,13 +60,15 @@ const HomeTemplate: React.FC<HomeTemplateProps> = ({ pathContext, data }: HomeTe
     author: authors.find((author) => author.slug === fields.author),
   } as ArticleData));
 
-  return (
-    <HomePage
-      page={page}
-      pageCount={pageCount}
-      articles={articles}
-    />
-  );
+  const homePage: HomePageData = {
+    title: siteMetadata.title + ' - ' + siteMetadata.description,
+    description: siteMetadata.description + '.',
+    url: siteMetadata.siteUrl + (page === 1 ? '' : `/page/${page}`),
+    page: page,
+    articles,
+  };
+
+  return <HomePage homePage={homePage} pageCount={pageCount}/>;
 };
 
 export default HomeTemplate;
@@ -73,13 +81,7 @@ export const pageQuery = graphql`
           authors {
             name
             slug
-            bio
             avatar
-            social {
-              twitter
-              github
-              facebook
-            }
           }
         }
       }
@@ -107,6 +109,13 @@ export const pageQuery = graphql`
             }
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        siteUrl
       }
     }
   }

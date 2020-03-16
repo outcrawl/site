@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { SvgIcon } from '@material-ui/core';
 import { SvgIconProps } from '@material-ui/core/SvgIcon/SvgIcon';
+import * as React from 'react';
 
 const GitHub: React.FC<SvgIconProps> = (props: SvgIconProps) => (
   <SvgIcon {...props}>

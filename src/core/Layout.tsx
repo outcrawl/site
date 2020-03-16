@@ -1,10 +1,10 @@
-import React from 'react';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
-import theme from './theme';
-import Header from './Header';
-import Footer from './Footer';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import './code-theme.scss';
+import Footer from './Footer';
+import Header from './Header';
+import theme from './theme';
 
 const useStyles = makeStyles({
   '@global': {

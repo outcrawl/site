@@ -7,3 +7,9 @@ export interface SiteMetadata {
   siteUrl: string;
   articlesPerPage: number;
 }
+
+export interface PageData {
+  title: string;
+  description: string;
+  url: string;
+}

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'gatsby';
 import { Chip, createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import { Link } from 'gatsby';
+import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     paddingBottom: theme.spacing(0.5),
     paddingLeft: 0,
     paddingRight: 0,
-    alignSelf: 'last baseline',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
@@ -21,10 +20,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 type TagProps = {
   title: string;
   to: string;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLElement>;
 
 const Tag: React.FC<TagProps> = (props: TagProps) => {
-  const { title, to, className } = props;
+  const { className, title, to } = props;
   const classes = useStyles();
 
   return (

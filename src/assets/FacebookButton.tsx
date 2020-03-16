@@ -1,8 +1,8 @@
-import React from 'react';
 import { createStyles, Fab, Theme } from '@material-ui/core';
-import { Facebook } from './icons';
-import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import React from 'react';
+import { Facebook } from './icons';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {

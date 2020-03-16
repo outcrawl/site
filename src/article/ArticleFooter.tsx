@@ -1,10 +1,10 @@
-import React, { HTMLAttributes } from 'react';
-import { ArticlePageData } from './types';
+import { Box } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import React, { HTMLAttributes } from 'react';
 import Tag from '../tag/Tag';
 import ArticleShare from './ArticleShare';
-import { Box } from '@material-ui/core';
-import classNames from 'classnames';
+import { ArticlePageData } from './types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -13,12 +13,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
   },
   tag: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
-    // alignItems: 'center',
-    // marginBottom: theme.spacing(1),
     marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(0.5),
   },
   share: {
     marginLeft: 'auto',
@@ -30,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 type ArticleFooterProps = {
   articlePage: ArticlePageData;
-} & HTMLAttributes<HTMLDivElement>;
+} & HTMLAttributes<HTMLElement>;
 
 const ArticleFooter: React.FC<ArticleFooterProps> = (props: ArticleFooterProps) => {
   const { articlePage, className } = props;
@@ -38,7 +34,7 @@ const ArticleFooter: React.FC<ArticleFooterProps> = (props: ArticleFooterProps) 
 
   return (
     <Box component="section" display="flex" className={classNames(className, classes.root)}>
-      <Box>
+      <Box display="flex" flexWrap="wrap">
         {articlePage.tags.map((tag, i) => (
           <Tag key={i} className={classes.tag} title={tag.title} to={`/tags/${tag.slug}`}/>
         ))}

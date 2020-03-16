@@ -1,11 +1,11 @@
-import React from 'react';
 import { graphql } from 'gatsby';
+import React from 'react';
+import ArticlePage from '../article/ArticlePage';
 import { ArticleData, ArticlePageData } from '../article/types';
 import { AuthorData } from '../author/types';
-import ArticlePage from '../article/ArticlePage';
-import { TagData } from '../tag/types';
 import { shuffle } from '../common/arrays';
 import { SiteMetadata } from '../core/types';
+import { TagData } from '../tag/types';
 
 type ArticleTemplateProps = {
   data: {

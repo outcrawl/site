@@ -1,5 +1,5 @@
-import React, { HTMLAttributes } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React, { HTMLAttributes } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 type PageContentProps = {
   html: string;
-} & HTMLAttributes<HTMLDivElement>;
+} & HTMLAttributes<HTMLElement>;
 
 const PageContent: React.FC<PageContentProps> = (props: PageContentProps) => {
   const { html, ...rest } = props;

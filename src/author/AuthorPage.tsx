@@ -1,9 +1,9 @@
-import React from 'react';
-import { AuthorArticleData, AuthorData } from './types';
-import Page from '../core/Page';
-import AuthorHeader from './AuthorHeader';
-import AuthorArticleList from './AuthorArticleList';
 import { Box } from '@material-ui/core';
+import React from 'react';
+import Page from '../core/Page';
+import AuthorArticleList from './AuthorArticleList';
+import AuthorHeader from './AuthorHeader';
+import { AuthorArticleData, AuthorData } from './types';
 
 type AuthorPageProps = {
   author: AuthorData;

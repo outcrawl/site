@@ -1,8 +1,8 @@
-import React from 'react';
-import { ArticleData } from './types';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TwitterButton from '../assets/TwitterButton';
+import React from 'react';
 import FacebookButton from '../assets/FacebookButton';
+import TwitterButton from '../assets/TwitterButton';
+import { ArticleData } from './types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   facebookButton: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 type ArticleShareProps = {
   article: ArticleData;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLElement>;
 
 const ArticleShare: React.FC<ArticleShareProps> = (props: ArticleShareProps) => {
   const { article, className } = props;

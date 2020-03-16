@@ -1,10 +1,10 @@
-import React from 'react';
-import { ArticleData } from './types';
 import { Box, Card, CardContent, createStyles, Theme, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
-import AuthorCard from '../author/AuthorCard';
 import Img from 'gatsby-image';
+import React from 'react';
+import AuthorCard from '../author/AuthorCard';
+import { ArticleData } from './types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   titleLink: {

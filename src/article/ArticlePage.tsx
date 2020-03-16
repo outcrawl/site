@@ -1,15 +1,15 @@
-import React from 'react';
-import Img from 'gatsby-image';
-import { ArticlePageData } from './types';
-import Page from '../core/Page';
-import ArticleMeta from './ArticleMeta';
 import { Box, createStyles, Theme, Typography } from '@material-ui/core';
-import ArticleHeader from './ArticleHeader';
-import ArticleFooter from './ArticleFooter';
 import { makeStyles } from '@material-ui/core/styles';
+import Img from 'gatsby-image';
+import React from 'react';
+import Page from '../core/Page';
 import PageContent from '../core/PageContent';
 import Newsletter from '../newsletter/Newsletter';
+import ArticleFooter from './ArticleFooter';
+import ArticleHeader from './ArticleHeader';
+import ArticleMeta from './ArticleMeta';
 import RelatedArticleList from './RelatedArticleList';
+import { ArticlePageData } from './types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   header: {

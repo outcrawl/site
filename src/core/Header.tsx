@@ -1,7 +1,7 @@
-import React from 'react';
 import { AppBar, createStyles, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
+import React from 'react';
 import LogoText from '../assets/LogoText';
 
 const useStyles = makeStyles(createStyles({

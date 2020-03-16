@@ -1,11 +1,11 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { AuthorData } from './types';
 import { Box, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React from 'react';
 import FacebookButton from '../assets/FacebookButton';
-import TwitterButton from '../assets/TwitterButton';
 import GitHubButton from '../assets/GitHubButton';
 import LinkedinButton from '../assets/LinkedinButton';
+import TwitterButton from '../assets/TwitterButton';
+import { AuthorData } from './types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   avatar: {

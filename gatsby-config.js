@@ -114,7 +114,7 @@ const plugins = [
 module.exports = {
   siteMetadata: {
     title: 'Outcrawl',
-    description: 'Software engineering without nonsense.',
+    description: 'Software engineering without nonsense',
     copyright: '2020 © Outcrawl. All rights reserved.',
     twitterId: '@tinrab',
     facebookId: '863987620425609',

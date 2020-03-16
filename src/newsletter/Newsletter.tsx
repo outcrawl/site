@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   Box,
   Button,
@@ -11,13 +10,14 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
-import { Link } from 'gatsby';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { makeStyles } from '@material-ui/core/styles';
-import { useRef, useState } from 'react';
-import newsletterApi from './newsletter-api';
+import Alert from '@material-ui/lab/Alert';
 import classNames from 'classnames';
+import { Link } from 'gatsby';
+import * as React from 'react';
+import { useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import newsletterApi from './newsletter-api';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-type NewsletterProps = React.HTMLAttributes<HTMLDivElement>;
+type NewsletterProps = React.HTMLAttributes<HTMLElement>;
 
 type NewsletterState = {
   snackbar: {

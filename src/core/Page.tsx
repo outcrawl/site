@@ -1,8 +1,8 @@
-import React from 'react';
-import Layout from './Layout';
 import { Container, createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import React from 'react';
+import Layout from './Layout';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {

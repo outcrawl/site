@@ -1,5 +1,5 @@
-import React from 'react';
 import { graphql } from 'gatsby';
+import React from 'react';
 import AuthorPage from '../author/AuthorPage';
 import { AuthorArticleData, AuthorData } from '../author/types';
 import { SiteMetadata } from '../core/types';

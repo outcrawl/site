@@ -1,7 +1,7 @@
-import React from 'react';
 import { Box, Typography } from '@material-ui/core';
-import { AuthorArticleData } from './types';
 import { Link } from 'gatsby';
+import React from 'react';
+import { AuthorArticleData } from './types';
 
 type AuthorArticleListProps = {
   articles: AuthorArticleData[];

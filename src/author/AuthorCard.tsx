@@ -1,9 +1,9 @@
-import React from 'react';
-import { AuthorData } from './types';
+import { Avatar, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { Link } from 'gatsby';
-import { Avatar, Typography } from '@material-ui/core';
+import React from 'react';
+import { AuthorData } from './types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 type AuthorCardProps = {
   author: AuthorData;
   subtitle?: string;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLElement>;
 
 const AuthorCard: React.FC<AuthorCardProps> = (props: AuthorCardProps) => {
   const { author, subtitle, className } = props;
