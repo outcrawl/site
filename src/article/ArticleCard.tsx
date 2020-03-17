@@ -14,14 +14,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 type ArticleCardProps = {
   article: ArticleData;
-}
+} & React.HTMLAttributes<HTMLElement>;
 
 const ArticleCard: React.FC<ArticleCardProps> = (props: ArticleCardProps) => {
-  const { article } = props;
+  const { className, article } = props;
   const classes = useStyles();
 
   return (
-    <Card>
+    <Card className={className} elevation={2}>
       {article.cover && (
         <Link to={'/' + article.slug}>
           <Img fluid={article.cover}/>
@@ -34,9 +34,11 @@ const ArticleCard: React.FC<ArticleCardProps> = (props: ArticleCardProps) => {
           </Typography>
         </Link>
       </CardContent>
-      <Box p={2} pt={0}>
-        {article.author && <AuthorCard author={article.author} subtitle={article.date}/>}
-      </Box>
+      {article.author && (
+        <Box p={2} pt={0}>
+          <AuthorCard author={article.author} subtitle={article.date}/>
+        </Box>
+      )}
     </Card>
   );
 };

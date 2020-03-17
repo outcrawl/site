@@ -28,7 +28,7 @@ type HomeTemplateProps = {
             slug: string;
             date: string;
             author: string;
-            cover: {
+            cover?: {
               childImageSharp: {
                 fluid: {
                   aspectRatio: number;
@@ -56,7 +56,7 @@ const HomeTemplate: React.FC<HomeTemplateProps> = (props: HomeTemplateProps) => 
 
   const articles = data.articles.edges.map(({ node: { fields } }) => ({
     ...fields,
-    cover: fields.cover.childImageSharp.fluid,
+    cover: fields.cover?.childImageSharp.fluid,
     author: authors.find((author) => author.slug === fields.author),
   } as ArticleData));
 

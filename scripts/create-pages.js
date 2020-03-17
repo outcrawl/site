@@ -31,17 +31,15 @@ module.exports = (params) => {
         return reject(result.errors);
       }
 
-      const {
-        allMarkdownRemark: { edges: pages },
-      } = result.data;
+      const { allMarkdownRemark: { edges: pages } } = result.data;
 
-      for (let i = 0; i < pages.length; i++) {
-        const fields = pages[i].node.fields;
-
-        let tags = [];
-        if (fields.tags) {
-          tags = fields.tags.map((tag) => tag.slug);
+      for (const page of pages) {
+        if (!page.node.fields) {
+          continue;
         }
+
+        const fields = page.node.fields;
+        let tags = (fields.tags || []).map((tag) => tag.slug);
 
         createPage({
           path: fields.slug,

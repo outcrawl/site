@@ -20,7 +20,7 @@ type ArticleTemplateProps = {
           title: string;
           slug: string;
         }[];
-        cover: {
+        cover?: {
           publicURL: string;
           childImageSharp: {
             fluid: {
@@ -79,7 +79,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
       url: `${siteMetadata.siteUrl}/${article.slug}`,
       author,
       date: article.date,
-      cover: {
+      cover: article.cover && {
         ...article.cover.childImageSharp.fluid,
         url: article.cover.publicURL,
         width: 1280,
@@ -98,7 +98,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
 export default ArticleTemplate;
 
 export const pageQuery = graphql`
-  query($slug: String!, $author: String!, $tags: [String]!) {
+  query($slug: String!, $author: String, $tags: [String]!) {
     article: markdownRemark(fields: {slug: {eq: $slug}}) {
       html
       fields {

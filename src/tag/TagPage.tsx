@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import { Link } from 'gatsby';
 import React from 'react';
-import ArticleCard from '../article/ArticleCard';
+import ArticleCardGrid from '../article/ArticleCardGrid';
 import { ArticleData } from '../article/types';
 import BasicPageMeta from '../core/BasicPageMeta';
 import Page from '../core/Page';
@@ -43,13 +43,7 @@ const TagPage: React.FC<TagPageProps> = (props: TagPageProps) => {
     <Page>
       <BasicPageMeta title={title} description={description} url={url}/>
       <Typography className={classes.title} variant="h1">{tag.title}</Typography>
-      <Grid container spacing={2}>
-        {articles.map((article) => (
-          <Grid key={article.slug} item xs={12} sm={6}>
-            <ArticleCard article={article} key={article.slug}/>
-          </Grid>
-        ))}
-      </Grid>
+      <ArticleCardGrid articles={articles}/>
       <Pagination
         className={classes.pagination}
         page={pageNumber}

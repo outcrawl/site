@@ -4,6 +4,7 @@ import { Pagination, PaginationItem } from '@material-ui/lab';
 import { Link } from 'gatsby';
 import React from 'react';
 import ArticleCard from '../article/ArticleCard';
+import ArticleCardGrid from '../article/ArticleCardGrid';
 import BasicPageMeta from '../core/BasicPageMeta';
 import Page from '../core/Page';
 import { HomePageData } from './types';
@@ -34,13 +35,7 @@ const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
   return (
     <Page>
       <BasicPageMeta {...homePage}/>
-      <Grid container spacing={2}>
-        {homePage.articles.map((article) => (
-          <Grid key={article.slug} item xs={12} sm={6}>
-            <ArticleCard article={article} key={article.slug}/>
-          </Grid>
-        ))}
-      </Grid>
+      <ArticleCardGrid articles={homePage.articles}/>
       <Pagination
         className={classes.pagination}
         page={homePage.pageNumber}
