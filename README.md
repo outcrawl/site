@@ -1,6 +1,6 @@
 # Outcrawl
 
-Software development without nonsense.
+Software engineering without nonsense.
 
 ## Development
 
