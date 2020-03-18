@@ -24,29 +24,29 @@ Create a new project on Google Cloud [Console](https://console.cloud.google.com)
 
 Clone or download [tinrab/simple-online-leaderboard](https://github.com/tinrab/simple-online-leaderboard) repository.
 
-```
-$ git clone https://github.com/tinrab/simple-online-leaderboard
+```bash
+git clone https://github.com/tinrab/simple-online-leaderboard
 ```
 
 Navigate to the `simple-online-leaderboard` folder and deploy the service using `gcloud` command. Replace the `PROJECT_ID` with your own ID.
 
-```
-$ cd simple-online-leaderboard
-$ gcloud app deploy . --project=$PROJECT_ID
+```bash
+cd simple-online-leaderboard
+gcloud app deploy . --project=$PROJECT_ID
 ```
 
 Your leaderboard service should now be available at `https://[PROJECT_ID].appspot.com`.
 
 To post a new score, you can issue an HTTP POST request.
 
-```
-$ curl -x POST "https://[PROJECT_ID].appspot.com/api/scores?name=Lambert&score=42&password=12345"
+```bash
+curl -x POST "https://[PROJECT_ID].appspot.com/api/scores?name=Lambert&score=42&password=12345"
 ```
 
 Get all scores with this request.
 
-```
-$ curl "https://[PROJECT_ID].appspot.com/api/scores?skip=0&take=3"
+```bash
+curl "https://[PROJECT_ID].appspot.com/api/scores?skip=0&take=3"
 ```
 
 The response will look similar to this. Scores will be sorted from highest to lowest.
@@ -76,15 +76,17 @@ The `skip` parameter tells how many records to skip, and `take` the maximum numb
 
 Inside your UE4 C++ project, locate the `[PROJECT_NAME].Build.cs` file and add the following dependencies.
 
-```csharp{6-8}
+```csharp
 PublicDependencyModuleNames.AddRange(new string[] {
     "Core",
     "CoreUObject",
     "Engine",
     "InputCore",
+// highlight-start
     "Http",
     "Json",
     "JsonUtilities"
+// highlight-end
 });
 ```
 

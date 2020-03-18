@@ -59,8 +59,8 @@ package server
 
 GraphQL implementation can be generated with the following command:
 
-```
-$ go generate server/graphql.go
+```bash
+go generate server/graphql.go
 ```
 
 # Server
@@ -451,16 +451,16 @@ services:
 
 Build and run server:
 
-```
-$ vgo mod -vendor
-$ docker-compose up -d
+```bash
+vgo mod -vendor
+docker-compose up -d
 ```
 
 Run the Vue app:
 
-```
-$ cd frontend
-$ yarn serve
+```bash
+cd frontend
+yarn serve
 ```
 
 Final result looks like this:

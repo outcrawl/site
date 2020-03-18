@@ -246,8 +246,8 @@ package account
 
 Running the following command will generate code inside `pb` subdirectory.
 
-```
-$ go generate account/server.go
+```bash
+go generate account/server.go
 ```
 
 Server works as an adapter over the `Service` interface, and transforming request and response types accordingly.
@@ -911,8 +911,8 @@ package graph
 
 It can be run with:
 
-```
-$ go generate ./graphql/graph/graph.go
+```bash
+go generate ./graphql/graph/graph.go
 ```
 
 GraphQL server has references to all other services.
@@ -996,9 +996,9 @@ func (s *GraphQLServer) Account_orders(ctx context.Context, obj *Account) ([]Ord
 
 To run Spidey, execute the following commands:
 
-```
-$ vgo vendor
-$ docker-compose up -d --build
+```bash
+vgo vendor
+docker-compose up -d --build
 ```
 
 And open <http://localhost:8000/playground> in your browser.
