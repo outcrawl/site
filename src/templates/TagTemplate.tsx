@@ -76,7 +76,7 @@ const TagTemplate: React.FC<TagTemplateProps> = (props: TagTemplateProps) => {
   const tagPage: TagPageData = {
     title: tag.title + ' - ' + siteMetadata.title,
     description: siteMetadata.description + '.',
-    url: siteMetadata.siteUrl + '/tags/' + tag.slug + (page === 1 ? '' : `/page/${page}`),
+    url: `${siteMetadata.siteUrl}/tags/${tag.slug}/${page === 1 ? '' : `/page/${page}`}`,
     tag,
     pageNumber: page,
     pageCount,

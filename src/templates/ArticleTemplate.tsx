@@ -69,7 +69,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
     .map(({ node: { fields: article } }) => ({
       title: article.title,
       slug: article.slug,
-      url: `${siteMetadata.siteUrl}/${article.slug}`,
+      url: `${siteMetadata.siteUrl}/${article.slug}/`,
     } as ArticleData));
 
   const related = shuffle(relatedArticles)
@@ -80,7 +80,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
     article: {
       title: article.title,
       slug: article.slug,
-      url: `${siteMetadata.siteUrl}/${article.slug}`,
+      url: `${siteMetadata.siteUrl}/${article.slug}/`,
       author,
       date: article.date,
       cover: article.cover && {

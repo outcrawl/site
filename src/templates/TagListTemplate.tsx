@@ -40,7 +40,7 @@ const TagListTemplate: React.FC<TagListTemplateProps> = (props: TagListTemplateP
   const tagListPage: PageData = {
     title: 'Tags - ' + siteMetadata.title,
     description: siteMetadata.description + '.',
-    url: siteMetadata.siteUrl + '/tags',
+    url: siteMetadata.siteUrl + '/tags/',
   };
 
   return <TagListPage page={tagListPage} tagGroups={tagGroups}/>;

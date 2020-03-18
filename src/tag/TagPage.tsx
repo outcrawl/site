@@ -54,7 +54,7 @@ const TagPage: React.FC<TagPageProps> = (props: TagPageProps) => {
           <PaginationItem
             className={classes.paginationLink}
             component={Link}
-            to={item.page === 1 ? `/tags/${tag.slug}` : `tags/${tag.slug}/page/${item.page}`}
+            to={item.page === 1 ? `/tags/${tag.slug}/` : `tags/${tag.slug}/page/${item.page}/`}
             {...item}
           />
         )}

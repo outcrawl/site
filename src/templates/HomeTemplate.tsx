@@ -73,7 +73,7 @@ const HomeTemplate: React.FC<HomeTemplateProps> = (props: HomeTemplateProps) => 
   const homePage: HomePageData = {
     title: siteMetadata.title + ' - ' + siteMetadata.description,
     description: siteMetadata.description + '.',
-    url: siteMetadata.siteUrl + (page === 1 ? '' : `/page/${page}`),
+    url: siteMetadata.siteUrl + (page === 1 ? '/' : `/page/${page}/`),
     pageNumber: page,
     articles,
   };

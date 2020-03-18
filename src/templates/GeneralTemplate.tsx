@@ -25,7 +25,7 @@ const GeneralTemplate: React.FC<GeneralTemplateProps> = (props: GeneralTemplateP
   const generalPage: GeneralPageData = {
     ...page.fields,
     html: page.html,
-    url: `${siteMetadata.siteUrl}/${page.fields.slug}`,
+    url: `${siteMetadata.siteUrl}/${page.fields.slug}/`,
   };
 
   return <GeneralPage generalPage={generalPage}/>;

@@ -27,7 +27,7 @@ const AuthorArticleList: React.FC<AuthorArticleListProps> = (props: AuthorArticl
           <ul>
             {articlesByDate[date].map((article) => (
               <li key={article.slug}>
-                <Link to={'/' + article.slug}>{article.title}</Link>
+                <Link to={`/${article.slug}/`}>{article.title}</Link>
               </li>
             ))}
           </ul>

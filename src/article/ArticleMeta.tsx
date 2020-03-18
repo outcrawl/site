@@ -91,7 +91,7 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
                 "description":"${description}",
                 "mainEntityOfPage":{
                   "@type":"WebPage",
-                  "@id":"${siteMetadata.siteUrl}"
+                  "@id":"${siteMetadata.siteUrl}/"
                 }
               }`}
             </script>
