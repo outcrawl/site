@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 
 const LogoText: React.FC<HTMLAttributes<HTMLOrSVGElement>> = (props: HTMLAttributes<HTMLOrSVGElement>) =>
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 256"><title>logo-text-outline</title>
+  <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 256">
     <g id="logo-text">
       <g id="logo-text-outline">
         <path
