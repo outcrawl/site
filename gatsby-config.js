@@ -39,6 +39,7 @@ const remark = {
           },
         },
       },
+      'gatsby-remark-katex',
     ],
   },
 };
