@@ -66,7 +66,7 @@ const TagTemplate: React.FC<TagTemplateProps> = (props: TagTemplateProps) => {
     ...fields,
     cover: fields.cover && {
       ...fields.cover.childImageSharp.fluid,
-      url: fields.cover.publicURL,
+      url: siteMetadata.siteUrl + fields.cover.publicURL,
       width: fields.cover.childImageSharp.original.width,
       height: fields.cover.childImageSharp.original.height,
     },
