@@ -69,10 +69,10 @@ const Footer: React.FC = () => {
               <Grid item xs={12} sm={6}>
                 <ul className={classes.list}>
                   <li className={classes.listItem}>
-                    <Link to="/about">About</Link>
+                    <Link to="/about/">About</Link>
                   </li>
                   <li className={classes.listItem}>
-                    <Link to="/privacy">Privacy</Link>
+                    <Link to="/privacy/">Privacy</Link>
                   </li>
                 </ul>
               </Grid>
