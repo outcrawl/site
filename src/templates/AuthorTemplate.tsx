@@ -32,13 +32,13 @@ const ArticleTemplate: React.FC<AuthorTemplateProps> = (props: AuthorTemplatePro
   const articles = data.articles.edges.map(({ node: { fields } }) => ({
     ...fields,
     groupDate: fields.date,
-    url: `${siteMetadata.siteUrl}/${fields.slug}`,
+    url: `${siteMetadata.siteUrl}/${fields.slug}/`,
   } as AuthorArticleData));
 
   const page: PageData = {
     title: author.name + ' - ' + siteMetadata.title,
     description: siteMetadata.description + '.',
-    url: siteMetadata.siteUrl + '/authors/' + author.slug,
+    url: siteMetadata.siteUrl + '/authors/' + author.slug + '/',
   };
 
   return <AuthorPage page={page} author={author} articles={articles}/>;

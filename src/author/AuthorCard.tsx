@@ -40,7 +40,7 @@ const AuthorCard: React.FC<AuthorCardProps> = (props: AuthorCardProps) => {
     <div className={classNames(classes.root, className)}>
       <Avatar className={classes.avatar} alt={author.name} src={author.avatar} variant="circle"/>
       <div className={classes.info}>
-        <Link className={classes.name} to={`/authors/${author.slug}`}>
+        <Link className={classes.name} to={`/authors/${author.slug}/`}>
           {author.name}
         </Link>
         {subtitle && (

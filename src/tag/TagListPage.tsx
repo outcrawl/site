@@ -39,7 +39,7 @@ const TagListPage: React.FC<TagListPageProps> = (props: TagListPageProps) => {
             <Link
               key={tag.slug}
               className={classes.tag}
-              to={'/tags/' + tag.slug}
+              to={`/tags/${tag.slug}/`}
               style={{ fontSize: Math.max(size * 10 / tagGroups[0].size, 1) + 'rem' }}
             >
               {tag.title}

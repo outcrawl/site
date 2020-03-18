@@ -23,12 +23,12 @@ const ArticleCard: React.FC<ArticleCardProps> = (props: ArticleCardProps) => {
   return (
     <Card className={className} elevation={2}>
       {article.cover && (
-        <Link to={'/' + article.slug}>
+        <Link to={`/${article.slug}/`}>
           <Img fluid={article.cover}/>
         </Link>
       )}
       <CardContent>
-        <Link to={'/' + article.slug} className={classes.titleLink}>
+        <Link to={`/${article.slug}/`} className={classes.titleLink}>
           <Typography variant="h5">
             {article.title}
           </Typography>
