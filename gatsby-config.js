@@ -1,3 +1,7 @@
+const siteUrl = process.env.NODE_ENV === 'production'
+  ? 'https://outcrawl.com'
+  : 'http://localhost:8000';
+
 const remark = {
   resolve: 'gatsby-transformer-remark',
   options: {
@@ -84,7 +88,7 @@ const plugins = [
     options: {
       name: 'Outcrawl',
       short_name: 'Outcrawl',
-      start_url: '/',
+      start_url: siteUrl + '/',
       background_color: '#ffffff',
       theme_color: '#ffffff',
       display: 'minimal-ui',
@@ -115,16 +119,14 @@ const plugins = [
 
 module.exports = {
   siteMetadata: {
+    siteUrl,
     title: 'Outcrawl',
     description: 'Software engineering without nonsense',
     copyright: '2020 © Outcrawl. All rights reserved.',
     twitterId: '@tinrab',
     facebookId: '863987620425609',
-    siteUrl: process.env.NODE_ENV === 'production'
-      ? 'https://outcrawl.com'
-      : 'http://localhost:8000',
     articlesPerPage: 6,
-    featuredImage: this.siteUrl + '/static/featured.jpg',
+    featuredImage: siteUrl + '/static/featured.jpg',
   },
   plugins,
 };
