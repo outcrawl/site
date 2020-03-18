@@ -53,6 +53,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         margin: 0,
       },
     },
+    '& img': {
+      display: 'block',
+      maxWidth: '100%',
+      margin: '0 auto',
+    },
   },
 }));
 

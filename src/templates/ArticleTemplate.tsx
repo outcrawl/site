@@ -59,7 +59,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
     html: data.article.html,
   };
 
-  const author = data.author.authors.length > 0 ? data.author.authors[0] : undefined;
+  const author = data.author?.authors.length > 0 ? data.author.authors[0] : undefined;
 
   const relatedArticles: ArticleData[] = data.related.edges
     .map(({ node: { fields: article } }) => ({

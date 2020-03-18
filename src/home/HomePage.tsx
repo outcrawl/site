@@ -1,9 +1,8 @@
-import { createStyles, Grid, Theme } from '@material-ui/core';
+import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import { Link } from 'gatsby';
 import React from 'react';
-import ArticleCard from '../article/ArticleCard';
 import ArticleCardGrid from '../article/ArticleCardGrid';
 import BasicPageMeta from '../core/BasicPageMeta';
 import Page from '../core/Page';

@@ -23,7 +23,7 @@ Install [Minikube](https://github.com/kubernetes/minikube), [kubectl](https://ku
 Run Minikube. Certain commands will require root privileges.
 
 ```bash
-minikube start [--vm-driver=&lt;driver&gt;]
+minikube start [--vm-driver=<driver>]
 kubectl cluster-info
 ```
 

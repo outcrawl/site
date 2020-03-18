@@ -30,16 +30,12 @@
       "error",
       "always"
     ]
-//    "object-curly-newline": "off",
-//    "react/jsx-filename-extension": "off",
-//    "react/jsx-tag-spacing": 0,
-//    "react/jsx-props-no-spreading": 0,
-//    "react/jsx-one-expression-per-line": "off",
-//    "import/prefer-default-export": "off",
-//    "react/sort-comp": "off",
-//    "import/extensions": "off"
   },
   "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    },
     "import/resolver": {
       "node": {
         "paths": [

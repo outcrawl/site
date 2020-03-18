@@ -17,7 +17,7 @@ Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), [Doc
 Run Minikube, or configure `kubectl` for some other provider.
 
 ```bash
-minikube start [--vm-driver=&lt;driver&gt;]
+minikube start [--vm-driver=<driver>]
 ```
 
 # Developing services
@@ -94,13 +94,13 @@ docker login
 Run the following command; replacing `<username>` with your Docker Hub username and `<image>` with repository's name.
 
 ```bash
-docker build -t &lt;username&gt;/&lt;image&gt;
+docker build -t <username>/<image>
 ```
 
 Push it to Docker Hub.
 
 ```bash
-docker push &lt;username&gt;/&lt;image&gt;
+docker push <username>/<image>
 ```
 
 # Deploy to Kubernetes

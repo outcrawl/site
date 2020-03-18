@@ -59,7 +59,7 @@ const TagTemplate: React.FC<TagTemplateProps> = (props: TagTemplateProps) => {
 
   const articles = data.articles.edges.map(({ node: { fields } }) => ({
     ...fields,
-    cover: fields.cover.childImageSharp.fluid,
+    cover: fields.cover?.childImageSharp.fluid,
     author: authors.find((author) => author.slug === fields.author),
   } as ArticleData));
 
