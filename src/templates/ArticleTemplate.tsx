@@ -85,7 +85,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
       date: article.date,
       cover: article.cover && {
         ...article.cover.childImageSharp.fluid,
-        url: article.cover.publicURL,
+        url: siteMetadata.siteUrl + article.cover.publicURL,
         width: article.cover.childImageSharp.original.width,
         height: article.cover.childImageSharp.original.height,
       },
