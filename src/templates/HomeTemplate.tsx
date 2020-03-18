@@ -29,7 +29,12 @@ type HomeTemplateProps = {
             date: string;
             author: string;
             cover?: {
+              publicURL: string;
               childImageSharp: {
+                original: {
+                  width: number;
+                  height: number;
+                };
                 fluid: {
                   aspectRatio: number;
                   src: string;
@@ -56,7 +61,12 @@ const HomeTemplate: React.FC<HomeTemplateProps> = (props: HomeTemplateProps) => 
 
   const articles = data.articles.edges.map(({ node: { fields } }) => ({
     ...fields,
-    cover: fields.cover?.childImageSharp.fluid,
+    cover: fields.cover && {
+      ...fields.cover.childImageSharp.fluid,
+      url: fields.cover.publicURL,
+      width: fields.cover.childImageSharp.original.width,
+      height: fields.cover.childImageSharp.original.height,
+    },
     author: authors.find((author) => author.slug === fields.author),
   } as ArticleData));
 
@@ -101,7 +111,12 @@ export const pageQuery = graphql`
             date(formatString:"DD MMMM, YYYY")
             author
             cover {
+              publicURL
               childImageSharp {
+                original {
+                  width
+                  height
+                }
                 fluid(quality: 90) {
                   ...GatsbyImageSharpFluid_noBase64
                 }

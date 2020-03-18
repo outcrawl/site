@@ -26,6 +26,7 @@ const BasicPageMeta: React.FC<BasicPageMetaProps> = (props: BasicPageMetaProps) 
               siteUrl
               twitterId
               facebookId
+              featuredImage
             }
           }
         }
@@ -44,13 +45,12 @@ const BasicPageMeta: React.FC<BasicPageMetaProps> = (props: BasicPageMetaProps) 
             <meta property="fb:app_id" content={siteMetadata.facebookId}/>
             <meta property="og:type" content="website"/>
             <meta property="og:site_name" content={siteMetadata.title}/>
+            <meta property="og:url" content={url}/>
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:site" content={siteMetadata.twitterId}/>
 
-            <meta property="og:image" content={`${siteMetadata.siteUrl}/static/featured.jpg`}/>
-            <meta property='og:image:width' content="1280"/>
-            <meta property='og:image:height' content="1280"/>
-            <meta name="twitter:image" content={`${siteMetadata.siteUrl}/static/featured.jpg`}/>
+            <meta property="og:image" content={siteMetadata.featuredImage}/>
+            <meta name="twitter:image" content={siteMetadata.featuredImage}/>
           </Helmet>
         );
       }}

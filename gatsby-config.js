@@ -122,6 +122,7 @@ module.exports = {
       ? 'https://outcrawl.com'
       : 'http://localhost:8000',
     articlesPerPage: 6,
+    featuredImage: this.siteUrl + '/static/featured.jpg',
   },
   plugins,
 };

@@ -6,6 +6,7 @@ export interface SiteMetadata {
   facebookId: string;
   siteUrl: string;
   articlesPerPage: number;
+  featuredImage: string;
 }
 
 export interface PageData {

@@ -16,6 +16,7 @@ const HomeMeta: React.FC = () => {
               siteUrl
               twitterId
               facebookId
+              featuredImage
             }
           }
         }
@@ -39,10 +40,8 @@ const HomeMeta: React.FC = () => {
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:site" content={siteMetadata.twitterId}/>
 
-            <meta property="og:image" content={`${siteMetadata.siteUrl}/static/featured.jpg`}/>
-            <meta property='og:image:width' content="1280"/>
-            <meta property='og:image:height' content="1280"/>
-            <meta name="twitter:image" content={`${siteMetadata.siteUrl}/static/featured.jpg`}/>
+            <meta property="og:image" content={siteMetadata.featuredImage}/>
+            <meta name="twitter:image" content={siteMetadata.featuredImage}/>
           </Helmet>
         );
       }}

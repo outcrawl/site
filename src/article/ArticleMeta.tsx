@@ -23,6 +23,7 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
               siteUrl
               twitterId
               facebookId
+              featuredImage
             }
           }
         }
@@ -33,6 +34,7 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
         const description = articlePage.description && escapeHTML(articlePage.description);
         const date = article.date && new Date(article.date).toISOString().replace(/T.*$/, '');
         const author = article.author;
+        const imageUrl = article.cover?.url || siteMetadata.featuredImage;
 
         return (
           <Helmet>
@@ -45,13 +47,12 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
             <meta property="fb:app_id" content={siteMetadata.facebookId}/>
             <meta property="og:type" content="website"/>
             <meta property="og:site_name" content={siteMetadata.title}/>
+            <meta property="og:url" content={article.url}/>
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:site" content={siteMetadata.twitterId}/>
 
-            {article.cover && <meta property="og:image" content={article.cover.url}/>}
-            {article.cover && <meta property='og:image:width' content={article.cover.width + ''}/>}
-            {article.cover && <meta property='og:image:height' content={article.cover.height + ''}/>}
-            {article.cover && <meta name="twitter:image" content={article.cover.url}/>}
+            <meta property="og:image" content={imageUrl}/>
+            <meta name="twitter:image" content={imageUrl}/>
 
             <script type="application/ld+json">
               {`{
@@ -83,14 +84,10 @@ const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
                 "headline":"${title}",
                 "url":"${article.url}",
                 "datePublished":"${date}",
-                ${article.cover && `
                   "image":{
                     "@type":"ImageObject",
-                    "url":"${article.cover.url}",
-                    "width":${article.cover.width},
-                    "height":${article.cover.height}
+                    "url":"${imageUrl}"
                   },
-                `}
                 "description":"${description}",
                 "mainEntityOfPage":{
                   "@type":"WebPage",

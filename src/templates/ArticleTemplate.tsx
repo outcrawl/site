@@ -23,6 +23,10 @@ type ArticleTemplateProps = {
         cover?: {
           publicURL: string;
           childImageSharp: {
+            original: {
+              width: number;
+              height: number;
+            };
             fluid: {
               aspectRatio: number;
               src: string;
@@ -82,8 +86,8 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
       cover: article.cover && {
         ...article.cover.childImageSharp.fluid,
         url: article.cover.publicURL,
-        width: 1280,
-        height: 720,
+        width: article.cover.childImageSharp.original.width,
+        height: article.cover.childImageSharp.original.height,
       },
     },
     description: article.description,
@@ -113,6 +117,10 @@ export const pageQuery = graphql`
         cover {
           publicURL
           childImageSharp {
+            original {
+              width
+              height
+            }
             fluid(quality: 90) {
               ...GatsbyImageSharpFluid_noBase64
             }
