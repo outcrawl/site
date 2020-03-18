@@ -37,9 +37,7 @@ If you haven't already, install [Docker](https://docs.docker.com/install/), [Go]
 
 Create a directory for your project inside `$GOPATH`.
 
-<note>
-The project's root directory is assumed to be `github.com/tinrab/meower` throughout this article. Every time a package is added to the Go source file, make sure dependencies are up to date by running `dep ensure`.
-</note>
+> The project's root directory is assumed to be `github.com/tinrab/meower` throughout this article. Every time a package is added to the Go source file, make sure dependencies are up to date by running `dep ensure`.
 
 # Utilities
 
@@ -133,10 +131,11 @@ You can implement an in-memory database, which conforms to `Repository` interfac
 
 Create `docker-compose.yaml` file in your project's root directory and declare the `postgres` service in it.
 
-```yaml{4-10}
+```yaml
 version: "3.6"
 
 services:
+# highlight-start
   postgres:
     build: "./postgres"
     restart: "always"
@@ -144,6 +143,7 @@ services:
       POSTGRES_DB: "meower"
       POSTGRES_USER: "meower"
       POSTGRES_PASSWORD: "123456"
+# highlight-end
 ```
 
 Create `postgres` subdirectory and a `postgres/up.sql` file, which contains table definitions.
@@ -232,11 +232,13 @@ Meows are being ordered by their primary key, because keys will be k-sortable by
 
 Add `nats` service to `docker-compose.yaml`.
 
-```yaml{2-4}
+```yaml
 services:
+# highlight-start
   nats:
     image: "nats-streaming:0.9.2"
     restart: "always"
+# highlight-end
 ```
 
 Create `event` subdirectory and `event/messages.go` file, which contains event message types.
@@ -407,10 +409,12 @@ func (e *NatsEventStore) SubscribeMeowCreated() (<-chan MeowCreatedMessage, erro
 
 Update `docker-compose.yaml` file.
 
-```yaml{2-3}
+```yaml
 services:
+# highlight-start
   elasticsearch:
   image: 'docker.elastic.co/elasticsearch/elasticsearch:6.2.3'
+# highlight-end
 ```
 
 Create a repository interface inside `search/repository.go` file.
@@ -1238,8 +1242,9 @@ Reverse proxy will route traffic from and to the front-end app.
 
 Update `docker-compose.yaml` file.
 
-```yaml{2-9}
+```yaml
 services:
+# highlight-start
   nginx:
     build: "./nginx"
     ports:
@@ -1248,6 +1253,7 @@ services:
       - "meow"
       - "query"
       - "pusher"
+# highlight-end
 ```
 
 Create `nginx` subdirectory and `nginx/Dockerfile` file.
@@ -1309,15 +1315,15 @@ http {
 
 Create a vue app using [vue-cli](https://github.com/vuejs/vue-cli) 3.0+. Include Vuex when asked to select features.
 
-```
-$ vue create frontend
-$ cd frontend
+```bash
+vue create frontend
+cd frontend
 ```
 
 Add all necessary dependencies.
 
-```
-$ yarn add bootstrap timeago.js axios vue-native-websocket
+```bash
+yarn add bootstrap timeago.js axios vue-native-websocket
 ```
 
 Open `main.js` file and import Bootstrap SCSS files.
@@ -1458,7 +1464,8 @@ actions: {
 
 At the end of `store.js` file, dispatch the `getMeows` action to fetch meows when the page loads.
 
-```js{1}
+```js
+// highlight-next-line
 store.dispatch('getMeows');
 
 export default store;
@@ -1643,9 +1650,9 @@ export default {
 
 At this point everything should work as expected. To run the app, first build Docker images with Docker Compose and then start Vue development server.
 
-```
-$ docker-compose up -d --build
-$ cd frontend && yarn serve
+```bash
+docker-compose up -d --build
+cd frontend && yarn serve
 ```
 
 This is how Meower looks like.

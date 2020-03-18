@@ -43,10 +43,10 @@ This defines two services. The `search_api` service will host your Go app on por
 
 Create a subdirectory called `search-api` and initialize the project with `dep`.
 
-```
-$ mkdir search-api
-$ cd search-api
-$ dep init
+```bash
+mkdir search-api
+cd search-api
+dep init
 ```
 
 Write the Dockerfile for `search_api` service inside `search-api` directory.
@@ -213,9 +213,10 @@ c.Status(http.StatusOK)
 
 Register a new `/search` endpoint inside `main` function.
 
-```go{3}
+```go
 r := gin.Default()
 r.POST("/documents", createDocumentsEndpoint)
+// highlight-next-line
 r.GET("/search", searchEndpoint)
 if err = r.Run(":8080"); err != nil {
   log.Fatal(err)
@@ -284,27 +285,27 @@ c.JSON(http.StatusOK, res)
 
 Inside `search-api` directory ensure all dependencies are properly set up.
 
-```
-$ cd search-api
-$ dep ensure
+```bash
+cd search-api
+dep ensure
 ```
 
 Build and run both services using Docker Compose.
 
-```
-$ docker-compose up -d --build
+```bash
+docker-compose up -d --build
 ```
 
 Upload a couple of fake documents, for example, documents found inside [fake-data.json](https://raw.githubusercontent.com/tinrab/go-elasticsearch-example/master/fake-data.json) file.
 
-```
-$ curl -X POST http://localhost:8080/documents -d @fake-data.json -H "Content-Type: application/json"
+```bash
+curl -X POST http://localhost:8080/documents -d @fake-data.json -H "Content-Type: application/json"
 ```
 
 Try it out.
 
-```
-$ curl http://localhost:8080/search?query=exercitation+est+officia
+```bash{outputLines:2-12}
+curl http://localhost:8080/search?query=exercitation+est+officia
 {
   "time": "42",
   "hits": "43",

@@ -239,8 +239,8 @@ type User struct {
 
 To generate GraphQL implementation simply run the following command.
 
-```
-$ go generate graphql/graph.go
+```bash
+go generate graphql/graph.go
 ```
 
 The `GraphQLServer` struct must implement generated `ResolverRoot` interface.
@@ -509,20 +509,20 @@ func (p *PostLoader) load() error {
 
 To test the server out, first start the database:
 
-```
-$ docker-compose up -d
+```bash
+docker-compose up -d
 ```
 
 Optionally, insert fake data:
 
-```
-$ vgo run ./cmd/fakedata/main.go
+```bash
+vgo run ./cmd/fakedata/main.go
 ```
 
 And start the GraphQL server:
 
-```
-$ vgo run .
+```bash
+vgo run .
 ```
 
 Send a query to `http://localhost:8080/graphql`, for example this:
@@ -543,8 +543,8 @@ Send a query to `http://localhost:8080/graphql`, for example this:
 
 Here's a `curl` command:
 
-```
-$ curl localhost:8080/graphql -XPOST -d '{"query":"{users(pagination:{skip:0,take:3}){id,name,posts(pagination:{skip:0,take:2}){id,createdAt,body,}}}"}'
+```bash
+curl localhost:8080/graphql -XPOST -d '{"query":"{users(pagination:{skip:0,take:3}){id,name,posts(pagination:{skip:0,take:2}){id,createdAt,body,}}}"}'
 ```
 
 Complete source code of this project is available on [GitHub](https://github.com/tinrab/curly-waddle).

@@ -144,8 +144,8 @@ func main() {
 
 Now build the container and make sure everything works.
 
-```
-$ docker-compose -f docker-compose.yaml up --build
+```bash
+docker-compose -f docker-compose.yaml up --build
 ```
 
 # Loading TensorFlow model
@@ -154,7 +154,7 @@ Extracted files inside `/model` include a serialized TensorFlow graph and a list
 
 Declare some variables and update the `main` function.
 
-```go{1-4,7-10}
+```go
 var (
   graph  *tf.Graph
   labels []string
@@ -168,9 +168,7 @@ func main() {
 }
 ```
 
-<note>
-Imports are skipped for brevity. You can use [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports) tool to add them. Your code editor most likely has a plugin for it.
-</note>
+> Imports are skipped for brevity. You can use [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports) tool to add them. Your code editor most likely has a plugin for it.
 
 Write the `loadModel` function.
 
@@ -222,15 +220,17 @@ func responseJSON(w http.ResponseWriter, data interface{}) {
 
 Register a new HTTP handler inside `main` function.
 
-```go{6-8}
+```go
 func main() {
   if err := loadModel(); err != nil {
     log.Fatal(err)
     return
   }
+// highlight-start
   r := httprouter.New()
   r.POST("/recognize", recognizeHandler)
   log.Fatal(http.ListenAndServe(":8080", r))
+// highlight-end
 }
 ```
 
@@ -412,14 +412,14 @@ responseJSON(w, ClassifyResult{
 
 Rebuild the container.
 
-```
-$ docker-compose -f docker-compose.yaml up -d --build
+```bash
+docker-compose -f docker-compose.yaml up -d --build
 ```
 
 Try calling the `localhost:8080/recognize` endpoint with a couple of images.
 
-```
-$ curl localhost:8080/recognize -F 'image=@./cat.jpg'
+```bash{outputLines:2-11}
+curl localhost:8080/recognize -F 'image=@./cat.jpg'
 {
   "filename": "cat.jpg",
   "labels": [
