@@ -109,6 +109,7 @@ const plugins = [
       },
     },
   },
+  'gatsby-plugin-react-helmet',
   remark,
 ];
 
