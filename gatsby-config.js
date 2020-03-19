@@ -125,7 +125,7 @@ module.exports = {
     copyright: '2020 © Outcrawl. All rights reserved.',
     twitterId: '@tinrab',
     facebookId: '863987620425609',
-    articlesPerPage: 6,
+    articlesPerPage: 8,
     featuredImage: siteUrl + '/static/featured.jpg',
   },
   plugins,

@@ -10,6 +10,7 @@ function markdownFields(node, getNode, createNodeField) {
     createNodeField({ node, name: 'description', value: node.frontmatter.description });
     createNodeField({ node, name: 'author', value: node.frontmatter.author });
     createNodeField({ node, name: 'cover', value: node.frontmatter.cover });
+    createNodeField({ node, name: 'kind', value: node.frontmatter.kind || 'Standard' });
 
     // Date
     const date = path.substr('articles/'.length, '0000-00-00'.length);
