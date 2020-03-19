@@ -34,12 +34,14 @@ const ArticleFooter: React.FC<ArticleFooterProps> = (props: ArticleFooterProps) 
 
   return (
     <Box component="section" display="flex" className={classNames(className, classes.root)}>
-      <Box display="flex" flexWrap="wrap">
+      <Box display="flex" flexWrap="wrap" flexGrow={1}>
         {articlePage.tags.map((tag, i) => (
           <Tag key={i} className={classes.tag} title={tag.title} to={`/tags/${tag.slug}/`}/>
         ))}
       </Box>
-      <ArticleShare article={articlePage.article} className={classes.share}/>
+      <Box flexShrink={0}>
+        <ArticleShare article={articlePage.article} className={classes.share}/>
+      </Box>
     </Box>
   );
 };
