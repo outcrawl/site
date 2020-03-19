@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { ArticleData } from '../article/types';
+import { ArticleData, ArticleKind } from '../article/types';
 import { AuthorData } from '../author/types';
 import { SiteMetadata } from '../core/types';
 import HomePage from '../home/HomePage';
@@ -28,6 +28,7 @@ type HomeTemplateProps = {
             slug: string;
             date: string;
             author: string;
+            kind?: string;
             cover?: {
               publicURL: string;
               childImageSharp: {
@@ -61,6 +62,7 @@ const HomeTemplate: React.FC<HomeTemplateProps> = (props: HomeTemplateProps) => 
 
   const articles = data.articles.edges.map(({ node: { fields } }) => ({
     ...fields,
+    kind: fields.kind ? ArticleKind[fields.kind as keyof typeof ArticleKind] : ArticleKind.Standard,
     cover: fields.cover && {
       ...fields.cover.childImageSharp.fluid,
       url: siteMetadata.siteUrl + fields.cover.publicURL,
@@ -110,6 +112,7 @@ export const pageQuery = graphql`
             slug
             date(formatString:"DD MMMM, YYYY")
             author
+            kind
             cover {
               publicURL
               childImageSharp {

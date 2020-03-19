@@ -1,15 +1,7 @@
-import { Box, createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
 import React from 'react';
 import ArticleCard from './ArticleCard';
-import { ArticleData } from './types';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  article: {
-    padding: theme.spacing(0.5),
-    maxWidth: '50%',
-  },
-}));
+import { ArticleData, ArticleKind } from './types';
 
 type ArticleCardGridProps = {
   articles: ArticleData[];
@@ -17,7 +9,21 @@ type ArticleCardGridProps = {
 
 const ArticleCardGrid: React.FC<ArticleCardGridProps> = (props: ArticleCardGridProps) => {
   const { articles } = props;
-  const classes = useStyles();
+
+  const maxInGroup = 3;
+  const articleGroups: ArticleData[][] = articles.reduce((groups, article) => {
+    if (article.kind == ArticleKind.Short) {
+      const lastShortGroup = groups.findIndex(
+        (group) => group.length < maxInGroup && group[0].kind == ArticleKind.Short,
+      );
+      if (lastShortGroup >= 0) {
+        const updatedGroups = [...groups];
+        updatedGroups[lastShortGroup] = [...updatedGroups[lastShortGroup], article];
+        return updatedGroups;
+      }
+    }
+    return [...groups, [article]];
+  }, [] as ArticleData[][]);
 
   return (
     <Box
@@ -25,14 +31,35 @@ const ArticleCardGrid: React.FC<ArticleCardGridProps> = (props: ArticleCardGridP
       flexWrap="wrap"
       justifyContent="space-between"
     >
-      {articles.map((article) => (
+      {articleGroups.map((articleGroup, i) => articleGroup[0].kind == ArticleKind.Standard ? (
         <Box
-          key={article.slug}
-          className={classes.article}
+          key={articleGroup[0].slug}
+          p={0.5}
           flexGrow={1}
           flexShrink={0}
+          flexBasis="50%"
         >
-          <ArticleCard article={article}/>
+          <ArticleCard article={articleGroup[0]}/>
+        </Box>
+      ) : (
+        <Box
+          key={`group-${i}`}
+          display="flex"
+          flexDirection="column"
+          flexGrow={1}
+          flexShrink={0}
+          flexBasis="50%"
+        >
+          {articleGroup.map((article) => (
+            <Box
+              key={article.slug}
+              p={0.5}
+              flexGrow={1}
+              flexShrink={0}
+            >
+              <ArticleCard article={article}/>
+            </Box>
+          ))}
         </Box>
       ))}
     </Box>

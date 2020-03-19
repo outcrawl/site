@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 import ArticlePage from '../article/ArticlePage';
-import { ArticleData, ArticlePageData } from '../article/types';
+import { ArticleData, ArticlePageData, ArticleKind } from '../article/types';
 import { AuthorData } from '../author/types';
 import { shuffle } from '../common/arrays';
 import { SiteMetadata } from '../core/types';
@@ -16,6 +16,7 @@ type ArticleTemplateProps = {
         slug: string;
         description: string;
         date: string;
+        kind?: string;
         tags: {
           title: string;
           slug: string;
@@ -83,6 +84,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ data }: ArticleTempla
       url: `${siteMetadata.siteUrl}/${article.slug}/`,
       author,
       date: article.date,
+      kind: article.kind ? ArticleKind[article.kind as keyof typeof ArticleKind] : ArticleKind.Standard,
       cover: article.cover && {
         ...article.cover.childImageSharp.fluid,
         url: siteMetadata.siteUrl + article.cover.publicURL,
@@ -110,6 +112,7 @@ export const pageQuery = graphql`
         slug
         description
         date(formatString:"DD MMMM, YYYY")
+        kind
         tags {
           title
           slug
