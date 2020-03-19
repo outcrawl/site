@@ -5,6 +5,7 @@ export interface ArticleData {
   title: string;
   slug: string;
   url: string;
+  kind: ArticleKind;
   cover?: ArticleCover;
   author?: AuthorData;
   date?: string;
@@ -26,4 +27,9 @@ export interface ArticlePageData {
   html: string;
   tags: TagData[];
   related: ArticleData[];
+}
+
+export enum ArticleKind {
+  Standard = 'Standard',
+  Short = 'Short',
 }
