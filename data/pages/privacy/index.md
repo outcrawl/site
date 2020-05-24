@@ -45,6 +45,40 @@ In the event we become aware that the security of the Website has been compromis
 
 In the event we go through a business transition, such as a merger or acquisition by another company, or sale of all or a portion of its assets, your user account and personal data will likely be among the assets transferred.
 
+# Cookies
+
+A "cookie" is a string of information which assigns you a unique identifier that we store on your computer. Your browser then provides that unique identifier to use each time you submit a query to the Site. We use cookies on the Site to, among other things, keep track of services you have used, record registration information, record your user preferences, keep you logged into the Site, facilitate purchase procedures, and track the pages you visit. Cookies help us understand how the Site is being used and improve your user experience.
+
+The following types of cookies may be used when you visit the Site:
+
+## Advertising Cookies
+
+Advertising cookies are placed on your computer by advertisers and ad servers in order to display advertisements that are most likely to be of interest to you. These cookies allow advertisers and ad servers to gather information about your visits to the Site and other websites, alternate the ads sent to a specific computer, and track how often an ad has been viewed and by whom. These cookies are linked to a computer and do not gather any personal information about you. 
+
+## Analytics Cookies
+
+Analytics cookies monitor how users reached the Site, and how they interact with and move around once on the Site. These cookies let us know what features on the Site are working the best and what features on the Site can be improved. 
+
+## Our Cookies
+
+Our cookies are “first-party cookies”, and can be either permanent or temporary. These are necessary cookies, without which the Site won't work properly or be able to provide certain features and functionalities. Some of these may be manually disabled in your browser, but may affect the functionality of the Site.
+
+## Personalization Cookies
+
+Personalization cookies are used to recognize repeat visitors to the Site. We use these cookies to record your browsing history, the pages you have visited, and your settings and preferences each time you visit the Site. 
+
+## Security Cookies
+
+Security cookies help identify and prevent security risks. We use these cookies to authenticate users and protect user data from unauthorized parties.
+
+## Site Management Cookies
+
+Site management cookies are used to maintain your identity or session on the Site so that you are not logged off unexpectedly, and any information you enter is retained from page to page. These cookies cannot be turned off individually, but you can disable all cookies in your browser.
+
+## Third-Party Cookies
+
+Third-party cookies may be place on your computer when you visit the Site by companies that run certain services we offer. These cookies allow the third parties to gather and track certain information about you. These cookies can be manually disabled in your browser. 
+
 # Changes and amendments
 
 We reserve the right to modify this privacy policy relating to the Website or Services at any time, effective upon posting of an updated version of this Policy on the Website. When we do we will  send you an email to notify you. Continued use of the Website after any such changes shall constitute your consent to such changes.
@@ -55,4 +89,4 @@ You acknowledge that you have read this Policy and agree to all its terms and co
 
 # Update
 
-This document was last updated on July 28, 2017
+This document was last updated on May 24, 2020.

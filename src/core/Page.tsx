@@ -2,6 +2,7 @@ import { Container, createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import React from 'react';
+import CookiesConsent from './CookiesConsent';
 import Layout from './Layout';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -36,6 +37,7 @@ const Page: React.FC<PageProps> = (props: PageProps) => {
       <Container className={classNames(classes.root, { [classes.narrow]: narrow })}>
         {children}
       </Container>
+      <CookiesConsent/>
     </Layout>
   );
 };
