@@ -11,6 +11,10 @@ const useStyles = makeStyles({
 const CONSENTED_STORAGE_KEY = 'cookies-consented';
 
 const CookiesConsent: React.FC = () => {
+  if (typeof window === 'undefined') {
+    return <></>;
+  }
+  
   const [open, setOpen] = React.useState(localStorage.getItem(CONSENTED_STORAGE_KEY) !== 'true');
   const classes = useStyles();
 
