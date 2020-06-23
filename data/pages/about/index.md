@@ -1,6 +1,6 @@
 ---
 title: About
-description: Software development tutorials without nonsense
+description: Software engineering without nonsense.
 ---
 
-Software development tutorials without nonsense.
+Software engineering without nonsense.
