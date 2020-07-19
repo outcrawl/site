@@ -26,7 +26,7 @@ tokio = { version = "0.2.21", features = ["full"] }
 
 Firstly, we need to establish a connection to a Redis server.
 
-For local development, we can use Docker Compose and declare a Redis container inside [docker-compose.yaml](https://github.com/tinrab/rusty-redis-rate-limiting/blob/63b8bf4483f154f6a16b72e1275553b5c13dd679/docker-compose.yaml).
+For local development, we can use Docker Compose and declare a Redis container inside [docker-compose.yaml](https://github.com/tinrab/rusty-redis-rate-limiting/blob/46d95040708df92d46cef22d319d0182e12a2c0c/docker-compose.yaml).
 
 ```yaml
 version: "3.8"
@@ -47,7 +47,7 @@ docker-compose up -d --build
 
 Redis server is now running locally on port 6379.
 
-We declare the `RateLimiter` struct and create a connection to Redis ([src/rate_limiter.rs](https://github.com/tinrab/rusty-redis-rate-limiting/blob/63b8bf4483f154f6a16b72e1275553b5c13dd679/src/rate_limiter.rs)).
+We declare the `RateLimiter` struct and create a connection to Redis ([src/rate_limiter.rs](https://github.com/tinrab/rusty-redis-rate-limiting/blob/46d95040708df92d46cef22d319d0182e12a2c0c/src/rate_limiter.rs)).
 
 ```rust
 pub struct RateLimiter {
@@ -140,7 +140,7 @@ impl RateLimiter {
 }
 ```
 
-Here's an example of how this can be used ([examples/fixed_window.rs](https://github.com/tinrab/rusty-redis-rate-limiting/blob/63b8bf4483f154f6a16b72e1275553b5c13dd679/examples/fixed_window.rs)).
+Here's an example of how this can be used ([examples/fixed_window.rs](https://github.com/tinrab/rusty-redis-rate-limiting/blob/46d95040708df92d46cef22d319d0182e12a2c0c/examples/fixed_window.rs)).
 
 ```rust
 let mut rate_limiter = RateLimiter::open("redis://127.0.0.1:6379/").await?;
@@ -236,7 +236,7 @@ impl RateLimiter {
 }
 ```
 
-Here's how this can be used ([examples/sliding_log.rs](https://github.com/tinrab/rusty-redis-rate-limiting/blob/63b8bf4483f154f6a16b72e1275553b5c13dd679/examples/sliding_log.rs)).
+Here's how this can be used ([examples/sliding_log.rs](https://github.com/tinrab/rusty-redis-rate-limiting/blob/46d95040708df92d46cef22d319d0182e12a2c0c/examples/sliding_log.rs)).
 
 ```rust
 let mut rate_limiter = RateLimiter::open("redis://127.0.0.1:6379/").await?;
@@ -368,7 +368,7 @@ impl RateLimiter {
 }
 ```
 
-Here is an example ([examples/sliding_window.rs](https://github.com/tinrab/rusty-redis-rate-limiting/blob/63b8bf4483f154f6a16b72e1275553b5c13dd679/examples/sliding_window.rs)).
+Here is an example ([examples/sliding_window.rs](https://github.com/tinrab/rusty-redis-rate-limiting/blob/46d95040708df92d46cef22d319d0182e12a2c0c/examples/sliding_window.rs)).
 
 ```rust
 let mut rate_limiter = RateLimiter::open("redis://127.0.0.1:6379/").await?;
