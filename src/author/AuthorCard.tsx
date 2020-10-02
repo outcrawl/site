@@ -1,4 +1,4 @@
-import { Avatar, Typography } from '@material-ui/core';
+import { Avatar, Badge, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { Link } from 'gatsby';
@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   subtitle: {
     color: theme.palette.text.secondary,
   },
+  badge: {
+    transform: `scale(1) translateX(100%) translateX(${theme.spacing(1)}px)`,
+  },
 }));
 
 type AuthorCardProps = {
@@ -38,11 +41,13 @@ const AuthorCard: React.FC<AuthorCardProps> = (props: AuthorCardProps) => {
 
   return (
     <div className={classNames(classes.root, className)}>
-      <Avatar className={classes.avatar} alt={author.name} src={author.avatar} variant="circle"/>
+      <Avatar className={classes.avatar} alt={author.name} src={author.avatar} variant="circle" />
       <div className={classes.info}>
-        <Link className={classes.name} to={`/authors/${author.slug}/`}>
-          {author.name}
-        </Link>
+        <Badge color="error" invisible={!author.hireable} badgeContent="Hire me" classes={{ badge: classes.badge }}>
+          <Link className={classes.name} to={`/authors/${author.slug}/`}>
+            {author.name}
+          </Link>
+        </Badge>
         {subtitle && (
           <Typography className={classes.subtitle} variant="body2">
             {subtitle}
