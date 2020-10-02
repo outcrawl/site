@@ -55,6 +55,7 @@ export const pageQuery = graphql`
         bio
         avatar
         email
+        hireable
         social {
           github
           linkedin
