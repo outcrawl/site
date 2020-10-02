@@ -150,13 +150,6 @@ const remark = {
 
 const plugins = [
   {
-    resolve: 'gatsby-plugin-typescript',
-    options: {
-      isTSX: true,
-      allExtensions: true,
-    },
-  },
-  {
     resolve: 'gatsby-source-filesystem',
     options: {
       name: 'data',
