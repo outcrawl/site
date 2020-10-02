@@ -1,5 +1,5 @@
 ---
-title: Why Microservices Should Be Idempotent
+title: Why Should Microservices Be Idempotent
 author: tin-rabzelj
 tags:
   - Microservices
