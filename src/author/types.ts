@@ -4,6 +4,7 @@ export interface AuthorData {
   bio: string;
   avatar: string;
   email?: string;
+  hireable?: boolean;
   social: {
     github?: string;
     linkedin?: string;

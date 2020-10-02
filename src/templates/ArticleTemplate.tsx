@@ -137,6 +137,7 @@ export const pageQuery = graphql`
         slug
         bio
         avatar
+        hireable
         social {
           github
           linkedin

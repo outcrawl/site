@@ -1,10 +1,11 @@
-import { Box, Typography } from '@material-ui/core';
+import { Badge, Box, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import FacebookButton from '../assets/FacebookButton';
 import GitHubButton from '../assets/GitHubButton';
 import LinkedinButton from '../assets/LinkedinButton';
 import TwitterButton from '../assets/TwitterButton';
+import ExternalLink from '../core/ExternalLink';
 import { AuthorData } from './types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -17,7 +18,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   title: {
     fontSize: theme.typography.h2.fontSize,
-    marginBottom: '0.25em',
   },
   bio: {
     marginBottom: '1em',
@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   socialButton: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
+  },
+  email: {
+    fontSize: theme.typography.h6.fontSize,
+    marginBottom: '1em',
   },
 }));
 
@@ -38,8 +42,13 @@ const AuthorHeader: React.FC<AuthorHeaderProps> = (props: AuthorHeaderProps) => 
 
   return (
     <Box textAlign="center">
-      <img className={classes.avatar} width={140} height={140} src={author.avatar} alt={author.name}/>
+      <Badge color="error" overlap="circle" badgeContent="Hire me" invisible={!author.hireable}>
+        <img className={classes.avatar} width={140} height={140} src={author.avatar} alt={author.name} />
+      </Badge>
       <Typography className={classes.title} variant="h1">{author.name}</Typography>
+      <Typography className={classes.email} variant="body1">
+        <ExternalLink href={`mailto:${author.email}`}>{author.email}</ExternalLink>
+      </Typography>
       <Typography className={classes.bio} variant="body1">{author.bio}</Typography>
       <Box>
         {author.social.github && (
