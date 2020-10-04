@@ -54,7 +54,7 @@ If request fails due to rule violation, it doesn't make sense to retry it.
 Observability is important.
 Whether we're using centralized logging or tracing, logs should be interpreted with retries in mind.
 Log lines are correlated by using a unique request ID.
-Retries can propagate through downstream services and cause duplicate logs within a single request&mdash;and consequently harder to parse.
+Retries can propagate through upstream services and cause duplicate logs within a single request&mdash;and consequently harder to parse.
 
 Similarly, analytics and metrics can contain duplicate records.
 Retries should be properly considered for all pieces of infrastructure.
