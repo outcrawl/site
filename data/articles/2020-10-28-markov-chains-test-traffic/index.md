@@ -1,0 +1,253 @@
+---
+title: Generating Realistic Test Traffic Using Markov Chains
+author: tin-rabzelj
+tags:
+  - Rust
+  - Math
+description: This article shows how to generate realistic traffic using Markov Chains.
+---
+
+This article shows how you can generate realistic user traffic for testing purposes by sampling requests in production and generating fake ones using [Markov chains](https://en.wikipedia.org/wiki/Markov_chain).
+
+Example code is available on [GitHub](https://github.com/tinrab/rusty-markov-traffic).
+
+# Markov chains
+
+A Markov chain is a stochastic model telling us probability of an event based on previously observed events.
+Probability of next event $$X_{n+1}$$ is determined by last known event $$P(X_{n+1}|X_{n})$$ or previous $m$ events, which gives us a Markov chain of order $$m$$:
+
+$$
+P(X_{n}=x_{n}|X_{n-1}=x_{n-1},...,X_{n-m}=x_{n-m}), n\gt m.
+$$
+
+We can track actual user behaviour and build a model by counting events and calculating weighted probabilities for each event based on events preceding them.
+
+For example, $$10$$ users finished writing a blog post.
+$$9$$ users later published it and one of them trashed it.
+This gives us probabilities $$P(PostPublished|PostFinished)=0.9$$ and $$P(PostTrashed|PostFinished)=0.1$$.
+We can then selected a random event with [roulette wheel selection](https://en.wikipedia.org/wiki/Fitness_proportionate_selection).
+
+This is useful for stress or smoke testing when you need some fake traffic that resembles real users.
+
+# Implementation
+
+Let's declare a struct for a Markov chain.
+Map `occurrences` will hold event counts `BTreeMap<T, usize>` for any previous series of events `Vec<T>`.
+
+```rust
+#[derive(Clone)]
+pub struct MarkovChain<T>
+where
+    T: Clone + Ord,
+{
+    order: usize,
+    occurrences: BTreeMap<Vec<T>, BTreeMap<T, usize>>,
+    memory: Vec<T>,
+    rng: ThreadRng,
+}
+```
+
+To build a model we have to go through all observed events and count the number of times $$n$$-th event occured after all $$n>m$$ events.
+We also track last known $$m$$ events inside the `memory` vector, which will be used to generate the next event.
+
+```rust
+impl<T> MarkovChain<T>
+where
+    T: Clone + Ord,
+{
+    pub fn update(&mut self, events: &[T]) {
+        let events: Vec<_> = events.to_vec();
+        for history in events.windows(self.order + 1) {
+            // Split window to 0..N-1 and N
+            let previous = history[0..self.order].to_vec();
+            let current = history.last().cloned().unwrap();
+            // Count occurrence for current event
+            self.occurrences
+                .entry(previous)
+                .or_default()
+                .entry(current)
+                .and_modify(|count| *count += 1)
+                .or_insert(1);
+        }
+        // Update internal memory
+        self.memory.reserve(self.order);
+        for event in events.into_iter().rev().take(self.order) {
+            self.memory.insert(0, event);
+        }
+        self.memory.truncate(self.order);
+    }
+    // ...
+```
+
+The `generate_from` function takes in the memory, finds occurrences and chooses an event from those.
+We use [choose_weighted](https://docs.rs/rand/0.7.3/rand/seq/trait.SliceRandom.html#tymethod.choose_weighted) function provided by the [rand](https://crates.io/crates/rand) crate.
+
+```rust
+pub fn generate_from(&mut self, memory: &[T]) -> Option<T> {
+    assert_eq!(memory.len(), self.order, "invalid memory size");
+    if let Some(occurrences) = self.occurrences.get(memory) {
+        // Get number of occurrences for each known event.
+        // We need a Vec for `SliceRandom::choose_weighted`.
+        let occurrence_counts: Vec<_> = occurrences
+            .iter()
+            .map(|(event, count)| (event.clone(), *count))
+            .collect();
+        // Chose a random event based on its count
+        occurrence_counts
+            .choose_weighted(&mut self.rng, |(_, count)| *count)
+            .map(|(event, _)| event)
+            .ok()
+            .cloned()
+    } else {
+        // No match from memory
+        None
+    }
+}
+```
+
+After generating a new event, we update the internal memory.
+Next events will then be calculated from the most recent memory.
+
+```rust
+pub fn generate(&mut self, update_memory: bool) -> Option<T> {
+    let last_memory = self.memory.clone();
+    if let Some(next) = self.generate_from(&last_memory) {
+        if update_memory {
+            // Update internal memory
+            self.memory.insert(0, next.clone());
+            self.memory.truncate(self.order);
+        }
+        Some(next)
+    } else {
+        None
+    }
+}
+```
+
+We can also write an iterator that returns generated events.
+
+```rust
+pub struct MarkovChainIter<'a, T>
+where
+    T: Clone + Ord,
+{
+    chain: &'a mut MarkovChain<T>,
+}
+
+impl<'a, T> Iterator for MarkovChainIter<'a, T>
+where
+    T: Clone + Ord,
+{
+    type Item = T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.chain.generate(true)
+    }
+}
+
+impl<T> MarkovChain<T>
+where
+    T: Clone + Ord,
+{
+    pub fn iter(&mut self) -> MarkovChainIter<T> {
+        MarkovChainIter { chain: self }
+    }
+    // ...
+}
+```
+
+# Example
+
+To see it in action, we declare an enum of all possible actions.
+Of course, these can be way more complicated in the real world use-case.
+
+```rust
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+enum UserAction {
+    SignIn,
+    SignOut,
+    CreateTodo,
+    DeleteTodo,
+    ListTodos,
+}
+```
+
+We build a chain from a sample of actions.
+
+```rust
+let mut chain = MarkovChain::new(1);
+let actions = vec![
+    UserAction::SignIn,
+    UserAction::ListTodos,
+    UserAction::CreateTodo,
+    UserAction::CreateTodo,
+    UserAction::SignOut,
+    UserAction::SignIn,
+    UserAction::ListTodos,
+    UserAction::DeleteTodo,
+    UserAction::DeleteTodo,
+    UserAction::CreateTodo,
+    UserAction::CreateTodo,
+    UserAction::SignOut,
+    UserAction::SignIn,
+    UserAction::ListTodos,
+    UserAction::CreateTodo,
+    UserAction::DeleteTodo,
+    UserAction::CreateTodo,
+    UserAction::DeleteTodo,
+    UserAction::ListTodos,
+    UserAction::DeleteTodo,
+    UserAction::SignOut,
+];
+chain.update(&actions);
+```
+
+Then generate a few actions.
+
+```rust
+for action in chain.iter().take(16) {
+    if action == UserAction::SignIn {
+        println!("## New session ##");
+    }
+    println!("{:?}", action);
+}
+```
+
+Which gives us the following output.
+
+```bash{outputLines:2-21}
+cargo run --example traffic
+## New session ##
+SignIn
+ListTodos
+DeleteTodo
+SignOut
+## New session ##
+SignIn
+ListTodos
+DeleteTodo
+DeleteTodo
+CreateTodo
+SignOut
+## New session ##
+SignIn
+ListTodos
+CreateTodo
+CreateTodo
+CreateTodo
+DeleteTodo
+```
+
+Notice how after each `SignIn` there's a `ListTodos`, which means $$P(ListTodos|SignIn)=1$$.
+Built model can represent inherent rules of our application.
+Some series of actions will not be generated, those having probability $$0$$, which is a lot better than uniformly generated random data.
+
+Some combination of actions might not be possible, because they'd break business rules.
+Those can be filtered out, or left in to test invalid requests.
+
+# Conclusion
+
+We can do much more with this.
+This was only a brief introduction to a handy tool that can be used to generate some fake requests.
+
+Sample code is available on [GitHub](https://github.com/tinrab/rusty-markov-traffic).
