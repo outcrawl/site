@@ -191,7 +191,7 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-favicon',
     options: {
-      logo: './static/static/logo.svg',
+      logo: './static/static/logo.png',
       injectHTML: true,
       icons: {
         android: true,
@@ -215,7 +215,7 @@ module.exports = {
     siteUrl,
     title: 'Outcrawl',
     description: 'Software engineering without nonsense',
-    copyright: '2020 © Outcrawl. All rights reserved.',
+    copyright: '2021 © Outcrawl. All rights reserved.',
     twitterId: '@tinrab',
     facebookId: '863987620425609',
     articlesPerPage: 8,
