@@ -1,51 +1,49 @@
-import { createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Pagination, PaginationItem } from '@material-ui/lab';
-import { Link } from 'gatsby';
-import React from 'react';
 import ArticleCardGrid from '../article/ArticleCardGrid';
-import BasicPageMeta from '../core/BasicPageMeta';
-import Page from '../core/Page';
-import { HomePageData } from './types';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  pagination: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(3),
-  },
-  paginationLink: {
-    ...theme.typography.button,
-    '&:hover': {
-      textDecoration: 'none',
-    },
-  },
-}));
+import { ArticleData } from '../article/types';
+import InternalLink from '../common/InternalLink';
+import Page from '../common/Page';
+import { loadConfig } from '../config';
+import GeneralPageMeta from '../general-page/GeneralPageMeta';
+import { routerRedirects } from '../routes';
+import { Pagination, PaginationItem } from '@mui/material';
+import React, { ReactNode } from 'react';
 
 type HomePageProps = {
-  homePage: HomePageData;
+  articles: ArticleData[];
+  page: number;
   pageCount: number;
 };
 
-const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
-  const { homePage, pageCount } = props;
-  const classes = useStyles();
+const HomePage: React.FC<HomePageProps> = ({
+  articles,
+  page,
+  pageCount,
+}: HomePageProps) => {
+  const config = loadConfig();
 
   return (
     <Page>
-      <BasicPageMeta {...homePage}/>
-      <ArticleCardGrid articles={homePage.articles}/>
+      <GeneralPageMeta
+        title={`${config.title} - ${config.description}`}
+        description={config.description}
+        url={`${config.url}${routerRedirects.home.page(page)}`}
+      />
+      <ArticleCardGrid articles={articles} />
       <Pagination
-        className={classes.pagination}
-        page={homePage.pageNumber}
-        count={pageCount}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          my: 2,
+        }}
         color="primary"
-        size="medium"
-        renderItem={(item: { page: number }): React.ReactNode => (
+        size="large"
+        page={page}
+        count={pageCount}
+        renderItem={(item): ReactNode => (
           <PaginationItem
-            className={classes.paginationLink}
-            component={Link}
-            to={item.page === 1 ? '/' : `/page/${item.page}`}
+            component={InternalLink}
+            href={routerRedirects.home.page(item.page || 1)}
+            underline="none"
             {...item}
           />
         )}

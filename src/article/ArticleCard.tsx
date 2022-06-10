@@ -1,54 +1,53 @@
-import { Box, Card, CardContent, createStyles, Theme, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import { Link } from 'gatsby';
-import Img from 'gatsby-image';
-import React from 'react';
-import AuthorCard from '../author/AuthorCard';
+import AuthorAvatar from '../author/AuthorAvatar';
+import InternalLink from '../common/InternalLink';
+import { routerRedirects } from '../routes';
 import { ArticleData } from './types';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flexGrow: 1,
-  },
-  titleLink: {
-    color: theme.palette.text.primary,
-  },
-}));
+import { Card, CardActions, CardContent, Typography } from '@mui/material';
+import { SxProps, Theme } from '@mui/system';
+import ExportedImage from 'next-image-export-optimizer';
+import React from 'react';
 
 type ArticleCardProps = {
+  sx?: SxProps<Theme>;
   article: ArticleData;
-} & React.HTMLAttributes<HTMLElement>;
-
-const ArticleCard: React.FC<ArticleCardProps> = (props: ArticleCardProps) => {
-  const { className, article } = props;
-  const classes = useStyles();
-
-  return (
-    <Card className={classNames(className, classes.root)} elevation={2}>
-      {article.cover && (
-        <Link to={`/${article.slug}/`}>
-          <Img fluid={article.cover}/>
-        </Link>
-      )}
-      <CardContent className={classes.content}>
-        <Link to={`/${article.slug}/`} className={classes.titleLink}>
-          <Typography variant="h5">
-            {article.title}
-          </Typography>
-        </Link>
-      </CardContent>
-      {article.author && (
-        <Box p={2} pt={0}>
-          <AuthorCard author={article.author} subtitle={article.date}/>
-        </Box>
-      )}
-    </Card>
-  );
 };
+
+const ArticleCard: React.FC<ArticleCardProps> = ({
+  sx,
+  article,
+}: ArticleCardProps) => (
+  <Card sx={sx}>
+    {article.cover !== undefined ? (
+      <InternalLink href={routerRedirects.article(article.slug)}>
+        <ExportedImage
+          src={article.cover.path}
+          width={article.cover.width}
+          height={article.cover.height}
+          alt={article.title}
+          layout="responsive"
+        />
+      </InternalLink>
+    ) : null}
+    <CardContent>
+      <Typography variant="h5">
+        <InternalLink
+          color="inherit"
+          href={routerRedirects.article(article.slug)}
+        >
+          {article.title}
+        </InternalLink>
+      </Typography>
+    </CardContent>
+    <CardActions sx={{ pt: 0 }}>
+      {article.author !== undefined ? (
+        <AuthorAvatar
+          author={article.author}
+          subtext={article.date}
+          disableHire
+        />
+      ) : null}
+    </CardActions>
+  </Card>
+);
 
 export default ArticleCard;

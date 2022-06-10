@@ -9,17 +9,18 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.15.x
+          node-version: 18.2.x
       - run: npm install
       - run: npm run build
       - uses: actions/upload-artifact@v1
         with:
-          name: public
-          path: ./public
+          name: out
+          path: ./out
   publish:
     name: Publish
     needs: build
@@ -27,12 +28,12 @@ jobs:
     steps:
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.15.x
+          node-version: 18.2.x
       - uses: actions/download-artifact@v1
         with:
-          name: public
-          path: ./public
-      - run: aws s3 cp ./public s3://${{ secrets.AWS_BUCKET }} --recursive
+          name: out
+          path: ./out
+      - run: aws s3 cp ./out s3://${{ secrets.AWS_BUCKET }} --recursive
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

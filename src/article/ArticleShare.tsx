@@ -1,38 +1,29 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React from 'react';
-import FacebookButton from '../assets/FacebookButton';
-import TwitterButton from '../assets/TwitterButton';
+import FacebookButton from '../common/FacebookButton';
+import TwitterButton from '../common/TwitterButton';
 import { ArticleData } from './types';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  facebookButton: {
-    marginLeft: theme.spacing(1),
-  },
-}));
+import { Box, SxProps, Theme } from '@mui/system';
+import React from 'react';
 
 type ArticleShareProps = {
+  sx?: SxProps<Theme>;
   article: ArticleData;
-} & React.HTMLAttributes<HTMLElement>;
-
-const ArticleShare: React.FC<ArticleShareProps> = (props: ArticleShareProps) => {
-  const { article, className } = props;
-  const classes = useStyles();
-
-  return (
-    <div className={className}>
-      <TwitterButton
-        href={`https://twitter.com/intent/tweet?url=${article.url}&text=${
-          article.title
-        }`}
-        aria-label="Share on Twitter"
-      />
-      <FacebookButton
-        className={classes.facebookButton}
-        href={`https://www.facebook.com/sharer/sharer.php?u=${article.url}`}
-        aria-label="Share on Facebook"
-      />
-    </div>
-  );
 };
+
+const ArticleShare: React.FC<ArticleShareProps> = ({
+  sx,
+  article,
+}: ArticleShareProps) => (
+  <Box sx={sx}>
+    <TwitterButton
+      href={`https://twitter.com/intent/tweet?url=${article.url}&text=${article.title}`}
+      aria-label="Share on Twitter"
+    />
+    <FacebookButton
+      sx={{ ml: 1 }}
+      href={`https://www.facebook.com/sharer/sharer.php?u=${article.url}`}
+      aria-label="Share on Facebook"
+    />
+  </Box>
+);
 
 export default ArticleShare;

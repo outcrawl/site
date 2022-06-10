@@ -1,35 +1,29 @@
 import { AuthorData } from '../author/types';
 import { TagData } from '../tag/types';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote/dist/types';
 
-export interface ArticleData {
-  title: string;
+export type ArticleData = {
   slug: string;
-  url: string;
   kind: ArticleKind;
-  cover?: ArticleCover;
-  author?: AuthorData;
-  date?: string;
-}
-
-export interface ArticleCover {
   url: string;
-  width: number;
-  height: number;
-  aspectRatio: number;
-  src: string;
-  srcSet: string;
-  sizes: string;
-}
-
-export interface ArticlePageData {
-  article: ArticleData;
-  description?: string;
-  html: string;
+  title: string;
+  date: string;
+  description: string;
   tags: TagData[];
-  related: ArticleData[];
-}
+  assetPath: string;
+  cover?: ArticleCoverData;
+  author?: AuthorData;
+  content?: MDXRemoteSerializeResult;
+  containsMath?: boolean;
+};
 
 export enum ArticleKind {
-  Standard = 'Standard',
-  Short = 'Short',
+  STANDARD = 'STANDARD',
+  SHORT = 'SHORT',
 }
+
+export type ArticleCoverData = {
+  path: string;
+  width: number;
+  height: number;
+};

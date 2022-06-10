@@ -1,41 +1,45 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import React from 'react';
-import AuthorCard from '../author/AuthorCard';
+import AuthorAvatar from '../author/AuthorAvatar';
 import ArticleShare from './ArticleShare';
-import { ArticlePageData } from './types';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    display: 'flex',
-    [theme.breakpoints.down('xs')]: {
-      flexDirection: 'column',
-    },
-  },
-  share: {
-    display: 'flex',
-    marginLeft: 'auto',
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: 0,
-      marginTop: theme.spacing(1),
-    },
-  },
-}));
+import { ArticleData } from './types';
+import { Box, SxProps, SystemStyleObject, Theme } from '@mui/system';
+import React from 'react';
 
 type ArticleHeaderProps = {
-  articlePage: ArticlePageData;
-} & React.HTMLAttributes<HTMLElement>;
-
-const ArticleHeader: React.FC<ArticleHeaderProps> = (props: ArticleHeaderProps) => {
-  const { articlePage: { article }, className } = props;
-  const classes = useStyles();
-
-  return (
-    <section className={classNames(classes.root, className)}>
-      {article.author && <AuthorCard author={article.author} subtitle={article.date}/>}
-      <ArticleShare article={article} className={classes.share}/>
-    </section>
-  );
+  sx?: SxProps<Theme>;
+  article: ArticleData;
 };
+
+const ArticleHeader: React.FC<ArticleHeaderProps> = ({
+  sx = [],
+  article,
+}: ArticleHeaderProps) => (
+  <Box
+    sx={[
+      (theme) => ({
+        display: 'flex',
+        [theme.breakpoints.down('xs')]: {
+          flexDirection: 'column',
+        },
+      }),
+      ...((Array.isArray(sx) ? sx : [sx]) as SystemStyleObject<Theme>[]),
+    ]}
+    component="section"
+  >
+    {article.author !== undefined ? (
+      <AuthorAvatar author={article.author} subtext={article.date} />
+    ) : null}
+    <ArticleShare
+      sx={(theme) => ({
+        display: 'flex',
+        marginLeft: 'auto',
+        [theme.breakpoints.down('xs')]: {
+          marginLeft: 0,
+          mt: 1,
+        },
+      })}
+      article={article}
+    />
+  </Box>
+);
 
 export default ArticleHeader;

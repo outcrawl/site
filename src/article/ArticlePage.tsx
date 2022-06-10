@@ -1,57 +1,95 @@
-import { Box, createStyles, Theme, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Img from 'gatsby-image';
-import React from 'react';
-import Page from '../core/Page';
-import PageContent from '../core/PageContent';
+import Page from '../common/Page';
+import MdxContent from '../mdx/MdxContent';
 import Newsletter from '../newsletter/Newsletter';
 import ArticleFooter from './ArticleFooter';
 import ArticleHeader from './ArticleHeader';
 import ArticleMeta from './ArticleMeta';
-import RelatedArticleList from './RelatedArticleList';
-import { ArticlePageData } from './types';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  header: {
-    marginBottom: theme.spacing(1),
-  },
-  title: {
-    fontSize: theme.typography.h2.fontSize,
-    marginBottom: theme.spacing(2),
-  },
-  footer: {
-    marginTop: theme.spacing(4),
-  },
-  newsletter: {
-    marginTop: theme.spacing(3),
-  },
-  related: {
-    marginTop: theme.spacing(3),
-  },
-}));
+import ArticleRelatedList from './ArticleRelatedList';
+import { ArticleData } from './types';
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import ExportedImage from 'next-image-export-optimizer';
+import React from 'react';
 
 type ArticlePageProps = {
-  articlePage: ArticlePageData;
+  article: ArticleData;
+  related: ArticleData[];
 };
 
-const ArticlePage: React.FC<ArticlePageProps> = (props: ArticlePageProps) => {
-  const { articlePage, articlePage: { article } } = props;
-  const classes = useStyles();
-
-  return (
-    <Page narrow>
-      <ArticleMeta articlePage={articlePage}/>
-      <Box component="article">
-        <Typography variant="h1" className={classes.title}>{article.title}</Typography>
-        <ArticleHeader articlePage={articlePage} className={classes.header}/>
-        {articlePage.article.cover && <Img fluid={articlePage.article.cover}/>}
-        <PageContent html={articlePage.html}/>
-      </Box>
-      <ArticleFooter className={classes.footer} articlePage={articlePage}/>
-      <Newsletter className={classes.newsletter}/>
-      <RelatedArticleList className={classes.related} articles={articlePage.related}/>
-    </Page>
-  );
-};
+const ArticlePage: React.FC<ArticlePageProps> = ({
+  article,
+  related,
+}: ArticlePageProps) => (
+  <Page narrow>
+    <ArticleMeta article={article} />
+    <article>
+      <Typography variant="h1" gutterBottom>
+        {article.title}
+      </Typography>
+      <ArticleHeader
+        sx={{
+          mb: 2,
+        }}
+        article={article}
+      />
+      {article.cover !== undefined ? (
+        <Box sx={{ mb: 1 }}>
+          <ExportedImage
+            src={article.cover.path}
+            width={article.cover.width}
+            height={article.cover.height}
+            alt={article.title}
+            layout="responsive"
+            objectFit="cover"
+          />
+        </Box>
+      ) : null}
+      {article.content !== undefined ? (
+        <MdxContent
+          source={article.content}
+          components={{
+            img: ({ src, alt, width, height }) => {
+              if (src === undefined) {
+                throw new Error('Missing image src');
+              }
+              if (src.indexOf('/') !== -1) {
+                src = src.substring(src.indexOf('/') + 1);
+              }
+              return (
+                <ExportedImage
+                  src={`${article.assetPath}/${src}`}
+                  alt={alt}
+                  width={width}
+                  height={height}
+                  layout="responsive"
+                  objectFit="scale-down"
+                />
+              );
+            },
+          }}
+        />
+      ) : null}
+      <ArticleFooter
+        sx={{
+          mt: 4,
+        }}
+        article={article}
+      />
+    </article>
+    <Newsletter
+      sx={{
+        mt: 3,
+      }}
+    />
+    {related.length !== 0 ? (
+      <ArticleRelatedList
+        sx={{
+          mt: 3,
+        }}
+        articles={related}
+      />
+    ) : null}
+  </Page>
+);
 
 export default ArticlePage;

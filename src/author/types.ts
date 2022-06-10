@@ -1,21 +1,15 @@
-export interface AuthorData {
+export type AuthorData = {
   name: string;
+  url: string;
   slug: string;
   bio: string;
   avatar: string;
   email?: string;
-  hireable?: boolean;
+  hire?: boolean;
   social: {
     github?: string;
     linkedin?: string;
     twitter?: string;
     facebook?: string;
   };
-}
-
-export interface AuthorArticleData {
-  title: string;
-  slug: string;
-  url: string;
-  groupDate: string;
-}
+};
