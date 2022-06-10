@@ -1,51 +1,53 @@
-import { Box, createStyles, Theme, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'gatsby';
+import InternalLink from '../common/InternalLink';
+import Page from '../common/Page';
+import { loadConfig } from '../config';
+import GeneralPageMeta from '../general-page/GeneralPageMeta';
+import { routerRedirects } from '../routes';
+import { TagGroupData } from './types';
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React from 'react';
-import BasicPageMeta from '../core/BasicPageMeta';
-import Page from '../core/Page';
-import { PageData } from '../core/types';
-import { TagGroup } from './types';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  title: {
-    fontSize: theme.typography.h2.fontSize,
-    marginBottom: theme.spacing(2),
-  },
-  tag: {
-    verticalAlign: 'middle',
-    display: 'inline-block',
-    lineHeight: 1,
-    margin: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
-  },
-}));
 
 type TagListPageProps = {
-  page: PageData;
-  tagGroups: TagGroup[];
+  tags: TagGroupData[];
 };
 
-const TagListPage: React.FC<TagListPageProps> = (props: TagListPageProps) => {
-  const { page, tagGroups } = props;
-  const classes = useStyles();
+const TagListPage: React.FC<TagListPageProps> = ({
+  tags,
+}: TagListPageProps) => {
+  const config = loadConfig();
 
   return (
     <Page narrow>
-      <BasicPageMeta {...page}/>
-      <Box component="article">
-        <Typography className={classes.title} variant="h1">Tags</Typography>
-        <Box textAlign="center">
-          {tagGroups.map(({ tag, size }) => (
-            <Link
-              key={tag.slug}
-              className={classes.tag}
-              to={`/tags/${tag.slug}/`}
-              style={{ fontSize: Math.max(size * 10 / tagGroups[0].size, 1) + 'rem' }}
-            >
-              {tag.title}
-            </Link>
-          ))}
-        </Box>
+      <GeneralPageMeta
+        title={`Tags - ${config.title}`}
+        description={`Tags on ${config.title}.`}
+        url={`${config.url}${routerRedirects.tags.index}`}
+      />
+      <Typography variant="h1" gutterBottom>
+        Tags
+      </Typography>
+      <Box sx={{ textAlign: 'center' }}>
+        {tags.map((tag) => (
+          <InternalLink
+            sx={{
+              verticalAlign: 'middle',
+              display: 'inline-block',
+              lineHeight: 1,
+              mx: 1,
+              my: 2,
+            }}
+            key={tag.slug}
+            href={routerRedirects.tags.tag(tag.slug).index}
+            style={{
+              fontSize:
+                Math.max((tag.articleCount * 15) / tags.length, 1).toString() +
+                'rem',
+            }}
+          >
+            {tag.title}
+          </InternalLink>
+        ))}
       </Box>
     </Page>
   );

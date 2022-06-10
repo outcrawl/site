@@ -1,17 +1,9 @@
-import { PageData } from '../core/types';
-
-export interface TagData {
-  title: string;
+export type TagData = {
   slug: string;
-}
+  title: string;
+  url: string;
+};
 
-export interface TagGroup {
-  tag: TagData;
-  size: number;
-}
-
-export interface TagPageData extends PageData {
-  pageNumber: number;
-  pageCount: number;
-  tag: TagData;
-}
+export type TagGroupData = TagData & {
+  articleCount: number;
+};

@@ -1,60 +1,53 @@
-import { Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Pagination, PaginationItem } from '@material-ui/lab';
-import { Link } from 'gatsby';
-import React from 'react';
 import ArticleCardGrid from '../article/ArticleCardGrid';
 import { ArticleData } from '../article/types';
-import BasicPageMeta from '../core/BasicPageMeta';
-import Page from '../core/Page';
-import { TagPageData } from './types';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  title: {
-    fontSize: theme.typography.h2.fontSize,
-    marginBottom: theme.spacing(2),
-  },
-  pagination: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
-  },
-  paginationLink: {
-    ...theme.typography.button,
-    '&:hover': {
-      textDecoration: 'none',
-    },
-  },
-}));
+import InternalLink from '../common/InternalLink';
+import Page from '../common/Page';
+import { loadConfig } from '../config';
+import GeneralPageMeta from '../general-page/GeneralPageMeta';
+import { routerRedirects } from '../routes';
+import { TagData } from './types';
+import { Pagination, PaginationItem, Typography } from '@mui/material';
+import React, { ReactNode } from 'react';
 
 type TagPageProps = {
-  tagPage: TagPageData;
+  tag: TagData;
   articles: ArticleData[];
+  page: number;
+  pageCount: number;
 };
 
-const TagPage: React.FC<TagPageProps> = (props: TagPageProps) => {
-  const {
-    tagPage: { title, description, url, pageNumber, pageCount, tag },
-    articles,
-  } = props;
-  const classes = useStyles();
+const TagPage: React.FC<TagPageProps> = ({
+  tag,
+  articles,
+  page,
+  pageCount,
+}: TagPageProps) => {
+  const config = loadConfig();
 
   return (
     <Page>
-      <BasicPageMeta title={title} description={description} url={url}/>
-      <Typography className={classes.title} variant="h1">{tag.title}</Typography>
-      <ArticleCardGrid articles={articles}/>
+      <GeneralPageMeta
+        title={`${tag.title} - ${config.title}`}
+        description={`${tag.title} tag on ${config.title}.`}
+        url={`${config.url}${routerRedirects.tags.tag(tag.slug).page(page)}`}
+      />
+      <Typography variant="h1">{tag.title}</Typography>
+      <ArticleCardGrid articles={articles} />
       <Pagination
-        className={classes.pagination}
-        page={pageNumber}
-        count={pageCount}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          my: 2,
+        }}
         color="primary"
-        size="medium"
-        renderItem={(item: { page: number }): React.ReactNode => (
+        size="large"
+        page={page}
+        count={pageCount}
+        renderItem={(item): ReactNode => (
           <PaginationItem
-            className={classes.paginationLink}
-            component={Link}
-            to={item.page === 1 ? `/tags/${tag.slug}/` : `tags/${tag.slug}/page/${item.page}/`}
+            component={InternalLink}
+            href={routerRedirects.tags.tag(tag.slug).page(item.page || 1)}
+            underline="none"
             {...item}
           />
         )}

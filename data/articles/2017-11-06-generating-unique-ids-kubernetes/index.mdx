@@ -1,0 +1,182 @@
+---
+title: Generating Unique 64 bit IDs with Go on Kubernetes
+author: tin-rabzelj
+tags:
+  - Go
+  - Kubernetes
+description: This article shows how to develop a service for generating globally unique IDs on a Kubernetes cluster. IDs will be generated similarly as with Twitter's Snowflake service, making them suitable for distributed systems where auto-incremental IDs fail and 128 bits for UUIDs is too inefficient. These IDs can also be "roughly" sorted by creation time, simply by sorting them lexicographically.
+cover:
+  path: ./cover.jpg
+---
+
+This article shows how to develop a service for generating globally unique IDs on a Kubernetes cluster. IDs will be generated similarly as with Twitter's [Snowflake](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html) service, making them suitable for distributed systems where auto-incremental IDs fail and 128 bits for [UUIDs](https://tools.ietf.org/html/rfc4122.html) is too inefficient. These IDs can also be "roughly" sorted by creation time, simply by sorting them lexicographically.
+
+For the example given, IDs will be generated inside a container running on multiple pods, exposed by a REST API service. Ideally, this mechanism would be tightly coupled inside independent services, making it highly available and not needing any centralized coordination.
+
+# Getting started
+
+Configure [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) to use a running Kubernetes cluster, preferably with [Minikube](https://github.com/kubernetes/minikube). Also install [Docker](https://docs.docker.com/engine/installation/).
+
+# Write the service
+
+This example uses [Sonyflake](https://github.com/sony/sonyflake) package, which works similarly to Twitter's Snowflake.
+
+Create `main.go` file and initialize Sonyflake inside `main` function.
+
+```go
+func main() {
+  st := sonyflake.Settings{}
+  st.MachineID = machineID
+  sf := sonyflake.NewSonyflake(st)
+  if sf == nil {
+    log.Fatal("failed to initialize sonyflake")
+  }
+}
+```
+
+Write the `machineID` function, which generates a unique value by using the IP address provided with an environment variable `MY_IP`.
+
+```go
+func machineID() (uint16, error) {
+  ipStr := os.Getenv("MY_IP")
+  if len(ipStr) == 0 {
+    return 0, errors.New("'MY_IP' environment variable not set")
+  }
+  ip := net.ParseIP(ipStr)
+  if len(ip) < 4 {
+    return 0, errors.New("invalid IP")
+  }
+  return uint16(ip[2])<<8 + uint16(ip[3]), nil
+}
+```
+
+Back in the `main` function, set up a router with [Gin](https://github.com/gin-gonic/gin) web framework. It handles only one endpoint, which returns generated ID. It's returned as string to ensure no data is lost if parsing the result in JavaScript.
+
+```go
+r := gin.Default()
+r.GET("/", func(c *gin.Context) {
+  // Generate new ID
+  id, err := sf.NextID()
+  if err != nil {
+    c.JSON(http.StatusInternalServerError, gin.H{
+      "error": err.Error(),
+    })
+  } else {
+    // Return ID as string
+    c.JSON(http.StatusOK, gin.H{
+      "id": fmt.Sprint(id),
+    })
+  }
+})
+if err := r.Run(":3000"); err != nil {
+  log.Fatal("failed to run server: ", err)
+}
+```
+
+# Build Docker image
+
+Create a `Dockerfile` file.
+
+```dockerfile
+FROM golang:1.9.2
+
+WORKDIR /go/src/app
+# Copies only "main.go" file
+COPY main.go .
+
+RUN go-wrapper download
+RUN go-wrapper install
+
+EXPOSE 3000
+
+CMD [ "app" ]
+```
+
+If you're using Minikube, switch to its Docker daemon, otherwise you'll have to push the image to some other registry.
+
+```bash {commandLine}
+eval $(minikube docker-env)
+```
+
+Build the image. Here it is named `local/unique-id`.
+
+```bash {commandLine}
+docker build -t local/unique-id .
+```
+
+# Deploy to Kubernetes
+
+Create a configuration `deployment.yaml` file for the Kubernetes Deployment object.
+
+```yaml
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: unique-id
+  labels:
+    app: unique-id
+spec:
+  selector:
+    matchLabels:
+      app: unique-id
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: unique-id
+    spec:
+      containers:
+        - name: unique-id
+          image: local/unique-id
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MY_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+```
+
+The `image` field is set to `local/unique-id` and `imagePullPolicy` is set to `Never`, which makes Kubernetes use the local image from the Minikube's Docker registry. The `MY_IP` environment variable is set to pod's IP using [Downward API](https://lukemarsden.github.io/docs/user-guide/downward-api/).
+
+Declare a service inside `service.yaml`, which targets pods labelled `unique-id`.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: unique-id
+spec:
+  type: LoadBalancer
+  selector:
+    app: unique-id
+  ports:
+    - port: 3000
+```
+
+Create resources.
+
+```bash {commandLine}
+kubectl create -f deployment.yaml
+kubectl create -f service.yaml
+```
+
+Get the URL of the service.
+
+```bash {commandLine}
+minikube service unique-id --url
+```
+
+Finally, try calling it a couple of times.
+
+```bash {commandLine:2-4}
+curl $(minikube service unique-id --url)
+{
+  "id": "168514248039727104"
+}
+```
+
+# Wrapping up
+
+Following this approach for each separate service that depends on globally unique IDs, allows for perfectly distributed generation of IDs. You can find slightly modified version of the example above on [GitHub](https://github.com/tinrab/makaroni/tree/master/utilities/unique-id).

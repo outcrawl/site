@@ -1,29 +1,38 @@
-import { Box } from '@material-ui/core';
-import React from 'react';
-import BasicPageMeta from '../core/BasicPageMeta';
-import Page from '../core/Page';
-import { PageData } from '../core/types';
-import AuthorArticleList from './AuthorArticleList';
+import ArticleGroupedList from '../article/ArticleGroupedList';
+import { ArticleData } from '../article/types';
+import Page from '../common/Page';
+import { loadConfig } from '../config';
+import GeneralPageMeta from '../general-page/GeneralPageMeta';
 import AuthorHeader from './AuthorHeader';
-import { AuthorArticleData, AuthorData } from './types';
+import { AuthorData } from './types';
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import React from 'react';
 
 type AuthorPageProps = {
-  page: PageData;
   author: AuthorData;
-  articles: AuthorArticleData[];
-}
+  articles: ArticleData[];
+};
 
-const AuthorPage: React.FC<AuthorPageProps> = (props: AuthorPageProps) => {
-  const { page, author, articles } = props;
+const AuthorPage: React.FC<AuthorPageProps> = ({
+  author,
+  articles,
+}: AuthorPageProps) => {
+  const config = loadConfig();
 
   return (
     <Page narrow>
-      <BasicPageMeta {...page}/>
-      <Box mb={3}>
-        <AuthorHeader author={author}/>
-      </Box>
+      <GeneralPageMeta
+        title={`${author.name} - ${config.title}`}
+        description={author.bio}
+        url={author.url}
+      />
+      <AuthorHeader author={author} />
       <Box>
-        <AuthorArticleList articles={articles}/>
+        <Typography variant="h2" gutterBottom>
+          Articles
+        </Typography>
+        <ArticleGroupedList articles={articles} />
       </Box>
     </Page>
   );

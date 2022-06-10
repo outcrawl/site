@@ -1,104 +1,92 @@
+import { loadConfig } from '../config';
+import { ArticleData } from './types';
 import escapeHTML from 'escape-html';
-import { graphql, StaticQuery } from 'gatsby';
+import Head from 'next/head';
 import React from 'react';
-import { Helmet } from 'react-helmet';
-import { SiteMetadata } from '../core/types';
-import { ArticlePageData } from './types';
 
 type ArticleMetaProps = {
-  articlePage: ArticlePageData;
+  article: ArticleData;
 };
 
-const ArticleMeta: React.FC<ArticleMetaProps> = (props: ArticleMetaProps) => {
-  const { articlePage, articlePage: { article } } = props;
+const ArticleMeta: React.FC<ArticleMetaProps> = ({
+  article,
+}: ArticleMetaProps) => {
+  const config = loadConfig();
+  const title = escapeHTML(`${article.title} - ${config.title}`);
+  const description = escapeHTML(article.description);
+  const date = new Date(article.date).toISOString().replace(/T.*$/, '');
+  const coverUrl =
+    article.cover !== undefined
+      ? `${config.url}${article.cover.path}`
+      : `${config.url}/featured.jpg`;
 
   return (
-    <StaticQuery
-      query={graphql`
-        query ArticleMetaQuery {
-          site {
-            siteMetadata {
-              title
-              description
-              siteUrl
-              twitterId
-              facebookId
-              featuredImage
+    <Head>
+      <title>{title}</title>
+      <link rel="canonical" href={article.url} />
+
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+
+      <meta property="fb:app_id" content={config.facebookId} />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={config.title} />
+      <meta property="og:url" content={article.url} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={config.twitterId} />
+
+      <meta property="og:image" content={coverUrl} />
+      <meta name="twitter:image" content={coverUrl} />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `{
+          "@context":"https://schema.org",
+          "@type":"Article",
+          "publisher":{
+            "@type":"Organization",
+            "name":"${config.title} - ${config.description}",
+            "logo":{
+              "@type":"ImageObject",
+              "url":"${config.url}/logo.png",
+              "width":60,
+              "height":60
             }
+          },
+          ${
+            article.author !== undefined
+              ? `
+            "author":{
+              "@type":"Person",
+              "name":"${article.author.name}",
+              "image":{
+                "@type":"ImageObject",
+                "url":"${article.author.avatar}",
+                "width":50,
+                "height":50
+              },
+              "url":"${config.url}/authors/${article.author.slug}"
+            },
+          `
+              : ''
           }
-        }
-      `}
-      render={(data: { site: { siteMetadata: SiteMetadata } }): React.ReactNode => {
-        const siteMetadata = data.site.siteMetadata;
-        const title = escapeHTML(`${article.title} - ${siteMetadata.title}`);
-        const description = articlePage.description && escapeHTML(articlePage.description);
-        const date = article.date && new Date(article.date).toISOString().replace(/T.*$/, '');
-        const author = article.author;
-        const imageUrl = article.cover?.url || siteMetadata.featuredImage;
-
-        return (
-          <Helmet>
-            <title>{title}</title>
-            <link rel="canonical" href={article.url}/>
-
-            <meta property="og:title" content={title}/>
-            <meta property="og:description" content={description}/>
-
-            <meta property="fb:app_id" content={siteMetadata.facebookId}/>
-            <meta property="og:type" content="website"/>
-            <meta property="og:site_name" content={siteMetadata.title}/>
-            <meta property="og:url" content={article.url}/>
-            <meta name="twitter:card" content="summary_large_image"/>
-            <meta name="twitter:site" content={siteMetadata.twitterId}/>
-
-            <meta property="og:image" content={imageUrl}/>
-            <meta name="twitter:image" content={imageUrl}/>
-
-            <script type="application/ld+json">
-              {`{
-                "@context":"https://schema.org",
-                "@type":"Article",
-                "publisher":{
-                  "@type":"Organization",
-                  "name":"${siteMetadata.title} - ${siteMetadata.description}",
-                  "logo":{
-                    "@type":"ImageObject",
-                    "url":"${siteMetadata.siteUrl}/static/logo.png",
-                    "width":60,
-                    "height":60
-                  }
-                },
-                ${author && `
-                  "author":{
-                    "@type":"Person",
-                    "name":"${author.name}",
-                    "image":{
-                      "@type":"ImageObject",
-                      "url":"${author.avatar}",
-                      "width":50,
-                      "height":50
-                    },
-                    "url":"${siteMetadata.siteUrl}/authors/${author.slug}"
-                  },
-                `}
-                "headline":"${title}",
-                "url":"${article.url}",
-                "datePublished":"${date}",
-                  "image":{
-                    "@type":"ImageObject",
-                    "url":"${imageUrl}"
-                  },
-                "description":"${description}",
-                "mainEntityOfPage":{
-                  "@type":"WebPage",
-                  "@id":"${siteMetadata.siteUrl}/"
-                }
-              }`}
-            </script>
-          </Helmet>
-        );
-      }}
-    />
+          "headline":"${title}",
+          "url":"${article.url}",
+          "datePublished":"${date}",
+          "image":{
+            "@type":"ImageObject",
+            "url":"${coverUrl}"
+          },
+          "description":"${description}",
+          "mainEntityOfPage":{
+            "@type":"WebPage",
+            "@id":"${config.url}/"
+          }
+        }`,
+        }}
+      />
+    </Head>
   );
 };
 

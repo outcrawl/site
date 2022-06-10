@@ -1,49 +1,44 @@
-import { Box } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import React, { HTMLAttributes } from 'react';
-import Tag from '../tag/Tag';
+import TagChip from '../tag/TagChip';
 import ArticleShare from './ArticleShare';
-import { ArticlePageData } from './types';
+import { ArticleData } from './types';
+import { Box, SxProps, SystemStyleObject, Theme } from '@mui/system';
+import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    [theme.breakpoints.down('xs')]: {
-      flexDirection: 'column',
-    },
-  },
-  tag: {
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(0.5),
-  },
-  share: {
-    marginLeft: 'auto',
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: 0,
-    },
-  },
-}));
+type ArticleFooterProps = { sx?: SxProps<Theme>; article: ArticleData };
 
-type ArticleFooterProps = {
-  articlePage: ArticlePageData;
-} & HTMLAttributes<HTMLElement>;
-
-const ArticleFooter: React.FC<ArticleFooterProps> = (props: ArticleFooterProps) => {
-  const { articlePage, className } = props;
-  const classes = useStyles();
-
-  return (
-    <Box component="section" display="flex" className={classNames(className, classes.root)}>
-      <Box display="flex" flexWrap="wrap" flexGrow={1}>
-        {articlePage.tags.map((tag, i) => (
-          <Tag key={i} className={classes.tag} title={tag.title} to={`/tags/${tag.slug}/`}/>
-        ))}
-      </Box>
-      <Box flexShrink={0}>
-        <ArticleShare article={articlePage.article} className={classes.share}/>
-      </Box>
+const ArticleFooter: React.FC<ArticleFooterProps> = ({
+  sx = [],
+  article,
+}: ArticleFooterProps) => (
+  <Box
+    sx={[
+      (theme) => ({
+        display: 'flex',
+        [theme.breakpoints.down('xs')]: {
+          flexDirection: 'column',
+        },
+      }),
+      ...((Array.isArray(sx) ? sx : [sx]) as SystemStyleObject<Theme>[]),
+    ]}
+    component="section"
+  >
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', flexGrow: 1 }}>
+      {article.tags.map((tag) => (
+        <TagChip key={tag.slug} sx={{ mr: 1, mb: 0.5 }} tag={tag} />
+      ))}
     </Box>
-  );
-};
+    <Box sx={{ flexShrink: 0 }}>
+      <ArticleShare
+        sx={(theme) => ({
+          marginLeft: 'auto',
+          [theme.breakpoints.down('xs')]: {
+            marginLeft: 0,
+          },
+        })}
+        article={article}
+      />
+    </Box>
+  </Box>
+);
 
 export default ArticleFooter;
