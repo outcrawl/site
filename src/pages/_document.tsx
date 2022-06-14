@@ -5,7 +5,6 @@ import React from 'react';
 const CustomDocument: React.FC<DocumentProps> = () => (
   <Html lang="en">
     <Head>
-      <meta name="viewport" content="initial-scale=1, width=device-width" />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

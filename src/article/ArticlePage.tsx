@@ -41,6 +41,8 @@ const ArticlePage: React.FC<ArticlePageProps> = ({
             alt={article.title}
             layout="responsive"
             objectFit="cover"
+            placeholder="blur"
+            blurDataURL={`${article.assetPath}/nextImageExportOptimizer/cover-opt-10.WEBP`}
           />
         </Box>
       ) : null}

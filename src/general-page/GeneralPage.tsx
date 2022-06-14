@@ -44,6 +44,8 @@ const GeneralPage: React.FC<GeneralPageProps> = ({
                     height={height}
                     layout="responsive"
                     objectFit="scale-down"
+                    placeholder="blur"
+                    blurDataURL={`${page.assetPath}/nextImageExportOptimizer/cover-opt-10.WEBP`}
                   />
                 );
               },

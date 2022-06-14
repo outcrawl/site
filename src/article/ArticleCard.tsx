@@ -25,6 +25,8 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           height={article.cover.height}
           alt={article.title}
           layout="responsive"
+          placeholder="blur"
+          blurDataURL={`${article.assetPath}/nextImageExportOptimizer/cover-opt-10.WEBP`}
         />
       </InternalLink>
     ) : null}
